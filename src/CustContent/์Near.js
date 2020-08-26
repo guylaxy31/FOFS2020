@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import NearCate from './NearCate';
+import Hextagon from './Hextagon';
 
 class Near extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerText}>จากร้านอาหารใกล้คุณ</Text>
+        <View style={styles.titleAlign}>
+          <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
+          <Text style={styles.headerText}>จากร้านอาหารใกล้คุณ</Text>
+        </View>
         <ScrollView
           style={styles.scrollStyle}
           horizontal={true}
@@ -49,9 +53,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  headerText: { flex: 1, alignSelf: 'flex-start', marginLeft: 20 },
+  headerText: { paddingLeft: 10 },
   scrollStyle: {
     marginTop: '3%',
+  },
+  titleAlign: {
+    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    paddingLeft: 20,
   },
 });
 
