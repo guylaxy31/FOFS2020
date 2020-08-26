@@ -4,6 +4,7 @@ import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
 import Menu from '../Menu/Menu';
+import CustContent from '../CustContent/CustContent';
 // หน้าหลักของแอปพลิเคชัน
 
 class Home extends Component {
@@ -12,7 +13,12 @@ class Home extends Component {
       <View style={styles.container}>
         <NavTop style={styles.nav__container}></NavTop>
         <HeaderName></HeaderName>
-        <ScrollView style={styles.scroll_View}></ScrollView>
+        <ScrollView
+          style={styles.scroll_View}
+          showsVerticalScrollIndicator={false}
+        >
+          <CustContent style={styles.content__container}></CustContent>
+        </ScrollView>
         <Menu style={styles.menu__container}></Menu>
       </View>
     );
@@ -33,7 +39,17 @@ const styles = StyleSheet.create({
   menu__container: {
     flex: 1,
   },
-  scroll_View: { alignSelf: 'stretch', backgroundColor: '#fff' },
+  scroll_View: {
+    height: '100%',
+    alignSelf: 'stretch',
+    backgroundColor: 'gray',
+    padding: 0,
+    margin: 0,
+  },
+  content__container: {
+    height: '100%',
+    alignSelf: 'stretch',
+  },
 });
 
 export default Home;
