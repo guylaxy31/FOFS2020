@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-
 // เมนูที่ขอบด้านล่างจอ
 
 class Menu extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>MENU</Text>
+        <Text>MENU BUTTONS</Text>
       </View>
     );
   }
@@ -16,11 +15,20 @@ class Menu extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '7%',
     alignSelf: 'stretch',
-    backgroundColor: 'gray',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+
+    elevation: 6,
   },
 });
 

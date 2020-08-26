@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-class NavTop extends Component {
+class Signin extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Top Navigation</Text>
+        <Text>Signin</Text>
       </View>
     );
   }
@@ -13,13 +13,12 @@ class NavTop extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: '10%',
-    width: '100%',
+    flex: 1,
     alignSelf: 'stretch',
-    backgroundColor: '#FFFC1B',
+    backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
 
-export default NavTop;
+export default Signin;
