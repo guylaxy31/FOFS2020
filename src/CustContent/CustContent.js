@@ -14,7 +14,7 @@ class CustContent extends Component {
         <Recommend></Recommend>
         <Near></Near>
         <View>
-          <Text>ดูอาหารทั้งหมด</Text>
+          <Text>ดูร้านอาหารทั้งหมด</Text>
         </View>
       </View>
     );

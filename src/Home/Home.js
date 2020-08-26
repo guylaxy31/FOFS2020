@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   scroll_View: {
     height: '100%',
     alignSelf: 'stretch',
-    backgroundColor: 'gray',
+    backgroundColor: '#fff',
     padding: 0,
     margin: 0,
   },

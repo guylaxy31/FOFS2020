@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import PromotionCate from './PromotionCate';
+import Hextagon from './Hextagon';
 
 class Promotion extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.baseText}>โปรโมชั่น ส่วนลด</Text>
+        <View style={styles.titleAlign}>
+          <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
+          <Text style={styles.baseText}>โปรโมชั่น ส่วนลด</Text>
+          <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
+        </View>
+
         <ScrollView
           style={styles.scrollStyle}
           horizontal={true}
@@ -37,7 +43,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  baseText: {},
+  titleAlign: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  baseText: { paddingHorizontal: 10 },
   scrollStyle: {
     marginTop: '3%',
   },
