@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-class NavTop extends Component {
+class HeaderName extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Top Navigation</Text>
+        <Text style={styles.HeaderFont}>หน้าหลัก</Text>
       </View>
     );
   }
@@ -13,13 +13,14 @@ class NavTop extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: '10%',
+    height: '6%',
     width: '100%',
     alignSelf: 'stretch',
-    backgroundColor: '#FFFC1B',
+    backgroundColor: '#FFFE9D',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  HeaderFont: {},
 });
 
-export default NavTop;
+export default HeaderName;

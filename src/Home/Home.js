@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView, View } from 'react-native';
+
 import NavTop from '../NavTop/NavTop';
+import HeaderName from '../NavTop/HeaderName';
 import Menu from '../Menu/Menu';
 // หน้าหลักของแอปพลิเคชัน
 
@@ -9,43 +11,8 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <NavTop style={styles.nav__container}></NavTop>
-        <ScrollView>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-          <Text>CONTENT AREA</Text>
-        </ScrollView>
+        <HeaderName></HeaderName>
+        <ScrollView style={styles.scroll_View}></ScrollView>
         <Menu style={styles.menu__container}></Menu>
       </View>
     );
@@ -66,6 +33,7 @@ const styles = StyleSheet.create({
   menu__container: {
     flex: 1,
   },
+  scroll_View: { alignSelf: 'stretch', backgroundColor: '#fff' },
 });
 
 export default Home;

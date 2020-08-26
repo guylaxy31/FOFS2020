@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import Home from './src/Home/Home'; // หน้าหลักของแอปพลิเคชัน
 
 export default function App() {
