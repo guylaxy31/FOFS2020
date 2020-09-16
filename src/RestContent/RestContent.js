@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-class HeaderName extends Component {
+import RestHeaderStatus from './RestHeaderStatus'
+import RestTool from './RestTool';
+
+class RestContent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.HeaderFont}>จัดการร้านอาหาร</Text>
+        <RestHeaderStatus/>
+        <RestTool />
       </View>
     );
   }
@@ -13,14 +17,13 @@ class HeaderName extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: '6%',
+    height: '100%',
     width: '100%',
     alignSelf: 'stretch',
-    backgroundColor: '#FFFE9D',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  HeaderFont: {},
 });
 
-export default HeaderName;
+export default RestContent;
