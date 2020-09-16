@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Header, Button } from 'react-native-elements';
 
 class NavTop extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Top Navigation</Text>
-      </View>
+      <Header
+        containerStyle={{
+          backgroundColor: '#FFFC1B',
+        }}
+        leftComponent={{ icon: 'menu', color: '#000' }}
+        rightComponent={{ icon: 'person', color: '#000' }}
+      ></Header>
     );
   }
 }

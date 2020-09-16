@@ -4,7 +4,8 @@ import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
 import Menu from '../Menu/Menu';
-import CustContent from '../CustContent/CustContent';
+// import CustContent from '../CustContent/CustContent';
+import RestContent from '../RestContent/RestContent'
 // หน้าหลักของแอปพลิเคชัน
 
 class Home extends Component {
@@ -17,7 +18,8 @@ class Home extends Component {
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
-          <CustContent style={styles.content__container}></CustContent>
+          {/* <CustContent style={styles.content__container}></CustContent> */}
+          <RestContent style={styles.content__container}></RestContent>
         </ScrollView>
         <Menu style={styles.menu__container}></Menu>
       </View>
