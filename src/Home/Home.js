@@ -5,21 +5,23 @@ import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
 import Menu from '../Menu/Menu';
 // import CustContent from '../CustContent/CustContent';
-import RestContent from '../RestContent/RestContent'
+// import RestContent from '../RestContent/RestContent'
+import LoginMode from '../Login/LoginMode'
 // หน้าหลักของแอปพลิเคชัน
 
 class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavTop style={styles.nav__container}></NavTop>
-        <HeaderName></HeaderName>
+        {/* <NavTop style={styles.nav__container}></NavTop> */}
+        {/* <HeaderName></HeaderName> */}
         <ScrollView
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
+          <LoginMode></LoginMode>
           {/* <CustContent style={styles.content__container}></CustContent> */}
-          <RestContent style={styles.content__container}></RestContent>
+          {/* <RestContent style={styles.content__container}></RestContent> */}
         </ScrollView>
         <Menu style={styles.menu__container}></Menu>
       </View>
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
     height: '100%',
     alignSelf: 'stretch',
   },
+
 });
 
 export default Home;
