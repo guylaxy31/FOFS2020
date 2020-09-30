@@ -6,7 +6,10 @@ import HeaderName from '../NavTop/HeaderName';
 import Menu from '../Menu/Menu';
 // import CustContent from '../CustContent/CustContent';
 // import RestContent from '../RestContent/RestContent'
-import LoginMode from '../Login/LoginMode'
+// import LoginMode from '../Login/LoginMode'
+//import LoginCustomerOptions from '../Login/LoginCustomerOptions'
+import RegisterCust from '../Register/RegisterCust'
+
 // หน้าหลักของแอปพลิเคชัน
 
 class Home extends Component {
@@ -19,7 +22,8 @@ class Home extends Component {
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
-          <LoginMode></LoginMode>
+          <RegisterCust></RegisterCust>
+          {/* <LoginMode></LoginMode> */}
           {/* <CustContent style={styles.content__container}></CustContent> */}
           {/* <RestContent style={styles.content__container}></RestContent> */}
         </ScrollView>
@@ -36,6 +40,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   nav__container: {
     flex: 1,
