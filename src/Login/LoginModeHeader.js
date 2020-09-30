@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   header__line1: {
     color: '#000',
     fontWeight: 'bold',
-    fontSize: 26
+    fontSize: 26,
+
   },
   header__line2: {
     color: '#989762',
