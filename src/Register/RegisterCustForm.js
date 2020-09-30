@@ -50,6 +50,10 @@ class RegisterCustForm extends Component {
                         <TextInput style={styles.text__input}></TextInput>
                     </View>
                     <View>
+                        <Text style={styles.form_title}>หน่วยงาน/สังกัด/คณะ</Text>
+                        <TextInput style={styles.text__input}></TextInput>
+                    </View>
+                    <View>
                         <Text style={styles.form_title}>เบอร์โทรศัพท์</Text>
                         <TextInput style={styles.text__input}></TextInput>
                     </View>
@@ -57,7 +61,7 @@ class RegisterCustForm extends Component {
                         <Text style={styles.form_title}>อีเมล</Text>
                         <TextInput style={styles.text__input}></TextInput>
                     </View>
-                    <View>
+                    <View style={styles.agree__detail_box}>
                         <Text style={styles.user__agreement}>ผู้ลงทะเบียนรับทราบยินยอมให้ผู้พัฒนานำข้อมูลทางสถิติไปใช้วิเคราะห์ในอนาคตได้</Text>
                         <Text style={styles.user__agreement}>ผู้พัฒนาจะไม่เผยแพร่ข้อมูลส่วนบุคคลในการระบุตัวตนของผู้ใช้งานได้(พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)</Text>
                     </View>
@@ -112,12 +116,18 @@ const styles = StyleSheet.create({
 
     },
     text__input: {
-        width: '60%',
+        width: '90%',
         backgroundColor: '#FFFFE3',
         padding: '3%',
         marginTop: '5%',
         marginBottom: '5%'
-    }, user__agreement: {
+    },
+    agree__detail_box: {
+        marginTop: '10%'
+    }
+    ,
+    user__agreement: {
+
         color: 'red',
         marginBottom: '2%'
     }, touch_agree_btn: {
@@ -128,19 +138,20 @@ const styles = StyleSheet.create({
     }
     , agree_text: {
         alignSelf: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        fontSize: 15
     }, checkBoxAlign: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
+        backgroundColor: '#FFF',
         paddingVertical: '5%',
-        backgroundColor: '#FFF'
     },
 
     checkBox: {
         backgroundColor: '#FFF',
-        width: 30,
-        height: 30
+        width: 40,
+        height: 40
     }
     , confirm_text: {
 
