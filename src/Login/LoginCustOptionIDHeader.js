@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-class LoginCustLocalHeader extends Component {
+class LoginCustOptionIDHeader extends Component {
 
     render() {
         return (
@@ -24,7 +24,10 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOpacity: 0.1,
         elevation: 3,
-    },
+    }, header__line1: {
+        fontSize: 18,
+        fontWeight: 'bold'
+    }
 });
 
-export default LoginCustLocalHeader;
+export default LoginCustOptionIDHeader;
