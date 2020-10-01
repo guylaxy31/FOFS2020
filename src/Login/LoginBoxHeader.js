@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 
 
-class LoginModeHeader extends Component {
+class LoginBoxHeader extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default LoginModeHeader;
+export default LoginBoxHeader;

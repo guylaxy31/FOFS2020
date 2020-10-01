@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
 
-import LoginCustHeader from './LoginCustHeader'
+import LoginCustOptionIDHeader from './LoginCustOptionIDHeader'
 
 
-class LoginCustomerOptions extends Component {
+class LoginCust1 extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <LoginCustHeader></LoginCustHeader>
+                <LoginCustOptionIDHeader></LoginCustOptionIDHeader>
 
                 <TouchableOpacity style={styles.login_button}>
                     <Image style={styles.img__} source={require('../../assets/login/Foodid_btn.png')}></Image>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         alignItems: 'center',
         justifyContent: 'center',
-        fontFamily: 'Prompt-Regular'
+
     },
 
     login_button: {
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default LoginCustomerOptions;
+export default LoginCust1;

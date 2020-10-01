@@ -3,12 +3,13 @@ import { StyleSheet, Text, ScrollView, View } from 'react-native';
 
 import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
-import Menu from '../Menu/Menu';
+import MenuBottomMain from '../Menu/MenuBottomMain';
 // import CustContent from '../CustContent/CustContent';
 // import RestContent from '../RestContent/RestContent'
-// import LoginMode from '../Login/LoginMode'
-//import LoginCustomerOptions from '../Login/LoginCustomerOptions'
-import RegisterCust from '../Register/RegisterCust'
+import LoginModeMain from '../Login/LoginModeMain'
+import LoginCustOptionID from '../Login/LoginCustOptionID'
+import RegisterCustMain from '../Register/RegisterCustMain'
+
 
 // หน้าหลักของแอปพลิเคชัน
 
@@ -22,12 +23,12 @@ class Home extends Component {
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
-          <RegisterCust></RegisterCust>
+          <LoginCustOptionID></LoginCustOptionID>
           {/* <LoginMode></LoginMode> */}
           {/* <CustContent style={styles.content__container}></CustContent> */}
           {/* <RestContent style={styles.content__container}></RestContent> */}
         </ScrollView>
-        <Menu style={styles.menu__container}></Menu>
+        <MenuBottomMain style={styles.menu__container}></MenuBottomMain>
       </View>
     );
   }

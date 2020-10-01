@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-class LoginCustHeader extends Component {
+class LoginCustLocalHeader extends Component {
 
     render() {
         return (
@@ -9,7 +9,6 @@ class LoginCustHeader extends Component {
                 <Text style={styles.header__line1}>เข้าสู่ระบบ</Text>
             </View>
         );
-
     }
 }
 const styles = StyleSheet.create({
@@ -28,4 +27,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginCustHeader;
+export default LoginCustLocalHeader;

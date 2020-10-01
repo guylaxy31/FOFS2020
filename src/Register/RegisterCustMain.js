@@ -3,13 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import RegisterCustForm from './RegisterCustForm'
 
-class RegisterCust extends Component {
+class RegisterCustMain extends Component {
     render() {
         return (
             <View style={styles.container}>
-
                 <RegisterCustForm></RegisterCustForm>
-
             </View>
         );
     }
@@ -32,4 +30,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default RegisterCust;
+export default RegisterCustMain;
