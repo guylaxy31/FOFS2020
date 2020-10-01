@@ -18,12 +18,8 @@ class LoginCust1 extends Component {
                     <Image style={styles.img__} source={require('../../assets/login/OAuth_btn.png')}></Image>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.login_button}>
-                    <Image style={styles.img__} source={require('../../assets/login/gmail_btn.png')}></Image>
-                </TouchableOpacity>
-
                 <TouchableOpacity style={styles.create_new_btn}>
-                    <Text>สร้างบัญชีใหม่</Text>
+                    <Text style={styles.register_txt}>สร้างบัญชีใหม่</Text>
                 </TouchableOpacity>
 
                 <View style={styles.img_mode}>
@@ -49,7 +45,6 @@ const styles = StyleSheet.create({
         width: 'auto',
         flex: 1,
         flexDirection: 'row',
-        height: '100%',
         justifyContent: 'center',
         marginBottom: '2%',
         backgroundColor: '#FFF'
@@ -60,6 +55,9 @@ const styles = StyleSheet.create({
         padding: '1%',
         marginTop: '10%',
         marginBottom: '3%'
+         
+    },register_txt:{
+        fontSize:16
     }
 
 });

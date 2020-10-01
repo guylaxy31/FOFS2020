@@ -4,7 +4,7 @@ import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
 import MenuBottomMain from '../Menu/MenuBottomMain';
-// import CustContent from '../CustContent/CustContent';
+import CustContentMain from '../CustContent/CustContentMain';
 // import RestContent from '../RestContent/RestContent'
 import LoginModeMain from '../Login/LoginModeMain'
 import LoginCustOptionID from '../Login/LoginCustOptionID'
@@ -17,13 +17,13 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <NavTop style={styles.nav__container}></NavTop> */}
-        {/* <HeaderName></HeaderName> */}
+        <NavTop style={styles.nav__container}></NavTop>
+        <HeaderName></HeaderName>
         <ScrollView
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
-          <LoginCustOptionID></LoginCustOptionID>
+          <CustContentMain></CustContentMain>
           {/* <LoginMode></LoginMode> */}
           {/* <CustContent style={styles.content__container}></CustContent> */}
           {/* <RestContent style={styles.content__container}></RestContent> */}
