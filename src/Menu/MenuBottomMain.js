@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 // เมนูที่ขอบด้านล่างจอ
 
-class Menu extends Component {
+class MenuBottomMain extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Menu;
+export default MenuBottomMain;

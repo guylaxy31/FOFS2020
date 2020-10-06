@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 
 
-class LoginCustMode extends Component {
+class LoginCustBox extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default LoginCustMode;
+export default LoginCustBox;
