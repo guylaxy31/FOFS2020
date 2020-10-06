@@ -5,7 +5,7 @@ import Promotion from './Promotion';
 import Recommend from './Recommend';
 import Near from './์Near';
 
-class CustContent extends Component {
+class CustContentMain extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustContent;
+export default CustContentMain;

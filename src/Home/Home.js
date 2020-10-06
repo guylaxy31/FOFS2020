@@ -17,13 +17,13 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavTop style={styles.nav__container}></NavTop>
-        <HeaderName></HeaderName>
+        {/* <NavTop style={styles.nav__container}></NavTop>
+        <HeaderName></HeaderName> */}
         <ScrollView
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
-          <CustContentMain></CustContentMain>
+          <LoginCustOptionID></LoginCustOptionID>
           {/* <LoginMode></LoginMode> */}
           {/* <CustContent style={styles.content__container}></CustContent> */}
           {/* <RestContent style={styles.content__container}></RestContent> */}

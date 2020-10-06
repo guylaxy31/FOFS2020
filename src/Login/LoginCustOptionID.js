@@ -11,11 +11,15 @@ class LoginCust1 extends Component {
                 <LoginCustOptionIDHeader></LoginCustOptionIDHeader>
 
                 <TouchableOpacity style={styles.login_button}>
-                    <Image style={styles.img__} source={require('../../assets/login/Foodid_btn.png')}></Image>
+                    <Image style={styles.img__} source={require('../../assets/login/foodid_btn.png')}></Image>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.login_button}>
-                    <Image style={styles.img__} source={require('../../assets/login/OAuth_btn.png')}></Image>
+                    <Image style={styles.img__} source={require('../../assets/login/oauth_btn.png')}></Image>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.login_button}>
+                    <Image style={styles.img__} source={require('../../assets/login/gmail_btn.png')}></Image>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.create_new_btn}>
