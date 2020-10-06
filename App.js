@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text , View, StyleSheet } from 'react-native';
+
+import Home from './src/Home/Home'; // หน้าหลักของแอปพลิเคชัน
+
+
+
 
 export default function App() {
+  
+  
+  
+  
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Home />
+      
     </View>
+    
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
   },
