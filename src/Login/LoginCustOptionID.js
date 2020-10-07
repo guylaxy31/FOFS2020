@@ -11,35 +11,59 @@ const ANDROID_CLIENT_ID =
 
 
 class LoginCust1 extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            signedIn: false,
-            name: "",
-            photoUrl: ""
-        }
-    }
-    signIn = async () => {
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         signedIn: false,
+    //         name: "",
+    //         photoUrl: ""
+    //     }
+    // }
+    // signIn = async () => {
+    //     try {
+    //         const result = await Google.logInAsync({
+    //             androidClientId: ANDROID_CLIENT_ID,
+    //             iosClientId: IOS_CLIENT_ID,
+    //             scopes: ["profile", "email"]
+    //         })
+
+    //         if (result.type === "success") {
+    //             this.setState({
+    //                 signedIn: true,
+    //                 name: result.user.name,
+    //                 photoUrl: result.user.photoUrl
+    //             })
+    //         } else {
+    //             console.log("cancelled")
+    //         }
+    //     } catch (e) {
+    //         console.log("error", e)
+    //     }
+    // }
+    signInWithGoogle = async () => {
         try {
             const result = await Google.logInAsync({
-                androidClientId: ANDROID_CLIENT_ID,
                 iosClientId: IOS_CLIENT_ID,
+                androidClientId: ANDROID_CLIENT_ID,
                 scopes: ["profile", "email"]
-            })
+            });
 
             if (result.type === "success") {
-                this.setState({
-                    signedIn: true,
-                    name: result.user.name,
+                console.log("Login.js.js 21 | ", result.user.givenName);
+                console.log("Login.js.js 21 | ", result.user.photoUrl);
+                this.props.navigation.navigate("Profile", {
+                    username: result.user.givenName,
                     photoUrl: result.user.photoUrl
-                })
+                }); //after Google login redirect to Profile
+                return result.accessToken;
             } else {
-                console.log("cancelled")
+                return { cancelled: true };
             }
         } catch (e) {
-            console.log("error", e)
+            console.log('LoginScreen.js.js 30 | Error with login', e);
+            return { error: true };
         }
-    }
+    };
     render() {
         return (
             <View style={styles.container}>
@@ -51,40 +75,45 @@ class LoginCust1 extends Component {
                 <TouchableOpacity style={styles.login_button}>
                     <Image style={styles.img__} source={require('../../assets/login/OAuth_btn.png')}></Image>
                 </TouchableOpacity>
-                {this.state.signedIn ? (
+                {/* {this.state.signedIn ? (
                     <LoggedInPage name={this.state.name} photoUrl={this.state.photoUrl} />
                 ) : (
                         <LoginPage signIn={this.signIn} />
-                    )}
+                    )} */}
+
+                <TouchableOpacity style={styles.login_button} onPress={this.signInWithGoogle}>
+                    <Image style={styles.img__} source={require('../../assets/login/gmail_btn.png')}></Image>
+                </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.create_new_btn}>
                     <Text style={styles.register_txt}>สร้างบัญชีใหม่</Text>
                 </TouchableOpacity>
-                
+
             </View>
         )
     }
 }
 
-const LoginPage = props => {
-    return (
-        <View>
-            <TouchableOpacity style={styles.login_button} onPress={() => props.signIn()}>
-                <Image style={styles.img__} source={require('../../assets/login/gmail_btn.png')}></Image>
-            </TouchableOpacity>
-        </View>
-    )
-}
+// const LoginPage = props => {
+//     return (
+//         <View>
+//             <TouchableOpacity style={styles.login_button} onPress={() => props.signIn()}>
+//                 <Image style={styles.img__} source={require('../../assets/login/gmail_btn.png')}></Image>
+//             </TouchableOpacity>
+//         </View>
+//     )
+// }
 
-const LoggedInPage = props => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Welcome:{props.name}</Text>
-            <Image style={styles.image} source={{ uri: props.photoUrl }} />
-        </View>
-    )
-}
+// const LoggedInPage = props => {
+//     return (
+//         <View style={styles.container}>
+//             <Text style={styles.header}>Welcome:{props.name}</Text>
+//             <Image style={styles.image} source={{ uri: props.photoUrl }} />
+
+//         </View>
+//     )
+// }
 
 const styles = StyleSheet.create({
     container: {
