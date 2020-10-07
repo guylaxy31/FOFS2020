@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button ,Image} from "react-native";
 
 export default class ProfileScreen extends Component {
   render() {
@@ -9,6 +9,7 @@ export default class ProfileScreen extends Component {
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
           Welcome, {this.props.navigation.getParam("username")}
         </Text>
+        <Image style={styles.image} source={{ uri:this.props.navigation.getParam("photoUrl") }} />
         <Button
           title="Sign out"
           onPress={() => this.props.navigation.navigate("Login")}
@@ -24,5 +25,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
-  }
+  },
+  image: {
+    marginTop: 15,
+    width: 150,
+    height: 150,
+    borderColor: "rgba(0,0,0,0.2)",
+    borderWidth: 3,
+    borderRadius: 150
+}
 });
