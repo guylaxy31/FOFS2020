@@ -5,31 +5,31 @@ import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
 import MenuBottomMain from '../Menu/MenuBottomMain';
 import CustContentMain from '../CustContent/CustContentMain';
-// import RestContent from '../RestContent/RestContent'
-import LoginModeMain from '../Login/LoginModeMain'
-import LoginCustOptionID from '../Login/LoginCustOptionID'
-import RegisterCustMain from '../Register/RegisterCustMain'
 
 
 // หน้าหลักของแอปพลิเคชัน
 
 class Home extends Component {
+
   render() {
     return (
       <View style={styles.container}>
-        {/* <NavTop style={styles.nav__container}></NavTop>
-        <HeaderName></HeaderName> */}
+        {/* Nav ประกอบไปด้วย drawer และ profile icon */}
+        <NavTop style={styles.nav__container}></NavTop>
+        {/* เปลี่ยนตรง page ได้ */}
+        <HeaderName page="หน้าหลัก"></HeaderName>
+
+        {/* พื้นที่แสดงเนื้อหา */}
         <ScrollView
           style={styles.scroll_View}
           showsVerticalScrollIndicator={false}
         >
-          <LoginCustOptionID></LoginCustOptionID>
-          {/* <LoginMode></LoginMode> */}
-          {/* <CustContent style={styles.content__container}></CustContent> */}
-          {/* <RestContent style={styles.content__container}></RestContent> */}
+          <CustContentMain></CustContentMain>
         </ScrollView>
+
+        {/* ปุ่มเนนูต่างๆ */}
         <MenuBottomMain style={styles.menu__container}></MenuBottomMain>
-      </View>
+      </View >
     );
   }
 }

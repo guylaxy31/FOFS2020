@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   baseText: { paddingHorizontal: 10 },
   scrollStyle: {
     marginTop: '3%',
+ 
   },
 });
 

@@ -5,7 +5,7 @@ class HeaderName extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.HeaderFont}>จัดการร้านอาหาร</Text>
+        <Text style={styles.HeaderFont}>{this.props.page}</Text>
       </View>
     );
   }
