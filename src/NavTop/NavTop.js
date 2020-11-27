@@ -4,6 +4,10 @@ import { Header, Button } from 'react-native-elements';
 
 
 class NavTop extends Component {
+
+
+
+
   render() {
     return (
 
@@ -12,7 +16,7 @@ class NavTop extends Component {
           backgroundColor: '#FFFC1B',
         }}
         leftComponent={{ icon: 'menu', color: '#000' }}
-        rightComponent={{ icon: 'person', color: '#000' }}
+        rightComponent={{ icon: 'person', color: '#000', }}
       >
 
 

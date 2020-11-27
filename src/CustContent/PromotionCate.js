@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   imgBorder: {
     height: 180,
     width: 320,
-    
+
     borderWidth: 1,
     borderColor: '#FFFC1B',
     borderRadius: 15,

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   HeaderFont: {
     fontFamily: 'Prompt-Regular',
-    fontSize: 20,
+    fontSize: 16,
 
   },
 });
