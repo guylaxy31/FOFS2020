@@ -13,7 +13,7 @@ class SearchBox extends Component {
             size={25}
             color="#D6D434"
           />
-          <Text style={styles.find__descrip}>
+          <Text style={styles.find__descrip, { fontFamily: 'Prompt-Light' }} >
             ค้นหาชื่อร้านอาหาร / ชื่อเมนู
           </Text>
         </View>

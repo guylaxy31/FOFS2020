@@ -9,7 +9,7 @@ class Promotion extends Component {
       <View style={styles.container}>
         <View style={styles.titleAlign}>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
-          <Text style={styles.baseText}>โปรโมชั่น ส่วนลด</Text>
+          <Text style={styles.baseText, { fontFamily: 'Prompt-Regular' }}> โปรโมชั่น ส่วนลด </Text>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
         </View>
 
@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  baseText: { paddingHorizontal: 10 },
+  baseText: { marginHorizontal: 10 },
   scrollStyle: {
     marginTop: '3%',
- 
+
   },
 });
 

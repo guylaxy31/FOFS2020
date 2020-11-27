@@ -9,7 +9,7 @@ class Recommend extends Component {
       <View style={styles.container}>
         <View style={styles.titleAlign}>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
-          <Text style={styles.headerText}>เมนูแนะนำ</Text>
+          <Text style={styles.headerText, { fontFamily: 'Prompt-Regular' }}> เมนูแนะนำ</Text>
         </View>
 
         <ScrollView

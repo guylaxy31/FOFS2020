@@ -5,7 +5,8 @@ class HeaderName extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.HeaderFont}>{this.props.page}</Text>
+        <Text style={styles.HeaderFont ,{fontFamily:'Prompt-Regular'}}>{this.props.page}</Text>
+        
       </View>
     );
   }

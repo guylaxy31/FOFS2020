@@ -14,7 +14,7 @@ class CustContentMain extends Component {
         <Recommend></Recommend>
         <Near></Near>
         <View>
-          <Text>ดูร้านอาหารทั้งหมด</Text>
+          <Text style={{ fontFamily: 'Prompt-Regular' }}>ดูร้านอาหารทั้งหมด</Text>
         </View>
       </View>
     );

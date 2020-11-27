@@ -9,7 +9,7 @@ class Near extends Component {
       <View style={styles.container}>
         <View style={styles.titleAlign}>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
-          <Text style={styles.headerText}>จากร้านอาหารใกล้คุณ</Text>
+          <Text style={styles.headerText, { fontFamily: 'Prompt-Regular' }}> จากร้านอาหารใกล้คุณ</Text>
         </View>
         <ScrollView
           style={styles.scrollStyle}
