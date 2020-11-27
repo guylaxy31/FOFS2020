@@ -5,23 +5,27 @@ class HeaderName extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.HeaderFont ,{fontFamily:'Prompt-Regular'}}>{this.props.page}</Text>
-        
-      </View>
+        <Text style={styles.HeaderFont}>{this.props.page}</Text>
+
+      </View >
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '6%',
+    height: '8%',
     width: '100%',
     alignSelf: 'stretch',
     backgroundColor: '#FFFE9D',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  HeaderFont: {},
+  HeaderFont: {
+    fontFamily: 'Prompt-Regular',
+    fontSize: 20,
+
+  },
 });
 
 export default HeaderName;

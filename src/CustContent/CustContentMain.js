@@ -14,7 +14,7 @@ class CustContentMain extends Component {
         <Recommend></Recommend>
         <Near></Near>
         <View>
-          <Text style={{ fontFamily: 'Prompt-Regular' }}>ดูร้านอาหารทั้งหมด</Text>
+          <Text style={styles.viewAll}>ดูร้านอาหารทั้งหมด</Text>
         </View>
       </View>
     );
@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }, viewAll: {
+    fontFamily: 'Prompt-Regular', fontSize: 18, marginVertical: 18
+  }
 });
 
 export default CustContentMain;

@@ -13,7 +13,7 @@ class SearchBox extends Component {
             size={25}
             color="#D6D434"
           />
-          <Text style={styles.find__descrip, { fontFamily: 'Prompt-Light' }} >
+          <Text style={styles.find__descrip} >
             ค้นหาชื่อร้านอาหาร / ชื่อเมนู
           </Text>
         </View>
@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
   find__descrip: {
     flex: 1,
     color: '#D6D434',
-
     alignSelf: 'center',
+    fontFamily: 'Prompt-Light',
+    fontSize: 14
   },
   alignRow: {
     flex: 1,

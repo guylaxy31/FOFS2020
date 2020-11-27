@@ -9,7 +9,7 @@ class Recommend extends Component {
       <View style={styles.container}>
         <View style={styles.titleAlign}>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
-          <Text style={styles.headerText, { fontFamily: 'Prompt-Regular' }}> เมนูแนะนำ</Text>
+          <Text style={styles.headerText}>เมนูแนะนำ</Text>
         </View>
 
         <ScrollView
@@ -58,15 +58,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  headerText: { paddingLeft: 10 },
+  headerText: { paddingLeft: 10, fontFamily: 'Prompt-Regular', fontSize: 18 },
   scrollStyle: {
     marginTop: '3%',
+
   },
   titleAlign: {
     width: '100%',
     flex: 1,
     flexDirection: 'row',
     paddingLeft: 20,
+
   },
 });
 

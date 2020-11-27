@@ -12,7 +12,7 @@ class Hextagon extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { alignSelf: 'center' },
 });
 
 export default Hextagon;
