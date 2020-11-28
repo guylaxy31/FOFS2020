@@ -12,7 +12,7 @@ class SearchBox extends Component {
             name="search"
             size={22}
             color="#C7BDAC"
-            onPress={() => alert('Search')}
+             
           />
 
           <TextInput
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: '7%',
+    borderRadius: 20
   },
 
   alignRow: {
