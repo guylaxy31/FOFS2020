@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }, viewAll: {
-    fontFamily: 'Prompt-Regular', fontSize: 18, marginVertical: 18
+    fontFamily: 'pr-reg', fontSize: 18, marginVertical: 18
   }
 });
 

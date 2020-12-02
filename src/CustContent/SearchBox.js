@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#C7B292',
     alignSelf: 'center',
-    fontFamily: 'Prompt-Light',
+    fontFamily: 'pr-light',
     fontSize: 14
   }
 });

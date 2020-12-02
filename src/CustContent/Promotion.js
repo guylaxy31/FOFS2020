@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
   },
-  baseText: { paddingHorizontal: 10, fontFamily: 'Prompt-Regular', fontSize: 20 },
+  baseText: { paddingHorizontal: 10, fontFamily: 'pr-reg', fontSize: 20 },
   scrollStyle: {
     marginTop: '3%',
 

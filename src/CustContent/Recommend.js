@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerText: {
-    paddingLeft: 10, fontFamily: 'Prompt-Regular', fontSize: 18
+    paddingLeft: 10, fontFamily: 'pr-reg', fontSize: 18
   },
   scrollStyle: {
     marginTop: '3%',

@@ -9,8 +9,8 @@ class PromotionCate extends Component {
           <Image style={styles.imgBorder} source={this.props.imageUri}></Image>
         </View>
         <View>
-          <Text style={{ fontFamily: 'Prompt-Light', marginTop: 10 }}>{this.props.foodName}</Text>
-          <Text style={{ fontFamily: 'Prompt-Light' }}>{this.props.resName}</Text>
+          <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.foodName}</Text>
+          <Text style={{ fontFamily: 'pr-light' }}>{this.props.resName}</Text>
         </View>
       </View>
     );
