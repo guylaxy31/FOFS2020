@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 class SearchBox extends Component {
   render() {
     return (
@@ -12,7 +13,7 @@ class SearchBox extends Component {
             name="search"
             size={22}
             color="#C7BDAC"
-             
+
           />
 
           <TextInput

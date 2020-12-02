@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 class HeaderName extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.HeaderFont}>{this.props.page}</Text>
-
       </View >
     );
   }
@@ -28,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderName;
+export default HeaderName

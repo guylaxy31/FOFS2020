@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   headerText: { paddingLeft: 10, fontFamily: 'Prompt-Regular', fontSize: 18 },
   scrollStyle: {
     marginTop: '3%',
+
   },
   titleAlign: {
     width: '100%',

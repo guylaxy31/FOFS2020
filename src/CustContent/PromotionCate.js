@@ -5,7 +5,7 @@ class PromotionCate extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.imgContainer}>
           <Image style={styles.imgBorder} source={this.props.imageUri}></Image>
         </View>
       </View>
@@ -17,15 +17,26 @@ const styles = StyleSheet.create({
   container: {
     height: null,
     width: null,
-
     marginHorizontal: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 3
+  },
+  imgContainer: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    elevation: 5,
+    shadowOpacity: 0.26,
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#FFFC1B',
+    borderRadius: 15,
+
+
   },
   imgBorder: {
     height: 180,
     width: 320,
-
-    borderWidth: 1,
-    borderColor: '#FFFC1B',
     borderRadius: 15,
   },
 });

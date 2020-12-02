@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, Button } from 'react-native';
 import { AppLoading } from 'expo';
+import { connect } from 'react-redux'
 import * as Font from 'expo-font';
 
 
@@ -10,13 +11,15 @@ import MenuBottomMain from '../Menu/MenuBottomMain';
 import CustContentMain from '../CustContent/CustContentMain';
 import LoginModeMain from '../Login/LoginModeMain'
 
+
 let customFonts = {
-  'Prompt-Bold': require('../../assets/fonts/Prompt-Bold.ttf'),
-  'Prompt-Regular': require('../../assets/fonts/Prompt-Regular.ttf'),
-  'Prompt-Light': require('../../assets/fonts/Prompt-Light.ttf'),
+  'pr-light': require('../../assets/fonts/Prompt-Light.ttf'),
+  'pr-reg': require('../../assets/fonts/Prompt-Regular.ttf'),
+  'pr-bold': require('../../assets/fonts/Prompt-Bold.ttf'),
 };
 
 // หน้าหลักของแอปพลิเคชัน
+
 
 class Home extends Component {
 
@@ -35,6 +38,8 @@ class Home extends Component {
 
   render() {
 
+
+
     if (this.state.fontsLoaded) {
       return (
         <View style={styles.container}>
@@ -42,7 +47,11 @@ class Home extends Component {
           <NavTop style={styles.nav__container}></NavTop>
           {/* เปลี่ยนตรง page ได้ */}
           <HeaderName page="หน้าหลัก"></HeaderName>
-
+          <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
+          <Button onPress={() => this.props.add(5000)} title="รับเงินเพิ่ม"></Button>
+          <Button onPress={() => this.props.login()} title="ลงชื่อเข้าใช้"></Button>
+          <Button onPress={() => this.props.logout()} title="ลงชื่อออก"></Button>
+          <Text>{this.props.loginStatus.loginState}</Text>
           {/* พื้นที่แสดงเนื้อหา */}
           <ScrollView
             style={styles.scroll_View}
@@ -62,6 +71,7 @@ class Home extends Component {
 
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -94,4 +104,41 @@ const styles = StyleSheet.create({
 
 });
 
-export default Home;
+const mapStatetoProps = (state) => {
+  return {
+    user: state.user,
+    emp: state.emp,
+    loginStatus: state.loginStatus
+  }
+}
+
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    setName: (name) => {
+      dispatch({
+        type: "setName",
+        payload: name
+      })
+    },
+
+    add: (val) => {
+      dispatch({
+        type: "ADD",
+        payload: val
+      })
+    },
+    login: () => {
+      dispatch({
+        type: "LOGIN",
+      })
+    },
+    logout: () => {
+      dispatch({
+        type: "LOGOUT",
+      })
+    },
+
+  }
+}
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(Home);
