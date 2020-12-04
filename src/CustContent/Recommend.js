@@ -20,27 +20,27 @@ class Recommend extends Component {
           {/* ลูปเรียกตัว PromotionCate */}
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic1.jpg')}
-            foodName="น่องไก่ทอด"
-            resName="ร้านอิ่มจัง"
+            foodType="เมนูเส้น"
+            resName="ร้านก๋วยเตี๋ยวลุงชัย"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic2.jpg')}
-            foodName="ข้าวมันไก่"
+            foodType="ข้าวมันไก่"
             resName="ร้านนายยง"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic3.jpg')}
-            foodName="ข้าวราด"
+            foodType="ข้าวราด"
             resName="ร้านลุงชม"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic4.jpg')}
-            foodName="น่องไก่ทอด"
+            foodType="น่องไก่ทอด"
             resName="ร้านไก่หรรษา"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic5.jpg')}
-            foodName="ข้าวมันไก่"
+            foodType="ข้าวมันไก่"
             resName="ร้านป้าอร"
           ></RecommendCate>
         </ScrollView>

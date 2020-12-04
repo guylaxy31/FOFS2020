@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Home from './src/Home/Home'; // หน้าหลักของแอปพลิเคชัน
+import Home from './src/Home/Home';
+
+
 // R E D U X
-import { createStore, combineReducers, ApplyMiddleware, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux'
 import { userReducer, employeeReducer, loginStatus } from './src/Reducers/Reducers'
+import { Provider } from 'react-redux';
 
-const mylogger = (store) => (next) => (action) => {
-  console.log("Log Action", action);
-  next(action);
-}
+// N A V I G A T O R
+import AppNavigation from './src/screens/AppNavigation'
 
-const store = createStore(combineReducers({ user: userReducer, emp: employeeReducer, loginStatus }, {}, applyMiddleware(mylogger)))
+const store = createStore(combineReducers({ user: userReducer, emp: employeeReducer, loginStatus }))
 
 export default function App() {
   return (
@@ -23,13 +23,13 @@ export default function App() {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,                    // ให้มีพื้นที่ 1 ส่วน (Default Column)
+    alignSelf: 'stretch',       // ให้ child ใน container align ให้ match กับ height ของ container (Column direction)
+    alignItems: 'center',       // จัดให้ container มันเองอยู่ตอนกลาง ( Row direction)
+    justifyContent: 'center',   // ให้ child align ตามทิศของ container
   },
+
 });
 

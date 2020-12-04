@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { Header } from 'react-native-elements';
 import { connect } from 'react-redux'
 
 class NavTop extends Component {
 
-
   render() {
+
     const login_activate = this.props.loginStatus.loginState
     if (login_activate === 0) {
+      console.log('Login status = 0')
       return (
         <Header
           containerStyle={{
@@ -17,10 +18,13 @@ class NavTop extends Component {
           leftComponent={{ icon: 'menu', color: '#000' }}
           rightComponent={{ icon: 'person', color: '#000', }}
         >
-
+          <Button title='test' onPress={() => {
+            this.props.navigation.navigate('Homescreen')
+          }}></Button>
         </Header>)
     }
     else {
+      console.log('Login status Nav is 1')
       return (
         <Header
           containerStyle={{

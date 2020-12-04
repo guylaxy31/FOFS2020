@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   HeaderFont: {
-    fontFamily: 'Prompt-Regular',
+    fontFamily: 'pr-reg',
     fontSize: 16,
 
   },

@@ -4,21 +4,16 @@ import { AppLoading } from 'expo';
 import { connect } from 'react-redux'
 import * as Font from 'expo-font';
 
-
 import NavTop from '../NavTop/NavTop';
 import HeaderName from '../NavTop/HeaderName';
 import MenuBottomMain from '../Menu/MenuBottomMain';
 import CustContentMain from '../CustContent/CustContentMain';
-import LoginModeMain from '../Login/LoginModeMain'
-
 
 let customFonts = {
   'pr-light': require('../../assets/fonts/Prompt-Light.ttf'),
   'pr-reg': require('../../assets/fonts/Prompt-Regular.ttf'),
   'pr-bold': require('../../assets/fonts/Prompt-Bold.ttf'),
 };
-
-// หน้าหลักของแอปพลิเคชัน
 
 
 class Home extends Component {
@@ -37,28 +32,19 @@ class Home extends Component {
   }
 
   render() {
-
-
-
     if (this.state.fontsLoaded) {
       return (
         <View style={styles.container}>
-          {/* Nav ประกอบไปด้วย drawer และ profile icon */}
+
           <NavTop style={styles.nav__container}></NavTop>
-          {/* เปลี่ยนตรง page ได้ */}
           <HeaderName page="หน้าหลัก"></HeaderName>
-          <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
+          {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
           <Button onPress={() => this.props.add(5000)} title="รับเงินเพิ่ม"></Button>
           <Button onPress={() => this.props.login()} title="ลงชื่อเข้าใช้"></Button>
           <Button onPress={() => this.props.logout()} title="ลงชื่อออก"></Button>
-          <Text>{this.props.loginStatus.loginState}</Text>
-          {/* พื้นที่แสดงเนื้อหา */}
-          <ScrollView
-            style={styles.scroll_View}
-            showsVerticalScrollIndicator={false}
-          >
+          <Text>{this.props.loginStatus.loginState}</Text> */}
+          <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
             <CustContentMain></CustContentMain>
-
           </ScrollView>
 
           {/* ปุ่มเนนูต่างๆ */}
@@ -72,7 +58,6 @@ class Home extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -80,8 +65,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-
-
   },
   nav__container: {
     flex: 1,
