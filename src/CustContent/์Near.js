@@ -1,44 +1,60 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import NearCate from './NearCate';
 import Hextagon from './Hextagon';
 
 class Near extends Component {
   render() {
+
+    this.state = {
+      nearLIST: [
+        {
+          resName: 'ร้านลุงชม',
+          imageUri: require('../../assets/recommends/200718pic1.jpg'),
+        },
+        {
+          resName: 'ร้านลุงชม',
+          imageUri: require('../../assets/recommends/200718pic2.jpg'),
+        },
+        {
+          resName: 'ร้านลุงชม',
+          imageUri: require('../../assets/recommends/200718pic3.jpg'),
+        },
+        {
+          resName: 'ร้านลุงชม',
+          imageUri: require('../../assets/recommends/200718pic4.jpg'),
+        },
+        {
+          resName: 'ร้านลุงชม',
+          imageUri: require('../../assets/recommends/200718pic5.jpg'),
+        },
+      ]
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.titleAlign}>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
           <Text style={styles.headerText}>จากร้านอาหารใกล้คุณ</Text>
         </View>
-        <ScrollView
-          style={styles.scrollStyle}
+
+
+        <FlatList
+          data={this.state.nearLIST}
+          renderItem={({ item }) =>
+            <NearCate
+              imageUri={item.imageUri}
+              resName={item.resName}
+            ></NearCate>}
+          keyExtractor={item => item.id}
           horizontal={true}
+          showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-        >
-          {/* ลูปเรียกตัว PromotionCate */}
-          <NearCate
-            imageUri={require('../../assets/recommends/200718pic1.jpg')}
-            resName="ร้านอิ่มจัง"
-          ></NearCate>
-          <NearCate
-            imageUri={require('../../assets/recommends/200718pic2.jpg')}
-            resName="ร้านนายยง"
-          ></NearCate>
-          <NearCate
-            imageUri={require('../../assets/recommends/200718pic3.jpg')}
-            resName="ร้านลุงชม"
-          ></NearCate>
-          <NearCate
-            imageUri={require('../../assets/recommends/200718pic4.jpg')}
-            resName="ร้านไก่หรรษา"
-          ></NearCate>
-          <NearCate
-            imageUri={require('../../assets/recommends/200718pic5.jpg')}
-            foodName="ข้าวมันไก่"
-            resName="ร้านป้าอร"
-          ></NearCate>
-        </ScrollView>
+          style={styles.nearStyle}
+        />
+
+
+
       </View>
     );
   }
@@ -54,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerText: { paddingLeft: 10, fontFamily: 'pr-reg', fontSize: 18 },
-  scrollStyle: {
+  nearStyle: {
     marginTop: '3%',
     paddingVertical: 15
 

@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import PromotionCate from './PromotionCate';
 import Hextagon from './Hextagon';
 
 class Promotion extends Component {
   render() {
+
+    this.state = {
+      promotionLIST: [
+        {
+          promotionTitle: 'KFC',
+          imageUri: require('../../assets/promotions/promotionKFCtest.jpg'),
+        },
+        {
+          promotionTitle: 'Macdonal',
+          imageUri: require('../../assets/promotions/promotionMctest.jpg'),
+        },
+        {
+          promotionTitle: 'Pizza',
+          imageUri: require('../../assets/promotions/promotionPizzatest.jpg'),
+        },
+      ]
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.titleAlign}>
@@ -13,22 +31,19 @@ class Promotion extends Component {
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
         </View>
 
-        <ScrollView
-          style={styles.scrollStyle}
+        <FlatList
+          data={this.state.promotionLIST}
+          renderItem={({ item }) =>
+            <PromotionCate
+              imageUri={item.imageUri}
+            ></PromotionCate>}
+          keyExtractor={item => item.id}
           horizontal={true}
+          showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-        >
-          {/* ลูปเรียกตัว PromotionCate */}
-          <PromotionCate
-            imageUri={require('../../assets/promotions/promotionKFCtest.jpg')}
-          ></PromotionCate>
-          <PromotionCate
-            imageUri={require('../../assets/promotions/promotionMctest.jpg')}
-          ></PromotionCate>
-          <PromotionCate
-            imageUri={require('../../assets/promotions/promotionPizzatest.jpg')}
-          ></PromotionCate>
-        </ScrollView>
+          style={styles.flatListStyle}
+        />
+
       </View>
     );
   }
@@ -49,9 +64,9 @@ const styles = StyleSheet.create({
 
   },
   baseText: { paddingHorizontal: 10, fontFamily: 'pr-reg', fontSize: 20 },
-  scrollStyle: {
+  flatListStyle: {
     marginTop: '3%',
-    paddingVertical:15
+    paddingVertical: 15
 
   },
 });

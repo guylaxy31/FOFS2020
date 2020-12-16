@@ -57,7 +57,7 @@ class Home extends Component {
           </ScrollView>
 
           {/* ปุ่มเนนูต่างๆ */}
-          
+
         </View >
       );
     } else {

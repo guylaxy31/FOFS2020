@@ -1,50 +1,55 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, FlatList } from 'react-native';
 import RecommendCate from './RecommendCate';
 import Hextagon from './Hextagon';
 
 class Recommend extends Component {
   render() {
+
+    this.state = {
+      restaurantLIST: [
+        {
+          imageUri: require('../../assets/recommends/200718pic1.jpg'),
+          foodName: 'ไก่ทอด',
+          resName: 'ร้านก๋วยเตี๋ยวลุงชัย'
+        },
+        {
+          imageUri: require('../../assets/recommends/200718pic2.jpg'),
+          foodName: 'ข้าวมันไก่',
+          resName: 'ร้านนายยง'
+        },
+        {
+          imageUri: require('../../assets/recommends/200718pic3.jpg'),
+          foodName: 'ข้าวราด',
+          resName: 'ร้านลุงชม'
+        },
+      ]
+    }
+
     return (
+
       <View style={styles.container}>
         <View style={styles.titleAlign}>
           <Hextagon imageUri={require('../../assets/theme/hextagon.png')} />
           <Text style={styles.headerText}>เมนูแนะนำ</Text>
         </View>
 
-        <ScrollView
-          style={styles.scrollStyle}
+        <FlatList
+          data={this.state.restaurantLIST}
+          renderItem={({ item }) =>
+            <RecommendCate
+              imageUri={item.imageUri}
+              foodName={item.foodName}
+              resName={item.resName}
+            ></RecommendCate>}
+          keyExtractor={item => item.id}
           horizontal={true}
+          showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-        >
-          {/* ลูปเรียกตัว PromotionCate */}
-          <RecommendCate
-            imageUri={require('../../assets/recommends/200718pic1.jpg')}
-            foodName="ไก่ทอด"
-            resName="ร้านก๋วยเตี๋ยวลุงชัย"
-          ></RecommendCate>
-          <RecommendCate
-            imageUri={require('../../assets/recommends/200718pic2.jpg')}
-            foodName="ข้าวมันไก่"
-            resName="ร้านนายยง"
-          ></RecommendCate>
-          <RecommendCate
-            imageUri={require('../../assets/recommends/200718pic3.jpg')}
-            foodName="ข้าวราด"
-            resName="ร้านลุงชม"
-          ></RecommendCate>
-          <RecommendCate
-            imageUri={require('../../assets/recommends/200718pic4.jpg')}
-            foodName="น่องไก่ทอด"
-            resName="ร้านไก่หรรษา"
-          ></RecommendCate>
-          <RecommendCate
-            imageUri={require('../../assets/recommends/200718pic5.jpg')}
-            foodName="ข้าวมันไก่"
-            resName="ร้านป้าอร"
-          ></RecommendCate>
-        </ScrollView>
-      </View>
+          style={styles.flatListStyle}
+        />
+
+      </View >
     );
   }
 }
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
   headerText: {
     paddingLeft: 10, fontFamily: 'pr-reg', fontSize: 18
   },
-  scrollStyle: {
+  flatListStyle: {
     marginTop: '3%',
     paddingVertical: 15
 
