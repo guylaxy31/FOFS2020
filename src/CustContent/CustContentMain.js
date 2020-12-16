@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import Promotion from './Promotion';
 import Recommend from './Recommend';
 import Near from './์Near';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class CustContentMain extends Component {
   render() {
@@ -14,7 +15,7 @@ class CustContentMain extends Component {
         <Recommend></Recommend>
         <Near></Near>
         <View>
-          <Text style={styles.viewAll}>ดูร้านอาหารทั้งหมด</Text>
+          <TouchableOpacity><Text style={styles.viewAll}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
         </View>
       </View>
     );

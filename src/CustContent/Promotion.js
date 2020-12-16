@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   baseText: { paddingHorizontal: 10, fontFamily: 'pr-reg', fontSize: 20 },
   scrollStyle: {
     marginTop: '3%',
+    paddingVertical:15
 
   },
 });

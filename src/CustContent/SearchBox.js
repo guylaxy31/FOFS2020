@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -8,13 +9,13 @@ class SearchBox extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.alignRow}>
-          <Icon
+          <TouchableOpacity><Icon
             style={styles.iconAlign}
             name="search"
             size={22}
             color="#C7BDAC"
 
-          />
+          /></TouchableOpacity>
 
           <TextInput
             placeholder={'ค้นหาชื่อร้านอาหาร / ชื่อเมนู'}

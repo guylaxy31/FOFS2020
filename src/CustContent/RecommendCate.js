@@ -9,7 +9,7 @@ class PromotionCate extends Component {
           <Image style={styles.imgBorder} source={this.props.imageUri}></Image>
         </View>
         <View>
-          <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.foodType}</Text>
+          <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.foodName}</Text>
           <Text style={{ fontFamily: 'pr-light' }}>{this.props.resName}</Text>
         </View>
       </View>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     height: null,
     width: null,
-    marginRight: 20
+    marginRight: 10,
   },
   imgContainer: {
     shadowColor: 'black',
@@ -31,7 +31,9 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowOpacity: 0.26,
     backgroundColor: '#FFF',
-    padding: 1
+    padding: 1,
+    borderRadius: 20
+
   }
   ,
   imgBorder: {
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     height: 150,
     width: 150,
+    borderRadius: 20
 
   },
 });

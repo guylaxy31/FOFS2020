@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   headerText: { paddingLeft: 10, fontFamily: 'pr-reg', fontSize: 18 },
   scrollStyle: {
     marginTop: '3%',
+    paddingVertical: 15
 
   },
   titleAlign: {

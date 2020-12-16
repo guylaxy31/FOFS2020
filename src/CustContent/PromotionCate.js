@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#FFFC1B',
-    borderRadius: 15,
+    borderRadius: 20,
 
 
   },
   imgBorder: {
     height: 180,
     width: 320,
-    borderRadius: 15,
+    borderRadius: 20,
   },
 });
 

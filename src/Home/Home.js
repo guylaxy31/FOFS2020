@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView, View, Button } from 'react-native';
 import { AppLoading } from 'expo';
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import * as Font from 'expo-font';
 
 import NavTop from '../NavTop/NavTop';
@@ -20,7 +20,9 @@ class Home extends Component {
 
   state = {
     fontsLoaded: false,
+
   };
+
 
   async _loadFontsAsync() {
     await Font.loadAsync(customFonts);
@@ -32,23 +34,30 @@ class Home extends Component {
   }
 
   render() {
+
+
+
     if (this.state.fontsLoaded) {
+
       return (
+
+
         <View style={styles.container}>
 
           <NavTop style={styles.nav__container}></NavTop>
-          <HeaderName page="หน้าหลัก"></HeaderName>
+
           {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
           <Button onPress={() => this.props.add(5000)} title="รับเงินเพิ่ม"></Button>
           <Button onPress={() => this.props.login()} title="ลงชื่อเข้าใช้"></Button>
           <Button onPress={() => this.props.logout()} title="ลงชื่อออก"></Button>
           <Text>{this.props.loginStatus.loginState}</Text> */}
+
           <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
             <CustContentMain></CustContentMain>
           </ScrollView>
 
           {/* ปุ่มเนนูต่างๆ */}
-          <MenuBottomMain style={styles.menu__container}></MenuBottomMain>
+          
         </View >
       );
     } else {
@@ -68,6 +77,7 @@ const styles = StyleSheet.create({
   },
   nav__container: {
     flex: 1,
+
   },
   menu__container: {
     flex: 1,

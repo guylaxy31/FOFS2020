@@ -16,9 +16,7 @@ const store = createStore(combineReducers({ user: userReducer, emp: employeeRedu
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Home />
-      </View>
+      <AppNavigation />
     </Provider>
   );
 }

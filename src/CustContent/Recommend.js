@@ -20,27 +20,27 @@ class Recommend extends Component {
           {/* ลูปเรียกตัว PromotionCate */}
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic1.jpg')}
-            foodType="เมนูเส้น"
+            foodName="ไก่ทอด"
             resName="ร้านก๋วยเตี๋ยวลุงชัย"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic2.jpg')}
-            foodType="ข้าวมันไก่"
+            foodName="ข้าวมันไก่"
             resName="ร้านนายยง"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic3.jpg')}
-            foodType="ข้าวราด"
+            foodName="ข้าวราด"
             resName="ร้านลุงชม"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic4.jpg')}
-            foodType="น่องไก่ทอด"
+            foodName="น่องไก่ทอด"
             resName="ร้านไก่หรรษา"
           ></RecommendCate>
           <RecommendCate
             imageUri={require('../../assets/recommends/200718pic5.jpg')}
-            foodType="ข้าวมันไก่"
+            foodName="ข้าวมันไก่"
             resName="ร้านป้าอร"
           ></RecommendCate>
         </ScrollView>
@@ -57,12 +57,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   headerText: {
     paddingLeft: 10, fontFamily: 'pr-reg', fontSize: 18
   },
   scrollStyle: {
     marginTop: '3%',
+    paddingVertical: 15
 
   },
   titleAlign: {

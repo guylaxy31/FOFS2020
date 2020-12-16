@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     height: null,
     width: null,
-    marginRight: 20
+    marginRight: 10
   },
   imgContainer: {
     shadowColor: 'black',
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowOpacity: 0.26,
     backgroundColor: '#FFF',
-    padding: 1
+    padding: 1,
+    borderRadius: 20
   }
   ,
   imgBorder: {
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     height: 150,
     width: 150,
+    borderRadius: 20
   },
 });
 
