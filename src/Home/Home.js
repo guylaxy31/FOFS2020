@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, ScrollView, View, Button } from 'react-native';
-import { AppLoading } from 'expo';
+import { StyleSheet, ScrollView, View } from 'react-native';
+
 import { connect, useDispatch } from 'react-redux'
-import * as Font from 'expo-font';
+
 
 import NavTop from '../NavTop/NavTop';
-import HeaderName from '../NavTop/HeaderName';
-import MenuBottomMain from '../Menu/MenuBottomMain';
 import CustContentMain from '../CustContent/CustContentMain';
 
 let customFonts = {
@@ -18,54 +16,27 @@ let customFonts = {
 
 class Home extends Component {
 
-  state = {
-    fontsLoaded: false,
-
-  };
-
-
-  async _loadFontsAsync() {
-    await Font.loadAsync(customFonts);
-    this.setState({ fontsLoaded: true });
-  }
-
-  componentDidMount() {
-    this._loadFontsAsync();
-  }
-
   render() {
+    return (
+      <View style={styles.container}>
 
+        <NavTop style={styles.nav__container}></NavTop>
 
-
-    if (this.state.fontsLoaded) {
-
-      return (
-
-
-        <View style={styles.container}>
-
-          <NavTop style={styles.nav__container}></NavTop>
-
-          {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
+        {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
           <Button onPress={() => this.props.add(5000)} title="รับเงินเพิ่ม"></Button>
           <Button onPress={() => this.props.login()} title="ลงชื่อเข้าใช้"></Button>
           <Button onPress={() => this.props.logout()} title="ลงชื่อออก"></Button>
           <Text>{this.props.loginStatus.loginState}</Text> */}
 
-          <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
-            <CustContentMain></CustContentMain>
-          </ScrollView>
+        <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
+          <CustContentMain></CustContentMain>
+        </ScrollView>
 
-          {/* ปุ่มเนนูต่างๆ */}
-
-        </View >
-      );
-    } else {
-      return <AppLoading />;
-    }
-
+      </View >
+    );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

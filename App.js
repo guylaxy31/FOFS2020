@@ -9,7 +9,7 @@ import { userReducer, employeeReducer, loginStatus } from './src/Reducers/Reduce
 import { Provider } from 'react-redux';
 
 // N A V I G A T O R
-import Homestack from './src/screens/AppNavigation'
+import AppNavigation from './src/screens/AppNavigation'
 
 const store = createStore(combineReducers({ user: userReducer, emp: employeeReducer, loginStatus }))
 
@@ -40,7 +40,7 @@ export default class App extends Component {
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
-          <Homestack />
+          <AppNavigation />
         </Provider>
       )
     }

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import LoginBoxHeader from './LoginBoxHeader'
-import LoginCustBox from './LoginCustBox'
-import LoginRestBox from './LoginRestBox'
+import ModeTitle from './ModeTitle'
+import ModeCustomer from './ModeCustomer'
+import ModeRestaurant from './ModeRestaurant'
 
-class LoginModeMain extends Component {
+class LoginMode extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <LoginBoxHeader></LoginBoxHeader>
+        <ModeTitle />
         <View style={styles.login__mode__layout}>
-          <LoginCustBox style={styles.mode_space}></LoginCustBox>
-          <LoginRestBox style={styles.mode_space}></LoginRestBox>
+          <ModeCustomer style={styles.mode_space} />
+          <ModeRestaurant style={styles.mode_space} />
         </View>
       </View>
     );
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
 
-
   },
+
 
 
 });
 
-export default LoginModeMain;
+export default LoginMode;

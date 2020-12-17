@@ -1,7 +1,8 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation';
 import Home from '../Home/Home'
-import LoginModeMain from '../Login/LoginModeMain'
+import LoginMode from '../Login/LoginMode'
+import CustomerWay from '../Login/CustomerWay'
 
 const screens = {
     Homescreen: {
@@ -14,11 +15,9 @@ const screens = {
                 textAlign: 'center',
             }
         },
-
-
     },
     LoginModescreen: {
-        screen: LoginModeMain,
+        screen: LoginMode,
         navigationOptions: {
             title: 'เข้าสู่ระบบ',
             headerTitleStyle: {
@@ -28,9 +27,27 @@ const screens = {
             }
         },
     },
-    initialRouteName: "Homescreen"
+    CustomerWayscreen: {
+        screen: CustomerWay,
+        navigationOptions: {
+            title: 'เข้าสู่ระบบ',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        },
+    },
+
+
+
 
 }
 
-const Homestack = createStackNavigator(screens);
+const Homestack = createStackNavigator(screens, { initialRouteName: 'CustomerWayscreen' });
 export default createAppContainer(Homestack);
+
+
+
+
+
