@@ -5,7 +5,7 @@ import { connect, useDispatch } from 'react-redux'
 
 
 import NavTop from '../NavTop/NavTop';
-import CustContentMain from '../CustContent/CustContentMain';
+import MenuContent from '../MenuContent/MenuContent';
 
 let customFonts = {
   'pr-light': require('../../assets/fonts/Prompt-Light.ttf'),
@@ -29,7 +29,7 @@ class Home extends Component {
           <Text>{this.props.loginStatus.loginState}</Text> */}
 
         <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
-          <CustContentMain></CustContentMain>
+          <MenuContent />
         </ScrollView>
 
       </View >

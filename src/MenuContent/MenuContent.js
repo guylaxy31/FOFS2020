@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SearchBox from './SearchBox';
-import Promotion from './Promotion';
-import Recommend from './Recommend';
-import Near from './์Near';
+import PromotionContainer from './PromotionContainer';
+import RecommendContainer from './RecommendContainer';
+import NearContainer from './NearContainer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class CustContentMain extends Component {
@@ -11,9 +11,9 @@ class CustContentMain extends Component {
     return (
       <View style={styles.container}>
         <SearchBox></SearchBox>
-        <Promotion></Promotion>
-        <Recommend></Recommend>
-        <Near></Near>
+        <PromotionContainer />
+        <RecommendContainer />
+        <NearContainer />
         <View>
           <TouchableOpacity><Text style={styles.viewAll}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
         </View>

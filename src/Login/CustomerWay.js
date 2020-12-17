@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+
 
 
 
