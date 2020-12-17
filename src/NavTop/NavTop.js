@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 // I C O N
 import { Header } from 'react-native-elements';
 
 // R E D U X
 import { connect } from 'react-redux'
+
 
 // N A V I G A T I O N
 
@@ -22,14 +23,14 @@ class NavTop extends Component {
         <Header
           containerStyle={{
             backgroundColor: '#FFFC1B',
-            height: '10%',
+            height: 60,
             flexDirection: 'row',
             paddingTop: 0
           }}
 
-          leftComponent={{ icon: 'menu', color: '#000' }}
+          leftComponent={{ icon: 'menu', color: '#000', style: { marginLeft: 10 } }}
           rightComponent={
-            <TouchableOpacity><Text style={{ fontFamily: 'pr-reg' }}>เข้าสู่ระบบ</Text></ TouchableOpacity>
+            <TouchableOpacity><Text style={{ fontFamily: 'pr-reg', marginRight: 10 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>
           }
         // {{ icon: 'person', color: '#000', }}
         >
