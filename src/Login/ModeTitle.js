@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 
 
-class LoginBoxHeader extends Component {
+class ModeTitle extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -31,22 +31,23 @@ const styles = StyleSheet.create({
   },
   header__line1: {
     color: '#000',
-    fontWeight: 'bold',
     fontSize: 26,
+    fontFamily: 'pr-reg'
 
   },
   header__line2: {
     color: '#989762',
-    fontWeight: 'bold',
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'pr-reg'
+
   },
   header__line3: {
     color: '#D2D18F',
-    fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'pr-reg'
   }
 
 
 });
 
-export default LoginBoxHeader;
+export default ModeTitle;

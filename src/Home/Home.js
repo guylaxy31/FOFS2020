@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
+
+import { connect, useDispatch } from 'react-redux'
+
 
 import NavTop from '../NavTop/NavTop';
-import HeaderName from '../NavTop/HeaderName';
-import MenuBottomMain from '../Menu/MenuBottomMain';
-import CustContentMain from '../CustContent/CustContentMain';
-// import RestContent from '../RestContent/RestContent'
-import LoginModeMain from '../Login/LoginModeMain'
-import LoginCustOptionID from '../Login/LoginCustOptionID'
-import RegisterCustMain from '../Register/RegisterCustMain'
+import MenuContent from '../MenuContent/MenuContent';
 
+let customFonts = {
+  'pr-light': require('../../assets/fonts/Prompt-Light.ttf'),
+  'pr-reg': require('../../assets/fonts/Prompt-Regular.ttf'),
+  'pr-bold': require('../../assets/fonts/Prompt-Bold.ttf'),
+};
 
-// หน้าหลักของแอปพลิเคชัน
 
 class Home extends Component {
+
   render() {
     return (
       <View style={styles.container}>
-        {/* <NavTop style={styles.nav__container}></NavTop>
-        <HeaderName></HeaderName> */}
-        <ScrollView
-          style={styles.scroll_View}
-          showsVerticalScrollIndicator={false}
-        >
-          <LoginCustOptionID></LoginCustOptionID>
-          {/* <LoginMode></LoginMode> */}
-          {/* <CustContent style={styles.content__container}></CustContent> */}
-          {/* <RestContent style={styles.content__container}></RestContent> */}
+
+        <NavTop style={styles.nav__container}></NavTop>
+
+        {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
+          <Button onPress={() => this.props.add(5000)} title="รับเงินเพิ่ม"></Button>
+          <Button onPress={() => this.props.login()} title="ลงชื่อเข้าใช้"></Button>
+          <Button onPress={() => this.props.logout()} title="ลงชื่อออก"></Button>
+          <Text>{this.props.loginStatus.loginState}</Text> */}
+
+        <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
+          <MenuContent />
         </ScrollView>
-        <MenuBottomMain style={styles.menu__container}></MenuBottomMain>
-      </View>
+
+      </View >
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -41,10 +45,10 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   nav__container: {
     flex: 1,
+
   },
   menu__container: {
     flex: 1,
@@ -55,6 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 0,
     margin: 0,
+
   },
   content__container: {
     height: '100%',
@@ -63,4 +68,41 @@ const styles = StyleSheet.create({
 
 });
 
-export default Home;
+const mapStatetoProps = (state) => {
+  return {
+    user: state.user,
+    emp: state.emp,
+    loginStatus: state.loginStatus
+  }
+}
+
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    setName: (name) => {
+      dispatch({
+        type: "setName",
+        payload: name
+      })
+    },
+
+    add: (val) => {
+      dispatch({
+        type: "ADD",
+        payload: val
+      })
+    },
+    login: () => {
+      dispatch({
+        type: "LOGIN",
+      })
+    },
+    logout: () => {
+      dispatch({
+        type: "LOGOUT",
+      })
+    },
+
+  }
+}
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(Home);
