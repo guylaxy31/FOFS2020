@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-class PromotionCate extends Component {
+class RecommendItem extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     height: null,
     width: null,
     marginRight: 10,
+    marginVertical: 10
   },
   imgContainer: {
     shadowColor: 'black',
@@ -46,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PromotionCate;
+export default RecommendItem;

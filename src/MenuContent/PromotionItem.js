@@ -15,28 +15,33 @@ class PromotionItem extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: null,
-    width: null,
+
     marginHorizontal: 20,
     paddingVertical: 10,
-    paddingHorizontal: 3
+    paddingHorizontal: 3,
+
+
   },
   imgContainer: {
-    shadowColor: 'black',
+
+
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     elevation: 5,
     shadowOpacity: 0.26,
     backgroundColor: '#FFF',
+    borderColor: '#FFF',
     borderWidth: 1,
-    borderColor: '#FFFC1B',
     borderRadius: 20,
+    padding: 1
 
 
   },
   imgBorder: {
-    height: 180,
-    width: 320,
+    width: 250,
+    height: 250,
+    resizeMode: 'contain',
     borderRadius: 20,
   },
 });

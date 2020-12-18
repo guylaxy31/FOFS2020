@@ -12,7 +12,7 @@ class ModeRestaurant extends Component {
                     <View style={styles.img_mode}>
                         <Image style={styles.img__} source={require('../../assets/login/restaurant_mode_logo.png')}></Image>
                     </View>
-                    <Text style={{ fontFamily: 'pr-light', fontSize:16 }}>จัดการร้านอาหาร</Text>
+                    <View style={styles.alignText}><Text style={{ fontFamily: 'pr-light', fontSize: 16 }}>จัดการร้านอาหาร</Text></View>
                 </TouchableOpacity>
             </View>
         );
@@ -21,34 +21,34 @@ class ModeRestaurant extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: 150,
-        width: 150,
+        height: '60%',
+        width: '40%',
         alignSelf: 'stretch',
-        backgroundColor: '#FFF',
         alignItems: 'center',
-        justifyContent: 'center',
-        justifyContent: 'flex-end',
-        marginLeft: 10
-
-    },
-    mode_btn: {
-        marginTop: 20,
-        marginBottom: 5,
-        width: '100%',
+        marginRight: 10,
         backgroundColor: '#FFF',
-        shadowOffset: { width: 0, height: 0 },
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 6,
         elevation: 3,
-        paddingVertical: '5%',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        shadowOpacity: 0.26,
+        padding: 1,
+
+    }, alignText: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     img_mode: {
         flex: 1,
         flexDirection: 'row',
         height: '100%',
-        justifyContent: 'center'
+        width: '100%',
+        justifyContent: 'center',
+        padding: 15,
+
+        alignItems: 'center'
     },
 });
 

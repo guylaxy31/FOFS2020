@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-class NearCate extends Component {
+class NearItem extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -10,6 +10,9 @@ class NearCate extends Component {
         </View>
         <View>
           <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.resName}</Text>
+        </View>
+        <View>
+          <Text style={{ fontFamily: 'pr-light', color: 'gray' }}>{this.props.distance}</Text>
         </View>
       </View>
     );
@@ -21,7 +24,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     height: null,
     width: null,
-    marginRight: 10
+    marginRight: 10,
+    marginVertical: 10
   },
   imgContainer: {
     shadowColor: 'black',
@@ -43,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NearCate;
+export default NearItem;

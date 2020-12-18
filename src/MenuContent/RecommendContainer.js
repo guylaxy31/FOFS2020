@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, FlatList } from 'react-native';
 import RecommendItem from './RecommendItem';
 import HextagonIcon from './HextagonIcon';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class RecommendContainer extends Component {
   render() {
@@ -9,19 +10,29 @@ class RecommendContainer extends Component {
     this.state = {
       restaurantLIST: [
         {
-          imageUri: require('../../assets/recommends/200718pic1.jpg'),
+          imageUri: require('../../assets/recommends/fried-chicken.jpg'),
           foodName: 'ไก่ทอด',
-          resName: 'ร้านก๋วยเตี๋ยวลุงชัย'
+          resName: 'ร้านอาหาร1'
         },
         {
-          imageUri: require('../../assets/recommends/200718pic2.jpg'),
+          imageUri: require('../../assets/recommends/chicken-rice.jpg'),
           foodName: 'ข้าวมันไก่',
-          resName: 'ร้านนายยง'
+          resName: 'ร้านอาหาร2'
         },
         {
-          imageUri: require('../../assets/recommends/200718pic3.jpg'),
-          foodName: 'ข้าวราด',
-          resName: 'ร้านลุงชม'
+          imageUri: require('../../assets/recommends/fried-rice.jpg'),
+          foodName: 'ข้าวผัด',
+          resName: 'ร้านอาหาร3'
+        },
+        {
+          imageUri: require('../../assets/recommends/brownie.jpg'),
+          foodName: 'ช็อกโกแลตบราวนี่',
+          resName: 'ร้านอาหาร4'
+        },
+        {
+          imageUri: require('../../assets/recommends/spaghetti.jpg'),
+          foodName: 'สปาร์เก็ตตี้ขี้เมา',
+          resName: 'ร้านอาหาร5'
         },
       ]
     }
@@ -37,7 +48,7 @@ class RecommendContainer extends Component {
         <FlatList
           data={this.state.restaurantLIST}
           renderItem={({ item }) =>
-            <RecommendItem imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} />}
+            <TouchableOpacity><RecommendItem imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
           keyExtractor={item => item.id}
           horizontal={true}
           showsVerticalScrollIndicator={false}

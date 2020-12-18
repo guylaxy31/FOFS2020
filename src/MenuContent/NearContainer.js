@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import NearItem from './NearItem';
 import HextagonIcon from './HextagonIcon';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class NearContainer extends Component {
   render() {
@@ -9,25 +10,16 @@ class NearContainer extends Component {
     this.state = {
       nearLIST: [
         {
-          resName: 'ร้านลุงชม',
-          imageUri: require('../../assets/recommends/200718pic1.jpg'),
+          resName: 'ร้าน NeuCafe',
+          imageUri: require('../../assets/near/coffee.jpg'),
+          distance: '0.25 km'
         },
         {
-          resName: 'ร้านลุงชม',
-          imageUri: require('../../assets/recommends/200718pic2.jpg'),
+          resName: 'ร้าน SmileItalia',
+          imageUri: require('../../assets/near/pizza.jpg'),
+          distance: '0.4 km'
         },
-        {
-          resName: 'ร้านลุงชม',
-          imageUri: require('../../assets/recommends/200718pic3.jpg'),
-        },
-        {
-          resName: 'ร้านลุงชม',
-          imageUri: require('../../assets/recommends/200718pic4.jpg'),
-        },
-        {
-          resName: 'ร้านลุงชม',
-          imageUri: require('../../assets/recommends/200718pic5.jpg'),
-        },
+
       ]
     }
 
@@ -42,7 +34,7 @@ class NearContainer extends Component {
         <FlatList
           data={this.state.nearLIST}
           renderItem={({ item }) =>
-            <NearItem imageUri={item.imageUri} resName={item.resName} />}
+            <TouchableOpacity><NearItem imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
           keyExtractor={item => item.id}
           horizontal={true}
           showsVerticalScrollIndicator={false}

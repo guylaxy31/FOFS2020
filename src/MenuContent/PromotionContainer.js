@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import PromotionItem from './PromotionItem';
 import HextagonIcon from './HextagonIcon';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class PromotionContainer extends Component {
   render() {
@@ -9,16 +10,16 @@ class PromotionContainer extends Component {
     this.state = {
       promotionLIST: [
         {
-          promotionTitle: 'KFC',
-          imageUri: require('../../assets/promotions/promotionKFCtest.jpg'),
+          promotionTitle: 'shabu',
+          imageUri: require('../../assets/promotions/shabupro.jpg'),
         },
         {
           promotionTitle: 'Macdonal',
-          imageUri: require('../../assets/promotions/promotionMctest.jpg'),
+          imageUri: require('../../assets/promotions/oth.jpg'),
         },
         {
           promotionTitle: 'Pizza',
-          imageUri: require('../../assets/promotions/promotionPizzatest.jpg'),
+          imageUri: require('../../assets/promotions/f01.jpg'),
         },
       ]
     }
@@ -34,7 +35,7 @@ class PromotionContainer extends Component {
         <FlatList
           data={this.state.promotionLIST}
           renderItem={({ item }) =>
-            <PromotionItem imageUri={item.imageUri} />}
+            <TouchableOpacity><PromotionItem imageUri={item.imageUri} /></TouchableOpacity>}
           keyExtractor={item => item.id}
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -49,7 +50,7 @@ class PromotionContainer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '10%',
+    marginTop: '15%',
     width: '100%',
     alignSelf: 'stretch',
     backgroundColor: '#fff',

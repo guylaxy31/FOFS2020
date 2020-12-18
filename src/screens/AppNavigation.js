@@ -4,6 +4,7 @@ import Home from '../Home/Home'
 import LoginMode from '../Login/LoginMode'
 import CustomerWay from '../Login/CustomerWay'
 import CustomerFoodID from '../Login/CustomerFoodID'
+import RegisterCustomerContainer from '../Register/RegisterCustomerContainer'
 
 const screens = {
     Homescreen: {
@@ -49,6 +50,17 @@ const screens = {
                 textAlign: 'center',
             }
         },
+    },
+    RegisterCustomerscreen: {
+        screen: RegisterCustomerContainer,
+        navigationOptions: {
+            title: 'สร้างบัญชี',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        },
     }
 
 
@@ -56,7 +68,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'CustomerFoodIDscreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'LoginModescreen' });
 export default createAppContainer(Homestack);
 
 

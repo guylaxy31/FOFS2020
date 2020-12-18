@@ -29,9 +29,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   login__mode__layout: {
+    width: '100%',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    backgroundColor: '#FFF'
 
   },
 
