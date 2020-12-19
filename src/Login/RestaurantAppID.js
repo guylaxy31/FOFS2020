@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import HextagonIcon from '../MenuContent/HextagonIcon';
-import { connect, useDispatch } from 'react-redux'
 
 
 
-const CustomerFoodID = props => {
+
+const RestaurantAppID = props => {
 
     return (
 
@@ -13,7 +13,7 @@ const CustomerFoodID = props => {
 
             <View style={styles.HeaderContainer}>
                 <View style={styles.HeaderWithIcon} ><HextagonIcon /><Text style={styles.LoginHeader}>เข้าสู่ระบบ</Text></View>
-                <View><Text style={styles.LoginSubHeader}>โดย FOOD ID</Text></View>
+                <View><Text style={styles.LoginSubHeader}>จัดการร้านอาหาร</Text></View>
             </View>
 
             <View style={styles.FormContainer}>
@@ -23,12 +23,10 @@ const CustomerFoodID = props => {
                 <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
             </View>
 
-            <TouchableOpacity style={styles.LoginButton} onPress={() => this.props.login(), () => props.navigation.navigate('Homescreen')}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
-            <TouchableOpacity><Text style={styles.registerBtn}>สร้างบัญชีใหม่</Text></TouchableOpacity>
+            <TouchableOpacity><Text>สร้างบัญชีใหม่</Text></TouchableOpacity>
         </View>
-
-
     );
 }
 
@@ -116,33 +114,7 @@ const styles = StyleSheet.create({
         margin: 10
     }, FormContainer: {
         justifyContent: 'center'
-    }, registerBtn: {
-        fontFamily: 'pr-light'
     }
 });
 
-const mapStatetoProps = (state) => {
-    return {
-        loginStatus: state.loginStatus
-    }
-}
-
-const mapDispatchtoProps = (dispatch) => {
-    return {
-        login: () => {
-            dispatch({
-                type: "LOGIN",
-            })
-        },
-        logout: () => {
-            dispatch({
-                type: "LOGOUT",
-            })
-        },
-
-    }
-}
-
-export default connect(mapStatetoProps, mapDispatchtoProps)(CustomerFoodID);
-
-
+export default RestaurantAppID;

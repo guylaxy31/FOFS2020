@@ -6,6 +6,7 @@ import CustomerWay from '../Login/CustomerWay'
 import CustomerFoodID from '../Login/CustomerFoodID'
 import RegisterCustomerContainer from '../Register/RegisterCustomerContainer'
 import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContainer'
+import RestaurantAppID from '../Login/RestaurantAppID'
 const screens = {
     Homescreen: {
         screen: Home,
@@ -72,6 +73,16 @@ const screens = {
                 textAlign: 'center',
             }
         },
+    }, RestaurantAppIDscreen: {
+        screen: RestaurantAppID,
+        navigationOptions: {
+            title: 'สถิติร้านอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        },
     }
 
 
@@ -79,7 +90,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'RestaurantAnalyticscreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
 export default createAppContainer(Homestack);
 
 

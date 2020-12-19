@@ -11,52 +11,50 @@ import { connect } from 'react-redux'
 // N A V I G A T I O N
 
 
-class NavTop extends Component {
+const NavTop = props => {
+  console.log('-----------Nav-top-----------')
+  console.log(props)
+  const login_activate = props.loginStatus.loginState
 
-  render() {
+  if (login_activate === 0) {
+    console.log('Login status = 0')
+    return (
+      <Header
+        containerStyle={{
+          backgroundColor: '#FFFC1B',
+          height: 60,
+          flexDirection: 'row',
+          paddingTop: 0
+        }}
 
-    const login_activate = this.props.loginStatus.loginState
+        leftComponent={{ icon: 'menu', color: '#000', style: { marginLeft: 10 } }}
+        rightComponent={
+          <TouchableOpacity onPress={() => props.navigation.navigate('LoginModescreen')}><Text style={{ fontFamily: 'pr-reg', marginRight: 10 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>
+        }
+      // {{ icon: 'person', color: '#000', }}
+      >
 
-    if (login_activate === 0) {
-      console.log('Login status = 0')
-      return (
-        <Header
-          containerStyle={{
-            backgroundColor: '#FFFC1B',
-            height: 60,
-            flexDirection: 'row',
-            paddingTop: 0
-          }}
+      </Header >)
+  }
+  else {
+    console.log('Login status Nav is 1')
+    return (
+      <Header
+        containerStyle={{
+          backgroundColor: '#FFFC1B',
+        }}
+        leftComponent={{ icon: 'menu', color: '#000' }}
+        rightComponent={{
+          text: 'user01', style: { color: '#000' }
+        }
+        }
+      >
 
-          leftComponent={{ icon: 'menu', color: '#000', style: { marginLeft: 10 } }}
-          rightComponent={
-            <TouchableOpacity><Text style={{ fontFamily: 'pr-reg', marginRight: 10 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>
-          }
-        // {{ icon: 'person', color: '#000', }}
-        >
-
-        </Header >)
-    }
-    else {
-      console.log('Login status Nav is 1')
-      return (
-        <Header
-          containerStyle={{
-            backgroundColor: '#FFFC1B',
-          }}
-          leftComponent={{ icon: 'menu', color: '#000' }}
-          rightComponent={{
-            text: 'user01', style: { color: '#000' }
-          }
-          }
-        >
-
-        </Header >)
-    }
-
+      </Header >)
   }
 
 }
+
 
 
 const styles = StyleSheet.create({
@@ -78,23 +76,6 @@ const mapStatetoProps = (state) => {
   }
 }
 
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    LOGIN: () => {
-      dispatch({
-        type: "LOGIN",
+ 
 
-      })
-    },
-
-    LOGOUT: () => {
-      dispatch({
-        type: "LOGOUT",
-
-      })
-    },
-
-  }
-}
-
-export default connect(mapStatetoProps, mapDispatchtoProps)(NavTop);
+ 

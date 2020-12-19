@@ -1,40 +1,48 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, Button, TouchableOpacity, Text } from 'react-native';
 
 import { connect, useDispatch } from 'react-redux'
 
-
-import NavTop from '../NavTop/NavTop';
 import MenuContent from '../MenuContent/MenuContent';
-
-let customFonts = {
-  'pr-light': require('../../assets/fonts/Prompt-Light.ttf'),
-  'pr-reg': require('../../assets/fonts/Prompt-Regular.ttf'),
-  'pr-bold': require('../../assets/fonts/Prompt-Bold.ttf'),
-};
+import { Header } from 'react-native-elements';
 
 
-class Home extends Component {
 
-  render() {
-    return (
-      <View style={styles.container}>
+const Home = props => {
 
-        <NavTop style={styles.nav__container}></NavTop>
+  return (
+    <View style={styles.container}>
 
-        {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
+      <View style={styles.nav__container}>
+
+        <Header
+          containerStyle={{
+            backgroundColor: '#FFFC1B',
+            height: 60,
+            flexDirection: 'row',
+            paddingTop: 0
+          }}
+
+          leftComponent={{ icon: 'menu', color: '#000', style: { marginLeft: 10 } }}
+          rightComponent={
+            <TouchableOpacity onPress={() => props.navigation.navigate('LoginModescreen')}><Text style={{ fontFamily: 'pr-reg', marginRight: 10 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>
+          }
+        // {{ icon: 'person', color: '#000', }}
+        />
+      </View>
+
+      {/* <Text style={{ fontFamily: 'pr-reg', marginVertical: 20 }}>สวัสดีคุณ {this.props.user.name} อายุ {this.props.user.age} เงินเดือน {this.props.emp.result}</Text>
           <Button onPress={() => this.props.add(5000)} title="รับเงินเพิ่ม"></Button>
           <Button onPress={() => this.props.login()} title="ลงชื่อเข้าใช้"></Button>
           <Button onPress={() => this.props.logout()} title="ลงชื่อออก"></Button>
           <Text>{this.props.loginStatus.loginState}</Text> */}
+      <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
+        <MenuContent />
+      </ScrollView>
 
-        <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
-          <MenuContent />
-        </ScrollView>
+    </View >
+  );
 
-      </View >
-    );
-  }
 }
 
 
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   nav__container: {
-    flex: 1,
+    width: '100%'
 
   },
   menu__container: {
