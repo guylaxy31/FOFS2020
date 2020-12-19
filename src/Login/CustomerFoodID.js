@@ -16,10 +16,12 @@ class CustomerFoodID extends Component {
                     <View><Text style={styles.LoginSubHeader}>โดย FOOD ID</Text></View>
                 </View>
 
-                <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
-                <View style={styles.FormContainer}><TextInput style={styles.id_field} /></View>
-                <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
-                <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
+                <View style={styles.FormContainer}>
+                    <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
+                    <View style={styles.FormContainer}><TextInput style={styles.id_field} /></View>
+                    <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
+                    <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
+                </View>
 
                 <TouchableOpacity style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
                 <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
@@ -110,6 +112,8 @@ const styles = StyleSheet.create({
         color: '#000'
         ,
         margin: 10
+    }, FormContainer: {
+        justifyContent: 'center'
     }
 });
 
