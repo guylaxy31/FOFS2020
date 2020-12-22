@@ -7,6 +7,7 @@ import CustomerFoodID from '../Login/CustomerFoodID'
 import RegisterCustomerContainer from '../Register/RegisterCustomerContainer'
 import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContainer'
 import RestaurantAppID from '../Login/RestaurantAppID'
+import RestaurantContainer from '../RestContent/RestaurantContainer'
 const screens = {
     Homescreen: {
         screen: Home,
@@ -77,6 +78,16 @@ const screens = {
         screen: RestaurantAppID,
         navigationOptions: {
             title: 'สถิติร้านอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        },
+    }, RestaurantContainerscreen: {
+        screen: RestaurantContainer,
+        navigationOptions: {
+            title: 'จัดการร้านอาหาร',
             headerTitleStyle: {
                 fontFamily: 'pr-reg',
                 fontSize: 16,

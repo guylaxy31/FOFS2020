@@ -23,7 +23,7 @@ const RestaurantAppID = props => {
                 <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
             </View>
 
-            <TouchableOpacity style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
             <TouchableOpacity><Text>สร้างบัญชีใหม่</Text></TouchableOpacity>
         </View>

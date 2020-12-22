@@ -18,15 +18,18 @@ class RestToolCard extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    height: '100%',
     width: '45%',
     alignSelf: 'stretch',
-    backgroundColor: '#FFF',
     alignItems: 'center',
-    justifyContent: 'center',
-    shadowOffset: { width: 0, height: 0 },
-    shadowColor: '#000',
+
+    backgroundColor: '#FFF',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    elevation: 3,
     shadowOpacity: 0.3,
-    elevation: 5,
+    padding: 1,
   },
   tool__logo: {
     width: '100%',

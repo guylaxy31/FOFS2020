@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowOpacity: 0.26,
     padding: 1,
+    borderRadius: 15
   }, findFood: {
     fontFamily: 'pr-light', fontSize: 18,
   }, alignText: {
