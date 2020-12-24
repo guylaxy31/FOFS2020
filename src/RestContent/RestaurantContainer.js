@@ -9,7 +9,16 @@ const RestContainer = props => {
 
   return (
     <View style={styles.container}>
-
+      <View>
+        <View style={styles.textInline}>
+          <Text style={styles.restNameTitle}>ร้าน</Text>
+          <Text style={styles.restNameValue}>อาหาร 1</Text>
+        </View>
+        <View style={styles.textInline}>
+          <Text style={styles.statusTitle}>สถานะ</Text>
+          <Text style={styles.statusValue}>ผ่านการอนุมัติแล้ว</Text>
+        </View>
+      </View>
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
           <TouchableOpacity>
@@ -49,43 +58,6 @@ const RestContainer = props => {
         </View>
       </View>
 
-      {/* <View style={styles.alignFlex}>
-
-        <View style={styles.PairContainer}>
-          <TouchableOpacity style={styles.cardContainer}>
-
-            <Image style={styles.imgCard} source={require('../../assets/restaurants/Subtraction2.png')}></Image>
-            <View style={styles.cardDescription}><Text style={styles.fontCard}>แก้ไขรายการอาหาร</Text></View>
-
-          </TouchableOpacity>
-        </View>
-        <View style={styles.PairContainer}>
-          <TouchableOpacity style={styles.cardContainer}>
-            <Image style={styles.imgCard} source={require('../../assets/restaurants/ic_room_service_24px.png')}></Image>
-            <View style={styles.cardDescription}><Text style={styles.fontCard}>คิวลูกค้า</Text></View>
-          </TouchableOpacity>
-
-        </View>
-      </View>
-
-      <View style={styles.alignFlex}>
-
-        <View style={styles.PairContainer}>
-          <TouchableOpacity style={styles.cardContainer}>
-
-            <Image style={styles.imgCard} source={require('../../assets/restaurants/ic_assessment_24px.png')}></Image>
-            <View style={styles.cardDescription}><Text style={styles.fontCard}>ดูสถิติของร้าน</Text></View>
-
-          </TouchableOpacity>
-        </View>
-        <View style={styles.PairContainer}>
-          <TouchableOpacity style={styles.cardContainer}>
-            <Image style={styles.imgCard} source={require('../../assets/restaurants/ic_event_note_24px.png')}></Image>
-            <View style={styles.cardDescription}><Text style={styles.fontCard}>ประวัติสั่งทำอาหาร</Text></View>
-          </TouchableOpacity>
-
-        </View>
-      </View> */}
 
     </View >
   );
@@ -151,6 +123,22 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15
+  }, textInline: {
+    flexDirection: 'row'
+  }, statusValue: {
+    marginLeft: 5,
+    fontFamily: 'pr-reg',
+    color: 'green'
+  }, restNameValue: {
+    marginLeft: 5,
+    fontFamily: 'pr-reg',
+    fontSize: 18,
+
+  }, restNameTitle: {
+    fontFamily: 'pr-reg',
+    fontSize: 18
+  }, statusTitle: {
+    fontFamily: 'pr-reg'
   }
 
 });

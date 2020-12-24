@@ -101,7 +101,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'RestaurantAnalyticscreen' });
 export default createAppContainer(Homestack);
 
 
