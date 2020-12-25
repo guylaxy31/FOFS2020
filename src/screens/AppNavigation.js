@@ -5,6 +5,7 @@ import LoginMode from '../Login/LoginMode'
 import CustomerWay from '../Login/CustomerWay'
 import CustomerFoodID from '../Login/CustomerFoodID'
 import RegisterCustomerContainer from '../Register/RegisterCustomerContainer'
+import RegisterRestaurantContainer from '../Register/RegisterRestaurantContainer'
 import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContainer'
 import RestaurantAppID from '../Login/RestaurantAppID'
 import RestaurantContainer from '../RestContent/RestaurantContainer'
@@ -64,6 +65,17 @@ const screens = {
             }
         },
     },
+    RegisterRestaurantscreen: {
+        screen: RegisterRestaurantContainer,
+        navigationOptions: {
+            title: 'สร้างบัญชีร้านอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
     RestaurantAnalyticscreen: {
         screen: RestaurantAnalyticContainer,
         navigationOptions: {
@@ -101,7 +113,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'RegisterRestaurantscreen' });
 export default createAppContainer(Homestack);
 
 
