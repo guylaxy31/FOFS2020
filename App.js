@@ -5,13 +5,13 @@ import { AppLoading } from 'expo';
 
 // R E D U X
 import { createStore, combineReducers } from 'redux'
-import { userReducer, employeeReducer, loginStatus } from './src/Reducers/Reducers'
+import { userReducer, loginStatus, consenseReducer } from './src/Reducers/Reducers'
 import { Provider } from 'react-redux';
 
 // N A V I G A T O R
 import AppNavigation from './src/screens/AppNavigation'
 
-const store = createStore(combineReducers({ user: userReducer, emp: employeeReducer, loginStatus }))
+const store = createStore(combineReducers({ user: userReducer, loginStatus, consense: consenseReducer }))
 
 let customFonts = {
   'pr-light': require('./assets/fonts/Prompt-Light.ttf'),

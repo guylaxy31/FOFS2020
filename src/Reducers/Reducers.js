@@ -19,23 +19,6 @@ export const userReducer = (state = { name: "guy", age: 21 }, action) => {
     return state;
 }
 
-const initialState = {
-    result: 15000
-}
-
-export const employeeReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "ADD":
-            state = {
-                ...state,
-                result: state.result += action.payload
-            }
-            break;
-        default:
-    }
-    return state;
-}
-
 const initialLogin = {
     loginState: 0
 }
@@ -52,6 +35,31 @@ export const loginStatus = (state = initialLogin, action) => {
             state = {
                 ...state,
                 loginState: state.loginState = 0
+            }
+            break
+
+        default:
+    }
+    return state
+}
+
+
+const initialConsense = {
+    ConsenseState: false
+}
+
+export const consenseReducer = (state = initialConsense, action) => {
+    switch (action.type) {
+        case "showConsense":
+            state = {
+                ...state,
+                ConsenseState: state.ConsenseState = true
+            }
+            break
+        case "hideConsense":
+            state = {
+                ...state,
+                ConsenseState: state.ConsenseState = false
             }
             break
 

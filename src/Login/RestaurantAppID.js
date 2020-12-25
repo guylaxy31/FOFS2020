@@ -25,7 +25,7 @@ const RestaurantAppID = props => {
 
             <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
-            <TouchableOpacity><Text>สร้างบัญชีใหม่</Text></TouchableOpacity>
+            <TouchableOpacity><Text style={{fontFamily:'pr-light'}}>สร้างบัญชีใหม่</Text></TouchableOpacity>
         </View>
     );
 }
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     LoginSubHeader: {
         fontFamily: 'pr-reg',
         fontSize: 20,
-        color: '#E8E521'
+        color: '#929292'
     }, HeaderContainer: {
         marginBottom: 15
     }, ForgetAndRegister: {

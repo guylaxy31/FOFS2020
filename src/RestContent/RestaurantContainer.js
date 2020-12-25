@@ -3,13 +3,11 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-import RestTool from './RestTool';
-
 const RestContainer = props => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{ marginTop: '5%' }}>
         <View style={styles.textInline}>
           <Text style={styles.restNameTitle}>ร้าน</Text>
           <Text style={styles.restNameValue}>อาหาร 1</Text>
@@ -41,7 +39,7 @@ const RestContainer = props => {
 
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantAnalyticscreen')}>
             <View style={styles.touchAlignSpecial}>
               <Image source={require('../../assets/restaurants/ic_assessment_24px.png')}></Image>
               <View style={styles.textContainer}><Text style={styles.toolText}>ดูสถิติของร้าน</Text></View>
@@ -72,6 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFF',
   },
   toolsFlex: {
     width: '100%',

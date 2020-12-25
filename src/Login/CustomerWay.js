@@ -11,8 +11,8 @@ const CustomerWay = props => {
         <View style={styles.container}>
 
             <TouchableOpacity onPress={() => props.navigation.navigate('CustomerFoodIDscreen')} style={styles.TouchContainer}><Image style={styles.WayButton} source={require('../../assets/login/Foodid_btn.png')} /></TouchableOpacity>
-            <TouchableOpacity style={styles.TouchContainer}><Image style={styles.WayButton} source={require('../../assets/login/OAuth_btn.png')} /></TouchableOpacity>
-            <TouchableOpacity style={styles.TouchContainer}><Image style={styles.WayButton} source={require('../../assets/login/Gmail_btn.png')} /></TouchableOpacity>
+            {/* <TouchableOpacity style={styles.TouchContainer}><Image style={styles.WayButton} source={require('../../assets/login/OAuth_btn.png')} /></TouchableOpacity>
+            <TouchableOpacity style={styles.TouchContainer}><Image style={styles.WayButton} source={require('../../assets/login/Gmail_btn.png')} /></TouchableOpacity> */}
 
             <TouchableOpacity style={styles.create_new_btn}>
                 <Text style={styles.register_txt}>สร้างบัญชีใหม่</Text>
