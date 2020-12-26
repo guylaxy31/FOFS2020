@@ -28,6 +28,7 @@ const LoginMode = props => {
         </View>
 
       </View>
+
     </View>
   );
 }

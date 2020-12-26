@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, ScrollView, View, Button, TouchableOpacity, Text } from 'react-native';
 
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 
 import MenuContent from '../MenuContent/MenuContent';
 import { Header } from 'react-native-elements';
 
-
-
 const Home = props => {
+
   return (
     <View style={styles.container}>
 

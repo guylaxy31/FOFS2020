@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-
-
 class ModeTitle extends Component {
   render() {
     return (
@@ -17,37 +15,24 @@ class ModeTitle extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    alignSelf: 'stretch',
-    backgroundColor: '#FFFC1B',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: '15%',
-    paddingVertical: '5%',
-    shadowOffset: { width: 0, height: 0 },
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    elevation: 3,
+
+    width: '100%', alignSelf: 'stretch', backgroundColor: '#FFFC1B',
+    alignItems: 'center', justifyContent: 'center', marginVertical: '15%',
+    paddingVertical: '5%', shadowOffset: { width: 0, height: 0 }, shadowColor: '#000',
+    shadowOpacity: 0.1, elevation: 3,
   },
   header__line1: {
-    color: '#000',
-    fontSize: 26,
-    fontFamily: 'pr-reg'
 
+    color: '#000', fontSize: 26, fontFamily: 'pr-reg'
   },
   header__line2: {
-    color: '#989762',
-    fontSize: 20,
-    fontFamily: 'pr-reg'
 
+    color: '#989762', fontSize: 20, fontFamily: 'pr-reg'
   },
   header__line3: {
-    color: '#D2D18F',
-    fontSize: 16,
-    fontFamily: 'pr-reg'
+
+    color: '#D2D18F', fontSize: 16, fontFamily: 'pr-reg'
   }
-
-
 });
 
 export default ModeTitle;

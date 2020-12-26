@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-import { StyleSheet, Image, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import HextagonIcon from '../MenuContent/HextagonIcon';
 
-
-
-
 const RestaurantAppID = props => {
-
     return (
-
         <View style={styles.container}>
 
             <View style={styles.HeaderContainer}>
@@ -25,94 +20,72 @@ const RestaurantAppID = props => {
 
             <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
-            <TouchableOpacity><Text style={{ fontFamily: 'pr-light' }}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity>
-        </View>
+            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterRestaurantscreen')}><Text style={{ fontFamily: 'pr-light' }}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
+        </View >
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
 
-        height: '100%',
-        width: '100%',
-        alignSelf: 'stretch',
-        backgroundColor: '#FFF',
-        alignItems: 'center',
+        flex: 1, height: '100%', width: '100%',
+        alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center',
         justifyContent: 'center',
+    },
+    LoginForm: {
 
-    }, LoginForm: {
-        fontFamily: 'pr-reg',
-        fontSize: 16,
-        paddingVertical: 16,
+        fontFamily: 'pr-reg', fontSize: 16, paddingVertical: 16,
+    },
+    HeaderWithIcon: {
 
-
-
-    }, HeaderWithIcon: {
-
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-        flexDirection: 'row',
-
+        flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row',
     },
     id_field: {
-        width: 250,
-        height: 50,
-        padding: 15,
-        color: '#000',
-        backgroundColor: '#FFFFE3',
-        fontFamily: 'pr-light',
-        fontSize: 16
-    }, pass_field: {
-        width: 250,
-        height: 50,
-        padding: 15,
-        color: '#000',
-        backgroundColor: '#FFFFE3',
-        fontFamily: 'pr-light',
-        fontSize: 16
-    }, LoginButton: {
-        color: '#000',
-        backgroundColor: '#FFFC1B',
-        margin: 15,
-        borderRadius: 15,
-        marginBottom: 25
 
+        width: 250, height: 50, padding: 15,
+        color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light',
+        fontSize: 16
+    },
+    pass_field: {
+
+        width: 250, height: 50, padding: 15,
+        color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light',
+        fontSize: 16
+    },
+    LoginButton: {
+
+        color: '#000', backgroundColor: '#FFFC1B', margin: 15,
+        borderRadius: 15, marginBottom: 25
     },
     LoginButtonText: {
-        fontFamily: 'pr-reg',
-        fontSize: 16,
-        paddingVertical: 10,
-        paddingHorizontal: 15,
 
-        borderRadius: 15
-        ,
+        fontFamily: 'pr-reg', fontSize: 16, paddingVertical: 10,
+        paddingHorizontal: 15, borderRadius: 15
     }
     , FormContainer: {
 
-        width: '100%',
+        width: '100%', marginLeft: 200
+    },
+    LoginHeader: {
 
-        marginLeft: 200
-    }, LoginHeader: {
-        fontFamily: 'pr-bold',
-        fontSize: 20,
-        color: '#000',
+        fontFamily: 'pr-bold', fontSize: 20, color: '#000',
         marginLeft: 5
     },
     LoginSubHeader: {
-        fontFamily: 'pr-reg',
-        fontSize: 20,
-        color: '#929292'
-    }, HeaderContainer: {
+
+        fontFamily: 'pr-reg', fontSize: 20, color: '#929292'
+    },
+    HeaderContainer: {
+
         marginBottom: 15
-    }, ForgetAndRegister: {
-        fontFamily: 'pr-light',
-        fontSize: 14,
-        color: '#000'
-        ,
+    },
+    ForgetAndRegister: {
+
+        fontFamily: 'pr-light', fontSize: 14, color: '#000',
         margin: 10
-    }, FormContainer: {
+    },
+    FormContainer: {
+
         justifyContent: 'center'
     }
 });

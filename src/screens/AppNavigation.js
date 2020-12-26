@@ -9,6 +9,8 @@ import RegisterRestaurantContainer from '../Register/RegisterRestaurantContainer
 import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContainer'
 import RestaurantAppID from '../Login/RestaurantAppID'
 import RestaurantContainer from '../RestContent/RestaurantContainer'
+import AdminMainContainer from '../Admin/AdminMainContainer'
+
 const screens = {
     Homescreen: {
         screen: Home,
@@ -105,7 +107,17 @@ const screens = {
                 fontSize: 16,
                 textAlign: 'center',
             }
-        },
+        }
+    }, AdminMainContainerscreen: {
+        screen: AdminMainContainer,
+        navigationOptions: {
+            title: 'จัดการระบบ',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
     }
 
 
@@ -113,7 +125,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'RegisterRestaurantscreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
 export default createAppContainer(Homestack);
 
 
