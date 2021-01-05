@@ -13,6 +13,7 @@ import AdminMainContainer from '../Admin/AdminMainContainer'
 import AdminRestaurantRequest from '../Admin/AdminRestaurantRequest'
 import AdminRestaurantList from '../Admin/AdminRestaurantList'
 import RequestView from '../Admin/RequestView'
+import ManageView from '../Admin/ManageView'
 const screens = {
     Homescreen: {
         screen: Home,
@@ -124,7 +125,7 @@ const screens = {
     , AdminRestaurantRequestscreen: {
         screen: AdminRestaurantRequest,
         navigationOptions: {
-            title: 'คำร้องร้านอาหารที่เข้าร่วม',
+            title: 'รายการร้านอาหารขอเข้าร่วม',
             headerTitleStyle: {
                 fontFamily: 'pr-reg',
                 fontSize: 16,
@@ -147,7 +148,7 @@ const screens = {
     , RequestViewscreen: {
         screen: RequestView,
         navigationOptions: {
-            title: 'ร้านอาหารในระบบ',
+            title: 'ตรวจสอบร้านอาหาร',
             headerTitleStyle: {
                 fontFamily: 'pr-reg',
                 fontSize: 16,
@@ -155,7 +156,18 @@ const screens = {
             }
         }
     }
-
+    ,
+    ManageViewscreen: {
+        screen: ManageView,
+        navigationOptions: {
+            title: 'จัดการแก้ไขร้านอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    }
 
 }
 

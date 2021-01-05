@@ -11,7 +11,7 @@ const AdminMainContainer = props => {
                     <View style={styles.imgalign}><Image style={styles.ImgTag} source={require('../../assets/admin/it.png')}></Image></View>
                     <View style={styles.InlineText}>
                         <Text style={styles.mgRight}>ร้านอาหารที่ขอเข้าร่วม</Text>
-                        <Text style={styles.chgFontRed}>3</Text>
+                        <Text style={styles.chgFontRed}>4</Text>
                         <Text style={styles.mgLeft}>ร้าน</Text>
                     </View>
                 </View>
@@ -21,7 +21,7 @@ const AdminMainContainer = props => {
                     <View style={styles.imgalign}><Image style={styles.ImgTag} source={require('../../assets/admin/shop.png')}></Image></View>
                     <View style={styles.InlineText}>
                         <Text style={styles.mgRight}>รายชื่อร้านอาหารในระบบ</Text>
-                        <Text style={styles.chgFontRed}>3</Text>
+                        <Text style={styles.chgFontRed}>5</Text>
                         <Text style={styles.mgLeft}>ร้าน</Text>
                     </View>
                 </View>
