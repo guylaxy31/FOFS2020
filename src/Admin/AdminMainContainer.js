@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
-export default class AdminMainContainer extends Component {
+const AdminMainContainer = props => {
 
-    render() {
 
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity>
-                    <View style={styles.toolCardContainer}>
-                        <View style={styles.imgalign}><Image source={require('../../assets/admin/request.png')}></Image></View>
-                        <View style={styles.InlineText}>
-                            <Text style={styles.mgRight}>ร้านอาหารที่ขอเข้าร่วม</Text>
-                            <Text style={styles.chgFontRed}>3</Text>
-                            <Text style={styles.mgLeft}>ร้าน</Text>
-                        </View>
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('AdminRestaurantRequestscreen')}>
+                <View style={styles.toolCardContainer}>
+                    <View style={styles.imgalign}><Image source={require('../../assets/admin/request.png')}></Image></View>
+                    <View style={styles.InlineText}>
+                        <Text style={styles.mgRight}>ร้านอาหารที่ขอเข้าร่วม</Text>
+                        <Text style={styles.chgFontRed}>3</Text>
+                        <Text style={styles.mgLeft}>ร้าน</Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={styles.toolCardContainer}>
-                        <View style={styles.imgalign}><Image source={require('../../assets/admin/shop.png')}></Image></View>
-                        <View style={styles.InlineText}>
-                            <Text style={styles.chgFont}>รายชื่อร้านอาหารในระบบ</Text>
-                        </View>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.navigate('AdminRestaurantListscreen')}>
+                <View style={styles.toolCardContainer}>
+                    <View style={styles.imgalign}><Image source={require('../../assets/admin/shop.png')}></Image></View>
+                    <View style={styles.InlineText}>
+                        <Text style={styles.mgRight}>รายชื่อร้านอาหารในระบบ</Text>
+                        <Text style={styles.chgFontRed}>3</Text>
+                        <Text style={styles.mgLeft}>ร้าน</Text>
                     </View>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+                </View>
+            </TouchableOpacity>
+        </View>
+    );
+
 }
 
 const styles = StyleSheet.create({
@@ -41,7 +42,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     toolCardContainer: {
-        margin: '5%',
+        marginVertical: '5%',
+        marginHorizontal: '15%',
         justifyContent: 'space-between',
         borderRadius: 15,
         backgroundColor: '#FFF',
@@ -67,10 +69,7 @@ const styles = StyleSheet.create({
         fontFamily: 'pr-reg',
         fontSize: 16
     },
-    chgFont: {
-        fontFamily: 'pr-reg',
-        fontSize: 16
-    },
+
     chgFontRed: {
         fontFamily: 'pr-reg',
         color: 'red',
@@ -86,3 +85,4 @@ const styles = StyleSheet.create({
 });
 
 
+export default AdminMainContainer

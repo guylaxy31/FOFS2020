@@ -10,7 +10,9 @@ import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContaine
 import RestaurantAppID from '../Login/RestaurantAppID'
 import RestaurantContainer from '../RestContent/RestaurantContainer'
 import AdminMainContainer from '../Admin/AdminMainContainer'
-
+import AdminRestaurantRequest from '../Admin/AdminRestaurantRequest'
+import AdminRestaurantList from '../Admin/AdminRestaurantList'
+import RequestView from '../Admin/RequestView'
 const screens = {
     Homescreen: {
         screen: Home,
@@ -119,13 +121,45 @@ const screens = {
             }
         }
     }
+    , AdminRestaurantRequestscreen: {
+        screen: AdminRestaurantRequest,
+        navigationOptions: {
+            title: 'คำร้องร้านอาหารที่เข้าร่วม',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    }
 
-
+    , AdminRestaurantListscreen: {
+        screen: AdminRestaurantList,
+        navigationOptions: {
+            title: 'ร้านอาหารในระบบ',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    }
+    , RequestViewscreen: {
+        screen: RequestView,
+        navigationOptions: {
+            title: 'ร้านอาหารในระบบ',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    }
 
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'AdminMainContainerscreen' });
 export default createAppContainer(Homestack);
 
 
