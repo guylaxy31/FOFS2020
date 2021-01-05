@@ -3,10 +3,7 @@ import { Dimensions } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 const AdminMainContainer = props => {
-    const ww = Dimensions.get('window').width
-    const hh = Dimensions.get('window').height
-    console.log('window width = ', ww)
-    console.log('window height = ', hh)
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => props.navigation.navigate('AdminRestaurantRequestscreen')}>
@@ -36,7 +33,7 @@ const AdminMainContainer = props => {
 const styles = StyleSheet.create({
     container: { flex: 1, height: '100%', width: '100%', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
 
-    toolCardContainer: { flexDirection: 'column', alignItems: 'center', width: Dimensions.get('window').width * .6, height: Dimensions.get('window').height * .28, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 15, margin: '5%', padding: 2 },
+    toolCardContainer: { flexDirection: 'column', alignItems: 'center', width: Dimensions.get('window').width * .6, height: Dimensions.get('window').height * .28, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 3, elevation: 3, shadowOpacity: 0.26, borderRadius: 15, margin: '5%', padding: 2 },
 
     imgalign: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFF', width: '100%', borderTopLeftRadius: 15, borderTopRightRadius: 15 },
     ImgTag: { width: 100, height: 100, backgroundColor: '#FFF' },

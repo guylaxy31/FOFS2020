@@ -1,5 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { Component } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput } from 'react-native';
 

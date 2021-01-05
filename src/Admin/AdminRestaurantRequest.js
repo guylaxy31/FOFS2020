@@ -5,7 +5,7 @@ import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 const AdminRestaurantRequest = props => {
 
     const tabledataset = {
-        tableHead: ['#', 'เวลา(น.)', 'ชื่อร้าน', 'รายละเอียด'],
+        tableHead: ['#', 'เวลา (น.)', 'ชื่อร้าน', 'รายละเอียด'],
         tableData: [
             ['1', '17.05', 'ร้านอาหาร1', 'ปุ่ม'],
             ['2', '18.05', 'ร้านอาหาร2', 'ปุ่ม'],
@@ -16,7 +16,7 @@ const AdminRestaurantRequest = props => {
 
 
     const element = (data, index) => (
-        <TouchableOpacity onPress={()=>props.navigation.navigate('RequestViewscreen')}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('RequestViewscreen')}>
             <View style={styles.btn}>
                 <Text style={styles.btnText}>ตรวจสอบ</Text>
             </View>
@@ -49,15 +49,7 @@ const AdminRestaurantRequest = props => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        height: '100%',
-        width: '100%',
-        alignSelf: 'stretch',
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+    container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
 
     Tablecontainer: { flex: 1, padding: 16, paddingTop: Dimensions.get('window').height * 0.05, backgroundColor: '#FFF', },
     head: { height: Dimensions.get('window').height * 0.15, backgroundColor: '#FFF' },
