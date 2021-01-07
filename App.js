@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
@@ -40,7 +40,9 @@ export default class App extends Component {
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
+
           <AppNavigation />
+
         </Provider>
       )
     }

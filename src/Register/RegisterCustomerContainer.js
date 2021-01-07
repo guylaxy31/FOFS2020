@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import HextagonIcon from '../MenuContent/HextagonIcon';
 import { connect } from 'react-redux'
@@ -15,8 +15,12 @@ const RegisterCustomerContainer = props => {
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
                     <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เพศ</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                    {/* Tag Text ชาย กับ หญิงจะไม่โผล่พร้อมกับ จะขึ้นตามที่เลือก 1 อัน */}
+                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text><Text style={styles.genderTxt}>ชาย</Text><Text style={styles.genderTxt}>หญิง</Text></View>
+                    <View style={styles.GenderContainer}>
+                        <TouchableOpacity><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
+                        <TouchableOpacity><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
+                    </View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อายุ</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สถานภาพ</Text></View>
@@ -29,20 +33,20 @@ const RegisterCustomerContainer = props => {
                     <View style={styles.FormContainer, { marginBottom: '20  %' }}><TextInput style={styles.FillFormText}></TextInput></View>
                     <TouchableOpacity onPress={() => props.showConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
                     <View style={styles.CheckBoxContainer}>
-                        <CheckBox
+                        {/* <CheckBox
                             disabled={false}
                             value={toggleCheckBox}
                             onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                        /><Text style={styles.consenseText}>ได้อ่านและยิมยอมข้อตกลง</Text>
+                        /><Text style={styles.consenseText}>ได้อ่านและยิมยอมข้อตกลง</Text> */}
                     </View>
                     <TouchableOpacity onPress={() => props.navigation.navigate('CustomerFoodIDscreen')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity>
                 </View>
                 <Modal transparent={true} visible={props.consense.ConsenseState}>
                     <View style={styles.ModelBackground}>
                         <View style={styles.ModalContainer}>
-                            <View style={{ flexDirection: 'row' }}><Text style={styles.consenseText}>ผู้ลงทะเบียนรับทราบยินยอมให้ผู้พัฒนานำข้อมูลทางสถิติไปใช้วิเคราะห์ในอนาคตได้</Text></View>
-                            <View style={{ flexDirection: 'row', marginBottom: '10%' }}><Text style={styles.consenseText}>ผู้พัฒนาจะไม่เผยแพร่ข้อมูลส่วนบุคคลในการระบุตัวตนของผู้ใช้งานได้ (พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)</Text></View>
-                            <TouchableOpacity onPress={() => props.hideConsense()} style={styles.TouchBackButton}><Text style={styles.closeButton}>ปิด</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row' }}><Text style={styles.consenseText}>   ผู้ลงทะเบียนรับทราบยินยอมให้ผู้พัฒนานำข้อมูลทางสถิติไปใช้วิเคราะห์ในอนาคตได้</Text></View>
+                            <View style={{ flexDirection: 'row', marginBottom: '10%' }}><Text style={styles.consenseText}>  ผู้พัฒนาจะไม่เผยแพร่ข้อมูลส่วนบุคคลในการระบุตัวตนของผู้ใช้งานได้ (พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)</Text></View>
+                            <TouchableOpacity onPress={() => props.hideConsense()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
@@ -53,80 +57,32 @@ const RegisterCustomerContainer = props => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', flex: 1, flexDirection: 'column' },
+    FormContainerWrap: { alignSelf: 'center' },
 
-        height: '100%', width: '100%', alignSelf: 'stretch',
-        backgroundColor: '#FFF', alignItems: 'center', flex: 1,
-        flexDirection: 'column'
-    },
-    RegisterTitle: {
+    RegisterTitle: { flexWrap: 'wrap', justifyContent: 'center', flexDirection: 'row' },
+    TitleText: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height * .028, marginLeft: 5, marginVertical: 20 },
 
-        flexWrap: 'wrap', justifyContent: 'center', flexDirection: 'row'
-    },
-    TitleText: {
+    FormContainer: { width: '100%', marginVertical: 6 },
+    FormContainerGenderTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
+    GenderContainer: { width: '100%', marginVertical: 6, flexDirection: 'row' },
+    genderBtn: { marginHorizontal: 5 },
+    genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height * .023, color: '#CCC' },
 
-        fontFamily: 'pr-bold', fontSize: 20, marginLeft: 5,
-        marginVertical: 20
-    },
-    FormContainer: {
+    FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height * .024 },
+    FillFormText: { backgroundColor: '#FFFFE3', width: 300, paddingVertical: 5, paddingHorizontal: 20, fontSize: Dimensions.get('window').height * .023, height: Dimensions.get('window').height * .063, borderRadius: 15 },
+    FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height * .024, marginRight: 5 },
 
-        width: '100%', marginVertical: 6
-    },
-    FormFillTitle: {
+    ModalContainer: { backgroundColor: '#fff', margin: 50, padding: 40, borderRadius: 15 },
+    ModelBackground: { backgroundColor: '#000000aa', flex: 1, },
+    consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height * .023, marginVertical: 10 },
+    TouchBackButton: { backgroundColor: '#EBEBEB', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center' },
+    closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .023 },
 
-        fontFamily: 'pr-reg', fontSize: 16
-    },
-    FillFormText: {
-
-        backgroundColor: '#FFFFE3', width: 300, paddingVertical: 5,
-        paddingHorizontal: 20
-    },
-    FormContainerWrap: {
-
-        alignSelf: 'center'
-    },
-    consenseText: {
-
-        fontFamily: 'pr-light', color: '#000', fontSize: 16,
-        marginVertical: 5,
-    },
-    ModalContainer: {
-
-        backgroundColor: '#fff', margin: 50, padding: 40,
-        borderRadius: 15
-    },
-    ModelBackground: {
-
-        backgroundColor: '#000000aa', flex: 1,
-
-    },
-    TouchBackButton: {
-
-        backgroundColor: '#D4D4D4', borderRadius: 15, marginTop: 10,
-        paddingVertical: '2%', width: '50%', alignSelf: 'center',
-    },
-    closeButton: {
-
-        fontFamily: 'pr-reg', textAlign: 'center'
-    },
-    submitButton: {
-
-        textAlign: 'center', fontFamily: 'pr-reg', backgroundColor: 'red',
-        width: '30%', padding: '2%', borderRadius: 15,
-        backgroundColor: '#FFFC1B', color: '#000', alignSelf: 'center'
-    },
-    TouchReadButton: {
-
-        marginBottom: '5%'
-    },
-    readforSubmit: {
-
-        fontFamily: 'pr-bold', textAlign: 'center', fontSize: 16
-    },
-    CheckBoxContainer: {
-
-        flexDirection: 'row', justifyContent: 'center', marginBottom: '5%'
-    }
+    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', backgroundColor: 'red', width: '30%', padding: '2%', backgroundColor: '#FFFC1B', color: '#000', alignSelf: 'center', borderRadius: 15 },
+    TouchReadButton: { marginBottom: '5%' },
+    readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: Dimensions.get('window').height * .025 },
+    CheckBoxContainer: { flexDirection: 'row', justifyContent: 'center', marginBottom: '5%' }
 });
 
 const mapStatetoProps = (state) => {

@@ -35,6 +35,7 @@ const screens = {
                 fontSize: 16,
                 textAlign: 'center',
             }
+
         },
     },
     CustomerWayscreen: {
@@ -67,8 +68,10 @@ const screens = {
                 fontFamily: 'pr-reg',
                 fontSize: 16,
                 textAlign: 'center',
-            }
-        },
+            },
+
+        }
+
     },
     RegisterRestaurantscreen: {
         screen: RegisterRestaurantContainer,
@@ -171,7 +174,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'AdminMainContainerscreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'LoginModescreen' });
 export default createAppContainer(Homestack);
 
 

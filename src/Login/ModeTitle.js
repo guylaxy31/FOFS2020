@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 class ModeTitle extends Component {
+
   render() {
+    const wh = Dimensions.get('window').height
+    const ww = Dimensions.get('window').width
+    console.log(wh)
     return (
       <View style={styles.container}>
         <Text style={styles.header__line1}>เลือก</Text>
@@ -16,22 +20,22 @@ class ModeTitle extends Component {
 const styles = StyleSheet.create({
   container: {
 
-    width: '100%', alignSelf: 'stretch', backgroundColor: '#FFFC1B',
-    alignItems: 'center', justifyContent: 'center', marginVertical: '15%',
-    paddingVertical: '5%', shadowOffset: { width: 0, height: 0 }, shadowColor: '#000',
+    width: '100%', backgroundColor: '#FFFC1B',
+    alignItems: 'center', justifyContent: 'center', marginVertical: Dimensions.get('window').height < 800 ? 50 : 80,
+    paddingVertical: Dimensions.get('window').height < 800 ? 28 : 34, shadowOffset: { width: 0, height: 0 }, shadowColor: '#000',
     shadowOpacity: 0.1, elevation: 3,
   },
   header__line1: {
 
-    color: '#000', fontSize: 26, fontFamily: 'pr-reg'
+    color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 30 : 35, fontFamily: 'pr-reg'
   },
   header__line2: {
 
-    color: '#989762', fontSize: 20, fontFamily: 'pr-reg'
+    color: '#989762', fontSize: Dimensions.get('window').height < 1000 ? 18 : 22, fontFamily: 'pr-reg'
   },
   header__line3: {
 
-    color: '#D2D18F', fontSize: 16, fontFamily: 'pr-reg'
+    color: '#D2D18F', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, fontFamily: 'pr-reg'
   }
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
 import HextagonIcon from '../MenuContent/HextagonIcon';
 
 const RestaurantAppID = props => {
@@ -11,12 +11,14 @@ const RestaurantAppID = props => {
                 <View><Text style={styles.LoginSubHeader}>จัดการร้านอาหาร</Text></View>
             </View>
 
-            <View style={styles.FormContainer}>
-                <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
-                <View style={styles.FormContainer}><TextInput style={styles.id_field} /></View>
-                <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
-                <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
-            </View>
+            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30} style={styles.KeyboardContainer}>
+                <View style={styles.FormContainer}>
+                    <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
+                    <View style={styles.FormContainer}><TextInput style={styles.id_field} /></View>
+                    <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
+                    <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
+                </View>
+            </KeyboardAvoidingView>
 
             <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
@@ -26,68 +28,24 @@ const RestaurantAppID = props => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
 
-        flex: 1, height: '100%', width: '100%',
-        alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center',
-        justifyContent: 'center',
-    },
-    LoginForm: {
+    FormContainer: { width: '100%', marginLeft: 200 },
+    LoginForm: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, paddingVertical: 16, },
+    HeaderContainer: { marginBottom: 15 },
+    id_field: { width: 250, height: 50, padding: 15, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+    pass_field: { width: 250, height: 50, padding: 15, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
 
-        fontFamily: 'pr-reg', fontSize: 16, paddingVertical: 16,
-    },
-    HeaderWithIcon: {
 
-        flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row',
-    },
-    id_field: {
+    LoginHeader: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 20 : 22, color: '#000', marginLeft: 5 },
+    LoginSubHeader: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, color: '#929292' },
+    HeaderWithIcon: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row', },
 
-        width: 250, height: 50, padding: 15,
-        color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light',
-        fontSize: 16
-    },
-    pass_field: {
+    LoginButton: { color: '#000', backgroundColor: '#FFFC1B', margin: 15, borderRadius: 15, marginVertical: Dimensions.get('window').height < 1000 ? 40 : 50 },
+    LoginButtonText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, paddingVertical: 10, paddingHorizontal: 15, borderRadius: 15 },
 
-        width: 250, height: 50, padding: 15,
-        color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light',
-        fontSize: 16
-    },
-    LoginButton: {
-
-        color: '#000', backgroundColor: '#FFFC1B', margin: 15,
-        borderRadius: 15, marginBottom: 25
-    },
-    LoginButtonText: {
-
-        fontFamily: 'pr-reg', fontSize: 16, paddingVertical: 10,
-        paddingHorizontal: 15, borderRadius: 15
-    }
-    , FormContainer: {
-
-        width: '100%', marginLeft: 200
-    },
-    LoginHeader: {
-
-        fontFamily: 'pr-bold', fontSize: 20, color: '#000',
-        marginLeft: 5
-    },
-    LoginSubHeader: {
-
-        fontFamily: 'pr-reg', fontSize: 20, color: '#929292'
-    },
-    HeaderContainer: {
-
-        marginBottom: 15
-    },
-    ForgetAndRegister: {
-
-        fontFamily: 'pr-light', fontSize: 14, color: '#000',
-        margin: 10
-    },
-    FormContainer: {
-
-        justifyContent: 'center'
-    }
+    ForgetAndRegister: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#000', margin: 10 },
+    FormContainer: { justifyContent: 'center' }
 });
 
 export default RestaurantAppID;
