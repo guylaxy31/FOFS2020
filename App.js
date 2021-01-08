@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
 // R E D U X
 import { createStore, combineReducers } from 'redux'
-import { userReducer, employeeReducer, loginStatus } from './src/Reducers/Reducers'
+import { userReducer, loginStatus, consenseReducer, genderSelectionReducer } from './src/Reducers/Reducers'
 import { Provider } from 'react-redux';
 
 // N A V I G A T O R
 import AppNavigation from './src/screens/AppNavigation'
 
-const store = createStore(combineReducers({ user: userReducer, emp: employeeReducer, loginStatus }))
+const store = createStore(combineReducers({ user: userReducer, loginStatus, consense: consenseReducer, gender: genderSelectionReducer }))
 
 let customFonts = {
   'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
@@ -40,7 +40,9 @@ export default class App extends Component {
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
+
           <AppNavigation />
+
         </Provider>
       )
     }

@@ -19,23 +19,6 @@ export const userReducer = (state = { name: "guy", age: 21 }, action) => {
     return state;
 }
 
-const initialState = {
-    result: 15000
-}
-
-export const employeeReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "ADD":
-            state = {
-                ...state,
-                result: state.result += action.payload
-            }
-            break;
-        default:
-    }
-    return state;
-}
-
 const initialLogin = {
     loginState: 0
 }
@@ -52,6 +35,55 @@ export const loginStatus = (state = initialLogin, action) => {
             state = {
                 ...state,
                 loginState: state.loginState = 0
+            }
+            break
+
+        default:
+    }
+    return state
+}
+
+
+const initialConsense = {
+    ConsenseState: false
+}
+
+export const consenseReducer = (state = initialConsense, action) => {
+    switch (action.type) {
+        case "SHOW_CONSENSE":
+            state = {
+                ...state,
+                ConsenseState: state.ConsenseState = true
+            }
+            break
+        case "CLOSE_CONSENSE":
+            state = {
+                ...state,
+                ConsenseState: state.ConsenseState = false
+            }
+            break
+
+        default:
+    }
+    return state
+}
+
+const GenderSelection = {
+    GenderState: 0
+}
+
+export const genderSelectionReducer = (state = GenderSelection, action) => {
+    switch (action.type) {
+        case "SET_MALE_GENDER":
+            state = {
+                ...state,
+                GenderSelection: state.GenderState = 1
+            }
+            break
+        case "SET_FEMALE_GENDER":
+            state = {
+                ...state,
+                GenderSelection: state.GenderState = 2
             }
             break
 
