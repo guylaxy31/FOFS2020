@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import HextagonIcon from '../MenuContent/HextagonIcon';
+import HextagonIcon from '../Themes/HextagonIcon';
 import { connect } from 'react-redux'
 
-const RegisterRestaurantContainer = props => {
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
+const RegisterForRestaurant = props => {
+
     return (
         <View style={styles.container}>
             <ScrollView horizontal={false} showsVerticalScrollIndicator={false} >
@@ -43,11 +42,7 @@ const RegisterRestaurantContainer = props => {
                     <View style={styles.FormContainer, { marginBottom: '20  %' }}><TextInput style={styles.FillFormText}></TextInput></View>
                     <TouchableOpacity onPress={() => props.showConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
                     <View style={styles.CheckBoxContainer}>
-                        <CheckBox
-                            disabled={false}
-                            value={toggleCheckBox}
-                            onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                        /><Text style={styles.consenseText}>ได้อ่านและยิมยอมข้อตกลง</Text>
+                        <Text style={styles.consenseText}>ได้อ่านและยิมยอมข้อตกลง</Text>
                     </View>
                     <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantAppIDscreen')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity>
                 </View>
@@ -166,4 +161,4 @@ const mapDispatchtoProps = (dispatch) => {
     }
 }
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(RegisterRestaurantContainer);
+export default connect(mapStatetoProps, mapDispatchtoProps)(RegisterForRestaurant);

@@ -1,13 +1,17 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation';
 import Home from '../Home/Home'
-import LoginMode from '../Login/LoginMode'
-import CustomerWay from '../Login/CustomerWay'
-import CustomerFoodID from '../Login/CustomerFoodID'
-import RegisterCustomerContainer from '../Register/RegisterCustomerContainer'
-import RegisterRestaurantContainer from '../Register/RegisterRestaurantContainer'
+
+import LoginHome from '../LoginPath/LoginHome'
+import LoginForCustomer from '../LoginPath/LoginForCustomer'
+import CustomerFoodID from '../LoginPath/CustomerFoodID'
+import LoginForRestaurant from '../LoginPath/LoginForRestaurant'
+
+import RegisterForCustomer from '../RegisterPath/RegisterForCustomer'
+import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
+
 import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContainer'
-import RestaurantAppID from '../Login/RestaurantAppID'
+
 import RestaurantContainer from '../RestContent/RestaurantContainer'
 import AdminMainContainer from '../Admin/AdminMainContainer'
 import AdminRestaurantRequest from '../Admin/AdminRestaurantRequest'
@@ -26,10 +30,10 @@ const screens = {
             }
         },
     },
-    LoginModescreen: {
-        screen: LoginMode,
+    LoginHome: {
+        screen: LoginHome,
         navigationOptions: {
-            title: 'เข้าสู่ระบบ',
+            title: 'เลือกการใช้งาน',
             headerTitleStyle: {
                 fontFamily: 'pr-reg',
                 fontSize: 16,
@@ -38,8 +42,8 @@ const screens = {
 
         },
     },
-    CustomerWayscreen: {
-        screen: CustomerWay,
+    LoginForCustomer: {
+        screen: LoginForCustomer,
         navigationOptions: {
             title: 'เข้าสู่ระบบ',
             headerTitleStyle: {
@@ -49,10 +53,10 @@ const screens = {
             }
         },
     },
-    CustomerFoodIDscreen: {
+    CustomerFoodID: {
         screen: CustomerFoodID,
         navigationOptions: {
-            title: 'ล็อคอินเข้าสู่ระบบ',
+            title: 'เข้าสู่ระบบ',
             headerTitleStyle: {
                 fontFamily: 'pr-reg',
                 fontSize: 16,
@@ -60,8 +64,8 @@ const screens = {
             }
         },
     },
-    RegisterCustomerscreen: {
-        screen: RegisterCustomerContainer,
+    RegisterForCustomer: {
+        screen: RegisterForCustomer,
         navigationOptions: {
             title: 'สร้างบัญชี',
             headerTitleStyle: {
@@ -73,8 +77,19 @@ const screens = {
         }
 
     },
-    RegisterRestaurantscreen: {
-        screen: RegisterRestaurantContainer,
+    LoginForRestaurant: {
+        screen: LoginForRestaurant,
+        navigationOptions: {
+            title: 'สถิติร้านอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        },
+    },
+    RegisterForRestaurant: {
+        screen: RegisterForRestaurant,
         navigationOptions: {
             title: 'สร้างบัญชีร้านอาหาร',
             headerTitleStyle: {
@@ -86,16 +101,6 @@ const screens = {
     },
     RestaurantAnalyticscreen: {
         screen: RestaurantAnalyticContainer,
-        navigationOptions: {
-            title: 'สถิติร้านอาหาร',
-            headerTitleStyle: {
-                fontFamily: 'pr-reg',
-                fontSize: 16,
-                textAlign: 'center',
-            }
-        },
-    }, RestaurantAppIDscreen: {
-        screen: RestaurantAppID,
         navigationOptions: {
             title: 'สถิติร้านอาหาร',
             headerTitleStyle: {
@@ -174,7 +179,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'LoginModescreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
 export default createAppContainer(Homestack);
 
 

@@ -50,16 +50,40 @@ const initialConsense = {
 
 export const consenseReducer = (state = initialConsense, action) => {
     switch (action.type) {
-        case "showConsense":
+        case "SHOW_CONSENSE":
             state = {
                 ...state,
                 ConsenseState: state.ConsenseState = true
             }
             break
-        case "hideConsense":
+        case "CLOSE_CONSENSE":
             state = {
                 ...state,
                 ConsenseState: state.ConsenseState = false
+            }
+            break
+
+        default:
+    }
+    return state
+}
+
+const GenderSelection = {
+    GenderState: 0
+}
+
+export const genderSelectionReducer = (state = GenderSelection, action) => {
+    switch (action.type) {
+        case "SET_MALE_GENDER":
+            state = {
+                ...state,
+                GenderSelection: state.GenderState = 1
+            }
+            break
+        case "SET_FEMALE_GENDER":
+            state = {
+                ...state,
+                GenderSelection: state.GenderState = 2
             }
             break
 

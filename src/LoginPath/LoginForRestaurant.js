@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
-import HextagonIcon from '../MenuContent/HextagonIcon';
+import HextagonIcon from '../Themes/HextagonIcon';
 
-const RestaurantAppID = props => {
+const LoginForRestaurant = props => {
     return (
         <View style={styles.container}>
 
@@ -21,8 +21,9 @@ const RestaurantAppID = props => {
             </KeyboardAvoidingView>
 
             <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForRestaurant')}><Text style={{ fontFamily: 'pr-light' }}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterRestaurantscreen')}><Text style={{ fontFamily: 'pr-light' }}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
+
         </View >
     );
 }
@@ -48,4 +49,4 @@ const styles = StyleSheet.create({
     FormContainer: { justifyContent: 'center' }
 });
 
-export default RestaurantAppID;
+export default LoginForRestaurant;

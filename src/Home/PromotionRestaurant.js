@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 
-class PromotionItem extends Component {
+class PromotionRestaurant extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PromotionItem;
+export default PromotionRestaurant;

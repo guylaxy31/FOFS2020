@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-class NearItem extends Component {
+class NearRestaurant extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NearItem;
+export default NearRestaurant;

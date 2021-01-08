@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
-import HextagonIcon from '../MenuContent/HextagonIcon';
+import HextagonIcon from '../Themes/HextagonIcon';
 import { connect } from 'react-redux'
  
 
 const CustomerFoodID = props => {
 
     return (
-
 
         <View style={styles.container}>
 
@@ -37,15 +36,13 @@ const CustomerFoodID = props => {
 
             <View style={styles.TouchRegisterContainer}>
 
-                <TouchableOpacity onPress={() => props.navigation.navigate('RegisterCustomerscreen')}><Text style={styles.registerBtn}>สร้างบัญชีใหม่</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForCustomer')}><Text style={styles.registerBtn}>สร้างบัญชีใหม่</Text></TouchableOpacity>
 
             </View>
-
 
             <View>
                 <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน?</Text></TouchableOpacity>
             </View>
-
 
         </View>
 

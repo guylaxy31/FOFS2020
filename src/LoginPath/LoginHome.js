@@ -6,10 +6,7 @@ import ModeTitle from './ModeTitle'
 
 
 const LoginMode = props => {
-  const wh = Dimensions.get('window').height
-  const ww = Dimensions.get('window').width
-  console.log('height device ', wh)
-
+ 
   return (
 
     < View style={styles.container} >
@@ -17,7 +14,7 @@ const LoginMode = props => {
         <ModeTitle />
         <View style={styles.login__mode__layout}>
           <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}>
-            <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('CustomerFoodIDscreen')}>
+            <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('CustomerFoodID')}>
               <View style={styles.img_mode}>
                 <Image source={require('../../assets/login/customer_mode_logo.png')}></Image>
               </View>
@@ -25,7 +22,7 @@ const LoginMode = props => {
             </TouchableOpacity>
           </View>
           <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}  >
-            <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('RestaurantAppIDscreen')}>
+            <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('LoginForRestaurant')}>
               <View style={styles.img_mode}>
                 <Image source={require('../../assets/login/restaurant_mode_logo.png')}></Image>
               </View>

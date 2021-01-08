@@ -5,7 +5,7 @@ class HextagonIcon extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require('../../assets/theme/hextagon.png')}></Image>
+        <Image style={styles.HexIconMargin} source={require('../../assets/theme/hextagon.png')}></Image>
       </View>
     );
   }
@@ -13,6 +13,7 @@ class HextagonIcon extends Component {
 
 const styles = StyleSheet.create({
   container: { alignSelf: 'center' },
+  HexIconMargin: { marginHorizontal: 5 }
 });
 
 export default HextagonIcon;
