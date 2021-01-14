@@ -10,14 +10,15 @@ import LoginForRestaurant from '../LoginPath/LoginForRestaurant'
 import RegisterForCustomer from '../RegisterPath/RegisterForCustomer'
 import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 
-import RestaurantAnalyticContainer from '../Analytics/RestaurantAnalyticContainer'
+import RestaurantHome from '../RestaurantPath/RestaurantHome'
+import AnalyticMain from '../RestaurantPath/AnalyticMain'
 
-import RestaurantContainer from '../RestContent/RestaurantContainer'
-import AdminMainContainer from '../Admin/AdminMainContainer'
-import AdminRestaurantRequest from '../Admin/AdminRestaurantRequest'
-import AdminRestaurantList from '../Admin/AdminRestaurantList'
-import RequestView from '../Admin/RequestView'
-import ManageView from '../Admin/ManageView'
+import AdminHome from '../AdminPath/AdminHome'
+import RequestMain from '../AdminPath/RequestMain'
+import RequestCheck from '../AdminPath/RequestCheck'
+import ListMain from '../AdminPath/ListMain'
+import ListCheck from '../AdminPath/ListCheck'
+
 const screens = {
     Homescreen: {
         screen: Home,
@@ -99,18 +100,9 @@ const screens = {
             }
         }
     },
-    RestaurantAnalyticscreen: {
-        screen: RestaurantAnalyticContainer,
-        navigationOptions: {
-            title: 'สถิติร้านอาหาร',
-            headerTitleStyle: {
-                fontFamily: 'pr-reg',
-                fontSize: 16,
-                textAlign: 'center',
-            }
-        },
-    }, RestaurantContainerscreen: {
-        screen: RestaurantContainer,
+
+    RestaurantHome: {
+        screen: RestaurantHome,
         navigationOptions: {
             title: 'จัดการร้านอาหาร',
             headerTitleStyle: {
@@ -119,8 +111,20 @@ const screens = {
                 textAlign: 'center',
             }
         }
-    }, AdminMainContainerscreen: {
-        screen: AdminMainContainer,
+    },
+
+    AnalyticMain: {
+        screen: AnalyticMain,
+        navigationOptions: {
+            title: 'สถิติร้านอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        },
+    }, AdminHome: {
+        screen: AdminHome,
         navigationOptions: {
             title: 'จัดการระบบ',
             headerTitleStyle: {
@@ -130,8 +134,8 @@ const screens = {
             }
         }
     }
-    , AdminRestaurantRequestscreen: {
-        screen: AdminRestaurantRequest,
+    , RequestMain: {
+        screen: RequestMain,
         navigationOptions: {
             title: 'รายการร้านอาหารขอเข้าร่วม',
             headerTitleStyle: {
@@ -141,20 +145,8 @@ const screens = {
             }
         }
     }
-
-    , AdminRestaurantListscreen: {
-        screen: AdminRestaurantList,
-        navigationOptions: {
-            title: 'ร้านอาหารในระบบ',
-            headerTitleStyle: {
-                fontFamily: 'pr-reg',
-                fontSize: 16,
-                textAlign: 'center',
-            }
-        }
-    }
-    , RequestViewscreen: {
-        screen: RequestView,
+    , RequestCheck: {
+        screen: RequestCheck,
         navigationOptions: {
             title: 'ตรวจสอบร้านอาหาร',
             headerTitleStyle: {
@@ -164,9 +156,22 @@ const screens = {
             }
         }
     }
+
+    , ListMain: {
+        screen: ListMain,
+        navigationOptions: {
+            title: 'ร้านอาหารในระบบ',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    }
+
     ,
-    ManageViewscreen: {
-        screen: ManageView,
+    ListCheck: {
+        screen: ListCheck,
         navigationOptions: {
             title: 'จัดการแก้ไขร้านอาหาร',
             headerTitleStyle: {
@@ -179,7 +184,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'RestaurantHome' });
 export default createAppContainer(Homestack);
 
 

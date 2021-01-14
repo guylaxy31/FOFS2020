@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-const RestContainer = props => {
+const RestaurantHome = props => {
 
   return (
     <View style={styles.container}>
@@ -39,7 +39,7 @@ const RestContainer = props => {
 
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantAnalyticscreen')}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('AnalyticMain')}>
             <View style={styles.touchAlignSpecial}>
               <Image source={require('../../assets/restaurants/ic_assessment_24px.png')}></Image>
               <View style={styles.textContainer}><Text style={styles.toolText}>ดูสถิติของร้าน</Text></View>
@@ -142,4 +142,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default RestContainer;
+export default RestaurantHome;

@@ -71,6 +71,8 @@ const Home = props => {
     ]
 
   }
+
+
   return (
     <View style={styles.container}>
 
@@ -100,7 +102,7 @@ const Home = props => {
           data={tempdatabase.PromotionList}
           renderItem={({ item }) =>
             <TouchableOpacity><PromotionRestaurant imageUri={item.imageUri} /></TouchableOpacity>}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
@@ -116,7 +118,7 @@ const Home = props => {
           data={tempdatabase.RestaurantList}
           renderItem={({ item }) =>
             <TouchableOpacity><RecommendRestaurant imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
@@ -132,7 +134,7 @@ const Home = props => {
           data={tempdatabase.NearList}
           renderItem={({ item }) =>
             <TouchableOpacity><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}

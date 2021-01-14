@@ -21,7 +21,7 @@ const LoginForRestaurant = props => {
             </KeyboardAvoidingView>
 
             <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForRestaurant')}><Text style={{ fontFamily: 'pr-light' }}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
+            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForRestaurant')}><Text style={styles.register_txt}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
 
         </View >
@@ -45,8 +45,11 @@ const styles = StyleSheet.create({
     LoginButton: { color: '#000', backgroundColor: '#FFFC1B', margin: 15, borderRadius: 15, marginVertical: Dimensions.get('window').height < 1000 ? 40 : 50 },
     LoginButtonText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, paddingVertical: 10, paddingHorizontal: 15, borderRadius: 15 },
 
-    ForgetAndRegister: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#000', margin: 10 },
+    register_txt: { fontSize: 16, fontFamily: 'pr-light' },
+    ForgetAndRegister: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#6F6F6F', margin: 10 },
     FormContainer: { justifyContent: 'center' }
+
+
 });
 
 export default LoginForRestaurant;

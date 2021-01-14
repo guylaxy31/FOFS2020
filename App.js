@@ -20,37 +20,27 @@ let customFonts = {
 };
 
 export default class App extends Component {
-  state = {
-    fontsLoaded: false,
-  };
-
+  state = { fontsLoaded: false };
 
   async _loadFontsAsync() {
     await Font.loadAsync(customFonts);
     this.setState({ fontsLoaded: true });
   }
 
-  componentDidMount() {
-    this._loadFontsAsync();
-  }
-
+  componentDidMount() { this._loadFontsAsync(); }
 
   render() {
 
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
-
           <AppNavigation />
-
         </Provider>
       )
     }
-
     else {
       return <AppLoading />;
     }
-
   }
 }
 

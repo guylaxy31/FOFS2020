@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image, } from 'react-native';
 
 import HextagonIcon from '../Themes/HextagonIcon';
 import { connect } from 'react-redux'
 
+
 const RegisterForCustomer = props => {
+
 
     return (
         <View style={styles.container}>
@@ -16,7 +18,7 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
                     <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
                     {/* Tag Text ชาย กับ หญิงจะไม่โผล่พร้อมกับ จะขึ้นตามที่เลือก 1 อัน */}
-                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{props.gender.GenderState === 0 ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (props.gender.GenderState === 1 ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
+                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{props.gender.GenderState === 'null' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (props.gender.GenderState === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                     <View style={styles.GenderContainer}>
                         <TouchableOpacity onPress={() => props.SetMaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
                         <TouchableOpacity onPress={() => props.SetFemaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
@@ -29,7 +31,7 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เบอร์โทรศัพท์</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมลล์</Text></View>
+                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
                     <View style={styles.FormContainer, { marginBottom: 60 }}><TextInput style={styles.FillFormText}></TextInput></View>
                     <TouchableOpacity onPress={() => props.ShowConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
 
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
     genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#CCC' },
 
     FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
-    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 300, paddingVertical: 5, paddingHorizontal: 20, height: Dimensions.get('window').height * .063, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 300, paddingVertical: 5, paddingHorizontal: 20, height: Dimensions.get('window').height * .058, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
     FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 5 },
 
     ModalContainer: { backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },

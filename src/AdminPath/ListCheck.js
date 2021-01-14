@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const ManageView = props => {
+const ListCheck = props => {
 
     return (
         <View style={styles.container}>
@@ -149,4 +149,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ManageView
+export default ListCheck

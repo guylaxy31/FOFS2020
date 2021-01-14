@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput } from 'react-native';
 
 
-const RequestView = props => {
+const RequestCheck = props => {
 
     return (
         <View style={styles.container}>
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default RequestView
+export default RequestCheck

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
 import HextagonIcon from '../Themes/HextagonIcon';
 import { connect } from 'react-redux'
- 
+
 
 const CustomerFoodID = props => {
 

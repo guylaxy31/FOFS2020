@@ -69,7 +69,7 @@ export const consenseReducer = (state = initialConsense, action) => {
 }
 
 const GenderSelection = {
-    GenderState: 0
+    GenderState: 'null'
 }
 
 export const genderSelectionReducer = (state = GenderSelection, action) => {
@@ -77,13 +77,13 @@ export const genderSelectionReducer = (state = GenderSelection, action) => {
         case "SET_MALE_GENDER":
             state = {
                 ...state,
-                GenderSelection: state.GenderState = 1
+                GenderSelection: state.GenderState = 'male'
             }
             break
         case "SET_FEMALE_GENDER":
             state = {
                 ...state,
-                GenderSelection: state.GenderState = 2
+                GenderSelection: state.GenderState = 'female'
             }
             break
 
