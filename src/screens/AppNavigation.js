@@ -12,6 +12,10 @@ import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 
 import RestaurantHome from '../RestaurantPath/RestaurantHome'
 import AnalyticMain from '../RestaurantPath/AnalyticMain'
+import MenuList from '../RestaurantPath/MenuList'
+import OrderMain from '../RestaurantPath/OrderMain'
+import HistoryMain from '../RestaurantPath/HistoryMain'
+import HistoryList from '../RestaurantPath/HistoryList'
 
 import AdminHome from '../AdminPath/AdminHome'
 import RequestMain from '../AdminPath/RequestMain'
@@ -122,8 +126,58 @@ const screens = {
                 fontSize: 16,
                 textAlign: 'center',
             }
-        },
-    }, AdminHome: {
+        }
+    },
+
+    MenuList: {
+        screen: MenuList,
+        navigationOptions: {
+            title: 'รายการอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    OrderMain: {
+        screen: OrderMain,
+        navigationOptions: {
+            title: 'รายการสั่งอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    HistoryMain: {
+        screen: HistoryMain,
+        navigationOptions: {
+            title: 'ประวัติการสั่งอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    HistoryList: {
+        screen: HistoryList,
+        navigationOptions: {
+            title: 'ประวัติการสั่งอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    AdminHome: {
         screen: AdminHome,
         navigationOptions: {
             title: 'จัดการระบบ',
@@ -133,8 +187,8 @@ const screens = {
                 textAlign: 'center',
             }
         }
-    }
-    , RequestMain: {
+    },
+    RequestMain: {
         screen: RequestMain,
         navigationOptions: {
             title: 'รายการร้านอาหารขอเข้าร่วม',
@@ -144,8 +198,8 @@ const screens = {
                 textAlign: 'center',
             }
         }
-    }
-    , RequestCheck: {
+    },
+    RequestCheck: {
         screen: RequestCheck,
         navigationOptions: {
             title: 'ตรวจสอบร้านอาหาร',
@@ -155,9 +209,9 @@ const screens = {
                 textAlign: 'center',
             }
         }
-    }
+    },
 
-    , ListMain: {
+    ListMain: {
         screen: ListMain,
         navigationOptions: {
             title: 'ร้านอาหารในระบบ',
@@ -167,9 +221,8 @@ const screens = {
                 textAlign: 'center',
             }
         }
-    }
+    },
 
-    ,
     ListCheck: {
         screen: ListCheck,
         navigationOptions: {
@@ -184,7 +237,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'RestaurantHome' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'OrderMain' });
 export default createAppContainer(Homestack);
 
 
