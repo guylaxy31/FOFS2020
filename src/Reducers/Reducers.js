@@ -1,23 +1,4 @@
 
-export const userReducer = (state = { name: "guy", age: 21 }, action) => {
-    switch (action.type) {
-        case "setName":
-            state = {
-                ...state,
-                name: action.payload
-            }
-            break;
-        case "setAge":
-            state = {
-                ...state,
-                age: action.payload
-            }
-            break
-
-        default:
-    }
-    return state;
-}
 
 const initialLogin = {
     loginState: 0
@@ -77,13 +58,13 @@ export const genderSelectionReducer = (state = GenderSelection, action) => {
         case "SET_MALE_GENDER":
             state = {
                 ...state,
-                GenderSelection: state.GenderState = 'male'
+                GenderState: state.GenderState = 'male'
             }
             break
         case "SET_FEMALE_GENDER":
             state = {
                 ...state,
-                GenderSelection: state.GenderState = 'female'
+                GenderState: state.GenderState = 'female'
             }
             break
 
@@ -91,3 +72,54 @@ export const genderSelectionReducer = (state = GenderSelection, action) => {
     }
     return state
 }
+
+const InitialOrderListState = {
+    OrderSubmitState: false,
+    FoodDemandState: false,
+    CancelState: false
+}
+
+export const orderlistReducer = (state = InitialOrderListState, action) => {
+    switch (action.type) {
+        case "SHOW_SUBMITBOX":
+            state = {
+                ...state,
+                OrderSubmitState: state.OrderSubmitState = true
+            }
+            break
+        case "CLOSE_SUBMITBOX":
+            state = {
+                ...state,
+                OrderSubmitState: state.OrderSubmitState = false
+            }
+            break
+        case "SHOW_DEMANDBOX":
+            state = {
+                ...state,
+                FoodDemandState: state.FoodDemandState = true
+            }
+            break
+        case "CLOSE_DEMANDBOX":
+            state = {
+                ...state,
+                FoodDemandState: state.FoodDemandState = false
+            }
+            break
+        case "SHOW_CANCELDBOX":
+            state = {
+                ...state,
+                CancelState: state.CancelState = true
+            }
+            break
+        case "CLOSE_CANCELBOX":
+            state = {
+                ...state,
+                CancelState: state.CancelState = false
+            }
+            break
+
+        default:
+    }
+    return state
+}
+

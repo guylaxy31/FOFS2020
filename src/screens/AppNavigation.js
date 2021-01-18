@@ -7,6 +7,11 @@ import LoginForCustomer from '../LoginPath/LoginForCustomer'
 import CustomerFoodID from '../LoginPath/CustomerFoodID'
 import LoginForRestaurant from '../LoginPath/LoginForRestaurant'
 
+import FoodMenuMain from '../CustomerPath/FoodMenuMain'
+import FoodMenuCustom from '../CustomerPath/FoodMenuCustom'
+import FoodMenuConfirm from '../CustomerPath/FoodMenuConfirm'
+import FoodStatus from '../CustomerPath/FoodStatus'
+
 import RegisterForCustomer from '../RegisterPath/RegisterForCustomer'
 import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 
@@ -82,6 +87,55 @@ const screens = {
         }
 
     },
+
+    FoodMenuMain: {
+        screen: FoodMenuMain,
+        navigationOptions: {
+            title: 'เลือกรายการอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    FoodMenuCustom: {
+        screen: FoodMenuCustom,
+        navigationOptions: {
+            title: 'แก้ไขเมนูอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    FoodMenuConfirm: {
+        screen: FoodMenuConfirm,
+        navigationOptions: {
+            title: 'ยืนยันรายการอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
+    FoodStatus: {
+        screen: FoodStatus,
+        navigationOptions: {
+            title: 'สถานะการสั่งอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
     LoginForRestaurant: {
         screen: LoginForRestaurant,
         navigationOptions: {
@@ -237,7 +291,7 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'OrderMain' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'FoodStatus' });
 export default createAppContainer(Homestack);
 
 

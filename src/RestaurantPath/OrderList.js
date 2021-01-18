@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, Modal } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux'
 
 const OrderList = props => {
@@ -37,25 +38,53 @@ const OrderList = props => {
                 </View>
 
                 <View style={styles.BtnContainer}>
-                    <View style={{ backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowConsense()}><Text style={styles.SubmitBtnText}>ยืนยันรายการ</Text></TouchableOpacity></View>
-                    <View style={{ backgroundColor: '#C6C699', padding: 8, borderRadius: 15 }}><TouchableOpacity><Text style={styles.NotEnBtnText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
-                    <View ><TouchableOpacity><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
+                    <View style={{ backgroundColor: '#CCCCC3', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowDemandBox()}><Text style={styles.NotEnBtnText}>รับออเดอร์แล้ว</Text></TouchableOpacity></View>
+                    <View style={{ backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowSubmitBox()}><Text style={styles.SubmitBtnText}>ยืนยันรายการ</Text></TouchableOpacity></View>
+                    <View style={{ backgroundColor: '#9C9C9C', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowDemandBox()}><Text style={styles.NotEnBtnText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
+                    <View ><TouchableOpacity onPress={() => props.ShowCancelBox()} ><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
                 </View>
-
 
             </View >
 
-            <Modal transparent={true} visible={props.consense.ConsenseState}>
+            <Modal transparent={true} visible={props.orderlist.OrderSubmitState}>
                 <View style={styles.ModelBackground}>
                     <View style={styles.ModalContainer}>
-                        <View style={{ flexDirection: 'row' }}><Text style={styles.consenseText}>ทำการยืนยัน ลูกค้าได้มารับอาหารและชำระเงินเรียบร้อยแล้ว</Text></View>
+                        <View style={{ flexDirection: 'row' }}><Text style={styles.SubmitOrderText}>คุณยืนยันการรับออเดอร์ เพื่อเข้าสู่ขั้นตอนปรุงอาหาร</Text></View>
                         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                            <TouchableOpacity onPress={() => props.CloseConsense()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.CloseConsense()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.CloseSubmitBox()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.CloseSubmitBox()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
                         </View>
                     </View>
                 </View>
             </Modal>
+
+            <Modal transparent={true} visible={props.orderlist.FoodDemandState}>
+                <View style={styles.ModelBackground}>
+                    <View style={styles.ModalContainer}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>คุณแน่ใจแล้วว่าจะปฏิเสธออเดอร์เนื่องด้วยวัตถุดิบไม่เพียงพอ</Text></View>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
+                            <TouchableOpacity onPress={() => props.CloseDemandBox()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.CloseDemandBox()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal transparent={true} visible={props.orderlist.CancelState}>
+                <View style={styles.ModelBackground}>
+                    <View style={styles.ModalContainer}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>ท่านแน่ใจว่าต้องการปฏิเสธออเดอร์</Text></View>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
+                            <TouchableOpacity onPress={() => props.CloseCancelBox()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.CloseCancelBox()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+
         </View>
     )
 
@@ -91,39 +120,62 @@ const styles = StyleSheet.create({
     TotalPricesText: { fontFamily: 'pr-bold', color: '#A7A799', marginLeft: 'auto', fontSize: Dimensions.get('window').height * .03 },
 
     BtnContainer: { flexDirection: 'row', justifyContent: 'space-between', margin: 20, alignItems: 'center' },
-    SubmitBtnText: { fontFamily: 'pr-reg', color: '#000' },
-    NotEnBtnText: { fontFamily: 'pr-reg', color: '#FFF' },
-    CancelBtnText: { fontFamily: 'pr-reg', color: 'red' },
+    SubmitBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    NotEnBtnText: { fontFamily: 'pr-reg', color: '#FFF', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
+    CancelBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
 
-    ModalContainer: { backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '30%' : '40%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
+    ModalContainer: { backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '25%' : '40%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
-    consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10 },
+    SubmitOrderText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10, textAlign: 'center' },
+    NotEnText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10, textAlign: 'center' },
     TouchSubmitButton: { backgroundColor: '#FFFC1B', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center', width: 100, marginRight: 20 },
-    TouchBackButton: { backgroundColor: '#EBEBEB', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center', width: 100, marginLeft: 20 },
-    closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .023, color: '#FFF' },
-    SubmitButtonText: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .023 },
+    TouchBackButton: { backgroundColor: '#D1D1D1', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center', width: 100, marginLeft: 20 },
+    closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .018, color: '#FFF' },
+    SubmitButtonText: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .018 },
 
 })
 
 const mapStatetoProps = (state) => {
     return {
-        consense: state.consense,
+
+        orderlist: state.orderlist
 
     }
 }
 
 const mapDispatchtoProps = (dispatch) => {
     return {
-        ShowConsense: () => {
+        ShowSubmitBox: () => {
             dispatch({
-                type: "SHOW_CONSENSE",
+                type: "SHOW_SUBMITBOX",
             })
         },
-        CloseConsense: () => {
+        CloseSubmitBox: () => {
             dispatch({
-                type: "CLOSE_CONSENSE",
+                type: "CLOSE_SUBMITBOX",
             })
-        }
+        },
+        ShowDemandBox: () => {
+            dispatch({
+                type: "SHOW_DEMANDBOX",
+            })
+        },
+        CloseDemandBox: () => {
+            dispatch({
+                type: "CLOSE_DEMANDBOX",
+            })
+        },
+        ShowCancelBox: () => {
+            dispatch({
+                type: "SHOW_CANCELDBOX",
+            })
+        },
+        CloseCancelBox: () => {
+            dispatch({
+                type: "CLOSE_CANCELBOX",
+            })
+        },
+
 
     }
 }
