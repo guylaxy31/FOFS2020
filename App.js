@@ -1,22 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Text , View, StyleSheet } from 'react-native';
-
-import Home from './src/Home/Home'; // หน้าหลักของแอปพลิเคชัน
-import LoginScreen from './src/Login/LoginCustOptionID';
-import ProfileScreen from './src/screen/Profile';
-
+import { Provider } from "react-redux";
 //React Navigation Setup
-import {  createAppContainer, createSwitchNavigator } from 'react-navigation';
-
-const MainNavigator = createSwitchNavigator({
-  Login: { screen: LoginScreen },
-  Profile: { screen: ProfileScreen },
-  Home: {screen: Home}
-});
-
-const App = createAppContainer(MainNavigator);
-
-export default App;
+import ShopNavigator from './src/navigation/ShopNavigator';
+import store from './store/store'
+export default class App extends Component{
+  render() {
+    return (
+      <Provider store={store}>
+         <ShopNavigator />
+      </Provider>
+     
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
