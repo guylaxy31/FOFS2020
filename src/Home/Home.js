@@ -117,7 +117,7 @@ const Home = props => {
         <FlatList
           data={tempdatabase.RestaurantList}
           renderItem={({ item }) =>
-            <TouchableOpacity><RecommendRestaurant imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><RecommendRestaurant imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -133,7 +133,7 @@ const Home = props => {
         <FlatList
           data={tempdatabase.NearList}
           renderItem={({ item }) =>
-            <TouchableOpacity><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}

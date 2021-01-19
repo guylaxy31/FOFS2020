@@ -19,18 +19,18 @@ const RestaurantHome = props => {
       </View>
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}>
             <View style={styles.touchAlign}>
               <Image source={require('../../assets/restaurants/Subtraction2.png')}></Image>
-              <View style={styles.textContainer}><Text style={styles.toolText}>แก้ไขรายการอาหาร</Text></View>
+              <View style={styles.textContainer}><Text style={styles.toolText}>รายการอาหาร</Text></View>
             </View>
           </TouchableOpacity>
         </View>
         <View style={styles.toolCard}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('OrderMain')}>
             <View style={styles.touchAlign}>
               <Image source={require('../../assets/restaurants/ic_room_service_24px.png')}></Image>
-              <View style={styles.textContainer}><Text style={styles.toolText}>คิวลูกค้า</Text></View>
+              <View style={styles.textContainer}><Text style={styles.toolText}>ออเดอร์ลูกค้า</Text></View>
             </View>
           </TouchableOpacity>
         </View>
@@ -47,7 +47,7 @@ const RestaurantHome = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.toolCard}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain')}>
             <View style={styles.touchAlign}>
               <Image source={require('../../assets/restaurants/ic_event_note_24px.png')}></Image>
               <View style={styles.textContainer}><Text style={styles.toolText}>ประวัติสั่งทำอาหาร</Text></View>

@@ -20,7 +20,7 @@ const LoginForRestaurant = props => {
                 </View>
             </KeyboardAvoidingView>
 
-            <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantHome')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForRestaurant')}><Text style={styles.register_txt}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
 
