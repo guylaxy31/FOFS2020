@@ -23,7 +23,7 @@ const MenuList = props => {
             <ScrollView>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มอาหาร</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มอาหาร</Text></TouchableOpacity>
                 </View>
 
                 <Table borderStyle={{ borderColor: 'transparent' }}>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
 
     AddFoodContainerTouch: { backgroundColor: '#F5F5F5', padding: 5, borderRadius: 15, width: Dimensions.get('window').width * 0.25 },
-    AddFoodText: { textAlign: 'center' },
+    AddFoodText: { fontFamily: 'pr-reg', textAlign: 'center' },
 
     Tablecontainer: { flex: 1, padding: 16, paddingTop: Dimensions.get('window').height * 0.05, backgroundColor: '#FFF', },
     head: { height: Dimensions.get('window').height * 0.15, backgroundColor: '#FFF' },

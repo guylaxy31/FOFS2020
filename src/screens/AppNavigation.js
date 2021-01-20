@@ -18,6 +18,7 @@ import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 import RestaurantHome from '../RestaurantPath/RestaurantHome'
 import AnalyticMain from '../RestaurantPath/AnalyticMain'
 import MenuList from '../RestaurantPath/MenuList'
+import MenuAdd from '../RestaurantPath/MenuAdd'
 import OrderMain from '../RestaurantPath/OrderMain'
 import HistoryMain from '../RestaurantPath/HistoryMain'
 import HistoryList from '../RestaurantPath/HistoryList'
@@ -195,6 +196,18 @@ const screens = {
         }
     },
 
+    MenuAdd: {
+        screen: MenuAdd,
+        navigationOptions: {
+            title: 'เพิ่มเมนูอาหาร',
+            headerTitleStyle: {
+                fontFamily: 'pr-reg',
+                fontSize: 16,
+                textAlign: 'center',
+            }
+        }
+    },
+
     OrderMain: {
         screen: OrderMain,
         navigationOptions: {
@@ -291,9 +304,8 @@ const screens = {
 
 }
 
-const Homestack = createStackNavigator(screens, { initialRouteName: 'Homescreen' });
+const Homestack = createStackNavigator(screens, { initialRouteName: 'MenuAdd' });
 export default createAppContainer(Homestack);
-
 
 
 

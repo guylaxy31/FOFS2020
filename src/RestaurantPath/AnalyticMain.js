@@ -16,7 +16,7 @@ export default class AnalyticMain extends Component {
     render() {
 
         return (
-            <ScrollView style={{ backgroundColor: '#FFF' }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: '#FFF' }}>
                 <View style={styles.container}>
                     <View style={styles.CardContainer}>
                         <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>

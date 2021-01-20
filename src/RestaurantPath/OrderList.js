@@ -38,10 +38,10 @@ const OrderList = props => {
                 </View>
 
                 <View style={styles.BtnContainer}>
-                    <View style={{ backgroundColor: '#CCCCC3', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowDemandBox()}><Text style={styles.NotEnBtnText}>รับออเดอร์แล้ว</Text></TouchableOpacity></View>
-                    <View style={{ backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowSubmitBox()}><Text style={styles.SubmitBtnText}>ยืนยันรายการ</Text></TouchableOpacity></View>
-                    <View style={{ backgroundColor: '#9C9C9C', padding: 8, borderRadius: 15 }}><TouchableOpacity onPress={() => props.ShowDemandBox()}><Text style={styles.NotEnBtnText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
-                    <View ><TouchableOpacity onPress={() => props.ShowCancelBox()} ><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
+                    {/* <View style={{ backgroundColor: '#DDDDDD', padding: 8, borderRadius: 15 }}><Text style={styles.GetOrderText}>รับออเดอร์แล้ว</Text></View> */}
+                    <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.ShowSubmitBox()}><Text style={styles.SubmitBtnText}>ยืนยันรายการ</Text></TouchableOpacity></View>
+                    <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => props.ShowDemandBox()}><Text style={styles.NotEnBtnText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
+                    <View style={styles.CancelContainer}><TouchableOpacity onPress={() => props.ShowCancelBox()} ><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
                 </View>
 
             </View >
@@ -49,10 +49,10 @@ const OrderList = props => {
             <Modal transparent={true} visible={props.orderlist.OrderSubmitState}>
                 <View style={styles.ModelBackground}>
                     <View style={styles.ModalContainer}>
-                        <View style={{ flexDirection: 'row' }}><Text style={styles.SubmitOrderText}>คุณยืนยันการรับออเดอร์ เพื่อเข้าสู่ขั้นตอนปรุงอาหาร</Text></View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                            <TouchableOpacity onPress={() => props.CloseSubmitBox()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.CloseSubmitBox()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                        <View style={{ flexDirection: 'row' }}><Text style={styles.SubmitOrderText}>คุณยืนยันการรับออเดอร์ และเข้าสู่ขั้นตอนปรุงอาหาร</Text></View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => props.CloseSubmitBox()}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => props.CloseSubmitBox()}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
                 </View>
@@ -61,11 +61,12 @@ const OrderList = props => {
             <Modal transparent={true} visible={props.orderlist.FoodDemandState}>
                 <View style={styles.ModelBackground}>
                     <View style={styles.ModalContainer}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>คุณแน่ใจแล้วว่าจะปฏิเสธออเดอร์เนื่องด้วยวัตถุดิบไม่เพียงพอ</Text></View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>คุณแน่ใจแล้วว่าจะปฏิเสธออเดอร์ ระบบจะทำการแจ้งเตือนลูกค้าเนื่องด้วยวัตถุดิบไม่เพียงพอ</Text></View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                            <TouchableOpacity onPress={() => props.CloseDemandBox()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.CloseDemandBox()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => props.CloseDemandBox()}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => props.CloseDemandBox()}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -74,11 +75,11 @@ const OrderList = props => {
             <Modal transparent={true} visible={props.orderlist.CancelState}>
                 <View style={styles.ModelBackground}>
                     <View style={styles.ModalContainer}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>ท่านแน่ใจว่าต้องการปฏิเสธออเดอร์</Text></View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>คุณแน่ใจว่าต้องการปฏิเสธออเดอร์นี้</Text></View>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                            <TouchableOpacity onPress={() => props.CloseCancelBox()} style={styles.TouchSubmitButton}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.CloseCancelBox()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => props.CloseCancelBox()}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => props.CloseCancelBox()}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
                 </View>
@@ -119,19 +120,24 @@ const styles = StyleSheet.create({
     TotalPricesRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 16 },
     TotalPricesText: { fontFamily: 'pr-bold', color: '#A7A799', marginLeft: 'auto', fontSize: Dimensions.get('window').height * .03 },
 
+    GetOrderText: { fontFamily: 'pr-reg', color: '#FFF', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
     BtnContainer: { flexDirection: 'row', justifyContent: 'space-between', margin: 20, alignItems: 'center' },
+    SubmitContainer: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     SubmitBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    NotEnContainer: { backgroundColor: '#FF5400', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     NotEnBtnText: { fontFamily: 'pr-reg', color: '#FFF', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
+    CancelContainer: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     CancelBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
 
-    ModalContainer: { backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '25%' : '40%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
+    ModalContainer: { alignSelf: 'center', width: 350, backgroundColor: '#fff', paddingHorizontal: 20, paddingVertical: 30, borderRadius: 15, justifyContent: 'center', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
     SubmitOrderText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10, textAlign: 'center' },
     NotEnText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10, textAlign: 'center' },
-    TouchSubmitButton: { backgroundColor: '#FFFC1B', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center', width: 100, marginRight: 20 },
-    TouchBackButton: { backgroundColor: '#D1D1D1', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center', width: 100, marginLeft: 20 },
-    closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .018, color: '#FFF' },
-    SubmitButtonText: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .018 },
+
+    TouchContainer: { backgroundColor: '#FFFC1B', borderRadius: 15, marginTop: 10, padding: 8, width: 80, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    SubmitButtonText: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    TouchBackContainer: { backgroundColor: '#FFF', borderRadius: 15, marginTop: 10, padding: 8, width: 80, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#000' },
 
 })
 

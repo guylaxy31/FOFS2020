@@ -21,9 +21,11 @@ const LoginForCustomer = props => {
 const styles = StyleSheet.create({
     container: { height: '100%', width: 'auto', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
 
+
+
     create_new_btn: { backgroundColor: '#FFF', padding: '1%', marginTop: '10%', marginBottom: '3%' },
     register_txt: { fontSize: 16, fontFamily: 'pr-light' },
-    
+
     WayButton: { width: 150, height: 100, resizeMode: 'contain', marginBottom: 15 }
 });
 
