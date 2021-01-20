@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Platform } from 'react-native';
 import * as resAction from '../../store/action/resaction'
 
+
 const Home = props => {
   console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
   const dispatch = useDispatch();
@@ -119,7 +120,7 @@ const Home = props => {
         />
 
         <View style={styles.titleAlign}>
-
+          <HextagonIcon />
           <Text style={styles.headerText}>เมนูแนะนำ</Text>
         </View>
 
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
 
   nav__container: { width: '100%' },
 
-  SearchBoxContainer: { flex: 1, flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 15, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', marginVertical: 15 },
-  iconAlign: { flex: 1, flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
+  SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 10, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', alignItems: 'center', marginVertical: 15 },
+  iconAlign: { flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
   textinput_field: { flex: 1, color: '#C7B292', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, textAlign: 'left', justifyContent: 'center' },
 
   scroll_View: { height: '100%', alignSelf: 'stretch', backgroundColor: '#fff', padding: 0, margin: 0 },

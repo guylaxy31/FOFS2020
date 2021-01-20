@@ -98,8 +98,8 @@ const FoodMenuCustom = props => {
                     </View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 30 }}>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} style={styles.btnSubmit}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} style={styles.btnCancel}><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
+                        <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity></View>
+                        <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
                     </View>
                 </View>
             </ScrollView>
@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
 
     TextInputBox: { height: 60, borderColor: 'gray', borderWidth: 1, marginHorizontal: 40, padding: 10, marginBottom: 30, borderRadius: 15, fontFamily: 'pr-reg' },
 
-    btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, marginRight: 20 },
+    btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, marginRight: 20, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     btnSubmitText: { fontFamily: 'pr-reg', paddingHorizontal: 10 },
 
-    btnCancel: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, marginLeft: 20 },
+    btnCancel: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, marginLeft: 20, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     btnCancelText: { fontFamily: 'pr-reg' }
 });
 

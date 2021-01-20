@@ -24,7 +24,7 @@ const RegisterForCustomer = props => {
                         <TouchableOpacity onPress={() => props.SetFemaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                     </View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อายุ</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput style={styles.AgeFillInput}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สถานภาพ</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>หน่วยงาน/สังกัด/คณะ</Text></View>
@@ -35,26 +35,29 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainer, { marginBottom: 60 }}><TextInput style={styles.FillFormText}></TextInput></View>
                     <TouchableOpacity onPress={() => props.ShowConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
 
-                    <TouchableOpacity style={{ marginBottom: 50 }} onPress={() => props.navigation.navigate('CustomerFoodID')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 50 }}>
+                        <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.navigation.navigate('CustomerFoodID')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
+                        <View style={styles.CancelContainer}><TouchableOpacity><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
+                    </View>
                 </View>
                 <Modal transparent={true} visible={props.consense.ConsenseState}>
                     <View style={styles.ModelBackground}>
                         <View style={styles.ModalContainer}>
-                            <View style={{ flexDirection: 'row' }}><Text style={styles.consenseText}>  ผู้ลงทะเบียนรับทราบยินยอมให้ผู้พัฒนานำข้อมูลทางสถิติไปใช้วิเคราะห์ในอนาคตได้</Text></View>
-                            <View style={{ flexDirection: 'row', marginBottom: 50 }}><Text style={styles.consenseText}>  ผู้พัฒนาจะไม่เผยแพร่ข้อมูลส่วนบุคคลในการระบุตัวตนของผู้ใช้งานได้ (พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)</Text></View>
-                            <TouchableOpacity onPress={() => props.CloseConsense()} style={styles.TouchBackButton}><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}><Text style={styles.consenseText}>ผู้ลงทะเบียนรับทราบยินยอมให้ผู้พัฒนานำข้อมูลทางสถิติไปใช้วิเคราะห์ในอนาคตได้</Text></View>
+                            <View style={{ flexDirection: 'row', marginBottom: 30, flexWrap: 'wrap' }}><Text style={styles.consenseText}>ผู้พัฒนาจะไม่เผยแพร่ข้อมูลส่วนบุคคลในการระบุตัวตนของผู้ใช้งานได้ (พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)</Text></View>
+                            <View style={styles.CloseModalContainer}><TouchableOpacity style={{ width: '100%' }} onPress={() => props.CloseConsense()}><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity></View>
                         </View>
                     </View>
                 </Modal>
 
             </ScrollView>
-        </View>
+        </View >
     );
 }
 
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', flex: 1, flexDirection: 'column' },
-    FormContainerWrap: { alignSelf: 'center' },
+    FormContainerWrap: { flexDirection: 'column', alignSelf: 'center' },
 
     RegisterTitle: { flexWrap: 'wrap', justifyContent: 'center', flexDirection: 'row' },
     TitleText: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginLeft: 5, marginVertical: 20 },
@@ -66,18 +69,25 @@ const styles = StyleSheet.create({
     genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#CCC' },
 
     FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
-    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 300, paddingVertical: 5, paddingHorizontal: 20, height: Dimensions.get('window').height * .058, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    AgeFillInput: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 100, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
     FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 5 },
 
-    ModalContainer: { backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
+    ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
     consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10 },
-    TouchBackButton: { backgroundColor: '#EBEBEB', borderRadius: 15, marginTop: 10, paddingVertical: '3%', width: '50%', alignSelf: 'center' },
-    closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height * .023 },
 
-    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', backgroundColor: 'red', width: 120, padding: 10, backgroundColor: '#FFFC1B', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+
+    SubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, backgroundColor: '#FFFC1B', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    CancelContainer: { width: 80, borderRadius: 15, backgroundColor: '#FFF', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    CancelButtonText: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, backgroundColor: '#FFF', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+
+
     TouchReadButton: { marginBottom: 50 },
     readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
+    CloseModalContainer: { flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', borderRadius: 15, width: 100, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    closeButtonTxt: { textAlign: 'center', fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
 
 });
 

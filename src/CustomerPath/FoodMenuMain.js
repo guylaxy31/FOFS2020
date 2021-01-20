@@ -47,8 +47,8 @@ const FoodMenuMain = props => {
                     />
 
                     <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingHorizontal: 20, marginTop: 50, alignItems: 'center' }}>
-                        <View><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm')} style={styles.nextBTNBackground}><Text style={styles.nextBTNText}>ดำเนินการต่อ</Text></TouchableOpacity></View>
-                        <View><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.cancelBTNText}>ยกเลิก</Text></TouchableOpacity></View>
+                        <View style={styles.nextBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm')}><Text style={styles.nextBTNText}>ดำเนินการต่อ</Text></TouchableOpacity></View>
+                        <View style={styles.CancelBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.cancelBTNText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
 
                 </View>
@@ -72,8 +72,9 @@ const styles = StyleSheet.create({
 
     MenuTouchContainer: { marginVertical: 10, width: 320 },
     nextBTNText: { fontFamily: 'pr-reg', color: '#000' },
-    nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15 },
-    cancelBTNText: { fontFamily: 'pr-reg', color: '#000' }
+    nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 100 },
+    CancelBTNBackground: { backgroundColor: '#FFF', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 80 },
+    cancelBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' }
 
 });
 

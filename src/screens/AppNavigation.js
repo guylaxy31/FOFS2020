@@ -21,6 +21,7 @@ import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 import RestaurantHome from '../RestaurantPath/RestaurantHome'
 import AnalyticMain from '../RestaurantPath/AnalyticMain'
 import MenuList from '../RestaurantPath/MenuList'
+import MenuAdd from '../RestaurantPath/MenuAdd'
 import OrderMain from '../RestaurantPath/OrderMain'
 import HistoryMain from '../RestaurantPath/HistoryMain'
 import HistoryList from '../RestaurantPath/HistoryList'
@@ -30,6 +31,7 @@ import RequestMain from '../AdminPath/RequestMain'
 import RequestCheck from '../AdminPath/RequestCheck'
 import ListMain from '../AdminPath/ListMain'
 import ListCheck from '../AdminPath/ListCheck'
+
 
 // const screens = {
 //     Homescreen: {
@@ -299,6 +301,8 @@ import ListCheck from '../AdminPath/ListCheck'
 // export default createAppContainer(Homestack);
 
 const Stack = createStackNavigator();
+
+
 
 const AppNavigation = props => {
     return (
@@ -574,6 +578,5 @@ const AppNavigation = props => {
 };
 
 export default AppNavigation;
-
 
 

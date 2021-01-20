@@ -24,7 +24,7 @@ const OrderMain = props => {
     }
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <FlatList
                     data={tempdatabase.menulists}
