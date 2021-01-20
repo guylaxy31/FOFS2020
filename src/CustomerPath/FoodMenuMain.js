@@ -2,39 +2,45 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, FlatList } from 'react-native';
 
 import FoodMenuItem from './FoodMenuItem'
-
+import { useSelector } from "react-redux";
 const FoodMenuMain = props => {
-    const tempdatabase = {
-        MenuList: [
-            {
-                menuTitle: 'ข้าวผัด',
-                imageUri: require('../../assets/menulist/fried-rice.jpg'),
-            },
-            {
-                menuTitle: 'ผัดไท',
-                imageUri: require('../../assets/menulist/PT1.jpg'),
-            },
-            {
-                menuTitle: 'ก๋วยเตี๋ยว',
-                imageUri: require('../../assets/menulist/noodle.jpg'),
-            },
-        ]
-    }
+    // const tempdatabase = {
+    //     MenuList: [
+    //         {
+    //             menuTitle: 'ข้าวผัด',
+    //             imageUri: require('../../assets/menulist/fried-rice.jpg'),
+    //         },
+    //         {
+    //             menuTitle: 'ผัดไท',
+    //             imageUri: require('../../assets/menulist/PT1.jpg'),
+    //         },
+    //         {
+    //             menuTitle: 'ก๋วยเตี๋ยว',
+    //             imageUri: require('../../assets/menulist/noodle.jpg'),
+    //         },
+    //     ]
+    // }
+    const {resId} = props.route.params;
+    
+    // console.log(resId);
+    const restaurant = useSelector(state => state.restaurant.restaurants.find(restaurant => restaurant._id  === resId));
+
+    console.log(restaurant.menus);
     return (
 
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
                     <View style={styles.RestImageContainer}><Image style={styles.RestImage} source={require('../../assets/restaurantlist/rest011182.jpg')}></Image></View>
-                    <View style={styles.RestNameContainer}><Text style={styles.RestNameText}>ร้านป้าอร</Text></View>
+                    <View style={styles.RestNameContainer}><Text style={styles.RestNameText}>{restaurant.restaurant_name}</Text></View>
 
 
 
                     <FlatList
-                        data={tempdatabase.MenuList}
+                        data={restaurant.menus}
                         renderItem={({ item }) =>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom')} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menuTitle} imageUri={item.imageUri} /></TouchableOpacity>}
-                        keyExtractor={(item, index) => index.toString()}
+                            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom')} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.imageUri} /></TouchableOpacity>}
+                        keyExtractor={item => item._id}
                         horizontal={false}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}
