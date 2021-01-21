@@ -39,10 +39,10 @@ const Stack = createStackNavigator();
 const AppNavigation = props => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="MenuAdd">
+            <Stack.Navigator initialRouteName="Homescreen">
                 <Stack.Screen name="Homescreen"
                     component={Home}
-                    option={{
+                    options={{
                         title: 'หน้าหลัก',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -54,8 +54,8 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="LoginHome"
                     component={LoginHome}
-                    option={{
-                        title: 'หน้าหลัก',
+                    options={{
+                        title: 'เข้าสู่ระบบ',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
                             fontSize: 16,
@@ -66,7 +66,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="LoginForCustomer"
                     component={LoginForCustomer}
-                    option={{
+                    options={{
                         title: 'เข้าสู่ระบบ',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -78,7 +78,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="CustomerFoodID"
                     component={CustomerFoodID}
-                    option={{
+                    options={{
                         title: 'เข้าสู่ระบบ',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -90,7 +90,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="RegisterForCustomer"
                     component={RegisterForCustomer}
-                    option={{
+                    options={{
                         title: 'สร้างบัญชี',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -102,7 +102,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="FoodMenuMain"
                     component={FoodMenuMain}
-                    option={{
+                    options={{
                         title: 'เลือกรายการอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -114,7 +114,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="FoodMenuCustom"
                     component={FoodMenuCustom}
-                    option={{
+                    options={{
                         title: 'แก้ไขรายการอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -126,7 +126,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="FoodMenuConfirm"
                     component={FoodMenuConfirm}
-                    option={{
+                    options={{
                         title: 'ยืนยันรายการอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -138,7 +138,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="FoodStatus"
                     component={FoodStatus}
-                    option={{
+                    options={{
                         title: 'สถานะรายการอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -150,7 +150,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="LoginForRestaurant"
                     component={LoginForRestaurant}
-                    option={{
+                    options={{
                         title: 'เข้าสู่ระบบร้านอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -162,7 +162,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="RegisterForRestaurant"
                     component={RegisterForRestaurant}
-                    option={{
+                    options={{
                         title: 'สร้างบัญชีร้านอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -174,7 +174,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="RestaurantHome"
                     component={RestaurantHome}
-                    option={{
+                    options={{
                         title: 'จัดการร้านอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -186,7 +186,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="AnalyticMain"
                     component={AnalyticMain}
-                    option={{
+                    options={{
                         title: 'สถิติร้านอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -198,7 +198,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="MenuList"
                     component={MenuList}
-                    option={{
+                    options={{
                         title: 'รายการอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -210,7 +210,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="MenuAdd"
                     component={MenuAdd}
-                    option={{
+                    options={{
                         title: 'เพิ่มเมนู',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -222,7 +222,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="OrderMain"
                     component={OrderMain}
-                    option={{
+                    options={{
                         title: 'รายการสั่งอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -234,7 +234,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="HistoryMain"
                     component={HistoryMain}
-                    option={{
+                    options={{
                         title: 'ประวัติการสั่งอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -246,7 +246,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="HistoryList"
                     component={HistoryList}
-                    option={{
+                    options={{
                         title: 'ประวัติการสั่งอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -258,7 +258,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="AdminHome"
                     component={AdminHome}
-                    option={{
+                    options={{
                         title: 'ระบบจัดการ',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -270,7 +270,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="RequestMain"
                     component={RequestMain}
-                    option={{
+                    options={{
                         title: 'รายการร้านอาหารขอเข้าร่วม',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -282,7 +282,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="RequestCheck"
                     component={RequestCheck}
-                    option={{
+                    options={{
                         title: 'ตรวจสอบร้านอาหาร',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -294,7 +294,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="ListMain"
                     component={ListMain}
-                    option={{
+                    options={{
                         title: 'ร้านค้าในระบบ',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
@@ -306,7 +306,7 @@ const AppNavigation = props => {
                 />
                 <Stack.Screen name="ListCheck"
                     component={ListCheck}
-                    option={{
+                    options={{
                         title: 'แก้ไขร้านค้าในระบบ',
                         headerTitleStyle: {
                             fontFamily: 'pr-reg',
