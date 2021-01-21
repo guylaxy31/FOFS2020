@@ -20,7 +20,7 @@ const HistoryMain = props => {
     );
     return (
         <View style={styles.Tablecontainer}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
 
 

@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     RestImage: { width: 200, height: 200, borderRadius: 15 },
 
     MenuTouchContainer: { marginVertical: 10, width: 320 },
-    nextBTNText: { fontFamily: 'pr-reg', color: '#000' },
-    nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 100 },
+    nextBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' },
+    nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 110 },
     CancelBTNBackground: { backgroundColor: '#FFF', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 80 },
     cancelBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' }
 
