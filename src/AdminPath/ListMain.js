@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
-const AdminRestaurantList = props => {
+const ListMain = props => {
     const tabledataset = {
         tableHead: ['#', 'ชื่อร้าน', 'จังหวัด', 'อนุมัติเมื่อ', 'รายการ'],
         tableData: [
@@ -15,7 +15,7 @@ const AdminRestaurantList = props => {
     }
 
     const element = (data, index) => (
-        <TouchableOpacity onPress={() => props.navigation.navigate('ManageViewscreen')}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('ListCheck')}>
             <View style={styles.btn}>
                 <Text style={styles.btnText}>จัดการแก้ไข</Text>
             </View>
@@ -50,8 +50,8 @@ const AdminRestaurantList = props => {
 const styles = StyleSheet.create({
     container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
 
-    RestaurantCountingContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2BF', paddingVertical: 5 },
-    CountingTxt: { fontFamily: 'pr-reg', marginHorizontal: 5, fontSize: Dimensions.get('window').height * 0.021, color: '#66664D' },
+    RestaurantCountingContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFF', paddingVertical: 5 },
+    CountingTxt: { fontFamily: 'pr-reg', marginHorizontal: 5, fontSize: Dimensions.get('window').height * 0.021, color: '#909073' },
     CountingTxtNumber: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height * 0.025 },
 
     Tablecontainer: { flex: 1, padding: 16, paddingTop: Dimensions.get('window').height * 0.05, backgroundColor: '#FFF', },
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default AdminRestaurantList
+export default ListMain

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-class RecommendItem extends Component {
+class RecommendRestaurant extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecommendItem;
+export default RecommendRestaurant;

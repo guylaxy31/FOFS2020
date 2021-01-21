@@ -5,13 +5,13 @@ import { AppLoading } from 'expo';
 
 // R E D U X
 import { createStore, combineReducers } from 'redux'
-import { userReducer, loginStatus, consenseReducer, genderSelectionReducer } from './src/Reducers/Reducers'
+import { loginStatus, consenseReducer, genderSelectionReducer, orderlistReducer } from './src/Reducers/Reducers'
 import { Provider } from 'react-redux';
 
 // N A V I G A T O R
 import AppNavigation from './src/screens/AppNavigation'
-
-const store = createStore(combineReducers({ user: userReducer, loginStatus, consense: consenseReducer, gender: genderSelectionReducer }))
+import store from './store/store'
+// const store = createStore(combineReducers({ loginStatus, consense: consenseReducer, gender: genderSelectionReducer, orderlist: orderlistReducer }))
 
 let customFonts = {
   'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
@@ -20,37 +20,27 @@ let customFonts = {
 };
 
 export default class App extends Component {
-  state = {
-    fontsLoaded: false,
-  };
-
+  state = { fontsLoaded: false };
 
   async _loadFontsAsync() {
     await Font.loadAsync(customFonts);
     this.setState({ fontsLoaded: true });
   }
 
-  componentDidMount() {
-    this._loadFontsAsync();
-  }
-
+  componentDidMount() { this._loadFontsAsync(); }
 
   render() {
 
     if (this.state.fontsLoaded) {
       return (
         <Provider store={store}>
-
           <AppNavigation />
-
         </Provider>
       )
     }
-
     else {
       return <AppLoading />;
     }
-
   }
 }
 

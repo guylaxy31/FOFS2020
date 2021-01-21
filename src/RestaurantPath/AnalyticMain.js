@@ -11,12 +11,12 @@ import {
 
 
 
-export default class RestaurantAnalyticContainer extends Component {
+export default class AnalyticMain extends Component {
 
     render() {
 
         return (
-            <ScrollView style={{ backgroundColor: '#FFF' }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: '#FFF' }}>
                 <View style={styles.container}>
                     <View style={styles.CardContainer}>
                         <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
@@ -171,61 +171,17 @@ export default class RestaurantAnalyticContainer extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        height: '100%',
-        width: '100%',
-        alignSelf: 'stretch',
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    }, TextTitleHeader: {
-        fontFamily: 'pr-reg',
-        fontSize: 18
-    }, TextSubTitleHeader: {
-        fontFamily: 'pr-light',
-        fontSize: 16,
-        marginBottom: 15
-    }, TotalText: {
-        fontFamily: 'pr-bold',
-        fontSize: 20,
-        marginBottom: 16
-    }
-    , CardContainer: {
-        flex: 1,
-        height: '100%',
-        width: '100%',
-        alignItems: 'center',
-
-        padding: 20,
-        alignContent: 'center',
-        backgroundColor: '#FFF'
-
-    }, dataContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        width: '100%',
-        marginBottom: 25
-    }
-
-    , column1: {
-        marginRight: 20
-    },
-    column2: {
-        marginRight: 10
-    }, changeFont: {
-        fontFamily: 'pr-reg',
-        fontSize: 16
-    }, LineChartContainer: {
-        marginBottom: '5%'
-    }, LineChartContainer2: {
-        backgroundColor: '#FFF',
-        flexDirection: 'row',
-        marginBottom: '5%',
-        marginLeft: 20,
-        marginRight: 20
-    }
+    container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
+    TextTitleHeader: { fontFamily: 'pr-reg', fontSize: 18 },
+    TextSubTitleHeader: { fontFamily: 'pr-light', fontSize: 16, marginBottom: 15 },
+    TotalText: { fontFamily: 'pr-bold', fontSize: 20, marginBottom: 16 },
+    CardContainer: { flex: 1, height: '100%', width: '100%', alignItems: 'center', padding: 20, alignContent: 'center', backgroundColor: '#FFF' },
+    dataContainer: { flex: 1, flexDirection: 'row', width: '100%', marginBottom: 25 },
+    column1: { marginRight: 20 },
+    column2: { marginRight: 10 },
+    changeFont: { fontFamily: 'pr-reg', fontSize: 16 },
+    LineChartContainer: { marginBottom: '5%' },
+    LineChartContainer2: { backgroundColor: '#FFF', flexDirection: 'row', marginBottom: '5%', marginLeft: 20, marginRight: 20 }
 });
 
 

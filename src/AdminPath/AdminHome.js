@@ -2,11 +2,11 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
-const AdminMainContainer = props => {
+const AdminHome = props => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('AdminRestaurantRequestscreen')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('RequestMain')}>
                 <View style={styles.toolCardContainer}>
                     <View style={styles.imgalign}><Image style={styles.ImgTag} source={require('../../assets/admin/it.png')}></Image></View>
                     <View style={styles.InlineText}>
@@ -16,7 +16,7 @@ const AdminMainContainer = props => {
                     </View>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('AdminRestaurantListscreen')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('ListMain')}>
                 <View style={styles.toolCardContainer}>
                     <View style={styles.imgalign}><Image style={styles.ImgTag} source={require('../../assets/admin/shop.png')}></Image></View>
                     <View style={styles.InlineText}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
     chgFontRed: { fontFamily: 'pr-reg', color: 'red', fontSize: Dimensions.get('window').height * .021 },
 });
 
-export default AdminMainContainer
+export default AdminHome

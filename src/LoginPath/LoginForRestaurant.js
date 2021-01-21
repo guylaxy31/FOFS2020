@@ -20,8 +20,8 @@ const LoginForRestaurant = props => {
                 </View>
             </KeyboardAvoidingView>
 
-            <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantContainerscreen')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForRestaurant')}><Text style={{ fontFamily: 'pr-light' }}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
+            <View style={styles.LoginContainer}><TouchableOpacity onPress={() => props.navigation.navigate('RestaurantHome')} style={styles.LoginButton}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity></View>
+            <TouchableOpacity onPress={() => props.navigation.navigate('RegisterForRestaurant')}><Text style={styles.register_txt}>ส่งร้านอาหารเข้าร่วม</Text></TouchableOpacity >
             <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน</Text></TouchableOpacity>
 
         </View >
@@ -34,19 +34,23 @@ const styles = StyleSheet.create({
     FormContainer: { width: '100%', marginLeft: 200 },
     LoginForm: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, paddingVertical: 16, },
     HeaderContainer: { marginBottom: 15 },
-    id_field: { width: 250, height: 50, padding: 15, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
-    pass_field: { width: 250, height: 50, padding: 15, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+    id_field: { borderRadius: 15, width: 250, height: 50, padding: 15, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+    pass_field: { borderRadius: 15, width: 250, height: 50, padding: 15, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
 
 
     LoginHeader: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 20 : 22, color: '#000', marginLeft: 5 },
     LoginSubHeader: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, color: '#929292' },
     HeaderWithIcon: { flexWrap: 'wrap', alignItems: 'flex-start', flexDirection: 'row', },
 
-    LoginButton: { color: '#000', backgroundColor: '#FFFC1B', margin: 15, borderRadius: 15, marginVertical: Dimensions.get('window').height < 1000 ? 40 : 50 },
-    LoginButtonText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, paddingVertical: 10, paddingHorizontal: 15, borderRadius: 15 },
+    LoginContainer: { marginVertical: 30, borderRadius: 15, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    LoginButton: { color: '#000', padding: 10 },
+    LoginButtonText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, borderRadius: 15 },
 
-    ForgetAndRegister: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#000', margin: 10 },
+    register_txt: { fontSize: 16, fontFamily: 'pr-light' },
+    ForgetAndRegister: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#6F6F6F', margin: 10 },
     FormContainer: { justifyContent: 'center' }
+
+
 });
 
 export default LoginForRestaurant;

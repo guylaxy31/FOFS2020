@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
-const AdminRestaurantRequest = props => {
+const RequestMain = props => {
 
     const tabledataset = {
         tableHead: ['#', 'เวลา (น.)', 'ชื่อร้าน', 'รายละเอียด'],
@@ -16,7 +16,7 @@ const AdminRestaurantRequest = props => {
 
 
     const element = (data, index) => (
-        <TouchableOpacity onPress={() => props.navigation.navigate('RequestViewscreen')}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('RequestCheck')}>
             <View style={styles.btn}>
                 <Text style={styles.btnText}>ตรวจสอบ</Text>
             </View>
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default AdminRestaurantRequest
+export default RequestMain

@@ -1,7 +1,7 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList } from 'react-native';
 
-import { connect } from 'react-redux'
+import { useDispatch ,useSelector} from 'react-redux'
 
 import PromotionRestaurant from './PromotionRestaurant'
 import HextagonIcon from '../Themes/HextagonIcon'
@@ -11,66 +11,78 @@ import NearRestaurant from './NearRestaurant'
 import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Platform } from 'react-native';
+import * as resAction from '../../store/action/resaction'
+
 
 const Home = props => {
   console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
-  const tempdatabase = {
-    PromotionList: [
-      {
-        promotionTitle: 'shabu',
-        imageUri: require('../../assets/promotions/shabupro.jpg'),
-      },
-      {
-        promotionTitle: 'Macdonal',
-        imageUri: require('../../assets/promotions/oth.jpg'),
-      },
-      {
-        promotionTitle: 'Pizza',
-        imageUri: require('../../assets/promotions/f01.jpg'),
-      },
-    ],
-    RestaurantList: [
-      {
-        imageUri: require('../../assets/recommends/fried-chicken.jpg'),
-        foodName: 'ไก่ทอด',
-        resName: 'ร้านอาหาร1'
-      },
-      {
-        imageUri: require('../../assets/recommends/chicken-rice.jpg'),
-        foodName: 'ข้าวมันไก่',
-        resName: 'ร้านอาหาร2'
-      },
-      {
-        imageUri: require('../../assets/recommends/fried-rice.jpg'),
-        foodName: 'ข้าวผัด',
-        resName: 'ร้านอาหาร3'
-      },
-      {
-        imageUri: require('../../assets/recommends/brownie.jpg'),
-        foodName: 'ช็อกโกแลตบราวนี่',
-        resName: 'ร้านอาหาร4'
-      },
-      {
-        imageUri: require('../../assets/recommends/spaghetti.jpg'),
-        foodName: 'สปาร์เก็ตตี้ขี้เมา',
-        resName: 'ร้านอาหาร5'
-      },
-    ],
-    NearList: [
-      {
-        resName: 'ร้าน NeuCafe',
-        imageUri: require('../../assets/near/coffee.jpg'),
-        distance: '0.25 km'
-      },
-      {
-        resName: 'ร้าน SmileItalia',
-        imageUri: require('../../assets/near/pizza.jpg'),
-        distance: '0.4 km'
-      },
+  const dispatch = useDispatch();
 
-    ]
+  const {restaurants} = useSelector(state => state.restaurant)
+  
+  useEffect(() => {
+    dispatch(resAction.fetchRes());
+    
+  }, [dispatch]);
+  // const tempdatabase = {
+  //   PromotionList: [
+  //     {
+  //       promotionTitle: 'shabu',
+  //       imageUri: require('../../assets/promotions/shabupro.jpg'),
+  //     },
+  //     {
+  //       promotionTitle: 'Macdonal',
+  //       imageUri: require('../../assets/promotions/oth.jpg'),
+  //     },
+  //     {
+  //       promotionTitle: 'Pizza',
+  //       imageUri: require('../../assets/promotions/f01.jpg'),
+  //     },
+  //   ],
+  //   RestaurantList: [
+  //     {
+  //       imageUri: require('../../assets/recommends/fried-chicken.jpg'),
+  //       foodName: 'ไก่ทอด',
+  //       resName: 'ร้านอาหาร1'
+  //     },
+  //     {
+  //       imageUri: require('../../assets/recommends/chicken-rice.jpg'),
+  //       foodName: 'ข้าวมันไก่',
+  //       resName: 'ร้านอาหาร2'
+  //     },
+  //     {
+  //       imageUri: require('../../assets/recommends/fried-rice.jpg'),
+  //       foodName: 'ข้าวผัด',
+  //       resName: 'ร้านอาหาร3'
+  //     },
+  //     {
+  //       imageUri: require('../../assets/recommends/brownie.jpg'),
+  //       foodName: 'ช็อกโกแลตบราวนี่',
+  //       resName: 'ร้านอาหาร4'
+  //     },
+  //     {
+  //       imageUri: require('../../assets/recommends/spaghetti.jpg'),
+  //       foodName: 'สปาร์เก็ตตี้ขี้เมา',
+  //       resName: 'ร้านอาหาร5'
+  //     },
+  //   ],
+  //   NearList: [
+  //     {
+  //       resName: 'ร้าน NeuCafe',
+  //       imageUri: require('../../assets/near/coffee.jpg'),
+  //       distance: '0.25 km'
+  //     },
+  //     {
+  //       resName: 'ร้าน SmileItalia',
+  //       imageUri: require('../../assets/near/pizza.jpg'),
+  //       distance: '0.4 km'
+  //     },
 
-  }
+  //   ]
+
+  // }
+
+
   return (
     <View style={styles.container}>
 
@@ -97,10 +109,10 @@ const Home = props => {
         </View>
 
         <FlatList
-          data={tempdatabase.PromotionList}
+          // data={tempdatabase.PromotionList}
           renderItem={({ item }) =>
             <TouchableOpacity><PromotionRestaurant imageUri={item.imageUri} /></TouchableOpacity>}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
@@ -108,15 +120,15 @@ const Home = props => {
         />
 
         <View style={styles.titleAlign}>
-
+          <HextagonIcon />
           <Text style={styles.headerText}>เมนูแนะนำ</Text>
         </View>
 
         <FlatList
-          data={tempdatabase.RestaurantList}
+          // data={tempdatabase.RestaurantList}
           renderItem={({ item }) =>
-            <TouchableOpacity><RecommendRestaurant imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
-          keyExtractor={item => item.id}
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><RecommendRestaurant imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
+          keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
@@ -129,10 +141,22 @@ const Home = props => {
         </View>
 
         <FlatList
-          data={tempdatabase.NearList}
+          data={restaurants}
+          keyExtractor={item => item._id}
           renderItem={({ item }) =>
-            <TouchableOpacity><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
-          keyExtractor={item => item.id}
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain' ,  {resId: item._id})}><NearRestaurant imageUri={item.imageUri} resName={item.restaurant_name} distance={item._id} /></TouchableOpacity>}
+
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          style={styles.nearStyle}
+        />
+
+<FlatList
+          // data={tempdatabase.NearList}
+          renderItem={({ item }) =>
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
+          keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
@@ -155,8 +179,8 @@ const styles = StyleSheet.create({
 
   nav__container: { width: '100%' },
 
-  SearchBoxContainer: { flex: 1, flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 15, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', marginVertical: 15 },
-  iconAlign: { flex: 1, flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
+  SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 10, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', alignItems: 'center', marginVertical: 15 },
+  iconAlign: { flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
   textinput_field: { flex: 1, color: '#C7B292', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, textAlign: 'left', justifyContent: 'center' },
 
   scroll_View: { height: '100%', alignSelf: 'stretch', backgroundColor: '#fff', padding: 0, margin: 0 },
@@ -172,32 +196,32 @@ const styles = StyleSheet.create({
   ViewAllTxt: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginVertical: 18, textAlign: 'center' }
 });
 
-const mapStatetoProps = (state) => {
-  return {
-    user: state.user,
-    loginStatus: state.loginStatus
-  }
-}
+// const mapStatetoProps = (state) => {
+//   return {
+//     user: state.user,
+//     loginStatus: state.loginStatus
+//   }
+// }
 
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    setName: (name) => {
-      dispatch({
-        type: "setName",
-        payload: name
-      })
-    },
-    login: () => {
-      dispatch({
-        type: "LOGIN",
-      })
-    },
-    logout: () => {
-      dispatch({
-        type: "LOGOUT",
-      })
-    },
-  }
-}
+// const mapDispatchtoProps = (dispatch) => {
+//   return {
+//     setName: (name) => {
+//       dispatch({
+//         type: "setName",
+//         payload: name
+//       })
+//     },
+//     login: () => {
+//       dispatch({
+//         type: "LOGIN",
+//       })
+//     },
+//     logout: () => {
+//       dispatch({
+//         type: "LOGOUT",
+//       })
+//     },
+//   }
+// }
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(Home);
+export default Home;
