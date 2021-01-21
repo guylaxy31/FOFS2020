@@ -10,8 +10,8 @@ import { Provider } from 'react-redux';
 
 // N A V I G A T O R
 import AppNavigation from './src/screens/AppNavigation'
-
-const store = createStore(combineReducers({ loginStatus, consense: consenseReducer, gender: genderSelectionReducer, orderlist: orderlistReducer }))
+import store from './store/store'
+// const store = createStore(combineReducers({ loginStatus, consense: consenseReducer, gender: genderSelectionReducer, orderlist: orderlistReducer }))
 
 let customFonts = {
   'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
