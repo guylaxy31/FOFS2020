@@ -39,8 +39,6 @@ const Tab = createMaterialBottomTabNavigator();
 const AppNavigation = props => {
     return (
 
-
-
         <Stack.Navigator initialRouteName="Homescreen">
             <Stack.Screen name="Homescreen"
                 component={Home}
@@ -332,7 +330,7 @@ const CustomerBottomTab = props => {
     return (
         <NavigationContainer>
             <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#000" barStyle={{ backgroundColor: '#FFF' }}>
-                <Tab.Screen name="หน้าหลัก" component={AppNavigation} />
+                <Tab.Screen name="หน้าหลัก" component={AppNavigation}  />
                 <Tab.Screen name="สถานะออเดอร์" component={FoodStatus} />
             </Tab.Navigator>
         </NavigationContainer>

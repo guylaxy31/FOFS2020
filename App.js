@@ -1,47 +1,33 @@
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+
+// การโหลด Fonts
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
-import { Provider } from 'react-redux';
-
-// N A V I G A T O R
+// [1]Navigation [2]Redux
 import AppNavigation from './src/screens/AppNavigation'
+import { Provider } from 'react-redux';
 import store from './store/store'
 
-let customFonts = {
-  'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
-  'pr-reg': require('./assets/fonts/Prompt-Regular.ttf'),
-  'pr-bold': require('./assets/fonts/Prompt-Bold.ttf'),
-};
-
-export default class App extends Component {
-  state = { fontsLoaded: false };
-
-  async _loadFontsAsync() {
-    await Font.loadAsync(customFonts);
-    this.setState({ fontsLoaded: true });
-  }
-
-  componentDidMount() { this._loadFontsAsync(); }
-
-  render() {
-
-    if (this.state.fontsLoaded) {
-      return (
-        <Provider store={store}>
-          <AppNavigation />
-        </Provider>
-      )
-    }
-    else {
-      return <AppLoading />;
-    }
-  }
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
+    'pr-reg': require('./assets/fonts/Prompt-Regular.ttf'),
+    'pr-bold': require('./assets/fonts/Prompt-Bold.ttf'),
+  })
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', },
+export default function App() {
+  const [fontLoaded, setFonLoaded] = useState(false);
 
-});
-
+  if (!fontLoaded) {
+    return <AppLoading startAsync={fetchFonts} onFinish={() => {
+      setFonLoaded(true)
+    }} />
+  }
+  return (
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
+  )
+}

@@ -141,32 +141,4 @@ const styles = StyleSheet.create({
   ViewAllTxt: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginVertical: 18, textAlign: 'center' }
 });
 
-// const mapStatetoProps = (state) => {
-//   return {
-//     user: state.user,
-//     loginStatus: state.loginStatus
-//   }
-// }
-
-// const mapDispatchtoProps = (dispatch) => {
-//   return {
-//     setName: (name) => {
-//       dispatch({
-//         type: "setName",
-//         payload: name
-//       })
-//     },
-//     login: () => {
-//       dispatch({
-//         type: "LOGIN",
-//       })
-//     },
-//     logout: () => {
-//       dispatch({
-//         type: "LOGOUT",
-//       })
-//     },
-//   }
-// }
-
 export default Home;
