@@ -12,6 +12,7 @@ import FoodMenuMain from '../CustomerPath/FoodMenuMain'
 import FoodMenuCustom from '../CustomerPath/FoodMenuCustom'
 import FoodMenuConfirm from '../CustomerPath/FoodMenuConfirm'
 import FoodStatus from '../CustomerPath/FoodStatus'
+import FoodHistory from '../CustomerPath/FoodHistory'
 
 import RegisterForCustomer from '../RegisterPath/RegisterForCustomer'
 import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
@@ -140,6 +141,18 @@ const AppNavigation = props => {
                 component={FoodStatus}
                 options={{
                     title: 'สถานะรายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="FoodHistory"
+                component={FoodHistory}
+                options={{
+                    title: 'ประวัติการสั่งออเดอร์',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -330,8 +343,9 @@ const CustomerBottomTab = props => {
     return (
         <NavigationContainer>
             <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#000" barStyle={{ backgroundColor: '#FFF' }}>
-                <Tab.Screen name="หน้าหลัก" component={AppNavigation}  />
+                <Tab.Screen name="หน้าหลัก" component={AppNavigation} />
                 <Tab.Screen name="สถานะออเดอร์" component={FoodStatus} />
+                <Tab.Screen name="ประวัติการสั่ง" component={FoodHistory} />
             </Tab.Navigator>
         </NavigationContainer>
     )
