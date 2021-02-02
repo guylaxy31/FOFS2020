@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Home/Home'
@@ -32,7 +33,7 @@ import ListMain from '../AdminPath/ListMain'
 import ListCheck from '../AdminPath/ListCheck'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -340,18 +341,17 @@ const AppNavigation = props => {
 
 
 const CustomerBottomTab = props => {
+
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#000" barStyle={{ backgroundColor: '#FFF' }}>
-                <Tab.Screen name="หน้าหลัก" component={AppNavigation} />
-                <Tab.Screen name="สถานะออเดอร์" component={FoodStatus} />
-                <Tab.Screen name="ประวัติการสั่ง" component={FoodHistory} />
+            <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
+                <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />), }} />
+                <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />), }} />
+                <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />), }} />
             </Tab.Navigator>
         </NavigationContainer>
     )
 }
-
-
 
 export default CustomerBottomTab;
 

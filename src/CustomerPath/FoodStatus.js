@@ -17,16 +17,19 @@ const FoodStatus = props => {
                     </View>
                     <View style={styles.StatusHeaderContainer}>
                         <Text style={styles.HeaderTextLeft}>#</Text>
+                        <Text style={styles.HeaderTextCenter}>เวลา(น.)</Text>
                         <Text style={styles.HeaderTextCenter}>ร้านอาหาร</Text>
                         <Text style={styles.HeaderTextRight}>สถานะ</Text>
                     </View>
                     <View style={styles.StatusValueContainer}>
                         <Text style={styles.ValueTextLeft}>152</Text>
+                        <Text style={styles.ValueTextCenter}>11:02</Text>
                         <Text style={styles.ValueTextCenter}>กับข้าวปาณี</Text>
                         <Text style={styles.ValueTextRight}>กำลังปรุงอาหาร</Text>
                     </View>
                     <View style={styles.StatusValueContainer}>
                         <Text style={styles.ValueTextLeft}>153</Text>
+                        <Text style={styles.ValueTextCenter}>12:06</Text>
                         <Text style={styles.ValueTextCenter}>ไก่ทอดหาดเล็ด</Text>
                         <Text style={styles.ValueTextRight}>รับออเดอร์</Text>
                     </View>
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
     StatusValueContainer: { width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 },
     ValueTextLeft: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginLeft: 40, color: '#888888' },
     ValueTextCenter: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#888888', alignItems: 'center' },
-    ValueTextRight: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 30, color: '#888888' }
+    ValueTextRight: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 30, color: '#000' }
 
 });
 
