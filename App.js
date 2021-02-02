@@ -3,15 +3,11 @@ import { StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
-// R E D U X
-import { createStore, combineReducers } from 'redux'
-import { loginStatus, consenseReducer, genderSelectionReducer, orderlistReducer } from './src/Reducers/Reducers'
 import { Provider } from 'react-redux';
 
 // N A V I G A T O R
 import AppNavigation from './src/screens/AppNavigation'
 import store from './store/store'
-// const store = createStore(combineReducers({ loginStatus, consense: consenseReducer, gender: genderSelectionReducer, orderlist: orderlistReducer }))
 
 let customFonts = {
   'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
@@ -45,12 +41,7 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,                    // ให้มีพื้นที่ 1 ส่วน (Default Column)
-    alignSelf: 'stretch',       // ให้ child ใน container align ให้ match กับ height ของ container (Column direction)
-    alignItems: 'center',       // จัดให้ container มันเองอยู่ตอนกลาง ( Row direction)
-    justifyContent: 'center',   // ให้ child align ตามทิศของ container
-  },
+  container: { flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', },
 
 });
 

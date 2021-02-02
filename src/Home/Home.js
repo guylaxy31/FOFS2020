@@ -1,15 +1,16 @@
-import React ,{useEffect}from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList } from 'react-native';
 
-import { useDispatch ,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import PromotionRestaurant from './PromotionRestaurant'
 import HextagonIcon from '../Themes/HextagonIcon'
 import RecommendRestaurant from './RecommendRestaurant'
 import NearRestaurant from './NearRestaurant'
 
+
 import { Header } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Platform } from 'react-native';
 import * as resAction from '../../store/action/resaction'
 
@@ -18,76 +19,18 @@ const Home = props => {
   console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
   const dispatch = useDispatch();
 
-  const {restaurants} = useSelector(state => state.restaurant)
-  
+  const { restaurants } = useSelector(state => state.restaurant)
+
   useEffect(() => {
     dispatch(resAction.fetchRes());
-    
+
   }, [dispatch]);
-  // const tempdatabase = {
-  //   PromotionList: [
-  //     {
-  //       promotionTitle: 'shabu',
-  //       imageUri: require('../../assets/promotions/shabupro.jpg'),
-  //     },
-  //     {
-  //       promotionTitle: 'Macdonal',
-  //       imageUri: require('../../assets/promotions/oth.jpg'),
-  //     },
-  //     {
-  //       promotionTitle: 'Pizza',
-  //       imageUri: require('../../assets/promotions/f01.jpg'),
-  //     },
-  //   ],
-  //   RestaurantList: [
-  //     {
-  //       imageUri: require('../../assets/recommends/fried-chicken.jpg'),
-  //       foodName: 'ไก่ทอด',
-  //       resName: 'ร้านอาหาร1'
-  //     },
-  //     {
-  //       imageUri: require('../../assets/recommends/chicken-rice.jpg'),
-  //       foodName: 'ข้าวมันไก่',
-  //       resName: 'ร้านอาหาร2'
-  //     },
-  //     {
-  //       imageUri: require('../../assets/recommends/fried-rice.jpg'),
-  //       foodName: 'ข้าวผัด',
-  //       resName: 'ร้านอาหาร3'
-  //     },
-  //     {
-  //       imageUri: require('../../assets/recommends/brownie.jpg'),
-  //       foodName: 'ช็อกโกแลตบราวนี่',
-  //       resName: 'ร้านอาหาร4'
-  //     },
-  //     {
-  //       imageUri: require('../../assets/recommends/spaghetti.jpg'),
-  //       foodName: 'สปาร์เก็ตตี้ขี้เมา',
-  //       resName: 'ร้านอาหาร5'
-  //     },
-  //   ],
-  //   NearList: [
-  //     {
-  //       resName: 'ร้าน NeuCafe',
-  //       imageUri: require('../../assets/near/coffee.jpg'),
-  //       distance: '0.25 km'
-  //     },
-  //     {
-  //       resName: 'ร้าน SmileItalia',
-  //       imageUri: require('../../assets/near/pizza.jpg'),
-  //       distance: '0.4 km'
-  //     },
-
-  //   ]
-
-  // }
-
 
   return (
+
     <View style={styles.container}>
 
       <View style={styles.nav__container}>
-
         <Header
           containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
           leftComponent={{ icon: 'menu', color: '#000', style: { marginLeft: 10 } }}
@@ -98,7 +41,7 @@ const Home = props => {
       <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
 
         <View style={styles.SearchBoxContainer}>
-          <TouchableOpacity><Icon style={styles.iconAlign} name="search" size={22} color="#C7BDAC" /></TouchableOpacity>
+          <TouchableOpacity><FontAwesome style={styles.iconAlign} name="search" size={22} color="#C7BDAC" /></TouchableOpacity>
           <TextInput placeholder={'ค้นชื่อร้าน / ชื่อเมนู'} style={styles.textinput_field} />
         </View>
 
@@ -144,7 +87,7 @@ const Home = props => {
           data={restaurants}
           keyExtractor={item => item._id}
           renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain' ,  {resId: item._id})}><NearRestaurant imageUri={item.imageUri} resName={item.restaurant_name} distance={item._id} /></TouchableOpacity>}
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><NearRestaurant imageUri={item.imageUri} resName={item.restaurant_name} distance={item._id} /></TouchableOpacity>}
 
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -152,7 +95,7 @@ const Home = props => {
           style={styles.nearStyle}
         />
 
-<FlatList
+        <FlatList
           // data={tempdatabase.NearList}
           renderItem={({ item }) =>
             <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
@@ -168,7 +111,9 @@ const Home = props => {
 
       </ScrollView>
 
+
     </View >
+
   );
 
 }
