@@ -25,35 +25,35 @@ const FoodHistory = props => {
                         <Text style={styles.ValueTextLeft}>152</Text>
                         <Text style={styles.ValueTextCenter}>23 ม.ค. 64</Text>
                         <Text style={styles.ValueTextCenter}>กับข้าวปาณี</Text>
-                        <TouchableOpacity style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
                     </View>
 
                     <View style={styles.StatusValueContainer}>
                         <Text style={styles.ValueTextLeft}>164</Text>
                         <Text style={styles.ValueTextCenter}>26 ม.ค. 64</Text>
                         <Text style={styles.ValueTextCenter}>ป้าฟรุ๊ตตี้</Text>
-                        <TouchableOpacity style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
                     </View>
 
                     <View style={styles.StatusValueContainer}>
                         <Text style={styles.ValueTextLeft}>170</Text>
                         <Text style={styles.ValueTextCenter}>26 ม.ค. 64</Text>
                         <Text style={styles.ValueTextCenter}>ป้าฟรุ๊ตตี้</Text>
-                        <TouchableOpacity style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
                     </View>
 
                     <View style={styles.StatusValueContainer}>
                         <Text style={styles.ValueTextLeft}>172</Text>
                         <Text style={styles.ValueTextCenter}>28 ม.ค. 64</Text>
                         <Text style={styles.ValueTextCenter}>ไก่ทอดหาดเล็ก</Text>
-                        <TouchableOpacity style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
                     </View>
 
                     <View style={styles.StatusValueContainer}>
                         <Text style={styles.ValueTextLeft}>198</Text>
                         <Text style={styles.ValueTextCenter}>29 ม.ค. 64</Text>
                         <Text style={styles.ValueTextCenter}>น้ำแข็งใสใบบัว</Text>
-                        <TouchableOpacity style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><Text style={styles.ValueTextRightBtn}>ดูรายละเอียด</Text></TouchableOpacity>
                     </View>
 
 

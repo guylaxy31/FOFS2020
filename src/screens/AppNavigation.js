@@ -14,6 +14,7 @@ import FoodMenuCustom from '../CustomerPath/FoodMenuCustom'
 import FoodMenuConfirm from '../CustomerPath/FoodMenuConfirm'
 import FoodStatus from '../CustomerPath/FoodStatus'
 import FoodHistory from '../CustomerPath/FoodHistory'
+import FoodHistoryDetail from '../CustomerPath/FoodHistoryDetail'
 
 import RegisterForCustomer from '../RegisterPath/RegisterForCustomer'
 import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
@@ -154,6 +155,18 @@ const AppNavigation = props => {
                 component={FoodHistory}
                 options={{
                     title: 'ประวัติการสั่งออเดอร์',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="FoodHistoryDetail"
+                component={FoodHistoryDetail}
+                options={{
+                    title: 'ดูรายละเอียด',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
