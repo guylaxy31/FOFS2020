@@ -8,8 +8,8 @@ class ModeTitle extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header__line1}>เลือก</Text>
-        <Text style={styles.header__line2}>สิ่งที่คุณต้องการใช้งาน</Text>
-        <Text style={styles.header__line3}>ก่อนเข้าสู่ระบบ</Text>
+        <Text style={styles.header__line2}>ประเภทของบัญชี</Text>
+        <Text style={styles.header__line3}>เพื่อสร้างบัญชี</Text>
       </View>
     );
   }

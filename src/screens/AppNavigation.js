@@ -1,13 +1,11 @@
 import * as React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Home/Home'
 
 import LoginHome from '../LoginPath/LoginHome'
-import LoginForCustomer from '../LoginPath/LoginForCustomer'
-import CustomerFoodID from '../LoginPath/CustomerFoodID'
-import LoginForRestaurant from '../LoginPath/LoginForRestaurant'
 
 import FoodMenuMain from '../CustomerPath/FoodMenuMain'
 import FoodMenuCustom from '../CustomerPath/FoodMenuCustom'
@@ -16,6 +14,7 @@ import FoodStatus from '../CustomerPath/FoodStatus'
 import FoodHistory from '../CustomerPath/FoodHistory'
 import FoodHistoryDetail from '../CustomerPath/FoodHistoryDetail'
 
+import RegisterHome from '../RegisterPath/RegisterHome'
 import RegisterForCustomer from '../RegisterPath/RegisterForCustomer'
 import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 
@@ -37,6 +36,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigation = props => {
@@ -67,22 +67,12 @@ const AppNavigation = props => {
                 }
                 }
             />
-            <Stack.Screen name="LoginForCustomer"
-                component={LoginForCustomer}
+
+
+            <Stack.Screen name="RegisterHome"
+                component={RegisterHome}
                 options={{
-                    title: 'เข้าสู่ระบบ',
-                    headerTitleStyle: {
-                        fontFamily: 'pr-reg',
-                        fontSize: 16,
-                        textAlign: 'center',
-                    }
-                }
-                }
-            />
-            <Stack.Screen name="CustomerFoodID"
-                component={CustomerFoodID}
-                options={{
-                    title: 'เข้าสู่ระบบ',
+                    title: 'เลือกประเภทบัญชี',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -175,18 +165,7 @@ const AppNavigation = props => {
                 }
                 }
             />
-            <Stack.Screen name="LoginForRestaurant"
-                component={LoginForRestaurant}
-                options={{
-                    title: 'เข้าสู่ระบบร้านอาหาร',
-                    headerTitleStyle: {
-                        fontFamily: 'pr-reg',
-                        fontSize: 16,
-                        textAlign: 'center',
-                    }
-                }
-                }
-            />
+
             <Stack.Screen name="RegisterForRestaurant"
                 component={RegisterForRestaurant}
                 options={{
@@ -356,16 +335,28 @@ const AppNavigation = props => {
 const CustomerBottomTab = props => {
 
     return (
+
+        <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
+            <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />), }} />
+            <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />), }} />
+            <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />), }} />
+        </Tab.Navigator>
+
+    )
+}
+
+const DrawerTab = props => {
+    return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
-                <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />), }} />
-                <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />), }} />
-                <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />), }} />
-            </Tab.Navigator>
+            <Drawer.Navigator>
+                <Drawer.Screen name="home" component={CustomerBottomTab} />
+                <Drawer.Screen name="FoodStatus" component={FoodStatus} />
+                <Drawer.Screen name="FoodHistory" component={FoodHistory} />
+            </Drawer.Navigator>
         </NavigationContainer>
     )
 }
 
-export default CustomerBottomTab;
+export default DrawerTab;
 
 

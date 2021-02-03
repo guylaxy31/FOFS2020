@@ -1,55 +1,73 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
+import HextagonIcon from '../Themes/HextagonIcon';
+import { connect } from 'react-redux'
 
-import ModeTitle from './ModeTitle'
 
+const LoginHome = props => {
 
-const LoginMode = props => {
- 
   return (
+    <View style={styles.container}>
 
-    < View style={styles.container} >
-      <ScrollView style={styles.ScrollContainer} horizontal={false}>
-        <ModeTitle />
-        <View style={styles.login__mode__layout}>
-          <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}>
-            <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('CustomerFoodID')}>
-              <View style={styles.img_mode}>
-                <Image source={require('../../assets/login/customer_mode_logo.png')}></Image>
-              </View>
-              <View style={styles.alignText}><Text style={styles.TextinBox}>หาอาหารรับประทาน</Text></View>
-            </TouchableOpacity>
-          </View>
-          <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}  >
-            <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('LoginForRestaurant')}>
-              <View style={styles.img_mode}>
-                <Image source={require('../../assets/login/restaurant_mode_logo.png')}></Image>
-              </View>
-              <View style={styles.alignText}><Text style={styles.TextinBox}>จัดการร้านอาหาร</Text></View>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.HeaderContainer}>
+        <View style={styles.HeaderWithIcon} ><HextagonIcon /><Text style={styles.LoginHeader}>เข้าสู่ระบบ</Text></View>
+
+      </View>
+
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30} style={styles.KeyboardContainer}>
+        <View style={styles.FormContainer}>
+          <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
+
+          <View style={styles.TextInputContainer}><TextInput style={styles.id_field} /></View>
+
+          <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
+
+          <View style={styles.TextInputContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
         </View>
-      </ScrollView>
+      </KeyboardAvoidingView>
 
-    </View >
+      <View style={styles.TouchLoginContainer}><TouchableOpacity style={styles.LoginButton} onPress={() => this.props.login(), () => props.navigation.navigate('Homescreen')}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity></View>
 
+
+      <View style={styles.TouchRegisterContainer}>
+
+        <TouchableOpacity onPress={() => props.navigation.navigate('RegisterHome')}><Text style={styles.registerBtn}>สร้างบัญชีใหม่</Text></TouchableOpacity>
+
+      </View>
+
+      <View>
+        <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน?</Text></TouchableOpacity>
+      </View>
+
+    </View>
   );
 }
 
-
 const styles = StyleSheet.create({
-  container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-  ScrollContainer: { backgroundColor: '#FFF', width: '100%' },
+  container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
+  ScrollContainer: { height: '100%', backgroundColor: 'blue' },
 
-  login__mode__layout: { width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFF', marginBottom: '15%' },
-  mode_space: { height: Dimensions.get('window').height * .325, width: Dimensions.get('window').width * .42, alignItems: 'center', backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 3, elevation: 3, shadowOpacity: 0.26, padding: 1, borderRadius: 15 },
-  mode_space2: { height: Dimensions.get('window').height * .42, width: Dimensions.get('window').width * .325, alignItems: 'center', backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 3, elevation: 3, shadowOpacity: 0.26, padding: 1, borderRadius: 15 },
-  TouchScale: { backgroundColor: '#FFF', width: '100%', height: '100%', borderRadius: 15 },
+  LoginForm: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, paddingVertical: 16, },
+  HeaderWithIcon: { alignItems: 'center', flexDirection: 'row', justifyContent: 'center' },
 
-  TextinBox: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 20 },
-  alignText: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-  img_mode: { flex: 1, flexDirection: 'row', height: '100%', width: null, justifyContent: 'center', padding: 15, alignItems: 'center' },
+  id_field: { width: 250, padding: 10, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, borderRadius: 15 },
+  pass_field: { width: 250, padding: 10, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, borderRadius: 15 },
+
+  FormContainer: { width: '100%', marginLeft: 200 },
+  TextInputContainer: { borderRadius: 15 },
+  LoginHeader: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 20 : 22, color: '#000', marginLeft: 5 },
+  HeaderContainer: { marginBottom: 15, textAlign: 'center', backgroundColor: '#FFF' },
+
+
+  TouchLoginContainer: { marginBottom: 30, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, backgroundColor: '#FFFC1B', borderRadius: 15, marginTop: 30 },
+  LoginButton: { color: '#000' },
+  LoginButtonText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, paddingVertical: 8, paddingHorizontal: 15, borderRadius: 15 },
+
+  TouchRegisterContainer: { marginBottom: 5 },
+  registerBtn: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+  ForgetAndRegister: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#6F6F6F', margin: 10 },
+  FormContainer: { justifyContent: 'center' },
+
 });
 
-export default LoginMode;
+export default LoginHome;

@@ -14,7 +14,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Platform } from 'react-native';
 import * as resAction from '../../store/action/resaction'
 
-
 const Home = props => {
   console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
   const dispatch = useDispatch();
@@ -33,7 +32,7 @@ const Home = props => {
       <View style={styles.nav__container}>
         <Header
           containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
-          leftComponent={{ icon: 'menu', color: '#000', style: { marginLeft: 10 } }}
+          leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><Text>Drawer</Text></TouchableOpacity>}
           rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={{ fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
         />
       </View>
