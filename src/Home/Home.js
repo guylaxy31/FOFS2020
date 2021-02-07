@@ -32,7 +32,7 @@ const Home = props => {
       <View style={styles.nav__container}>
         <Header
           containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
-          leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><Text>Drawer</Text></TouchableOpacity>}
+          leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
           rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={{ fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
         />
       </View>
