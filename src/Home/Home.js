@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   PromotionTxt: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
   headerText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
 
-  ViewAllTxtContainer: { marginLeft: 20, marginVertical: 30, marginBottom: 80 },
+  ViewAllTxtContainer: { marginLeft: 20, marginVertical: 30, marginBottom: 40 },
   ViewAllTxt: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginVertical: 18, textAlign: 'center' }
 });
 

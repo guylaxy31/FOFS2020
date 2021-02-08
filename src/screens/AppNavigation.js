@@ -35,6 +35,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { DrawerContent } from './DrawerContent';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -348,10 +350,8 @@ const CustomerBottomTab = props => {
 const DrawerTab = props => {
     return (
         <NavigationContainer>
-            <Drawer.Navigator>
+            <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
                 <Drawer.Screen name="home" component={CustomerBottomTab} />
-                <Drawer.Screen name="FoodStatus" component={FoodStatus} />
-                <Drawer.Screen name="FoodHistory" component={FoodHistory} />
             </Drawer.Navigator>
         </NavigationContainer>
     )
