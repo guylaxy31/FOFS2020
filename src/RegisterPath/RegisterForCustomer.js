@@ -2,13 +2,30 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image, } from 'react-native';
 
 import HextagonIcon from '../Themes/HextagonIcon';
-import { connect } from 'react-redux'
-
 
 const RegisterForCustomer = props => {
 
+    const [genderState, setGenderState] = React.useState('null');
+    const [conSenseState, setConsenseState] = React.useState(false);
+
+    const setMaleGender = () => {
+        setGenderState('male')
+    }
+
+    const setFemaleGender = () => {
+        setGenderState('female')
+    }
+
+    const openConsense = () => {
+        setConsenseState(true)
+    }
+
+    const closeConsense = () => {
+        setConsenseState(false)
+    }
 
     return (
+
         <View style={styles.container}>
             <ScrollView horizontal={false} showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
                 <View style={styles.FormContainerWrap}>
@@ -18,10 +35,10 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
                     <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
                     {/* Tag Text ชาย กับ หญิงจะไม่โผล่พร้อมกับ จะขึ้นตามที่เลือก 1 อัน */}
-                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{props.gender.GenderState === 'null' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (props.gender.GenderState === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
+                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{genderState === 'null' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (genderState === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                     <View style={styles.GenderContainer}>
-                        <TouchableOpacity onPress={() => props.SetMaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
-                        <TouchableOpacity onPress={() => props.SetFemaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
+                        <TouchableOpacity onPress={() => setMaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
+                        <TouchableOpacity onPress={() => setFemaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                     </View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อายุ</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.AgeFillInput}></TextInput></View>
@@ -33,19 +50,19 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
                     <View style={styles.FormContainer, { marginBottom: 60 }}><TextInput style={styles.FillFormText}></TextInput></View>
-                    <TouchableOpacity onPress={() => props.ShowConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => openConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 50 }}>
-                        <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.navigation.navigate('CustomerFoodID')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
+                        <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
                         <View style={styles.CancelContainer}><TouchableOpacity><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
                 </View>
-                <Modal transparent={true} visible={props.consense.ConsenseState}>
+                <Modal transparent={true} visible={conSenseState}>
                     <View style={styles.ModelBackground}>
                         <View style={styles.ModalContainer}>
                             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}><Text style={styles.consenseText}>ผู้ลงทะเบียนรับทราบยินยอมให้ผู้พัฒนานำข้อมูลทางสถิติไปใช้วิเคราะห์ในอนาคตได้</Text></View>
                             <View style={{ flexDirection: 'row', marginBottom: 30, flexWrap: 'wrap' }}><Text style={styles.consenseText}>ผู้พัฒนาจะไม่เผยแพร่ข้อมูลส่วนบุคคลในการระบุตัวตนของผู้ใช้งานได้ (พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)</Text></View>
-                            <View style={styles.CloseModalContainer}><TouchableOpacity style={{ width: '100%' }} onPress={() => props.CloseConsense()}><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity></View>
+                            <View style={styles.CloseModalContainer}><TouchableOpacity style={{ width: '100%' }} onPress={() => closeConsense()}><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity></View>
                         </View>
                     </View>
                 </Modal>
@@ -91,37 +108,6 @@ const styles = StyleSheet.create({
 
 });
 
-const mapStatetoProps = (state) => {
-    return {
-        consense: state.consense,
-        gender: state.gender
-    }
-}
 
-const mapDispatchtoProps = (dispatch) => {
-    return {
-        ShowConsense: () => {
-            dispatch({
-                type: "SHOW_CONSENSE",
-            })
-        },
-        CloseConsense: () => {
-            dispatch({
-                type: "CLOSE_CONSENSE",
-            })
-        },
-        SetMaleGender: () => {
-            dispatch({
-                type: "SET_MALE_GENDER",
-            })
-        },
-        SetFemaleGender: () => {
-            dispatch({
-                type: "SET_FEMALE_GENDER",
-            })
-        },
 
-    }
-}
-
-export default connect(mapStatetoProps, mapDispatchtoProps)(RegisterForCustomer);
+export default RegisterForCustomer

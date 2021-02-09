@@ -4,6 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Home/Home'
+import ProfileSetting from '../Home/ProfileSetting'
+import Tutorial from '../Home/Tutorial'
+import CustomerReport from '../Home/CustomerReport'
+import Contact from '../Home/Contact'
 
 import LoginHome from '../LoginPath/LoginHome'
 
@@ -49,6 +53,54 @@ const AppNavigation = props => {
                 component={Home}
                 options={{
                     title: 'หน้าหลัก',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="ProfileSetting"
+                component={ProfileSetting}
+                options={{
+                    title: 'ตั้งค่าโปรไฟล์',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="Tutorial"
+                component={Tutorial}
+                options={{
+                    title: 'วิธีการสั่งอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="CustomerReport"
+                component={CustomerReport}
+                options={{
+                    title: 'ร้องเรียนปัญหา',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="Contact"
+                component={Contact}
+                options={{
+                    title: 'ติดต่อ',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -338,12 +390,11 @@ const CustomerBottomTab = props => {
 
     return (
 
-        <Tab.Navigator initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
-            <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />), }} />
-            <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />), }} />
-            <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />), }} />
+        <Tab.Navigator style={{ fontFamily: 'pr-reg' }} initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
+            <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+            <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
+            <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
         </Tab.Navigator>
-
     )
 }
 

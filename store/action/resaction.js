@@ -3,7 +3,7 @@ export const CREATE_RES = 'CRREATE_RES';
 
 export const fetchRes = () => {
     return async dispatch => {
-        const result = await fetch('http://10.80.51.127:3000/api/restaurant'); //ถ้า expo บน mobile ให้เปลี่ยนเป็น ip
+        const result = await fetch('http://172.20.10.2:3000/api/restaurant'); //ถ้า expo บน mobile ให้เปลี่ยนเป็น ip
         const resultData = await result.json();
         // console.log(resultData);
 

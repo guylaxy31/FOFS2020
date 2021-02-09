@@ -28,10 +28,10 @@ export function DrawerContent(props) {
                     </View>
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem icon={({ color, size }) => (<Icon name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('Homescreen')} />
-                        <DrawerItem icon={({ color, size }) => (<Icon name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('Homescreen')} />
-                        <DrawerItem icon={({ color, size }) => (<Icon name="help-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="วิธีการสั่งอาหาร" onPress={() => props.navigation.navigate('Homescreen')} />
-                        <DrawerItem icon={({ color, size }) => (<Icon name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('Homescreen')} />
-                        <DrawerItem icon={({ color, size }) => (<Icon name="contacts" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ติดต่อ" onPress={() => props.navigation.navigate('Homescreen')} />
+                        <DrawerItem icon={({ color, size }) => (<Icon name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} />
+                        <DrawerItem icon={({ color, size }) => (<Icon name="help-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="วิธีการสั่งอาหาร" onPress={() => props.navigation.navigate('Tutorial')} />
+                        <DrawerItem icon={({ color, size }) => (<Icon name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} />
+                        <DrawerItem icon={({ color, size }) => (<Icon name="contacts" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ติดต่อ" onPress={() => props.navigation.navigate('Contact')} />
 
                     </Drawer.Section>
 
