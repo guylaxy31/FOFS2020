@@ -1,12 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image, } from 'react-native';
+import Slider from '@react-native-community/slider';
 
 import HextagonIcon from '../Themes/HextagonIcon';
+import ThumbSlider from '../../assets/register/ThumbSlider.png'
+
 
 const RegisterForCustomer = props => {
 
     const [genderState, setGenderState] = React.useState('null');
     const [conSenseState, setConsenseState] = React.useState(false);
+    const [ageValue, setAgeValue] = React.useState(8);
 
     const setMaleGender = () => {
         setGenderState('male')
@@ -40,8 +44,22 @@ const RegisterForCustomer = props => {
                         <TouchableOpacity onPress={() => setMaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
                         <TouchableOpacity onPress={() => setFemaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                     </View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อายุ</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.AgeFillInput}></TextInput></View>
+                    <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{ageValue}</Text></View>
+                    <View style={styles.FormContainer}>
+                        <Slider
+                            style={{ width: 200, height: 50 }}
+                            minimumValue={12}
+                            maximumValue={60}
+                            thumbImage={ThumbSlider}
+                            minimumTrackTintColor="#000"
+                            maximumTrackTintColor="#616000"
+                            onValueChange={(value) => setAgeValue(value)}
+                            step={1}
+                            thumbTintColor="#FFFC1B"
+
+                        />
+
+                    </View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สถานภาพ</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>หน่วยงาน/สังกัด/คณะ</Text></View>
@@ -83,11 +101,13 @@ const styles = StyleSheet.create({
     FormContainerGenderTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
     GenderContainer: { width: '100%', marginVertical: 6, flexDirection: 'row' },
     genderBtn: { marginHorizontal: 5 },
-    genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#CCC' },
+    genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#6C6B2B' },
 
     FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
     FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    FormContainerAgeTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
     AgeFillInput: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 100, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    AgeText: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#6C6B2B' },
     FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 5 },
 
     ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
