@@ -4,7 +4,7 @@ import Slider from '@react-native-community/slider';
 
 import HextagonIcon from '../Themes/HextagonIcon';
 import ThumbSlider from '../../assets/register/ThumbSlider.png'
-
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const RegisterForCustomer = props => {
 

@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList } from 'react-native';
-
 import { useDispatch, useSelector } from 'react-redux'
+import AppContext from '../Context/AppContext'
 
 import PromotionRestaurant from './PromotionRestaurant'
 import HextagonIcon from '../Themes/HextagonIcon'
 import RecommendRestaurant from './RecommendRestaurant'
 import NearRestaurant from './NearRestaurant'
-
 
 import { Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -19,6 +18,8 @@ const Home = props => {
   const dispatch = useDispatch();
 
   const { restaurants } = useSelector(state => state.restaurant)
+  const { AuthLogin } = useContext(AppContext);
+
 
   useEffect(() => {
     dispatch(resAction.fetchRes());
@@ -30,11 +31,18 @@ const Home = props => {
     <View style={styles.container}>
 
       <View style={styles.nav__container}>
-        <Header
-          containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
-          leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-          rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={{ fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 }}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
-        />
+        {AuthLogin == true ?
+          <Header
+            containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
+            leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
+            rightComponent={<TouchableOpacity onPress={() => setLogout()}><Text style={styles.HedaerTitleTxt}>ออกจากระบบ</Text></ TouchableOpacity>}
+          />
+          : // ถ้ายังไม่ได้ Login
+          <Header
+            containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
+            leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
+            rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
+          />}
       </View>
 
       <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
@@ -122,6 +130,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF', alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', },
 
   nav__container: { width: '100%' },
+  HedaerTitleTxt: { fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
 
   SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 10, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', alignItems: 'center', marginVertical: 15 },
   iconAlign: { flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },

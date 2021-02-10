@@ -1,25 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import AppContext from '../Context/AppContext'
+
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Title, Caption, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
+
 export function DrawerContent(props) {
 
+    const { AuthLogin } = useContext(AppContext);
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-    const [AuthLogin, setAuthLogin] = React.useState(true);
 
     const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme)
-    }
-
-    const setLogin = () => {
-        setAuthLogin(true)
-    }
-
-    const setLogout = () => {
-        setAuthLogin(false)
     }
 
     return (

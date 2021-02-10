@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { AppProvider } from './src/Context/AppContext'
 // การโหลด Fonts
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -27,7 +27,10 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <AppNavigation />
+      <AppProvider>
+        <AppNavigation />
+      </AppProvider>
     </Provider>
   )
 }
+
