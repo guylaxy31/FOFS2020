@@ -10,6 +10,8 @@ import NearRestaurant from './NearRestaurant'
 
 import { Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import { Avatar } from 'react-native-paper';
 import { Platform } from 'react-native';
 import * as resAction from '../../store/action/resaction'
 
@@ -18,8 +20,7 @@ const Home = props => {
   const dispatch = useDispatch();
 
   const { restaurants } = useSelector(state => state.restaurant)
-  const { AuthLogin } = useContext(AppContext);
-
+  const { AuthLogin, setAuthLogin } = useContext(AppContext);
 
   useEffect(() => {
     dispatch(resAction.fetchRes());
@@ -35,7 +36,7 @@ const Home = props => {
           <Header
             containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
             leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-            rightComponent={<TouchableOpacity onPress={() => setLogout()}><Text style={styles.HedaerTitleTxt}>ออกจากระบบ</Text></ TouchableOpacity>}
+            rightComponent={<TouchableOpacity><Avatar.Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} size={24} /></ TouchableOpacity>}
           />
           : // ถ้ายังไม่ได้ Login
           <Header
@@ -131,6 +132,7 @@ const styles = StyleSheet.create({
 
   nav__container: { width: '100%' },
   HedaerTitleTxt: { fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+
 
   SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 10, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', alignItems: 'center', marginVertical: 15 },
   iconAlign: { flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },

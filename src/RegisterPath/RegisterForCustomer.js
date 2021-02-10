@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image, } from 'react-native';
 import Slider from '@react-native-community/slider';
 
@@ -8,9 +8,11 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 const RegisterForCustomer = props => {
 
-    const [genderState, setGenderState] = React.useState('null');
-    const [conSenseState, setConsenseState] = React.useState(false);
-    const [ageValue, setAgeValue] = React.useState(8);
+    const [genderState, setGenderState] = useState('null');
+    const [conSenseState, setConsenseState] = useState(false);
+    const [ageValue, setAgeValue] = useState(8);
+    const [career, setCareer] = useState('');
+    const [authSubmit, setAuthSubmit] = useState(false);
 
     const setMaleGender = () => {
         setGenderState('male')
@@ -26,6 +28,10 @@ const RegisterForCustomer = props => {
 
     const closeConsense = () => {
         setConsenseState(false)
+    }
+
+    const readedConsense = () => {
+        setAuthSubmit(true)
     }
 
     return (
@@ -48,8 +54,8 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainer}>
                         <Slider
                             style={{ width: 200, height: 50 }}
-                            minimumValue={12}
-                            maximumValue={60}
+                            minimumValue={13}
+                            maximumValue={65}
                             thumbImage={ThumbSlider}
                             minimumTrackTintColor="#000"
                             maximumTrackTintColor="#616000"
@@ -60,10 +66,42 @@ const RegisterForCustomer = props => {
                         />
 
                     </View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สถานภาพ</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>หน่วยงาน/สังกัด/คณะ</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อาชีพ</Text></View>
+                    <DropDownPicker
+                        items={[
+                            { label: 'นักเรียน/นักศึกษา', value: 'student' },
+                            { label: 'ครู/อาจารย์', value: 'professor' },
+                            { label: 'ฟรีแลนซ์', value: 'freelance' },
+                            { label: 'รับราชการ', value: 'officer' },
+                            { label: 'ค้าขาย', value: 'trade' },
+                        ]}
+                        defaultValue={career}
+                        placeholder="โปรดระบุ"
+                        containerStyle={{ height: 40, marginBottom: 16 }}
+                        style={{ backgroundColor: '#fafafa' }}
+                        itemStyle={{
+                            justifyContent: 'flex-start'
+                        }}
+                        dropDownStyle={{ backgroundColor: '#fafafa' }}
+                        onChangeItem={item => setCareer(item.value)}
+                        labelStyle={{
+                            fontFamily: 'pr-reg',
+                            color: '#000'
+                        }}
+                        selectedLabelStyle={{
+                            color: '#000'
+                        }}
+                    />
+
+                    {career == 'student' ?
+                        <View>
+                            <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สาขา/คณะที่เรียน</Text></View>
+                            <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                        </View>
+                        :
+                        null
+                    }
+
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เบอร์โทรศัพท์</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
@@ -71,7 +109,11 @@ const RegisterForCustomer = props => {
                     <TouchableOpacity onPress={() => openConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 50 }}>
-                        <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
+                        {authSubmit == true ?
+                            <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
+                            :
+                            <View style={styles.CantSubmitContainer}><Text style={styles.cantsubmitButton}>ยืนยัน</Text></View>
+                        }
                         <View style={styles.CancelContainer}><TouchableOpacity><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
                 </View>
@@ -116,7 +158,9 @@ const styles = StyleSheet.create({
 
 
     SubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
-    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, backgroundColor: '#FFFC1B', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    CantSubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#ccc' },
+    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    cantsubmitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, color: '#FFF', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
     CancelContainer: { width: 80, borderRadius: 15, backgroundColor: '#FFF', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     CancelButtonText: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, backgroundColor: '#FFF', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
 
