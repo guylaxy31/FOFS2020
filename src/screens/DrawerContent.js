@@ -12,7 +12,7 @@ export function DrawerContent(props) {
 
     const { AuthLogin, setAuthLogin } = useContext(AppContext);
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
- 
+
     const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme)
     }
@@ -25,7 +25,7 @@ export function DrawerContent(props) {
                     {AuthLogin == true ?
                         <View stlye={styles.userInfoSection}>
                             <View style={{ flexDirection: 'row', marginTop: 15, paddingLeft: 15 }}>
-                                <Avatar.Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} size={50} />
+                                <Icon name="account" size={50} />
                                 <View style={{ marginLeft: 15, flexDirection: 'column' }}>
                                     <Title style={{ fontFamily: 'pr-light' }}><Text style={{ fontFamily: 'pr-light' }}>คุณ</Text>ใจดี ซื้ออาหาร</Title>
                                     <Caption style={{ fontFamily: 'pr-light' }}>@user01</Caption>

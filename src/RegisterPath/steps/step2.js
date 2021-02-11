@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Dimensions, Image } from 'react-native';
 import HextagonIcon from '../../Themes/HextagonIcon';
 
+
+
 class step2 extends Component {
     constructor(props) {
         super(props);
@@ -34,6 +36,7 @@ class step2 extends Component {
         back();
     }
 
+
     render() {
         const { currentStep, totalSteps } = this.state;
         return (
@@ -55,8 +58,7 @@ class step2 extends Component {
                         <TouchableOpacity onPress={() => props.SetMaleGender()}><Image style={styles.genderBtn} source={require('../../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
                         <TouchableOpacity onPress={() => props.SetFemaleGender()}><Image style={styles.genderBtn} source={require('../../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                     </View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อายุ</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                    {/* <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{ageValue}</Text></View> */}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เบอร์ติดต่อ</Text></View>
                     <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
     FormContainer: { width: '100%', marginVertical: 6 },
     FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 300, paddingVertical: 5, paddingHorizontal: 20, height: Dimensions.get('window').height * .058, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
     FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+    FormContainerAgeTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
 
     GenderContainer: { width: '100%', marginVertical: 6, flexDirection: 'row' },
     genderBtn: { marginHorizontal: 5 },

@@ -1,37 +1,80 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image, } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Modal, TouchableOpacity, Dimensions, Image, Alert } from 'react-native';
 import Slider from '@react-native-community/slider';
 
 import HextagonIcon from '../Themes/HextagonIcon';
 import ThumbSlider from '../../assets/register/ThumbSlider.png'
 import DropDownPicker from 'react-native-dropdown-picker';
+import CheckBox from '@react-native-community/checkbox';
 
 const RegisterForCustomer = props => {
 
-    const [genderState, setGenderState] = useState('null');
+
     const [conSenseState, setConsenseState] = useState(false);
-    const [ageValue, setAgeValue] = useState(8);
-    const [career, setCareer] = useState('');
     const [authSubmit, setAuthSubmit] = useState(false);
+    const [user, setUser] = useState(
+        {
+            username: '',
+            password: '',
+            gender: '',
+            age: '13',
+            career: '',
+            careerDetail: '',
+            phonenumber: '',
+            email: '',
+            isValidUser: false,
+            isValidPassword: false,
+            isValidAge: false,
+            isValidPhoneNumber: false,
+            isValidEmail: false,
+        }
+    )
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-    const setMaleGender = () => {
-        setGenderState('male')
+    const setMaleGender = () => { setUser({ ...user, gender: 'male' }) }
+    const setFemaleGender = () => { setUser({ ...user, gender: 'female' }) }
+
+    const usernameRecord = (userinput) => { { setUser({ ...user, username: userinput }) } }
+    const passRecord = (userinput) => { setUser({ ...user, password: userinput }) }
+    const ageRecord = (userinput) => { setUser({ ...user, age: userinput }) }
+    const careerRecord = (userinput) => { setUser({ ...user, career: userinput }) }
+    const careerDetailRecord = (userinput) => { setUser({ ...user, careerDetail: userinput }) }
+    const phoneNumberRecord = (userinput) => { setUser({ ...user, phonenumber: userinput }) }
+    const emailRecord = (userinput) => { setUser({ ...user, email: userinput }) }
+
+    const openConsense = () => { setConsenseState(true) }
+    const closeConsense = () => { setConsenseState(false) }
+
+    const checkUsername = () => { if (user.username.trim().length >= 4 & user.username.trim().length <= 16) { setUser({ ...user, isValidUser: true }) } else { setUser({ ...user, isValidUser: false }) } }
+    const checkPassword = () => { if (user.password.trim().length >= 6 & user.password.trim().length <= 16) { setUser({ ...user, isValidPassword: true }) } else { setUser({ ...user, isValidPassword: false }) } }
+    const checkPhonenumber = () => { if (user.phonenumber.trim().length === 9 || user.phonenumber.trim().length === 10) { setUser({ ...user, isValidPhoneNumber: true }) } else { setUser({ ...user, isValidPhoneNumber: false }) } }
+    const checkEmail = () => {
+        const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+
+        if (expression.test(String(user.email).toLowerCase())) {
+            setUser({ ...user, isValidEmail: true })
+        } else { setUser({ ...user, isValidEmail: false }) }
+    }
+    const togcheckbox = (bool) => {
+        setToggleCheckBox(bool)
+        setAuthSubmit(bool)
     }
 
-    const setFemaleGender = () => {
-        setGenderState('female')
-    }
+    const checkBeforeNavigate = () => {
+        if (user.isValidUser & user.isValidPassword & user.gender != '' & user.career != '' & user.isValidPhoneNumber & user.isValidEmail) { props.navigation.navigate('Homescreen') } else {
+            Alert.alert(
+                //title
+                'ไม่สามารถยืนยันได้',
+                //body
+                'โปรดระบุข้อมูลให้ครบถ้วน',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
 
-    const openConsense = () => {
-        setConsenseState(true)
-    }
-
-    const closeConsense = () => {
-        setConsenseState(false)
-    }
-
-    const readedConsense = () => {
-        setAuthSubmit(true)
+            );
+        }
     }
 
     return (
@@ -41,16 +84,18 @@ const RegisterForCustomer = props => {
                 <View style={styles.FormContainerWrap}>
                     <View style={styles.RegisterTitle}><HextagonIcon /><Text style={styles.TitleText}>สร้างบัญชีใหม่</Text></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อผู้ใช้</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
+                    {user.isValidUser == true ? null : <View><Text style={styles.validText}>(ต้องการ 4 - 16 จำนวนตัวอักษร)</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
-                    <View style={styles.FormContainer}><TextInput secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
+                    {user.isValidPassword == true ? null : <View><Text style={styles.validText}>(ต้องการ 6 - 16 จำนวนตัวอักษร)</Text></View>}
                     {/* Tag Text ชาย กับ หญิงจะไม่โผล่พร้อมกับ จะขึ้นตามที่เลือก 1 อัน */}
-                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{genderState === 'null' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (genderState === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
+                    <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{user.gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (user.gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                     <View style={styles.GenderContainer}>
                         <TouchableOpacity onPress={() => setMaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
                         <TouchableOpacity onPress={() => setFemaleGender()}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                     </View>
-                    <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{ageValue}</Text></View>
+                    <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{user.age}</Text></View>
                     <View style={styles.FormContainer}>
                         <Slider
                             style={{ width: 200, height: 50 }}
@@ -59,7 +104,7 @@ const RegisterForCustomer = props => {
                             thumbImage={ThumbSlider}
                             minimumTrackTintColor="#000"
                             maximumTrackTintColor="#616000"
-                            onValueChange={(value) => setAgeValue(value)}
+                            onValueChange={(value) => ageRecord(value)}
                             step={1}
                             thumbTintColor="#FFFC1B"
 
@@ -70,12 +115,11 @@ const RegisterForCustomer = props => {
                     <DropDownPicker
                         items={[
                             { label: 'นักเรียน/นักศึกษา', value: 'student' },
-                            { label: 'ครู/อาจารย์', value: 'professor' },
                             { label: 'ฟรีแลนซ์', value: 'freelance' },
                             { label: 'รับราชการ', value: 'officer' },
                             { label: 'ค้าขาย', value: 'trade' },
                         ]}
-                        defaultValue={career}
+                        defaultValue={user.career}
                         placeholder="โปรดระบุ"
                         containerStyle={{ height: 40, marginBottom: 16 }}
                         style={{ backgroundColor: '#fafafa' }}
@@ -83,7 +127,7 @@ const RegisterForCustomer = props => {
                             justifyContent: 'flex-start'
                         }}
                         dropDownStyle={{ backgroundColor: '#fafafa' }}
-                        onChangeItem={item => setCareer(item.value)}
+                        onChangeItem={item => careerRecord(item.value)}
                         labelStyle={{
                             fontFamily: 'pr-reg',
                             color: '#000'
@@ -93,28 +137,45 @@ const RegisterForCustomer = props => {
                         }}
                     />
 
-                    {career == 'student' ?
+                    {user.career == 'student' ?
                         <View>
                             <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สาขา/คณะที่เรียน</Text></View>
-                            <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                            <View style={styles.FormContainer}><TextInput onChangeText={(value) => careerDetailRecord(value)} style={styles.FillFormText}></TextInput></View>
+                        </View>
+                        :
+                        null
+                    }
+                    {user.career == 'officer' ?
+                        <View>
+                            <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สังกัด/หน่วยงาน</Text></View>
+                            <View style={styles.FormContainer}><TextInput onChangeText={(value) => careerDetailRecord(value)} style={styles.FillFormText}></TextInput></View>
                         </View>
                         :
                         null
                     }
 
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เบอร์โทรศัพท์</Text></View>
-                    <View style={styles.FormContainer}><TextInput style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput keyboardType='numeric' onChangeText={(value) => phoneNumberRecord(value)} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText}></TextInput></View>
+                    {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>(โปรดระบุเบอร์โทรให้ถูกต้อง)</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
-                    <View style={styles.FormContainer, { marginBottom: 60 }}><TextInput style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => emailRecord(value)} onEndEditing={() => checkEmail()} style={styles.FillFormText}></TextInput></View>
+                    {user.isValidEmail == true ? null : <View style={{ marginBottom: 20 }}><Text style={styles.validText}>(โปรดระบุอีเมลให้ถูกต้อง)</Text></View>}
                     <TouchableOpacity onPress={() => openConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
-
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
+                        <CheckBox
+                            disabled={false}
+                            value={toggleCheckBox}
+                            onValueChange={(newValue) => togcheckbox(newValue)}
+                        />
+                        <Text style={styles.readedText}>ได้อ่านและยอมรับข้อตกลง</Text>
+                    </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 50 }}>
                         {authSubmit == true ?
-                            <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => checkBeforeNavigate()}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
                             :
                             <View style={styles.CantSubmitContainer}><Text style={styles.cantsubmitButton}>ยืนยัน</Text></View>
                         }
-                        <View style={styles.CancelContainer}><TouchableOpacity><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
+                        <View style={styles.CancelContainer}><TouchableOpacity onPress={()=> props.navigation.goBack()}><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
                 </View>
                 <Modal transparent={true} visible={conSenseState}>
@@ -152,10 +213,12 @@ const styles = StyleSheet.create({
     AgeText: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#6C6B2B' },
     FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 5 },
 
+    validText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14, color: 'red', marginVertical: 5, marginLeft: 10 },
+
     ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
     consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10 },
-
+    readedText: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
 
     SubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     CantSubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#ccc' },
@@ -165,7 +228,7 @@ const styles = StyleSheet.create({
     CancelButtonText: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, backgroundColor: '#FFF', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
 
 
-    TouchReadButton: { marginBottom: 50 },
+    TouchReadButton: { marginBottom: 10 },
     readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
     CloseModalContainer: { flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', borderRadius: 15, width: 100, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     closeButtonTxt: { textAlign: 'center', fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
