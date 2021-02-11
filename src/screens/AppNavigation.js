@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,6 +11,7 @@ import CustomerReport from '../Home/CustomerReport'
 import Contact from '../Home/Contact'
 
 import LoginHome from '../LoginPath/LoginHome'
+import ForgotPassword from '../LoginPath/ForgotPassword'
 
 import FoodMenuMain from '../CustomerPath/FoodMenuMain'
 import FoodMenuCustom from '../CustomerPath/FoodMenuCustom'
@@ -44,6 +46,7 @@ import { DrawerContent } from './DrawerContent';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
 
 const AppNavigation = props => {
     return (
@@ -121,7 +124,18 @@ const AppNavigation = props => {
                 }
                 }
             />
-
+            <Stack.Screen name="ForgotPassword"
+                component={ForgotPassword}
+                options={{
+                    title: 'ลืมรหัสผ่าน',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
 
             <Stack.Screen name="RegisterHome"
                 component={RegisterHome}

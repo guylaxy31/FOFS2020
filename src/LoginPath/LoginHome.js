@@ -1,10 +1,56 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView, Alert } from 'react-native';
 import HextagonIcon from '../Themes/HextagonIcon';
-import { connect } from 'react-redux'
 
 
 const LoginHome = props => {
+  const [database, setDatabase] = useState({
+    username: 'cust01',
+    password: '123456'
+  })
+
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  })
+
+  const usernameHandler = (input) => {
+    setUser(
+      {
+        ...user,
+        username: input
+      }
+    )
+  }
+
+  const passwordHandler = (input) => {
+    setUser(
+      {
+        ...user,
+        password: input
+      }
+    )
+  }
+
+  const checkBeforeLogin = () => {
+    if (user.username != database.username || user.password != database.password) {
+      Alert.alert(
+        //title
+        'ไม่สามารถเข้าสู่ระบบได้',
+        //body
+        'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+        [
+          { text: 'ปิด' },
+        ],
+        { cancelable: false },
+        //clicking out side of alert will not cancel
+
+      );
+    } else {
+      props.navigation.navigate('Homescreen')
+    }
+
+  }
 
   return (
     <View style={styles.container}>
@@ -18,15 +64,15 @@ const LoginHome = props => {
         <View style={styles.FormContainer}>
           <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
 
-          <View style={styles.TextInputContainer}><TextInput style={styles.id_field} /></View>
+          <View style={styles.TextInputContainer}><TextInput onChangeText={(val) => usernameHandler(val)} style={styles.id_field} /></View>
 
           <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
 
-          <View style={styles.TextInputContainer}><TextInput secureTextEntry={true} style={styles.pass_field} /></View>
+          <View style={styles.TextInputContainer}><TextInput onChangeText={(val) => passwordHandler(val)} secureTextEntry={true} style={styles.pass_field} /></View>
         </View>
       </KeyboardAvoidingView>
 
-      <View style={styles.TouchLoginContainer}><TouchableOpacity style={styles.LoginButton} onPress={() => this.props.login(), () => props.navigation.navigate('Homescreen')}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity></View>
+      <View style={styles.TouchLoginContainer}><TouchableOpacity style={styles.LoginButton} onPress={() => checkBeforeLogin()}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity></View>
 
 
       <View style={styles.TouchRegisterContainer}>
@@ -36,7 +82,7 @@ const LoginHome = props => {
       </View>
 
       <View>
-        <TouchableOpacity><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน?</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('ForgotPassword')}><Text style={styles.ForgetAndRegister}>ลืมรหัสผ่าน?</Text></TouchableOpacity>
       </View>
 
     </View>
