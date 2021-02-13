@@ -16,6 +16,8 @@ const RegisterForCustomer = props => {
         {
             username: '',
             password: '',
+            firstname: '',
+            lastname: '',
             gender: '',
             age: '13',
             career: '',
@@ -24,6 +26,7 @@ const RegisterForCustomer = props => {
             email: '',
             isValidUser: false,
             isValidPassword: false,
+            isValidFirstname: false,
             isValidAge: false,
             isValidPhoneNumber: false,
             isValidEmail: false,
@@ -36,6 +39,8 @@ const RegisterForCustomer = props => {
 
     const usernameRecord = (userinput) => { { setUser({ ...user, username: userinput }) } }
     const passRecord = (userinput) => { setUser({ ...user, password: userinput }) }
+    const firstnameRecord = (userinput) => { setUser({ ...user, firstname: userinput }) }
+    const lastnameRecord = (userinput) => { setUser({ ...user, lastname: userinput }) }
     const ageRecord = (userinput) => { setUser({ ...user, age: userinput }) }
     const careerRecord = (userinput) => { setUser({ ...user, career: userinput }) }
     const careerDetailRecord = (userinput) => { setUser({ ...user, careerDetail: userinput }) }
@@ -47,6 +52,7 @@ const RegisterForCustomer = props => {
 
     const checkUsername = () => { if (user.username.trim().length >= 4 & user.username.trim().length <= 16) { setUser({ ...user, isValidUser: true }) } else { setUser({ ...user, isValidUser: false }) } }
     const checkPassword = () => { if (user.password.trim().length >= 6 & user.password.trim().length <= 16) { setUser({ ...user, isValidPassword: true }) } else { setUser({ ...user, isValidPassword: false }) } }
+    const checkFirstname = () => { if (user.firstname.trim().length >= 1 & user.firstname.trim().length <= 16) { setUser({ ...user, isValidFirstname: true }) } else { setUser({ ...user, isValidFirstname: false }) } }
     const checkPhonenumber = () => { if (user.phonenumber.trim().length === 9 || user.phonenumber.trim().length === 10) { setUser({ ...user, isValidPhoneNumber: true }) } else { setUser({ ...user, isValidPhoneNumber: false }) } }
     const checkEmail = () => {
         const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
@@ -61,7 +67,7 @@ const RegisterForCustomer = props => {
     }
 
     const checkBeforeNavigate = () => {
-        if (user.isValidUser & user.isValidPassword & user.gender != '' & user.career != '' & user.isValidPhoneNumber & user.isValidEmail) { props.navigation.navigate('Homescreen') } else {
+        if (user.isValidUser & user.isValidPassword & user.gender != '' & user.career != '' & user.isValidPhoneNumber & user.isValidEmail && user.isValidFirstname) { props.navigation.navigate('Homescreen') } else {
             Alert.alert(
                 //title
                 'ไม่สามารถยืนยันได้',
@@ -85,10 +91,15 @@ const RegisterForCustomer = props => {
                     <View style={styles.RegisterTitle}><HextagonIcon /><Text style={styles.TitleText}>สร้างบัญชีใหม่</Text></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อผู้ใช้</Text></View>
                     <View style={styles.FormContainer}><TextInput onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
-                    {user.isValidUser == true ? null : <View><Text style={styles.validText}>(ต้องการ 4 - 16 จำนวนตัวอักษร)</Text></View>}
+                    {user.isValidUser == true ? null : <View><Text style={styles.validText}>ระบุ 4 - 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
                     <View style={styles.FormContainer}><TextInput onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
-                    {user.isValidPassword == true ? null : <View><Text style={styles.validText}>(ต้องการ 6 - 16 จำนวนตัวอักษร)</Text></View>}
+                    {user.isValidPassword == true ? null : <View><Text style={styles.validText}>ระบุ 6 - 16 ตัวอักษร</Text></View>}
+                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
+                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => firstnameRecord(value)} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput></View>
+                    {user.isValidFirstname == true ? null : <View><Text style={styles.validText}>*ระบุไม่เกิน 16 ตัวอักษร</Text></View>}
+                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>นามสกุล</Text></View>
+                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => lastnameRecord(value)} style={styles.FillFormText}></TextInput></View>
                     {/* Tag Text ชาย กับ หญิงจะไม่โผล่พร้อมกับ จะขึ้นตามที่เลือก 1 อัน */}
                     <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{user.gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (user.gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                     <View style={styles.GenderContainer}>
@@ -156,10 +167,10 @@ const RegisterForCustomer = props => {
 
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เบอร์โทรศัพท์</Text></View>
                     <View style={styles.FormContainer}><TextInput keyboardType='numeric' onChangeText={(value) => phoneNumberRecord(value)} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText}></TextInput></View>
-                    {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>(โปรดระบุเบอร์โทรให้ถูกต้อง)</Text></View>}
+                    {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>*ระบุเบอร์ให้ถูกต้อง</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
                     <View style={styles.FormContainer}><TextInput onChangeText={(value) => emailRecord(value)} onEndEditing={() => checkEmail()} style={styles.FillFormText}></TextInput></View>
-                    {user.isValidEmail == true ? null : <View style={{ marginBottom: 20 }}><Text style={styles.validText}>(โปรดระบุอีเมลให้ถูกต้อง)</Text></View>}
+                    {user.isValidEmail == true ? null : <View style={{ marginBottom: 20 }}><Text style={styles.validText}>ระบุอีเมลให้ถูกต้อง</Text></View>}
                     <TouchableOpacity onPress={() => openConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
                         <CheckBox
@@ -175,7 +186,7 @@ const RegisterForCustomer = props => {
                             :
                             <View style={styles.CantSubmitContainer}><Text style={styles.cantsubmitButton}>ยืนยัน</Text></View>
                         }
-                        <View style={styles.CancelContainer}><TouchableOpacity onPress={()=> props.navigation.goBack()}><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
+                        <View style={styles.CancelContainer}><TouchableOpacity onPress={() => props.navigation.goBack()}><Text style={styles.CancelButtonText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
                 </View>
                 <Modal transparent={true} visible={conSenseState}>

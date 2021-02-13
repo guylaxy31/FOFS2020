@@ -4,8 +4,9 @@ import AppContext from '../Context/AppContext'
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Title, Caption, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export function DrawerContent(props) {
@@ -31,7 +32,6 @@ export function DrawerContent(props) {
                                     <Caption style={{ fontFamily: 'pr-light' }}>@user01</Caption>
                                 </View>
                             </View>
-
                         </View>
                         :
                         <View>
@@ -39,11 +39,11 @@ export function DrawerContent(props) {
                         </View>}
 
                     <Drawer.Section style={styles.drawerSection}>
-                        <DrawerItem icon={({ color, size }) => (<Icon name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('Homescreen')} />
-                        {AuthLogin == true ? <DrawerItem icon={({ color, size }) => (<Icon name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} /> : null}
-                        <DrawerItem icon={({ color, size }) => (<Icon name="help-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="วิธีการสั่งอาหาร" onPress={() => props.navigation.navigate('Tutorial')} />
-                        <DrawerItem icon={({ color, size }) => (<Icon name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} />
-                        <DrawerItem icon={({ color, size }) => (<Icon name="contacts" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ติดต่อ" onPress={() => props.navigation.navigate('Contact')} />
+                        <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('Homescreen')} />
+                        {AuthLogin == true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} /> : null}
+                        <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="help-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="วิธีการสั่งอาหาร" onPress={() => props.navigation.navigate('Tutorial')} />
+                        <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} />
+                        <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="contacts" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ติดต่อ" onPress={() => props.navigation.navigate('Contact')} />
 
                     </Drawer.Section>
 
@@ -66,8 +66,8 @@ export function DrawerContent(props) {
 
             <Drawer.Section style={styles.bottomDrawerSection}>
                 {AuthLogin == true ?
-                    <DrawerItem icon={({ color, size }) => (<Icon name="exit-to-app" color={color} size={size} />)} label="ออกจากระบบ" labelStyle={{ fontFamily: 'pr-reg' }} />
-                    : <DrawerItem icon={({ color, size }) => (<Icon name="login" color={color} size={size} />)} label="เข้าสู่ระบบ" labelStyle={{ fontFamily: 'pr-reg' }} />}
+                    <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="exit-to-app" color={color} size={size} />)} label="ออกจากระบบ" labelStyle={{ fontFamily: 'pr-reg' }} />
+                    : <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="login" color={color} size={size} />)} label="เข้าสู่ระบบ" labelStyle={{ fontFamily: 'pr-reg' }} />}
             </Drawer.Section >
         </View >
     )
