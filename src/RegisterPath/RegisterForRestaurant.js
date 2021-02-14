@@ -36,8 +36,6 @@ const RegisterForRestaurant = props => {
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Ionicons name="person-circle-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View>
                         <TextInput style={styles.FillFormText}></TextInput>
-                    </View>
-                    <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Ionicons name="lock-closed-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View>
                         <TextInput style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
                     </View>
@@ -48,19 +46,14 @@ const RegisterForRestaurant = props => {
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
                         <TextInput style={styles.FillFormText}></TextInput>
-                    </View>
-                    <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>นามสกุล</Text></View>
-                        <TextInput style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
-                    </View>
-                    <View style={styles.FormContainer}>
+                        <TextInput style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+
                         <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{user.gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (user.gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                         <View style={styles.GenderContainer}>
                             <TouchableOpacity onPress={() => setUser({ ...user, gender: 'male' })}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
                             <TouchableOpacity onPress={() => setUser({ ...user, gender: 'female' })}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                         </View>
-                    </View>
-                    <View style={styles.FormContainer}>
                         <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{user.age}</Text></View>
                         <Slider
                             style={{ width: 200, height: 50 }}
@@ -75,24 +68,38 @@ const RegisterForRestaurant = props => {
 
                         />
                     </View>
+
+
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>เบอร์ติดต่อ</Text></View>
                         <TextInput style={styles.FillFormText} keyboardType='numeric' secureTextEntry={true} style={styles.FillFormText}></TextInput>
-                    </View>
-                    <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
                         <TextInput style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
-                    </View>
-                    <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>ไลน์</Text></View>
                         <TextInput style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
                     </View>
 
-
                 </ProgressStep>
                 <ProgressStep label="ข้อมูลร้าน" finishBtnText='ยืนยัน' previousBtnText="ย้อนกลับ" nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} previousBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }}>
                     <View style={{ alignItems: 'center' }}>
-                        <Text>This is the content within step 3!</Text>
+                        <View style={styles.FormContainer}>
+                            <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>ชื่อร้านอาหาร</Text></View>
+                            <TextInput style={styles.FillFormText}></TextInput>
+                        </View>
+                        <View style={styles.FormContainer}>
+                            <View style={{ flexDirection: 'row' }}><Ionicons name='location-outline' size={24} style={{ marginRight: 5 }}></Ionicons><Text style={styles.FormFillTitle}>ที่อยู่ร้านอาหาร</Text></View>
+                            <TextInput style={styles.FillFormText}></TextInput>
+                            <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>อำเภอ</Text></View>
+                            <TextInput style={styles.FillFormText}></TextInput>
+                            <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>จังหวัด</Text></View>
+                            <TextInput style={styles.FillFormText}></TextInput>
+                            <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>รหัสไปรษณีย์</Text></View>
+                            <TextInput style={styles.FillFormText}></TextInput>
+                        </View>
+                        <View style={styles.FormContainer}>
+                            <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>เว็บไซต์ของร้าน</Text></View>
+                            <TextInput style={styles.FillFormText}></TextInput>
+                        </View>
                     </View>
                 </ProgressStep>
             </ProgressSteps>
@@ -103,7 +110,7 @@ const RegisterForRestaurant = props => {
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', flex: 1, flexDirection: 'column' },
 
-    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, marginTop: 10 },
+    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, marginTop: 10, marginBottom: 12 },
     FormContainer: { width: '100%', marginVertical: 20, marginLeft: 40 },
     FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, alignSelf: 'center' },
 
