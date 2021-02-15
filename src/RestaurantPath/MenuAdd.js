@@ -16,7 +16,7 @@ const MenuAdd = props => {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
             }
-        })();
+        });
     }, []);
 
     const pickImage = async () => {
