@@ -11,7 +11,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 export function DrawerContent(props) {
 
     const { AuthLogin, setAuthLogin } = useContext(AppContext);
- 
+    const { database, setDatabase } = useContext(AppContext);
+
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const toggleTheme = () => {
@@ -28,8 +29,8 @@ export function DrawerContent(props) {
                             <View style={{ flexDirection: 'row', marginTop: 15, paddingLeft: 15 }}>
                                 <MaterialCommunityIcons name="account" size={50} />
                                 <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                                    <Title style={{ fontFamily: 'pr-light' }}><Text style={{ fontFamily: 'pr-light' }}>คุณ</Text>ใจดี ซื้ออาหาร</Title>
-                                    <Caption style={{ fontFamily: 'pr-light' }}>@cus</Caption>
+                                    <Title style={{ fontFamily: 'pr-light' }}><Text style={{ fontFamily: 'pr-light' }}>คุณ</Text>{database.firstname} {database.lastname}</Title>
+                                    <Caption style={{ fontFamily: 'pr-light' }}>@{database.username}</Caption>
                                 </View>
                             </View>
                         </View>

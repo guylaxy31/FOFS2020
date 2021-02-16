@@ -21,6 +21,8 @@ const Home = props => {
 
   const { restaurants } = useSelector(state => state.restaurant)
   const { AuthLogin, setAuthLogin } = useContext(AppContext);
+  const { database, setDatabase } = useContext(AppContext);
+  const [searchtext, setSearchtext] = useState('');
 
   useEffect(() => {
     dispatch(resAction.fetchRes());
@@ -36,7 +38,7 @@ const Home = props => {
           <Header
             containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
             leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-            rightComponent={<TouchableOpacity><MaterialCommunityIcons name="account" size={30} /></ TouchableOpacity>}
+            rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={30} /><Text style={styles.usernameText}>{database.username}</Text></ TouchableOpacity>}
           />
           : // ถ้ายังไม่ได้ Login
           <Header
@@ -50,7 +52,7 @@ const Home = props => {
 
         <View style={styles.SearchBoxContainer}>
           <TouchableOpacity><FontAwesome style={styles.iconAlign} name="search" size={22} color="#C7BDAC" /></TouchableOpacity>
-          <TextInput placeholder={'ค้นชื่อร้าน / ชื่อเมนู'} style={styles.textinput_field} />
+          <TextInput onChangeText={(value) => setSearchtext(value)} value={searchtext} placeholder={'ค้นชื่อร้าน / ชื่อเมนู'} style={styles.textinput_field} />
         </View>
 
         <View style={styles.TitlePromotionAlign}>
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
 
   nav__container: { width: '100%' },
   HedaerTitleTxt: { fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
-
+  usernameText: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
 
   SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 10, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', alignItems: 'center', marginVertical: 15 },
   iconAlign: { flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
