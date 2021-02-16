@@ -7,6 +7,8 @@ import CheckBox from '@react-native-community/checkbox';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 
 const RegisterForRestaurant = props => {
@@ -178,11 +180,11 @@ const RegisterForRestaurant = props => {
                 {/* ======================================================================= หน้า 1 */}
                 <ProgressStep label="บัญชี" nextBtnText='ถัดไป' nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} onNext={onNextStep1} errors={pageValid.error1}>
                     <View style={styles.FormContainer}>
-                        <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name="person-circle-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View>
+                        <View style={{ flexDirection: 'row', marginTop: 15 }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -5 }} name='account' size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View>
                         <TextInput value={user.username} onChangeText={(val) => setUser({ ...user, username: val })} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput>
                         {user.isValidUsername == true ? null : <View><Text style={styles.validText}>*ระบุ 4 - 16 ตัวอักษร</Text></View>}
 
-                        <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name="lock-closed-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View>
+                        <View style={{ flexDirection: 'row', marginTop: 15 }}><FontAwesome name="lock" style={{ marginRight: 10 }} size={24} color="black" /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View>
                         <TextInput value={user.password} onChangeText={(val) => setUser({ ...user, password: val })} onEndEditing={() => checkPassword()} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
                         {user.isValidPassword == true ? null : <View><Text style={styles.validText}>*ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     </View>

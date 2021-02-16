@@ -6,6 +6,8 @@ import HextagonIcon from '../Themes/HextagonIcon';
 import ThumbSlider from '../../assets/register/ThumbSlider.png'
 import DropDownPicker from 'react-native-dropdown-picker';
 import CheckBox from '@react-native-community/checkbox';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 const RegisterForCustomer = props => {
 
@@ -89,10 +91,10 @@ const RegisterForCustomer = props => {
             <ScrollView horizontal={false} showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
                 <View style={styles.FormContainerWrap}>
                     <View style={styles.RegisterTitle}><HextagonIcon /><Text style={styles.TitleText}>สร้างบัญชีใหม่</Text></View>
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อผู้ใช้</Text></View>
+                    <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -5 }} name='account' size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View></View>
                     <View style={styles.FormContainer}><TextInput value={user.username} onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidUser == true ? null : <View><Text style={styles.validText}>ระบุ 4 - 16 ตัวอักษร</Text></View>}
-                    <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
+                    <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><FontAwesome name="lock" style={{ marginRight: 10 }} size={24} color="black" /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View></View>
                     <View style={styles.FormContainer}><TextInput value={user.password} onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
                     {user.isValidPassword == true ? null : <View><Text style={styles.validText}>ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
