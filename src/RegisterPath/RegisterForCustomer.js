@@ -90,16 +90,16 @@ const RegisterForCustomer = props => {
                 <View style={styles.FormContainerWrap}>
                     <View style={styles.RegisterTitle}><HextagonIcon /><Text style={styles.TitleText}>สร้างบัญชีใหม่</Text></View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อผู้ใช้</Text></View>
-                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.username} onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidUser == true ? null : <View><Text style={styles.validText}>ระบุ 4 - 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>รหัสผ่าน</Text></View>
-                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.password} onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
                     {user.isValidPassword == true ? null : <View><Text style={styles.validText}>ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
-                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => firstnameRecord(value)} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.firstname} onChangeText={(value) => firstnameRecord(value)} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidFirstname == true ? null : <View><Text style={styles.validText}>*ระบุไม่เกิน 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>นามสกุล</Text></View>
-                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => lastnameRecord(value)} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.lastname} onChangeText={(value) => lastnameRecord(value)} style={styles.FillFormText}></TextInput></View>
                     {/* Tag Text ชาย กับ หญิงจะไม่โผล่พร้อมกับ จะขึ้นตามที่เลือก 1 อัน */}
                     <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{user.gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (user.gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                     <View style={styles.GenderContainer}>
@@ -151,7 +151,7 @@ const RegisterForCustomer = props => {
                     {user.career == 'student' ?
                         <View>
                             <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สาขา/คณะที่เรียน</Text></View>
-                            <View style={styles.FormContainer}><TextInput onChangeText={(value) => careerDetailRecord(value)} style={styles.FillFormText}></TextInput></View>
+                            <View style={styles.FormContainer}><TextInput value={user.careerDetail} onChangeText={(value) => careerDetailRecord(value)} style={styles.FillFormText}></TextInput></View>
                         </View>
                         :
                         null
@@ -159,17 +159,17 @@ const RegisterForCustomer = props => {
                     {user.career == 'officer' ?
                         <View>
                             <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>สังกัด/หน่วยงาน</Text></View>
-                            <View style={styles.FormContainer}><TextInput onChangeText={(value) => careerDetailRecord(value)} style={styles.FillFormText}></TextInput></View>
+                            <View style={styles.FormContainer}><TextInput value={user.careerDetail} onChangeText={(value) => careerDetailRecord(value)} style={styles.FillFormText}></TextInput></View>
                         </View>
                         :
                         null
                     }
 
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>เบอร์โทรศัพท์</Text></View>
-                    <View style={styles.FormContainer}><TextInput keyboardType='numeric' onChangeText={(value) => phoneNumberRecord(value)} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.phonenumber} keyboardType='numeric' onChangeText={(value) => phoneNumberRecord(value)} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>*ระบุเบอร์ให้ถูกต้อง</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
-                    <View style={styles.FormContainer}><TextInput onChangeText={(value) => emailRecord(value)} onEndEditing={() => checkEmail()} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.email} onChangeText={(value) => emailRecord(value)} onEndEditing={() => checkEmail()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidEmail == true ? null : <View style={{ marginBottom: 20 }}><Text style={styles.validText}>ระบุอีเมลให้ถูกต้อง</Text></View>}
                     <TouchableOpacity onPress={() => openConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
