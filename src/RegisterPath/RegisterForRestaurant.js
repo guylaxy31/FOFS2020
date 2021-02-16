@@ -59,7 +59,7 @@ const RegisterForRestaurant = props => {
         } else { setUser({ ...user, isValidEmail: false }) }
     }
     const checkRestaurantname = () => { if (restaurant.restaurantName.trim().length >= 1 & restaurant.restaurantName.trim().length <= 16) { setRestaurant({ ...restaurant, isValidRestaurantname: true }) } else { setRestaurant({ ...restaurant, isValidRestaurantname: false }) } }
-    const checkAddress = () => { if (restaurant.address.trim().length >= 1 & restaurant.address.trim().length <= 30) { setRestaurant({ ...restaurant, isValidAddress: true }) } else { setRestaurant({ ...restaurant, isValidAddress: false }) } }
+    const checkAddress = () => { if (restaurant.address.trim().length >= 1 & restaurant.address.trim().length <= 50) { setRestaurant({ ...restaurant, isValidAddress: true }) } else { setRestaurant({ ...restaurant, isValidAddress: false }) } }
     const checkAmphoe = () => { if (restaurant.amphoe.trim().length >= 1 & restaurant.amphoe.trim().length <= 16) { setRestaurant({ ...restaurant, isValidAmphoe: true }) } else { setRestaurant({ ...restaurant, isValidAmphoe: false }) } }
     const checkProvince = () => { if (restaurant.province.trim().length >= 1 & restaurant.province.trim().length <= 16) { setRestaurant({ ...restaurant, isValidProvince: true }) } else { setRestaurant({ ...restaurant, isValidProvince: false }) } }
     const checkPostalcode = () => { if (restaurant.postalcode.trim().length === 5) { setRestaurant({ ...restaurant, isValidPostalcode: true }) } else { setRestaurant({ ...restaurant, isValidPostalcode: false }) } }
@@ -179,11 +179,11 @@ const RegisterForRestaurant = props => {
                 <ProgressStep label="บัญชี" nextBtnText='ถัดไป' nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} onNext={onNextStep1} errors={pageValid.error1}>
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name="person-circle-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, username: val })} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.username} onChangeText={(val) => setUser({ ...user, username: val })} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput>
                         {user.isValidUsername == true ? null : <View><Text style={styles.validText}>*ระบุ 4 - 16 ตัวอักษร</Text></View>}
 
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name="lock-closed-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, password: val })} onEndEditing={() => checkPassword()} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.password} onChangeText={(val) => setUser({ ...user, password: val })} onEndEditing={() => checkPassword()} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
                         {user.isValidPassword == true ? null : <View><Text style={styles.validText}>*ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     </View>
 
@@ -194,10 +194,10 @@ const RegisterForRestaurant = props => {
 
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, firstname: val })} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.firstname} onChangeText={(val) => setUser({ ...user, firstname: val })} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput>
                         {user.isValidFirstname ? null : <View><Text style={styles.validText}>*ระบุไม่เกิน 16 ตัวอักษร</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>นามสกุล</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, lastname: val })} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.lastname} onChangeText={(val) => setUser({ ...user, lastname: val })} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
 
                         <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{user.gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (user.gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                         <View style={styles.GenderContainer}>
@@ -222,13 +222,13 @@ const RegisterForRestaurant = props => {
 
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>เบอร์ติดต่อ</Text></View>
-                        <TextInput keyboardType='numeric' onChangeText={(val) => setUser({ ...user, phonenumber: val })} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.phonenumber} keyboardType='numeric' onChangeText={(val) => setUser({ ...user, phonenumber: val })} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
                         {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>*ระบุเบอร์ให้ถูกต้อง</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, email: val })} onEndEditing={() => checkEmail()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.email} onChangeText={(val) => setUser({ ...user, email: val })} onEndEditing={() => checkEmail()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
                         {user.isValidEmail == true ? null : <View><Text style={styles.validText}>*ระบุอีเมลให้ถูกต้อง</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ไลน์</Text></View>
-                        <TextInput style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
+                        <TextInput value={user.line} onChangeText={(val) => setUser({ ...user, line: val })} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
                     </View>
 
                 </ProgressStep>
@@ -253,30 +253,30 @@ const RegisterForRestaurant = props => {
 
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>ชื่อร้านอาหาร</Text></View>
-                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, restaurantName: val })} onEndEditing={() => checkRestaurantname()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.restaurantName} onChangeText={(val) => setRestaurant({ ...restaurant, restaurantName: val })} onEndEditing={() => checkRestaurantname()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidRestaurantname == true ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                         </View>
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name='location-outline' size={24} style={{ marginRight: 5 }}></Ionicons><Text style={styles.FormFillTitle}>ที่อยู่ร้านอาหาร</Text></View>
-                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, address: val })} onEndEditing={() => checkAddress()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.address} onChangeText={(val) => setRestaurant({ ...restaurant, address: val })} onEndEditing={() => checkAddress()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidAddress ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ถนน</Text></View>
-                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, road: val })} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.road} onChangeText={(val) => setRestaurant({ ...restaurant, road: val })} style={styles.FillFormText}></TextInput>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ตำบล</Text></View>
-                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, subdistrict: val })} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.subdistrict} onChangeText={(val) => setRestaurant({ ...restaurant, subdistrict: val })} style={styles.FillFormText}></TextInput>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>อำเภอ</Text></View>
-                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, amphoe: val })} onEndEditing={() => checkAmphoe()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.amphoe} onChangeText={(val) => setRestaurant({ ...restaurant, amphoe: val })} onEndEditing={() => checkAmphoe()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidAmphoe ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>จังหวัด</Text></View>
-                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, province: val })} onEndEditing={() => checkProvince()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.province} onChangeText={(val) => setRestaurant({ ...restaurant, province: val })} onEndEditing={() => checkProvince()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidProvince ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>รหัสไปรษณีย์</Text></View>
-                            <TextInput keyboardType='numeric' onChangeText={(val) => setRestaurant({ ...restaurant, postalcode: val })} onEndEditing={() => checkPostalcode()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.postalcode} keyboardType='numeric' onChangeText={(val) => setRestaurant({ ...restaurant, postalcode: val })} onEndEditing={() => checkPostalcode()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidPostalcode ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                         </View>
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>เว็บไซต์ของร้าน</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
+                            <TextInput value={restaurant.website} onChangeText={(val) => setRestaurant({ ...restaurant, website: val })} style={styles.FillFormText}></TextInput>
 
                         </View>
 
