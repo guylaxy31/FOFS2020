@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView, Alert } from 'react-native';
 import HextagonIcon from '../Themes/HextagonIcon';
 import AppContext from '../Context/AppContext'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 const LoginHome = props => {
 
@@ -49,11 +51,11 @@ const LoginHome = props => {
 
       <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30} style={styles.KeyboardContainer}>
         <View style={styles.FormContainer}>
-          <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
+          <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -5 }} name='account' size={24} /><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View></View>
 
           <View style={styles.TextInputContainer}><TextInput value={user.username} onChangeText={(val) => setUser({ ...user, username: val })} style={styles.id_field} /></View>
 
-          <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
+          <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><FontAwesome name="lock" style={{ marginRight: 10 }} size={24} color="black" /><Text style={styles.LoginForm}>รหัสผ่าน</Text></View></View>
 
           <View style={styles.TextInputContainer}><TextInput value={user.password} onChangeText={(val) => setUser({ ...user, password: val })} secureTextEntry={true} style={styles.pass_field} /></View>
         </View>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
   ScrollContainer: { height: '100%', backgroundColor: 'blue' },
 
-  LoginForm: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, paddingVertical: 16, },
+  LoginForm: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 16 },
   HeaderWithIcon: { alignItems: 'center', flexDirection: 'row', justifyContent: 'center' },
 
   id_field: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
