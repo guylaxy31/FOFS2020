@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Image,
 import Slider from '@react-native-community/slider';
 
 import ThumbSlider from '../../assets/register/ThumbSlider.png'
-import DropDownPicker from 'react-native-dropdown-picker';
 import CheckBox from '@react-native-community/checkbox';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { Ionicons } from '@expo/vector-icons';
@@ -27,12 +26,14 @@ const RegisterForRestaurant = props => {
         isValidUsername: false,
         isValidPassword: false,
         isValidFirstname: false,
-        isValidPhonenumber: false,
+        isValidPhoneNumber: false,
+        isValidEmail: false,
     })
 
     const [restaurant, setRestaurant] = useState({
         restaurantName: '',
         address: '',
+        road: '',
         subdistrict: '',
         amphoe: '',
         province: '',
@@ -40,7 +41,6 @@ const RegisterForRestaurant = props => {
         website: '',
         isValidRestaurantname: false,
         isValidAddress: false,
-        isValidSubdistrict: false,
         isValidAmphoe: false,
         isValidProvince: false,
         isValidPostalcode: false
@@ -58,11 +58,17 @@ const RegisterForRestaurant = props => {
             setUser({ ...user, isValidEmail: true })
         } else { setUser({ ...user, isValidEmail: false }) }
     }
+    const checkRestaurantname = () => { if (restaurant.restaurantName.trim().length >= 1 & restaurant.restaurantName.trim().length <= 16) { setRestaurant({ ...restaurant, isValidRestaurantname: true }) } else { setRestaurant({ ...restaurant, isValidRestaurantname: false }) } }
+    const checkAddress = () => { if (restaurant.address.trim().length >= 1 & restaurant.address.trim().length <= 30) { setRestaurant({ ...restaurant, isValidAddress: true }) } else { setRestaurant({ ...restaurant, isValidAddress: false }) } }
+    const checkAmphoe = () => { if (restaurant.amphoe.trim().length >= 1 & restaurant.amphoe.trim().length <= 16) { setRestaurant({ ...restaurant, isValidAmphoe: true }) } else { setRestaurant({ ...restaurant, isValidAmphoe: false }) } }
+    const checkProvince = () => { if (restaurant.province.trim().length >= 1 & restaurant.province.trim().length <= 16) { setRestaurant({ ...restaurant, isValidProvince: true }) } else { setRestaurant({ ...restaurant, isValidProvince: false }) } }
+    const checkPostalcode = () => { if (restaurant.postalcode.trim().length === 5) { setRestaurant({ ...restaurant, isValidPostalcode: true }) } else { setRestaurant({ ...restaurant, isValidPostalcode: false }) } }
+
 
     const [conSenseState, setConsenseState] = useState(false);
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [authSubmit, setAuthSubmit] = useState(false);
-    const [page1, setPage1] = useState({ isValid: false, errors: false });
+
 
     const openConsense = () => { setConsenseState(true) }
     const closeConsense = () => { setConsenseState(false) }
@@ -92,37 +98,104 @@ const RegisterForRestaurant = props => {
             quality: 1,
         });
 
-        console.log(result);
 
         if (!result.cancelled) {
             setImage(result.uri);
         }
     };
 
+    const [pageValid, setPageValid] = useState({
+        error1: false,
+        error2: false,
+        error3: false
+    })
 
+    const onNextStep1 = () => {
+
+        if (user.isValidUsername == true & user.isValidPassword == true) {
+            setPageValid({ ...pageValid, error1: false });
+        } else {
+            Alert.alert(
+                //title
+                'ไม่สามารถไปยังหน้าถัดไป',
+                //body
+                'โปรดระบุข้อมูลให้ถูกต้อง',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+            );
+            setPageValid({ ...pageValid, error1: true });
+        }
+    };
+
+    const onNextStep2 = () => {
+
+        if (user.isValidFirstname == true & user.gender != '' & user.isValidPhoneNumber == true & user.isValidEmail == true) {
+            setPageValid({ ...pageValid, error2: false });
+        } else {
+            Alert.alert(
+                //title
+                'ไม่สามารถไปยังหน้าถัดไป',
+                //body
+                'โปรดระบุข้อมูลให้ถูกต้อง',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+            );
+            setPageValid({ ...pageValid, error2: true });
+        }
+    };
+
+    const onNextStep3 = () => {
+
+        if (restaurant.isValidRestaurantname === true & restaurant.isValidAddress === true & restaurant.isValidAmphoe === true & restaurant.isValidProvince === true & restaurant.isValidPostalcode === true & toggleCheckBox === true & image != null) {
+            setPageValid({ ...pageValid, error3: false });
+            props.navigation.navigate('RestaurantHome')
+        } else {
+            Alert.alert(
+                //title
+                'ไม่สามารถยืนยันการสมัคร',
+                //body
+                'โปรดระบุข้อมูลให้ถูกต้องและยอมรับข้อตกลง',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+            );
+            setPageValid({ ...pageValid, error3: true });
+        }
+    };
 
     return (
 
         <View style={styles.container}>
             <ProgressSteps activeStepIconBorderColor='#888765' completedProgressBarColor='#FFFC1B' activeStepIconColor='#FFFC1B' completedStepIconColor='#FFFC1B' labelFontFamily='pr-light' activeLabelColor='#000' completedCheckColor='#000'>
-                <ProgressStep label="บัญชี" nextBtnText='ถัดไป' nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }}>
-
+                {/* ======================================================================= หน้า 1 */}
+                <ProgressStep label="บัญชี" nextBtnText='ถัดไป' nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} onNext={onNextStep1} errors={pageValid.error1}>
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name="person-circle-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, username: val })} onEndEditing={checkUsername} style={styles.FillFormText}></TextInput>
-                        {user.isValidUsername ? null : <View><Text style={styles.validText}>*ระบุ 4 - 16 ตัวอักษร</Text></View>}
+                        <TextInput onChangeText={(val) => setUser({ ...user, username: val })} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput>
+                        {user.isValidUsername == true ? null : <View><Text style={styles.validText}>*ระบุ 4 - 16 ตัวอักษร</Text></View>}
+
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name="lock-closed-outline" style={{ marginRight: 3 }} size={24} /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, password: val })} onEndEditing={checkPassword} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
-                        {user.isValidPassword ? null : <View><Text style={styles.validText}>*ระบุ 6 - 16 ตัวอักษร</Text></View>}
+                        <TextInput onChangeText={(val) => setUser({ ...user, password: val })} onEndEditing={() => checkPassword()} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
+                        {user.isValidPassword == true ? null : <View><Text style={styles.validText}>*ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     </View>
 
                 </ProgressStep>
-                <ProgressStep label="ข้อมูลผู้ใช้" nextBtnText='ถัดไป' previousBtnText="ย้อนกลับ" nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} previousBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }}>
+
+                {/* ======================================================================= หน้า 2 */}
+                <ProgressStep label="ข้อมูลผู้ใช้" nextBtnText='ถัดไป' previousBtnText="ย้อนกลับ" nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} previousBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} onNext={onNextStep2} errors={pageValid.error2}>
 
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, firstname: val })} onEndEditing={checkFirstname} style={styles.FillFormText}></TextInput>
-                        {user.isvalidUsername ? null : <View><Text style={styles.validText}>*ระบุไม่เกิน 16 ตัวอักษร</Text></View>}
+                        <TextInput onChangeText={(val) => setUser({ ...user, firstname: val })} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput>
+                        {user.isValidFirstname ? null : <View><Text style={styles.validText}>*ระบุไม่เกิน 16 ตัวอักษร</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>นามสกุล</Text></View>
                         <TextInput onChangeText={(val) => setUser({ ...user, lastname: val })} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
 
@@ -149,17 +222,19 @@ const RegisterForRestaurant = props => {
 
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>เบอร์ติดต่อ</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, phonenumber: val })} onEndEditing={checkPhonenumber} style={styles.FillFormText} keyboardType='numeric' style={styles.FillFormText}></TextInput>
-                        {user.isValidPhonenumber ? null : <View><Text style={styles.validText}>*ระบุเบอร์ให้ถูกต้อง</Text></View>}
+                        <TextInput keyboardType='numeric' onChangeText={(val) => setUser({ ...user, phonenumber: val })} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>*ระบุเบอร์ให้ถูกต้อง</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
-                        <TextInput onChangeText={(val) => setUser({ ...user, email: val })} onEndEditing={checkEmail} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
-                        {user.isValidEmail ? null : <View><Text style={styles.validText}>*ระบุอีเมลให้ถูกต้อง</Text></View>}
+                        <TextInput onChangeText={(val) => setUser({ ...user, email: val })} onEndEditing={() => checkEmail()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        {user.isValidEmail == true ? null : <View><Text style={styles.validText}>*ระบุอีเมลให้ถูกต้อง</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ไลน์</Text></View>
                         <TextInput style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
                     </View>
 
                 </ProgressStep>
-                <ProgressStep label="ข้อมูลร้าน" finishBtnText='ยืนยัน' previousBtnText="ย้อนกลับ" nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} previousBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }}>
+
+                {/* ======================================================================= หน้า 3 */}
+                <ProgressStep label="ข้อมูลร้าน" finishBtnText='ยืนยัน' previousBtnText="ย้อนกลับ" nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} previousBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} onSubmit={onNextStep3} errors={pageValid.error3}>
                     <View style={{ alignItems: 'center' }}>
                         <View style={styles.FormContainer}>
 
@@ -169,7 +244,7 @@ const RegisterForRestaurant = props => {
                                     <Text style={{ fontFamily: 'pr-reg' }}>+ เพิ่ม/แก้ไขรูป</Text>
                                 </View>
                             </TouchableOpacity>
-
+                            {image === null ? <View style={{ marginTop: 30 }}><Text style={styles.validText}>*เพิ่มรูปร้านเพื่อการตรวจสอบ</Text></View> : null}
                         </View>
 
                         <View style={styles.FormContainer}>
@@ -178,24 +253,25 @@ const RegisterForRestaurant = props => {
 
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>ชื่อร้านอาหาร</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
-                            {restaurant.isValidRestaurantname ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
+                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, restaurantName: val })} onEndEditing={() => checkRestaurantname()} style={styles.FillFormText}></TextInput>
+                            {restaurant.isValidRestaurantname == true ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                         </View>
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name='location-outline' size={24} style={{ marginRight: 5 }}></Ionicons><Text style={styles.FormFillTitle}>ที่อยู่ร้านอาหาร</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
-                            {restaurant.isValidRestaurantname ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
+                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, address: val })} onEndEditing={() => checkAddress()} style={styles.FillFormText}></TextInput>
+                            {restaurant.isValidAddress ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
+                            <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ถนน</Text></View>
+                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, road: val })} style={styles.FillFormText}></TextInput>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ตำบล</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
-                            {restaurant.isValidSubdistrict ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
+                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, subdistrict: val })} style={styles.FillFormText}></TextInput>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>อำเภอ</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
+                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, amphoe: val })} onEndEditing={() => checkAmphoe()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidAmphoe ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>จังหวัด</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
+                            <TextInput onChangeText={(val) => setRestaurant({ ...restaurant, province: val })} onEndEditing={() => checkProvince()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidProvince ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>รหัสไปรษณีย์</Text></View>
-                            <TextInput style={styles.FillFormText}></TextInput>
+                            <TextInput keyboardType='numeric' onChangeText={(val) => setRestaurant({ ...restaurant, postalcode: val })} onEndEditing={() => checkPostalcode()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidPostalcode ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                         </View>
                         <View style={styles.FormContainer}>
