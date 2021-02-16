@@ -1,5 +1,5 @@
-import * as React from 'react';
-
+import React, { useContext } from 'react';
+import AppContext from '../Context/AppContext'
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -39,7 +39,9 @@ import ListMain from '../AdminPath/ListMain'
 import ListCheck from '../AdminPath/ListCheck'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { DrawerContent } from './DrawerContent';
 
@@ -49,6 +51,8 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
+
+
     return (
 
         <Stack.Navigator initialRouteName="Homescreen">
@@ -402,12 +406,22 @@ const AppNavigation = props => {
 
 const CustomerBottomTab = props => {
 
+    const { AuthLogin, setAuthLogin } = useContext(AppContext);
+
     return (
 
         <Tab.Navigator style={{ fontFamily: 'pr-reg' }} initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
             <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
-            <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-            <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
+            {AuthLogin === true ?
+                <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
+                :
+                <Tab.Screen name="FoodStatus" component={LoginHome} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
+            }
+            {AuthLogin === true ?
+                <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
+                :
+                <Tab.Screen name="FoodHistory" component={LoginHome} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
+            }
         </Tab.Navigator>
     )
 }
