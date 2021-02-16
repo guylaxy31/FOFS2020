@@ -4,7 +4,6 @@ import AppContext from '../Context/AppContext'
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Title, Caption, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -12,6 +11,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 export function DrawerContent(props) {
 
     const { AuthLogin, setAuthLogin } = useContext(AppContext);
+ 
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const toggleTheme = () => {
@@ -26,10 +26,10 @@ export function DrawerContent(props) {
                     {AuthLogin == true ?
                         <View stlye={styles.userInfoSection}>
                             <View style={{ flexDirection: 'row', marginTop: 15, paddingLeft: 15 }}>
-                                <Icon name="account" size={50} />
+                                <MaterialCommunityIcons name="account" size={50} />
                                 <View style={{ marginLeft: 15, flexDirection: 'column' }}>
                                     <Title style={{ fontFamily: 'pr-light' }}><Text style={{ fontFamily: 'pr-light' }}>คุณ</Text>ใจดี ซื้ออาหาร</Title>
-                                    <Caption style={{ fontFamily: 'pr-light' }}>@user01</Caption>
+                                    <Caption style={{ fontFamily: 'pr-light' }}>@cus</Caption>
                                 </View>
                             </View>
                         </View>
@@ -66,8 +66,8 @@ export function DrawerContent(props) {
 
             <Drawer.Section style={styles.bottomDrawerSection}>
                 {AuthLogin == true ?
-                    <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="exit-to-app" color={color} size={size} />)} label="ออกจากระบบ" labelStyle={{ fontFamily: 'pr-reg' }} />
-                    : <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="login" color={color} size={size} />)} label="เข้าสู่ระบบ" labelStyle={{ fontFamily: 'pr-reg' }} />}
+                    <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="exit-to-app" color={color} size={size} />)} label="ออกจากระบบ" onPress={() => setAuthLogin(false)} labelStyle={{ fontFamily: 'pr-reg' }} />
+                    : <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="login" color={color} size={size} />)} label="เข้าสู่ระบบ" onPress={() => props.navigation.navigate('LoginHome')} labelStyle={{ fontFamily: 'pr-reg' }} />}
             </Drawer.Section >
         </View >
     )

@@ -10,7 +10,7 @@ import NearRestaurant from './NearRestaurant'
 
 import { Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Platform } from 'react-native';
 import * as resAction from '../../store/action/resaction'
@@ -36,7 +36,7 @@ const Home = props => {
           <Header
             containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
             leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-            rightComponent={<TouchableOpacity><Icon name="account" size={30} /></ TouchableOpacity>}
+            rightComponent={<TouchableOpacity><MaterialCommunityIcons name="account" size={30} /></ TouchableOpacity>}
           />
           : // ถ้ายังไม่ได้ Login
           <Header

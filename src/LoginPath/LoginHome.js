@@ -1,36 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView, Alert } from 'react-native';
 import HextagonIcon from '../Themes/HextagonIcon';
-
+import AppContext from '../Context/AppContext'
 
 const LoginHome = props => {
+
+  const { AuthLogin, setAuthLogin } = useContext(AppContext);
+
   const [database, setDatabase] = useState({
     username: 'cust01',
-    password: '123456'
+    password: '123456',
+    role: 'customer'
   })
 
   const [user, setUser] = useState({
     username: '',
-    password: ''
+    password: '',
   })
-
-  const usernameHandler = (input) => {
-    setUser(
-      {
-        ...user,
-        username: input
-      }
-    )
-  }
-
-  const passwordHandler = (input) => {
-    setUser(
-      {
-        ...user,
-        password: input
-      }
-    )
-  }
 
   const checkBeforeLogin = () => {
     if (user.username != database.username || user.password != database.password) {
@@ -47,7 +33,8 @@ const LoginHome = props => {
 
       );
     } else {
-      props.navigation.navigate('Homescreen')
+      if (database.role === 'customer') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
+      else { setAuthLogin(true); props.navigation.navigate('RestaurantHome') }
     }
 
   }
@@ -64,11 +51,11 @@ const LoginHome = props => {
         <View style={styles.FormContainer}>
           <View style={styles.FormContainer}><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View>
 
-          <View style={styles.TextInputContainer}><TextInput onChangeText={(val) => usernameHandler(val)} style={styles.id_field} /></View>
+          <View style={styles.TextInputContainer}><TextInput value={user.username} onChangeText={(val) => setUser({ ...user, username: val })} style={styles.id_field} /></View>
 
           <View style={styles.FormContainer}><Text style={styles.LoginForm}>รหัสผ่าน</Text></View>
 
-          <View style={styles.TextInputContainer}><TextInput onChangeText={(val) => passwordHandler(val)} secureTextEntry={true} style={styles.pass_field} /></View>
+          <View style={styles.TextInputContainer}><TextInput value={user.password} onChangeText={(val) => setUser({ ...user, password: val })} secureTextEntry={true} style={styles.pass_field} /></View>
         </View>
       </KeyboardAvoidingView>
 
@@ -96,8 +83,8 @@ const styles = StyleSheet.create({
   LoginForm: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, paddingVertical: 16, },
   HeaderWithIcon: { alignItems: 'center', flexDirection: 'row', justifyContent: 'center' },
 
-  id_field: { width: 250, padding: 10, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, borderRadius: 15 },
-  pass_field: { width: 250, padding: 10, color: '#000', backgroundColor: '#FFFFE3', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, borderRadius: 15 },
+  id_field: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+  pass_field: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
 
   FormContainer: { width: '100%', marginLeft: 200 },
   TextInputContainer: { borderRadius: 15 },
