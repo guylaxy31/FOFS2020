@@ -262,7 +262,8 @@ const AppNavigation = props => {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
                         textAlign: 'center',
-                    }
+                    },
+                    headerLeft: null
                 }
                 }
             />
