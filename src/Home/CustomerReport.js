@@ -36,8 +36,8 @@ const CustomerReport = props => {
                         <View style={{ width: '100%', borderRadius: 15 }}><TextInput multiline={true} numberOfLines={4} style={styles.textinputDetailcontainer}></TextInput></View>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFF', width: '100%', paddingHorizontal: 60, marginTop: 60 }}>
-                        <TouchableOpacity style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, borderRadius: 15, backgroundColor: '#FFFC1B', }}><View style={{ paddingHorizontal: 10, paddingVertical: 5, borderRadius: 15, }}><Text style={styles.btnText}>ส่งคำร้อง</Text></View></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>props.navigation.goBack()} style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, borderRadius: 15, backgroundColor: '#FFF', }}><View style={{ paddingHorizontal: 10, paddingVertical: 5, borderRadius: 15, }}><Text style={styles.btnText}>ยกเลิก</Text></View></TouchableOpacity>
+                        <TouchableOpacity style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, borderRadius: 15, backgroundColor: '#FFFC1B', paddingHorizontal: 20, paddingVertical: 10 }}><View style={{ justifyContent: 'center' }}><Text style={styles.btnText}>ส่งคำร้อง</Text></View></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, borderRadius: 15, backgroundColor: '#FFF', paddingHorizontal: 20, paddingVertical: 10 }}><View style={{ justifyContent: 'center' }}><Text style={styles.btnText}>ยกเลิก</Text></View></TouchableOpacity>
                     </View>
 
                 </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     textinputcontainer: { width: 200, backgroundColor: '#FFFFE3', paddingVertical: 5, paddingHorizontal: 20, fontSize: 14 },
     textinputDetailcontainer: { width: '100%', backgroundColor: '#FFFFE3', paddingVertical: 10, paddingHorizontal: 20, fontSize: 14, textAlignVertical: 'top' },
 
-    btnText: { fontSize: 16, fontFamily: 'pr-reg', }
+    btnText: { fontSize: 14, fontFamily: 'pr-reg', }
 });
 
 

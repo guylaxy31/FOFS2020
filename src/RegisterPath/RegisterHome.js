@@ -13,18 +13,18 @@ const LoginMode = props => {
       <ScrollView style={styles.ScrollContainer} horizontal={false}>
         <ModeTitle />
         <View style={styles.login__mode__layout}>
-          <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}>
+          <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}  >
             <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('RegisterForCustomer')}>
-              <View style={styles.img_mode}>
-                <Image source={require('../../assets/login/customer_mode_logo.png')}></Image>
+              <View style={{ alignItems: 'center' }}>
+                <Image style={{ width: 120, height: 120, marginTop: 20 }} source={require('../../assets/login/customer_mode_logo.png')}></Image>
               </View>
               <View style={styles.alignText}><Text style={styles.TextinBox}>บัญชีผู้ใช้งาน</Text></View>
             </TouchableOpacity>
           </View>
           <View style={Dimensions.get('window').width < Dimensions.get('window').height ? styles.mode_space : styles.mode_space2}  >
             <TouchableOpacity style={styles.TouchScale} onPress={() => props.navigation.navigate('RegisterForRestaurant')}>
-              <View style={styles.img_mode}>
-                <Image source={require('../../assets/login/restaurant_mode_logo.png')}></Image>
+              <View style={{ alignItems: 'center' }}>
+                <Image style={{ width: 120, height: 120, marginTop: 20 }} source={require('../../assets/login/restaurant_mode_logo.png')}></Image>
               </View>
               <View style={styles.alignText}><Text style={styles.TextinBox}>บัญชีร้านอาหาร</Text></View>
             </TouchableOpacity>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
   TextinBox: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 20 },
   alignText: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-  img_mode: { flex: 1, flexDirection: 'row', height: '100%', width: null, justifyContent: 'center', padding: 15, alignItems: 'center' },
+  img_mode: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
 });
 
 export default LoginMode;

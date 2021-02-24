@@ -69,8 +69,8 @@ const ProfileSetting = props => {
 
                     <View>
                         <View style={{ flexDirection: 'row', width: 180, justifyContent: 'space-between' }}>
-                            <TouchableOpacity style={{ backgroundColor: '#FFFC1B', borderRadius: 15, paddingHorizontal: 10, paddingVertical: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }}><View><Text style={{ fontFamily: 'pr-reg', fontSize: 18 }}>บันทึก</Text></View></TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: '#fff', borderRadius: 15, paddingHorizontal: 10, paddingVertical: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }} onPress={() => props.navigation.goBack()}><View><Text style={{ fontFamily: 'pr-reg', fontSize: 18 }}>ยกเลิก</Text></View></TouchableOpacity>
+                            <TouchableOpacity style={{ backgroundColor: '#FFFC1B', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>บันทึก</Text></View></TouchableOpacity>
+                            <TouchableOpacity style={{ backgroundColor: '#fff', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }} onPress={() => props.navigation.goBack()}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>ยกเลิก</Text></View></TouchableOpacity>
                         </View>
                     </View>
                 </View>
