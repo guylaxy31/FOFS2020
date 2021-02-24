@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 const Contact = props => {
 
     return (
@@ -13,7 +14,7 @@ const Contact = props => {
                         <View><Text style={styles.titleH1}>กฤษณะ มะนุภา</Text><Text style={styles.titleH2}>ผู้ดูแลระบ</Text><Text style={styles.titleH3}>Front-End Developer</Text></View>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 30 }}>
-                        <MaterialIcons name="email" size={22} color="black" style={{ marginRight: 5 }} />
+                        <MaterialCommunityIcons name="email-outline" size={22} color="black" style={{ marginRight: 5 }} />
                         <Text style={styles.emailContactTitle}>kritsana.mnp@gmail.com</Text>
                     </View>
                 </View>
@@ -24,7 +25,7 @@ const Contact = props => {
                         <View><Text style={styles.titleH1}>อรรถชัย ภู่ศิลป์</Text><Text style={styles.titleH2}>ผู้ดูแลระบ</Text><Text style={styles.titleH3}>Back-End Developer</Text></View>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 30 }}>
-                        <MaterialIcons name="email" size={22} color="black" style={{ marginRight: 5 }} />
+                        <MaterialCommunityIcons name="email-outline" size={22} color="black" style={{ marginRight: 5 }} />
                         <Text style={styles.emailContactTitle}>att.pusin@gmail.com</Text>
                     </View>
                 </View>
