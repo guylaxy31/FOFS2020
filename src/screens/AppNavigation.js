@@ -254,6 +254,7 @@ const AppNavigation = props => {
                 }
             />
             <Stack.Screen name="RestaurantHome"
+
                 component={RestaurantHome}
                 options={{
                     title: 'จัดการร้านอาหาร',
@@ -409,12 +410,15 @@ const AppNavigation = props => {
 
 const CustomerBottomTab = props => {
 
-    const { AuthLogin, setAuthLogin } = useContext(AppContext);
+    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
 
     return (
 
         <Tab.Navigator style={{ fontFamily: 'pr-reg' }} initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
-            <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+            {database.role === 'restaurant' && AuthLogin === true ? <Tab.Screen name="home" component={RestaurantHome} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+                :
+                <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+            }
             {AuthLogin === true ?
                 <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
                 :

@@ -4,6 +4,7 @@ import HextagonIcon from '../Themes/HextagonIcon';
 import AppContext from '../Context/AppContext'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { getActiveChildNavigationOptions } from 'react-navigation';
 
 const LoginHome = props => {
 
@@ -25,8 +26,8 @@ const LoginHome = props => {
 
       );
     } else {
-      if (database.role === 'customer' & AuthLogin === true) { setAuthLogin(true), props.navigation.navigate('Homescreen'), setUser({ ...user, role: 'customer' }) }
-      else if (database.role === 'restaurant' & AuthLogin === true) { setAuthLogin(true), props.navigation.navigate('RestaurantHome'), setUser({ ...user, role: 'restaurant' }) }
+      if (database.role === 'customer') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
+      else if (database.role === 'restaurant') { setAuthLogin(true); props.navigation.navigate('RestaurantHome') }
     }
   }
 

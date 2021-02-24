@@ -41,18 +41,18 @@ export function DrawerContent(props) {
                     <Drawer.Section style={styles.drawerSection}>
                         {/* ถ้าบทบาทเป็น'ร้านอาหาร'หน้าหลักจะเป็นหน้าเครื่องมือ 4 เมนูสำหรับร้าน */}
                         {/* นอกจากนั้นจะเป็น home หลักแสดงอาหารหมดทุกกรณี ทั้งล็อคอินและล็อคอินเป็นลูกค้า */}
-                        {user.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('RestaurantHome')} />
+                        {database.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('RestaurantHome')} />
                             :
                             <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('Homescreen')} />
                         }
                         {/* ตั้งค่าโปรไฟล์ถ้าหากเป็นลูกค้าให้เป็นการตั้งโปรไฟล์สำหรับลูกค้า ร้านอาหารให้เป็นการตั้งโปรไฟล์สำหรับร้านอาหาร */}
-                        {user.role === 'customer' && AuthLogin == true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} /> : null}
+                        {database.role === 'customer' && AuthLogin == true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} /> : null}
 
-                        {user.role != 'restaurant' ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="help-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="วิธีการสั่งอาหาร" onPress={() => props.navigation.navigate('Tutorial')} /> : null}
+                        {database.role != 'restaurant' || AuthLogin === false ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="help-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="วิธีการสั่งอาหาร" onPress={() => props.navigation.navigate('Tutorial')} /> : null}
                         {/* navigate ไปยังหน้า customer report และ restaurant report จะต่างกัน */}
-                        {user.role === 'customer' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} />
+                        {database.role === 'customer' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} />
                             :
-                            user.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} /> : null
+                            database.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} /> : null
                         }
                         <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="contacts" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ติดต่อ" onPress={() => props.navigation.navigate('Contact')} />
 

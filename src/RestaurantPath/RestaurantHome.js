@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 const RestaurantHome = props => {
 
   return (
@@ -21,7 +21,7 @@ const RestaurantHome = props => {
         <View style={styles.toolCard}>
           <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}>
             <View style={styles.touchAlign}>
-              <Image source={require('../../assets/restaurants/Subtraction2.png')}></Image>
+              <MaterialIcons name="restaurant" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>รายการอาหาร</Text></View>
             </View>
           </TouchableOpacity>
@@ -29,7 +29,7 @@ const RestaurantHome = props => {
         <View style={styles.toolCard}>
           <TouchableOpacity onPress={() => props.navigation.navigate('OrderMain')}>
             <View style={styles.touchAlign}>
-              <Image source={require('../../assets/restaurants/ic_room_service_24px.png')}></Image>
+              <MaterialCommunityIcons name="room-service" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ออเดอร์ลูกค้า</Text></View>
             </View>
           </TouchableOpacity>
@@ -41,7 +41,7 @@ const RestaurantHome = props => {
         <View style={styles.toolCard}>
           <TouchableOpacity onPress={() => props.navigation.navigate('AnalyticMain')}>
             <View style={styles.touchAlignSpecial}>
-              <Image source={require('../../assets/restaurants/ic_assessment_24px.png')}></Image>
+              <MaterialIcons name="assessment" size={80} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ดูสถิติของร้าน</Text></View>
             </View>
           </TouchableOpacity>
@@ -49,7 +49,7 @@ const RestaurantHome = props => {
         <View style={styles.toolCard}>
           <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain')}>
             <View style={styles.touchAlign}>
-              <Image source={require('../../assets/restaurants/ic_event_note_24px.png')}></Image>
+              <MaterialIcons name="history" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ประวัติสั่งทำอาหาร</Text></View>
             </View>
           </TouchableOpacity>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   toolCard: { justifyContent: 'center', backgroundColor: '#FFF', width: '40%', borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, },
 
   touchAlign: { alignItems: 'center', backgroundColor: '#FFF', height: '100%', justifyContent: 'space-between', paddingTop: '35%', borderRadius: 15 },
-  touchAlignSpecial: { alignItems: 'center', backgroundColor: '#6C6C6C', height: '100%', justifyContent: 'space-between', paddingTop: '35%', borderRadius: 15 },
+  touchAlignSpecial: { alignItems: 'center', backgroundColor: '#fff', height: '100%', justifyContent: 'space-between', paddingTop: '30%', borderRadius: 15 },
   toolText: { fontFamily: 'pr-reg', fontSize: 16, textAlign: 'center', paddingVertical: 10, borderBottomLeftRadius: 15, borderBottomRightRadius: 15, width: '100%' },
   textContainer: { backgroundColor: '#FFFC1B', width: '100%', borderBottomLeftRadius: 15, borderBottomRightRadius: 15 },
   textInline: { flexDirection: 'row' },

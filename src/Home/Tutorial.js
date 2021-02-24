@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tutorial = props => {
 
@@ -16,7 +16,7 @@ const Tutorial = props => {
 
                     <View style={{ paddingHorizontal: 40, marginVertical: 15 }}>
                         <Text style={styles.titleH1Tutorial}>2 เลือกเมนูอาหาร</Text>
-                        <MaterialCommunityIcons name="food-fork-drink" size={80} color="black" style={{marginVertical:5}} />
+                        <MaterialCommunityIcons name="food-fork-drink" size={80} color="black" style={{ marginVertical: 5 }} />
                         <Text style={styles.detailTutorial}>เลือกเมนูที่สนใจทำการเลือกสิ่งที่ต้องการ</Text>
                     </View>
 
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     CardContainer: { flexDirection: 'column', alignItems: 'flex-start', alignSelf: 'center', margin: 20, width: 500 / Dimensions.get('window').width + 380, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 50, borderRadius: 15 },
 
     titleH1Tutorial: { fontFamily: 'pr-bold', fontSize: 18 },
-    detailTutorial: { fontFamily: 'pr-light', fontSize: 16, color: '#A7A7A7' },
+    detailTutorial: { fontFamily: 'pr-reg', fontSize: 16, color: '#A7A7A7' },
 });
 
 
