@@ -45,13 +45,16 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { DrawerContent } from './DrawerContent';
 
+
+
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
-
+    const { database, setDatabase } = useContext(AppContext);
 
     return (
 

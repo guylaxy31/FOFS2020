@@ -7,18 +7,8 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const LoginHome = props => {
 
-  const { AuthLogin, setAuthLogin } = useContext(AppContext);
+  const { AuthLogin, setAuthLogin, database, setDatabase, user, setUser } = useContext(AppContext);
 
-  const [database, setDatabase] = useState({
-    username: 'cust01',
-    password: '123456',
-    role: 'customer'
-  })
-
-  const [user, setUser] = useState({
-    username: '',
-    password: '',
-  })
 
   const checkBeforeLogin = () => {
     if (user.username != database.username || user.password != database.password) {
@@ -35,18 +25,18 @@ const LoginHome = props => {
 
       );
     } else {
-      if (database.role === 'customer') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
-      else { setAuthLogin(true); props.navigation.navigate('RestaurantHome') }
+      if (database.role === 'customer' & AuthLogin === true) { setAuthLogin(true), props.navigation.navigate('Homescreen'), setUser({ ...user, role: 'customer' }) }
+      else if (database.role === 'restaurant' & AuthLogin === true) { setAuthLogin(true), props.navigation.navigate('RestaurantHome'), setUser({ ...user, role: 'restaurant' }) }
     }
-
   }
+
+
 
   return (
     <View style={styles.container}>
 
       <View style={styles.HeaderContainer}>
         <View style={styles.HeaderWithIcon} ><HextagonIcon /><Text style={styles.LoginHeader}>เข้าสู่ระบบ</Text></View>
-
       </View>
 
       <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30} style={styles.KeyboardContainer}>
@@ -63,11 +53,8 @@ const LoginHome = props => {
 
       <View style={styles.TouchLoginContainer}><TouchableOpacity style={styles.LoginButton} onPress={() => checkBeforeLogin()}><Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text></TouchableOpacity></View>
 
-
       <View style={styles.TouchRegisterContainer}>
-
         <TouchableOpacity onPress={() => props.navigation.navigate('RegisterHome')}><Text style={styles.registerBtn}>สร้างบัญชีใหม่</Text></TouchableOpacity>
-
       </View>
 
       <View>
@@ -92,7 +79,6 @@ const styles = StyleSheet.create({
   TextInputContainer: { borderRadius: 15 },
   LoginHeader: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 20 : 22, color: '#000', marginLeft: 5 },
   HeaderContainer: { marginBottom: 15, textAlign: 'center', backgroundColor: '#FFF' },
-
 
   TouchLoginContainer: { marginBottom: 30, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, backgroundColor: '#FFFC1B', borderRadius: 15, marginTop: 30 },
   LoginButton: { color: '#000' },

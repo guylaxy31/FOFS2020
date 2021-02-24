@@ -31,7 +31,7 @@ export const createRes = ({ restaurant_name, addr_line1, addr_line2, state, city
                     postal_code
                 }
             })
-        })
+        }) 
 
         const responseData = await response.json();
         // console.log(responseData);

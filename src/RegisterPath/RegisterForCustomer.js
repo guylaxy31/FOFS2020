@@ -125,6 +125,8 @@ const RegisterForCustomer = props => {
 
                     </View>
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>อาชีพ</Text></View>
+
+
                     <DropDownPicker
                         items={[
                             { label: 'นักเรียน/นักศึกษา', value: 'student' },
@@ -133,9 +135,12 @@ const RegisterForCustomer = props => {
                             { label: 'ค้าขาย', value: 'trade' },
                         ]}
                         defaultValue={user.career}
+                        dropDownMaxHeight={300}
                         placeholder="โปรดระบุ"
                         containerStyle={{ height: 40, marginBottom: 16 }}
-                        style={{ backgroundColor: '#fafafa' }}
+                        style={{
+                            backgroundColor: '#fafafa',
+                        }}
                         itemStyle={{
                             justifyContent: 'flex-start'
                         }}
@@ -149,6 +154,8 @@ const RegisterForCustomer = props => {
                             color: '#000'
                         }}
                     />
+
+
 
                     {user.career == 'student' ?
                         <View>
@@ -242,7 +249,7 @@ const styles = StyleSheet.create({
 
 
     TouchReadButton: { marginBottom: 10 },
-    readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
+    readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginTop: 20 },
     CloseModalContainer: { flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', borderRadius: 15, width: 100, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     closeButtonTxt: { textAlign: 'center', fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
 
