@@ -9,6 +9,7 @@ import ProfileSetting from '../Home/ProfileSetting'
 import Tutorial from '../Home/Tutorial'
 import CustomerReport from '../Home/CustomerReport'
 import Contact from '../Home/Contact'
+import RestaurantList from '../Home/RestaurantList'
 
 import LoginHome from '../LoginPath/LoginHome'
 import ForgotPassword from '../LoginPath/ForgotPassword'
@@ -71,6 +72,21 @@ const AppNavigation = props => {
                 }
                 }
             />
+
+            <Stack.Screen name="RestaurantList"
+
+                component={RestaurantList}
+                options={{
+                    title: 'ร้านอาหารทั้งหมด',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    },
+                }
+                }
+            />
+
             <Stack.Screen name="ProfileSetting"
                 component={ProfileSetting}
                 options={{
@@ -267,6 +283,7 @@ const AppNavigation = props => {
                 }
                 }
             />
+
             <Stack.Screen name="AnalyticMain"
                 component={AnalyticMain}
                 options={{

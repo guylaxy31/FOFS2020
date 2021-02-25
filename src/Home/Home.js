@@ -116,7 +116,7 @@ const Home = props => {
           style={styles.nearStyle}
         />
         <View style={styles.ViewAllTxtContainer}>
-          <TouchableOpacity><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')}><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
         </View>
 
       </ScrollView>
