@@ -1,9 +1,8 @@
-import {createStore , applyMiddleware , combineReducers, compose} from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-
-import resReducer from './reducer/resreducer' ;
+import resReducer from './reducer/resreducer';
 
 const rootReducer = combineReducers({
     restaurant: resReducer

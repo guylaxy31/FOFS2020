@@ -24,17 +24,17 @@ const OrderMain = props => {
     }
     return (
         <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
 
-                <FlatList
-                    data={tempdatabase.menulists}
-                    renderItem={({ item }) => <OrderList idx={item.idx} ordernumber={item.ordernumber} timeclock={item.timeclock} menu={item.menu} />}
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal={false}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
-                />
-            </ScrollView>
+
+            <FlatList
+                data={tempdatabase.menulists}
+                renderItem={({ item }) => <OrderList idx={item.idx} ordernumber={item.ordernumber} timeclock={item.timeclock} menu={item.menu} />}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal={false}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+            />
+
 
         </View>
     )
