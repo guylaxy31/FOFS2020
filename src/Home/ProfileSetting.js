@@ -14,7 +14,7 @@ const ProfileSetting = props => {
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
-                    <View style={{ backgroundColor: '#F9F9DB', borderRadius: 100, width: 140, height: 140, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ backgroundColor: '#F9F9DB', borderRadius: 100, width: 140, height: 140, justifyContent: 'center', alignItems: 'center', marginBottom: 40 }}>
                         <MaterialCommunityIcons name="account" size={100} />
                     </View>
                     <View style={{ flexDirection: 'row', marginVertical: 20 }}>
@@ -69,7 +69,7 @@ const ProfileSetting = props => {
 
                     <View>
                         <View style={{ flexDirection: 'row', width: 180, justifyContent: 'space-between' }}>
-                            <TouchableOpacity style={{ backgroundColor: '#FFFC1B', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>บันทึก</Text></View></TouchableOpacity>
+                            <TouchableOpacity onPress={()=>props.navigation.navigate('Homescreen')} style={{ backgroundColor: '#FFFC1B', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>บันทึก</Text></View></TouchableOpacity>
                             <TouchableOpacity style={{ backgroundColor: '#fff', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }} onPress={() => props.navigation.goBack()}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>ยกเลิก</Text></View></TouchableOpacity>
                         </View>
                     </View>
