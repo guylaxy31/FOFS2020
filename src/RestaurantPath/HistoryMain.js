@@ -1,21 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 const HistoryMain = props => {
     const tabledataset = {
-        tableHead: ['เลขออเดอร์', 'วันที่', 'เวลา(น.)', 'ดูเพิ่มเติม'],
+        tableHead: ['เลขออเดอร์', 'วันที่', 'เวลา(น.)', 'รายละเอียด'],
         tableData: [
-            ['152', '18 ม.ค. 64', '11:04', 'ดูเพิ่มเติม'],
-            ['153', '18 ม.ค. 64', '11:08', 'ดูเพิ่มเติม']
+            ['152', '18 ม.ค. 64', '11:04', 'รายละเอียด'],
+            ['153', '18 ม.ค. 64', '11:08', 'รายละเอียด']
         ]
     }
 
     const element = (data, index) => (
-        <TouchableOpacity onPress={() => props.navigation.navigate('HistoryList')}>
-            <View style={styles.btn}>
-                <Image style={styles.btnEdit} source={require('../../assets/restaurants/baseline_list_alt_black_18.png')}></Image>
-            </View>
+        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.navigation.navigate('HistoryList')}>
+            <MaterialIcons name="more-horiz" size={24} color="black" />
         </TouchableOpacity>
     );
     return (
@@ -52,8 +52,6 @@ const styles = StyleSheet.create({
     head: { height: Dimensions.get('window').height * 0.15, backgroundColor: '#FFF' },
     text: { fontFamily: 'pr-reg', marginVertical: 15, fontSize: Dimensions.get('window').height * .018, textAlign: 'center' },
     row: { flexDirection: 'row', backgroundColor: '#FFF', justifyContent: 'center', borderBottomColor: '#000', borderBottomWidth: .5, borderBottomColor: '#D3D2B3' },
-    btn: { flexDirection: 'row', width: Dimensions.get('window').width * 0.18, height: Dimensions.get('window').height * 0.054, backgroundColor: '#F8F8D9', borderRadius: 15, justifyContent: 'center', padding: 5, alignItems: 'center' },
-    btnEdit: { width: 20, height: 20, }
 });
 
 

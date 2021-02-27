@@ -45,6 +45,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { DrawerContent } from './DrawerContent';
+import { header } from 'express-validator';
 
 
 
@@ -55,23 +56,54 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
+    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
 
 
     return (
 
         <Stack.Navigator initialRouteName="Homescreen">
-            <Stack.Screen name="Homescreen"
-                component={Home}
+
+            {AuthLogin === true ?
+                <Stack.Screen name="RestaurantHome"
+                    component={RestaurantHome}
+                    options={{
+                        title: 'หน้าหลัก',
+                        headerTitleStyle: {
+                            fontFamily: 'pr-reg',
+                            fontSize: 16,
+                            textAlign: 'center',
+                        }
+                    }
+                    }
+                />
+                :
+                <Stack.Screen name="Homescreen"
+                    component={Home}
+                    options={{
+                        title: 'หน้าหลัก',
+                        headerTitleStyle: {
+                            fontFamily: 'pr-reg',
+                            fontSize: 16,
+                            textAlign: 'center',
+                        }
+                    }
+                    }
+                />}
+
+            {/* <Stack.Screen name="RestaurantHome"
+
+                component={RestaurantHome}
                 options={{
-                    title: 'หน้าหลัก',
+                    title: 'จัดการร้านอาหาร',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
                         textAlign: 'center',
-                    }
+                    },
+
                 }
                 }
-            />
+            /> */}
 
             <Stack.Screen name="RestaurantList"
 
@@ -269,19 +301,7 @@ const AppNavigation = props => {
                 }
                 }
             />
-            <Stack.Screen name="RestaurantHome"
 
-                component={RestaurantHome}
-                options={{
-                    title: 'จัดการร้านอาหาร',
-                    headerTitleStyle: {
-                        fontFamily: 'pr-reg',
-                        fontSize: 16,
-                        textAlign: 'center',
-                    }
-                }
-                }
-            />
 
             <Stack.Screen name="AnalyticMain"
                 component={AnalyticMain}
@@ -334,7 +354,7 @@ const AppNavigation = props => {
             <Stack.Screen name="HistoryMain"
                 component={HistoryMain}
                 options={{
-                    title: 'ประวัติการสั่งอาหาร',
+                    title: 'ประวัติออเดอร์',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -346,7 +366,7 @@ const AppNavigation = props => {
             <Stack.Screen name="HistoryList"
                 component={HistoryList}
                 options={{
-                    title: 'ประวัติการสั่งอาหาร',
+                    title: 'ประวัติออเดอร์',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -425,7 +445,7 @@ const AppNavigation = props => {
 
 
 
-const CustomerBottomTab = props => {
+const userBottomTab = props => {
 
     const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
 
@@ -438,7 +458,7 @@ const CustomerBottomTab = props => {
                 database.role === 'customer' ?
                     <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
                     :
-                    <Tab.Screen name="home" component={RestaurantHome} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+                    <Tab.Screen name="RestaurantHome" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
             }
 
             {/* {database.role === 'restaurant' && AuthLogin === true ?
@@ -454,7 +474,7 @@ const CustomerBottomTab = props => {
                 database.role === 'customer' ?
                     <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'ตรวจสถานะ', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
                     :
-                    <Tab.Screen name="FoodOrder" component={OrderMain} options={{ tabBarLabel: 'ออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
+                    <Tab.Screen name="OrderMain" component={OrderMain} options={{ tabBarLabel: 'ออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
 
             }
 
@@ -483,7 +503,7 @@ const CustomerBottomTab = props => {
                 database.role === 'customer' ?
                     <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
                     :
-                    <Tab.Screen name="FoodHistory" component={HistoryMain} options={{ tabBarLabel: 'ประวัติออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
+                    <Tab.Screen name="HistoryMain" component={HistoryMain} options={{ tabBarLabel: 'ประวัติออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
             }
 
 
@@ -504,13 +524,14 @@ const CustomerBottomTab = props => {
 
         </Tab.Navigator>
     )
-}
+};
 
 const DrawerTab = props => {
+    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
     return (
         <NavigationContainer>
             <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-                <Drawer.Screen name="home" component={CustomerBottomTab} />
+                <Drawer.Screen name="home" component={userBottomTab} />
             </Drawer.Navigator>
         </NavigationContainer>
     )

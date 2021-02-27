@@ -27,7 +27,7 @@ const LoginHome = props => {
       );
     } else {
       if (database.role === 'customer') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
-      else if (database.role === 'restaurant') { setAuthLogin(true); props.navigation.navigate('RestaurantHome') }
+      else if (database.role === 'restaurant') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
     }
   }
 
