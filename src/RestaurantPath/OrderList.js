@@ -23,8 +23,8 @@ const OrderList = props => {
 
                 <View style={styles.FirstRow}>
                     <View><Text style={styles.IndexText}>{props.idx}</Text></View>
-                    <View><Text style={styles.OrderNumberTextTitle}>เลขออเดอร์</Text></View>
-                    <View><Text style={styles.OrderNumberTextValue}>{props.ordernumber}</Text></View>
+                    <View><Text style={styles.OrderNumberTextTitle}>ออเดอร์</Text></View>
+                    <View><Text style={styles.OrderNumberTextValue}>#{props.ordernumber}</Text></View>
 
                     <View style={{ marginLeft: 'auto' }}><Text style={styles.TimeValueText}>{props.timeclock}</Text></View>
                     <View style={{ marginLeft: 5 }}><Text style={styles.TimeUnitText}>น.</Text></View>
@@ -38,7 +38,7 @@ const OrderList = props => {
                 </View>
 
                 <View style={styles.TotalCountsRow}>
-                    <Text style={styles.TotalCountsText}>รวม</Text>
+                    <Text style={styles.TotalCountsText}>ยอดรวม</Text>
                 </View>
 
                 <View style={styles.TotalPricesRow}>
@@ -47,9 +47,9 @@ const OrderList = props => {
 
                 <View style={styles.BtnContainer}>
                     {/* <View style={{ backgroundColor: '#DDDDDD', padding: 8, borderRadius: 15 }}><Text style={styles.GetOrderText}>รับออเดอร์แล้ว</Text></View> */}
-                    <View><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, submitBox: true })}><AntDesign name="check" size={26} color="black" /></TouchableOpacity></View>
+                    <View><TouchableOpacity style={styles.TouchBtnAccept} onPress={() => setOrderstate({ ...orderstate, submitBox: true })}><AntDesign name="check" size={26} color="#7A794E" /></TouchableOpacity></View>
                     <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, fooddemandBox: true })}><Text style={styles.NotEnBtnText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
-                    <View><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: true })} ><AntDesign name="close" size={24} color="black" /></TouchableOpacity></View>
+                    <View style={styles.TouchBtnCancel}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: true })} ><AntDesign name="close" size={24} color="#F6E1E5" /></TouchableOpacity></View>
                 </View>
 
             </View >
@@ -86,7 +86,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>คุณแน่ใจว่าต้องการปฏิเสธออเดอร์นี้</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainerGray}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -107,35 +107,38 @@ const styles = StyleSheet.create({
     YellowBar: { borderTopLeftRadius: 15, borderTopEndRadius: 15, width: '100%', backgroundColor: 'yellow', height: 10 },
 
     FirstRow: { flexDirection: 'row', padding: 20, alignItems: 'center' },
-    IndexText: { fontFamily: 'pr-reg', marginRight: 15 },
-    OrderNumberTextTitle: { fontFamily: 'pr-reg', marginRight: 10, fontSize: 16 },
-    OrderNumberTextValue: { fontFamily: 'pr-reg', color: '#8B8B8B', fontSize: 16 },
+    IndexText: { fontFamily: 'pr-bold', marginRight: 10, fontSize: 16 },
+    OrderNumberTextTitle: { fontFamily: 'pr-bold', marginRight: 5, fontSize: 16 },
+    OrderNumberTextValue: { fontFamily: 'pr-bold', color: '#000', fontSize: 16 },
 
     TimeValueText: { fontFamily: 'pr-reg', color: '#8B8B8B', fontSize: 16 },
-    TimeUnitText: { fontFamily: 'pr-reg', fontSize: 16 },
+    TimeUnitText: { fontFamily: 'pr-reg', fontSize: 16, color: '#8B8B8B', },
 
     SecondRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 20, alignItems: 'center' },
     CustomerNameText: { fontFamily: 'pr-light', color: '#8B8B8B', marginTop: -10, fontSize: 16 },
 
     MenuRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 20, alignItems: 'center', backgroundColor: '#FCFCFC', paddingVertical: 5 },
-    MenuText: { fontFamily: 'pr-bold', fontSize: 18 },
-    CountingText: { fontFamily: 'pr-bold', fontSize: 18 },
-    PricesText: { fontFamily: 'pr-reg', color: '#CECEB7', fontSize: 16 },
+    MenuText: { fontFamily: 'pr-bold', fontSize: 16 },
+    CountingText: { fontFamily: 'pr-bold', fontSize: 16 },
+    PricesText: { fontFamily: 'pr-reg', color: '#8B8B8B', fontSize: 14 },
 
     TotalCountsRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 5 },
-    TotalCountsText: { fontFamily: 'pr-reg', marginLeft: 'auto', fontSize: 25 },
+    TotalCountsText: { fontFamily: 'pr-reg', marginLeft: 'auto', fontSize: 20 },
 
     TotalPricesRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 16 },
-    TotalPricesText: { fontFamily: 'pr-bold', color: '#A7A799', marginLeft: 'auto', fontSize: Dimensions.get('window').height * .03, fontSize: 20 },
+    TotalPricesText: { fontFamily: 'pr-bold', color: '#000', marginLeft: 'auto', fontSize: Dimensions.get('window').height * .03, fontSize: 20 },
 
     GetOrderText: { fontFamily: 'pr-reg', color: '#FFF', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
     BtnContainer: { flexDirection: 'row', justifyContent: 'space-between', margin: 20, alignItems: 'center' },
     SubmitContainer: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     SubmitBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
-    NotEnContainer: { backgroundColor: '#D4D4D4', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, paddingHorizontal: 10 },
-    NotEnBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
+    NotEnContainer: { backgroundColor: '#FFF', padding: 10, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, paddingHorizontal: 10 },
+    NotEnBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: 16 },
     CancelContainer: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     CancelBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    TouchBtnAccept: { backgroundColor: '#FFF', padding: 5, borderRadius: 15, borderWidth: 3, borderColor: '#FFFC1B' },
+    TouchBtnCancel: { backgroundColor: '#FFF', padding: 5, borderRadius: 15, borderWidth: 3, borderColor: '#F6E1E5' },
+
 
     ModalContainer: { alignSelf: 'center', width: 350, backgroundColor: '#fff', paddingHorizontal: 20, paddingVertical: 30, borderRadius: 15, justifyContent: 'center', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
 
     TouchContainer: { backgroundColor: '#FFFC1B', borderRadius: 15, marginTop: 10, padding: 8, width: 80, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     TouchContainerGray: { backgroundColor: '#F5F5F5', borderRadius: 15, marginTop: 10, padding: 8, width: 80, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    TouchContainerRed: { backgroundColor: '#FFF', borderColor: 'red', borderWidth: 1, borderRadius: 15, marginTop: 10, padding: 8, width: 80, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     SubmitButtonText: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
     TouchBackContainer: { backgroundColor: '#FFF', borderRadius: 15, marginTop: 10, padding: 8, width: 80, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     closeButtonTxt: { fontFamily: 'pr-reg', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, color: '#000' },
