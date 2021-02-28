@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 var order = new Schema({
-    addr_line1: String,
+    orderdetails: [{ type: Schema.Types.ObjectId, ref: 'orderdetail' },],
     addr_line2: String,
     state: String,
     city: String,

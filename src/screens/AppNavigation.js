@@ -23,6 +23,7 @@ import AnalyticMain from '../RestaurantPath/AnalyticMain'
 import MenuList from '../RestaurantPath/MenuList'
 import MenuAdd from '../RestaurantPath/MenuAdd'
 import OrderMain from '../RestaurantPath/OrderMain'
+import OrderList from '../RestaurantPath/OrderList'
 import HistoryMain from '../RestaurantPath/HistoryMain'
 import HistoryList from '../RestaurantPath/HistoryList'
 
@@ -476,6 +477,18 @@ const AppNavigation = props => {
                         }
                     }
                     />
+                    <Stack.Screen name="MenuAdd" 
+                    component={MenuAdd} 
+                    option={{
+                        title: 'เพิ่มเมนูอาหาร',
+                        headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                            } 
+                        }
+                    }
+                    />
                     <Stack.Screen name="OrderMain" 
                     component={OrderMain} 
                     option={{
@@ -488,6 +501,7 @@ const AppNavigation = props => {
                         }
                     }
                     />
+                    
                     <Stack.Screen name="HistoryMain" 
                     component={HistoryMain} 
                     option={{
