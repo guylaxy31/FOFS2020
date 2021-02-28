@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const MenuList = props => {
     const tabledataset = {
@@ -12,10 +13,8 @@ const MenuList = props => {
     }
 
     const element = (data, index) => (
-        <TouchableOpacity>
-            <View style={styles.btn}>
-                <Image style={styles.btnEdit} source={require('../../assets/restaurants/baseline_create_black_18.png')}></Image>
-            </View>
+        <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
+            <MaterialIcons name="edit" size={24} color="black" />
         </TouchableOpacity>
     );
     return (

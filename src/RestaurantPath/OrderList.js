@@ -49,7 +49,7 @@ const OrderList = props => {
                     {/* <View style={{ backgroundColor: '#DDDDDD', padding: 8, borderRadius: 15 }}><Text style={styles.GetOrderText}>รับออเดอร์แล้ว</Text></View> */}
                     <View><TouchableOpacity style={styles.TouchBtnAccept} onPress={() => setOrderstate({ ...orderstate, submitBox: true })}><AntDesign name="check" size={26} color="#7A794E" /></TouchableOpacity></View>
                     <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, fooddemandBox: true })}><Text style={styles.NotEnBtnText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
-                    <View style={styles.TouchBtnCancel}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: true })} ><AntDesign name="close" size={24} color="#F6E1E5" /></TouchableOpacity></View>
+                    <View style={styles.TouchBtnCancel}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: true })} ><AntDesign name="close" size={24} color="#FF0A0A" /></TouchableOpacity></View>
                 </View>
 
             </View >
@@ -86,7 +86,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>คุณแน่ใจว่าต้องการปฏิเสธออเดอร์นี้</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -132,12 +132,13 @@ const styles = StyleSheet.create({
     BtnContainer: { flexDirection: 'row', justifyContent: 'space-between', margin: 20, alignItems: 'center' },
     SubmitContainer: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     SubmitBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    SubmitForCCButtonText: { fontFamily: 'pr-reg', color: '#FF0A0A', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 ,textAlign:'center'},
     NotEnContainer: { backgroundColor: '#FFF', padding: 10, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, paddingHorizontal: 10 },
     NotEnBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: 16 },
     CancelContainer: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     CancelBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
     TouchBtnAccept: { backgroundColor: '#FFF', padding: 5, borderRadius: 15, borderWidth: 3, borderColor: '#FFFC1B' },
-    TouchBtnCancel: { backgroundColor: '#FFF', padding: 5, borderRadius: 15, borderWidth: 3, borderColor: '#F6E1E5' },
+    TouchBtnCancel: { backgroundColor: '#FFF', padding: 5, borderRadius: 15, borderWidth: 3, borderColor: '#FF0A0A' },
 
 
     ModalContainer: { alignSelf: 'center', width: 350, backgroundColor: '#fff', paddingHorizontal: 20, paddingVertical: 30, borderRadius: 15, justifyContent: 'center', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },

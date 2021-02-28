@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, TextInput, Modal, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, TextInput, Modal, Button, Alert } from 'react-native';
 import { Icon } from 'react-native-elements'
 
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -8,6 +8,22 @@ import * as ImagePicker from 'expo-image-picker';
 
 const MenuAdd = props => {
     const [image, setImage] = useState(null);
+    const [menu, setMenu] = useState({
+        name: '',
+        category: 'default',
+        price: '',
+        description: '',
+        status: true
+    });
+    const [variation, setVariation] = useState({
+        key1: { name: 'ธรรมดา', price: 30 },
+        key2: { name: 'พิเศษ', price: 35 },
+    });
+    const [ingredient, setIngredient] = useState({
+        key1: { name: 'ไข่ดาว', price: 5 },
+        key2: { name: 'ไข่เจียว', price: 5 }
+    });
+
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -34,44 +50,100 @@ const MenuAdd = props => {
         }
     };
 
+    const checkBeforeNavigate = () => {
+        {
+            image != null && menu.name != '' && menu.category != '' && menu.price != '' ? props.navigation.navigate('MenuList')
+                :
+                Alert.alert(
+                    //title
+                    'ไม่สามารถเพิ่มเมนูได้',
+                    //body
+                    'โปรดระบุข้อมูลให้ครบถ้วน',
+                    [
+                        { text: 'ปิด' },
+                    ],
+                    { cancelable: false },
+                    //clicking out side of alert will not cancel
+
+                );
+        }
+    }
+
     return (
         <View style={styles.container}>
             <ScrollView style={{ width: '100%', paddingHorizontal: 50 }} showsVerticalScrollIndicator={false}>
 
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={styles.AddImageContainer}><TouchableOpacity style={styles.TouchImageContainer} onPress={pickImage}><Text style={styles.addImageText}>+ เพิ่มรูปเมนู</Text><Icon name="image"></Icon></TouchableOpacity></View>
-                    {image && <Image source={{ uri: image }} style={{ width: 150, height: 150 }} />}
+                    {image && <Image source={{ uri: image }} style={{ width: 150, height: 150, marginTop: 20, borderRadius: 15 }} />}
                 </View>
-
+                {image === null ? <View style={{ width: '100%', alignItems: 'center', marginTop: 20 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*ต้องการรูปเมนู</Text></View> : null}
                 <View><Text style={styles.MenuTitleText}>ชื่อเมนู</Text></View>
-                <View><TextInput style={styles.TextInputVal}></TextInput></View>
+                <View><TextInput style={styles.TextInputVal} onChangeText={(val) => setMenu({ ...menu, name: val })}></TextInput></View>
+                {menu.name === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
                 <View><Text style={styles.MenuTitleText}>ประเภทอาหาร</Text></View>
-                <View style={styles.DropDownContainer}>
-                    <DropDownPicker
-                        items={[
-                            { label: 'อาหาตามสั่ง', value: 'madeinorder' },
-                            { label: 'เมนูเส้น', value: 'noodle' },
-                            { label: 'เครื่องดื่ม', value: 'drinks' },
-                            { label: 'ขนม', value: 'sweets' }
-                        ]}
-                        defaultIndex={0}
-                        containerStyle={{ height: 40 }}
-                        onChangeItem={item => console.log(item.label, item.value)}
-                        labelStyle={{ fontSize: 14, fontFamily: 'pr-reg', color: '#000', backgroundColor: '#FFF', textAlign: 'center' }}
-                        placeholder="เลือกประเภทอาหาร"
-                        placeholderStyle={{ fontFamily: 'pr-reg', color: '#A09E8C', textAlign: 'center', fontSize: 14 }}
-                        dropDownStyle={{ backgroundColor: '#FFF', textAlign: 'center' }}
-                        activeLabelStyle={{ backgroundColor: '#DDDDD6', width: '100%', textAlign: 'center', borderRadius: 15 }}
 
-                    />
-                </View>
+                <DropDownPicker
+                    items={[
+                        { label: 'โปรดระบุ', value: 'default', hidden: true, disabled: true },
+                        { label: 'อาหาตามสั่ง', value: 'madeinorder' },
+                        { label: 'เมนูเส้น', value: 'noodle' },
+                        { label: 'เครื่องดื่ม', value: 'drinks' },
+                        { label: 'ขนม', value: 'sweets' }
+                    ]}
+                    defaultValue={menu.category}
+                    dropDownMaxHeight={300}
+                    placeholder="โปรดระบุ"
+                    containerStyle={{ height: 40, marginBottom: 16 }}
+                    style={{
+                        backgroundColor: '#fafafa',
+                    }}
+                    itemStyle={{
+                        justifyContent: 'flex-start'
+                    }}
+                    dropDownStyle={{ backgroundColor: '#fafafa' }}
+                    onChangeItem={(item) => setMenu({ ...menu, category: item.value })}
+                    labelStyle={{
+                        fontFamily: 'pr-reg',
+                        color: '#000'
+                    }}
+                    selectedLabelStyle={{
+                        color: '#000'
+                    }}
+                />
+                {menu.category === 'default' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดเลือก</Text></View> : null}
+                {menu.category === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดเลือก</Text></View> : null}
+
 
                 <View><Text style={styles.MenuTitleText}>ราคา (บาท)</Text></View>
-                <View><TextInput style={styles.TextInputValPrices}></TextInput></View>
+                <View><TextInput keyboardType='numeric' onChangeText={(val) => setMenu({ ...menu, price: val })} style={styles.TextInputValPrices}></TextInput></View>
+                {menu.price === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
                 <View><Text style={styles.MenuTitleText}>กรณีมีปริมาณพิเศษ</Text></View>
+                {variation != null ?
+                    <View style={{ marginTop: 10 }}>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+                            <View><Text style={styles.ingreTitleText}>{variation.key1.name}</Text></View>
+                            <View><Text style={styles.ingrePricesText}>{variation.key1.price} ฿</Text></View>
+
+                            <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
+                            <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+                            <View><Text style={styles.ingreTitleText}>{variation.key2.name}</Text></View>
+                            <View><Text style={styles.ingrePricesText}>{variation.key1.price} ฿</Text></View>
+
+                            <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
+                            <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
+                        </View>
+                    </View>
+
+                    :
+                    null}
                 <View style={styles.ValueTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
+
 
                 <View><Text style={styles.MenuTitleText}>วัตถุดิบที่ลูกค้าสามารถเลือก</Text></View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
@@ -112,11 +184,11 @@ const MenuAdd = props => {
 
 
                 <View><Text style={styles.MenuTitleText}>รายละเอียดเพิ่มเติม (อาหาร)</Text></View>
-                <View><TextInput style={styles.TextInputValDesc}></TextInput></View>
+                <View><TextInput onChangeText={(val) => setMenu({ ...menu, description: val })} style={{ textAlignVertical: 'top' }} numberOfLines={3} multiline={true} style={styles.TextInputValDesc}></TextInput></View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 50 }}>
-                    <View style={styles.submitBtn}><TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.submitBtnText}>ยืนยัน</Text></TouchableOpacity></View>
-                    <View style={styles.cancelBtn}><TouchableOpacity><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
+                    <View style={styles.submitBtn}><TouchableOpacity onPress={() => checkBeforeNavigate()}><Text style={styles.submitBtnText}>ยืนยัน</Text></TouchableOpacity></View>
+                    <View style={styles.cancelBtn}><TouchableOpacity onPress={() => props.navigation.goBack()}><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
                 </View>
 
                 {/* แสดงเมื่อกดปุ่มลบ แก้ไข */}
@@ -152,11 +224,11 @@ const styles = StyleSheet.create({
     TouchImageContainer: { width: 150, height: 150, justifyContent: 'center', borderRadius: 15 },
 
     MenuTitleText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginBottom: 10, marginTop: 20 },
-    TextInputVal: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 250, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
+    TextInputVal: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 250, fontFamily: 'pr-reg', fontSize: 14, paddingHorizontal: 20, paddingVertical: 10 },
     TextInputValPrices: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 100, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
-    TextInputValDesc: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 300, height: 100, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
+    TextInputValDesc: { textAlignVertical: 'top', color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 300, height: 100, fontFamily: 'pr-reg', fontSize: 14, padding: 10 },
 
-    DropDownContainer: { zIndex: 1, width: Dimensions.get('window').width * .5, height: Dimensions.get('window').height * .08, marginVertical: 5, backgroundColor: '#FFF' },
+    DropDownContainer: { zIndex: 1, width: Dimensions.get('window').width * .5, marginVertical: 5, backgroundColor: '#FFF' },
 
     ValueTouchContainer: { width: 40, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, marginHorizontal: 5, borderRadius: 15 },
     ValueTouchBox: { padding: 5, },

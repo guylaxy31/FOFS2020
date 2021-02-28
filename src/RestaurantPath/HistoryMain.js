@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const HistoryMain = props => {
     const tabledataset = {
-        tableHead: ['เลขออเดอร์', 'วันที่', 'เวลา(น.)', 'รายละเอียด'],
+        tableHead: ['#ออเดอร์', 'วันที่', 'เวลา(น.)', 'รายละเอียด'],
         tableData: [
             ['152', '18 ม.ค. 64', '11:04', 'รายละเอียด'],
             ['153', '18 ม.ค. 64', '11:08', 'รายละเอียด']

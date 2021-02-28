@@ -50,7 +50,7 @@ const RestaurantHome = props => {
           <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain')}>
             <View style={styles.touchAlign}>
               <MaterialIcons name="history" size={60} color="black" />
-              <View style={styles.textContainer}><Text style={styles.toolText}>ประวัติสั่งทำอาหาร</Text></View>
+              <View style={styles.textContainer}><Text style={styles.toolText}>ประวัติออเดอร์</Text></View>
             </View>
           </TouchableOpacity>
         </View>
