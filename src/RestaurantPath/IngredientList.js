@@ -3,15 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const MenuList = props => {
+const IngredientList = props => {
     const tabledataset = {
-        tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา (฿)', 'แก้ไข'],
+        tableHead: ['#', 'รายการวัตถุดิบ', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
-            ['1', 'ข้าวผัดหมู', 'อาหารตามสั่ง', '25', 'แก้ไข'],
-            ['2', 'ข้าวไข่เจียว', 'อาหารตามสั่ง', '15', 'แก้ไข']
+            ['1', 'หมู', '0', 'แก้ไข'],
+            ['2', 'ปลา', '5', 'แก้ไข']
         ]
     }
-
     const element = (data, index) => (
         <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
             <MaterialIcons name="edit" size={24} color="black" />
@@ -20,15 +19,14 @@ const MenuList = props => {
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
-                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButton}>เมนู</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButtonUnselect}>เมนู</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('VariationList')}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
-                <TouchableOpacity><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
-                <TouchableOpacity><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButton}>วัตถุดิบ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <ScrollView>
-
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มวัตถุดิบ</Text></TouchableOpacity>
                 </View>
 
                 <Table borderStyle={{ borderColor: 'transparent' }}>
@@ -38,7 +36,7 @@ const MenuList = props => {
                             <TableWrapper key={index} style={styles.row}>
                                 {
                                     rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 4 ? element(cellData, index) : cellData} textStyle={styles.text} />
+                                        <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} textStyle={styles.text} />
                                     ))
                                 }
                             </TableWrapper>
@@ -47,9 +45,9 @@ const MenuList = props => {
                 </Table>
             </ScrollView>
         </View>
-    );
-}
+    )
 
+}
 
 const styles = StyleSheet.create({
     container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
 
     pageButton: { fontFamily: 'pr-reg', fontSize: 16 },
     pageButtonUnselect: { fontFamily: 'pr-reg', fontSize: 16, color: '#ccc' }
-});
+})
 
-
-export default MenuList
+export default IngredientList

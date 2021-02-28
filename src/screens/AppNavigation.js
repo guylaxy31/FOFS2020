@@ -28,6 +28,9 @@ import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 import RestaurantHome from '../RestaurantPath/RestaurantHome'
 import AnalyticMain from '../RestaurantPath/AnalyticMain'
 import MenuList from '../RestaurantPath/MenuList'
+import VariationList from '../RestaurantPath/VariationList'
+import IngredientList from '../RestaurantPath/IngredientList'
+import OptionList from '../RestaurantPath/OptionList'
 import MenuAdd from '../RestaurantPath/MenuAdd'
 import OrderMain from '../RestaurantPath/OrderMain'
 import HistoryMain from '../RestaurantPath/HistoryMain'
@@ -63,7 +66,7 @@ const AppNavigation = props => {
 
         <Stack.Navigator initialRouteName="Homescreen">
 
-            {AuthLogin === true ?
+            {database.role === 'restaurant' && AuthLogin === true ?
                 <Stack.Screen name="RestaurantHome"
                     component={RestaurantHome}
                     options={{
@@ -327,6 +330,46 @@ const AppNavigation = props => {
                 }
                 }
             />
+
+            <Stack.Screen name="VariationList"
+                component={VariationList}
+                options={{
+                    title: 'รายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
+            <Stack.Screen name="IngredientList"
+                component={IngredientList}
+                options={{
+                    title: 'รายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
+
+            <Stack.Screen name="OptionList"
+                component={OptionList}
+                options={{
+                    title: 'รายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
             <Stack.Screen name="MenuAdd"
                 component={MenuAdd}
                 options={{
@@ -456,7 +499,7 @@ const userBottomTab = props => {
                 <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
                 :
                 database.role === 'customer' ?
-                    <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+                    <Tab.Screen name="Homescreen" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
                     :
                     <Tab.Screen name="RestaurantHome" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
             }

@@ -19,7 +19,7 @@ export const AppProvider = ({ children }) => {
     //     email: 'cust@emailcom',
     // })
     const [database, setDatabase] = useState({
-        username: 'rest01',
+        username: 'rest',
         password: '123456',
         firstname: 'ใจดี',
         lastname: 'อาหาร',
