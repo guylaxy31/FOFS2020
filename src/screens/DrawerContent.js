@@ -6,11 +6,11 @@ import { Avatar, Title, Caption, Drawer, Text, TouchableRipple, Switch } from 'r
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { MaterialIcons } from '@expo/vector-icons';
 
 export function DrawerContent(props) {
 
-    const { AuthLogin, setAuthLogin, database, setDatabase, user, setUser } = useContext(AppContext);
+    const { AuthLogin, setAuthLogin, database, setDatabase, user, setUser, restaurant, setRestaurant } = useContext(AppContext);
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
@@ -45,6 +45,14 @@ export function DrawerContent(props) {
                             :
                             <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="home-outline" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="หน้าหลัก" onPress={() => props.navigation.navigate('Homescreen')} />
                         }
+                        {/* ถ้าเป็นร้านอาหาร ผ่านการล็อคอินแสดงหน้าตั้งค่า */}
+                        {database.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าข้อมูลผู้ใช้" onPress={() => props.navigation.navigate('ProfileSetting')} />
+                            :
+                            null}
+                        {database.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialIcons name="store" size={size} color={color} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าข้อมูลร้าน" onPress={() => props.navigation.navigate('RestaurantSetting')} />
+                            :
+                            null}
+
                         {/* ตั้งค่าโปรไฟล์ถ้าหากเป็นลูกค้าให้เป็นการตั้งโปรไฟล์สำหรับลูกค้า ร้านอาหารให้เป็นการตั้งโปรไฟล์สำหรับร้านอาหาร */}
                         {database.role === 'customer' && AuthLogin == true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} /> : null}
 

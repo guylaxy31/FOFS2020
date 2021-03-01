@@ -6,6 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Home/Home'
 import ProfileSetting from '../Home/ProfileSetting'
+import RestaurantSetting from '../Home/RestaurantSetting'
 import Tutorial from '../Home/Tutorial'
 import CustomerReport from '../Home/CustomerReport'
 import Contact from '../Home/Contact'
@@ -59,7 +60,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
-    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
+    const { AuthLogin, setAuthLogin, database, setDatabase, restaurant, setRestaurant } = useContext(AppContext);
 
 
     return (
@@ -126,6 +127,19 @@ const AppNavigation = props => {
                 component={ProfileSetting}
                 options={{
                     title: 'ตั้งค่าโปรไฟล์',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
+            <Stack.Screen name="RestaurantSetting"
+                component={RestaurantSetting}
+                options={{
+                    title: 'ตั้งค่าข้อมูลร้าน',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,

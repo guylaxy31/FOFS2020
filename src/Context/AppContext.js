@@ -28,7 +28,7 @@ export const AppProvider = ({ children }) => {
         age: '25',
         phonenumber: '0999999999',
         email: 'cust@emailcom',
-        line: 'cust@emailcom',
+        line: 'rest001',
     })
     const [restaurant, setRestaurant] = useState({
         restaurantName: 'ข้าวมันไก่',
@@ -38,7 +38,7 @@ export const AppProvider = ({ children }) => {
         amphoe: 'เมือง',
         province: 'เชียงใหม่',
         postalcode: '50200',
-        website: 'chicken@email.com',
+        website: 'chicken@website.com',
     })
     const [user, setUser] = useState({
         username: '',
@@ -46,7 +46,7 @@ export const AppProvider = ({ children }) => {
     })
 
 
-    return <AppContext.Provider value={{ AuthLogin, setAuthLogin, database, setDatabase, user, setUser }}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{ AuthLogin, setAuthLogin, database, setDatabase, user, setUser, restaurant, setRestaurant }}>{children}</AppContext.Provider>
 };
 
 export default AppContext
