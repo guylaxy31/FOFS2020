@@ -10,7 +10,7 @@ const RequestCheck = props => {
         <View style={styles.container}>
             <ScrollView style={styles.ScrollContainer} horizontal={false}>
                 <View style={styles.CardContainer}>
-                    {/* กรณีมีหลายรูป ให้ก็อป Tag View ImgContainer ต่อ 1 รูป */}
+
                     <View style={styles.ImgContainer}>
                         <Image
                             style={styles.ImgTag}
