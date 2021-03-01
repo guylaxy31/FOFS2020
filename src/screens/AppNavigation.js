@@ -472,7 +472,7 @@ const AppNavigation = props => {
             <Stack.Screen name="ListMain"
                 component={ListMain}
                 options={{
-                    title: 'ร้านค้าในระบบ',
+                    title: 'ร้านอาหารในระบบ',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
