@@ -447,6 +447,18 @@ const AppNavigation = props => {
                 }
                 }
             />
+              <Stack.Screen name="ReportingDetail"
+                component={ReportingDetail}
+                options={{
+                    title: 'รายละเอียดคำร้องเรียน',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
             <Stack.Screen name="RequestMain"
                 component={RequestMain}
                 options={{

@@ -13,7 +13,7 @@ const ReportManagement = props => {
     }
 
     const element = (data, index) => (
-        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.navigation.navigate('ListCheck')}>
+        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.navigation.navigate('ReportingDetail')}>
             <MaterialIcons name="more-horiz" size={24} color="black" />
         </TouchableOpacity>
     );
