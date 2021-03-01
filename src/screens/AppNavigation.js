@@ -42,6 +42,8 @@ import RequestMain from '../AdminPath/RequestMain'
 import RequestCheck from '../AdminPath/RequestCheck'
 import ListMain from '../AdminPath/ListMain'
 import ListCheck from '../AdminPath/ListCheck'
+import ReportManagement from '../AdminPath/ReportManagement'
+import ReportingDetail from '../AdminPath/ReportingDetail'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -493,6 +495,20 @@ const AppNavigation = props => {
                 }
                 }
             />
+
+            <Stack.Screen name="ReportManagement"
+                component={ReportManagement}
+                options={{
+                    title: 'ตรวจสอบคำร้องเรียง',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
         </Stack.Navigator>
 
 
