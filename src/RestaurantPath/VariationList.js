@@ -1,9 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const VariationList = props => {
+    const [state, setState] = useState({
+        variationViewState: false,
+    })
     const tabledataset = {
         tableHead: ['#', 'รายการปริมาณ', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
@@ -26,7 +29,7 @@ const VariationList = props => {
             </View>
             <ScrollView>
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่ม</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => setState({ ...state, variationViewState: true })} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่ม</Text></TouchableOpacity>
                 </View>
 
                 <Table borderStyle={{ borderColor: 'transparent' }}>
@@ -44,6 +47,27 @@ const VariationList = props => {
                     }
                 </Table>
             </ScrollView>
+
+            {/* กล่องนี้จะแสดงหากมีการกดปุ่มเพิ่ม...เพื่อแอดค่า */}
+
+            <Modal transparent={true} visible={state.variationViewState}>
+                <View style={styles.ModelBackground}>
+                    <View style={styles.ModalContainer}>
+                        <View>
+                            <Text style={styles.titleText}>ปริมาณ</Text>
+                            <TextInput style={styles.TextInputVal}></TextInput>
+                        </View>
+                        <View style={{ marginBottom: 40 }}>
+                            <Text style={styles.titleText}>ราคา</Text>
+                            <TextInput keyboardType='numeric' style={styles.TextInputValPrices}></TextInput>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20 }}>
+                            <TouchableOpacity style={styles.touchContainer} onPress={() => { setState({ ...state, variationViewState: false }) }}><Text style={styles.submitModalBtn}>เพิ่ม</Text></TouchableOpacity>
+                            <TouchableOpacity style={styles.touchBackContainer} onPress={() => { setState({ ...state, variationViewState: false }) }}><Text style={styles.cancelModalBtn}>ยกเลิก</Text></TouchableOpacity></View>
+                    </View>
+                </View>
+            </Modal>
+
         </View>
     )
 
@@ -63,7 +87,19 @@ const styles = StyleSheet.create({
     btnEdit: { width: 20, height: 20 },
 
     pageButton: { fontFamily: 'pr-reg', fontSize: 16 },
-    pageButtonUnselect: { fontFamily: 'pr-reg', fontSize: 16, color: '#ccc' }
+    pageButtonUnselect: { fontFamily: 'pr-reg', fontSize: 16, color: '#ccc' },
+
+    titleText: { fontFamily: 'pr-reg', fontSize: 16, marginBottom: 10, marginTop: 20 },
+    TextInputVal: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 250, fontFamily: 'pr-reg', fontSize: 14, paddingHorizontal: 20, paddingVertical: 10 },
+    TextInputValPrices: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 100, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
+
+    ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', paddingHorizontal: 40, borderRadius: 15, justifyContent: 'center', height: 380, marginTop: 120 },
+    ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
+    touchContainer: { backgroundColor: '#FFF', paddingHorizontal: 30, paddingVertical: 10, borderRadius: 15, backgroundColor: '#FFF', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    touchBackContainer: { backgroundColor: '#FFF', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    submitModalBtn: { fontFamily: 'pr-reg', fontSize: 16 },
+    cancelModalBtn: { fontFamily: 'pr-reg', fontSize: 16, color: 'grey' },
+
 })
 
 export default VariationList

@@ -22,8 +22,8 @@ const MenuList = props => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
                 <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButton}>เมนู</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('VariationList')}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
-                <TouchableOpacity><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
-                <TouchableOpacity><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <ScrollView>
 

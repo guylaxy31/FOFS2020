@@ -133,68 +133,6 @@ const MenuAdd = props => {
                 <View><TextInput keyboardType='numeric' onChangeText={(val) => setMenu({ ...menu, price: val })} style={styles.TextInputValPrices}></TextInput></View>
                 {menu.price === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
-                {/* [5] โซนเพิ่มปริมาณ */}
-                <View><Text style={styles.MenuTitleText}>กรณีมีปริมาณพิเศษ</Text></View>
-                {variation != null ?
-                    <View style={{ marginTop: 10 }}>
-
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                            <View><Text style={styles.ingreTitleText}>{variation.key1.name}</Text></View>
-                            <View><Text style={styles.ingrePricesText}>+{variation.key1.price} ฿</Text></View>
-
-                            <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                            <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                            <View><Text style={styles.ingreTitleText}>{variation.key2.name}</Text></View>
-                            <View><Text style={styles.ingrePricesText}>+{variation.key1.price} ฿</Text></View>
-
-                            <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                            <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                        </View>
-                    </View>
-
-                    :
-                    null}
-                <View style={styles.ValueTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
-
-                {/* วัตถุดิบเช่น หมู ไก่ กุ้ง ที่ใช้ประกอบอาหาร */}
-                <View><Text style={styles.MenuTitleText}>วัตถุดิบที่ลูกค้าสามารถเลือก</Text></View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>{ingredient.key1.name}</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+{ingredient.key1.price} ฿</Text></View>
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>{ingredient.key2.name}</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+{ingredient.key2.price} ฿</Text></View>
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>{ingredient.key3.name}</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+{ingredient.key3.price} ฿</Text></View>
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={styles.AddTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
-
-                {/* ไข่ดาว ไข่เจียว และราคา */}
-                <View><Text style={styles.MenuTitleText}>ท็อปปิ้ง</Text></View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>{option.key1.name}</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+{option.key1.price} ฿</Text></View>
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>{option.key2.name}</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+{option.key2.price} ฿</Text></View>
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={styles.AddTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
 
                 {/* เขียนเกี่ยวกับอาหารเพิ่มเติม หรืออาจจะเป็นข้อความแนะนำอาหาร ความพิเศษของเมนูนี้ */}
                 <View><Text style={styles.MenuTitleText}>รายละเอียดเพิ่มเติม (อาหาร)</Text></View>
