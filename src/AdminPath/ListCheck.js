@@ -100,7 +100,7 @@ const ListCheck = props => {
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => props.navigation.navigate('AdminRestaurantListscreen')}>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()}>
                             <View style={styles.btn3}>
                                 <Text style={styles.btnText3}>ย้อนกลับ</Text>
                             </View>

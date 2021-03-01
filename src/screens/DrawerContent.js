@@ -63,6 +63,7 @@ export function DrawerContent(props) {
                             database.role === 'restaurant' && AuthLogin === true ? <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="alert" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="แจ้งปัญหาที่พบ" onPress={() => props.navigation.navigate('CustomerReport')} /> : null
                         }
                         <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="contacts" color={color} size={size} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="ติดต่อ" onPress={() => props.navigation.navigate('Contact')} />
+                        <DrawerItem icon={({ color, size }) => (<MaterialIcons name="security" size={size} color={color} />)} labelStyle={{ fontFamily: 'pr-reg' }} label="สำหรับผู้พัฒนา" onPress={() => props.navigation.navigate('AdminHome')} />
 
                     </Drawer.Section>
 
