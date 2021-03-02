@@ -44,6 +44,9 @@ import ListMain from '../AdminPath/ListMain'
 import ListCheck from '../AdminPath/ListCheck'
 import ReportManagement from '../AdminPath/ReportManagement'
 import ReportingDetail from '../AdminPath/ReportingDetail'
+import CustomerList from '../AdminPath/CustomerList'
+import RestList from '../AdminPath/RestList'
+
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -447,7 +450,31 @@ const AppNavigation = props => {
                 }
                 }
             />
-              <Stack.Screen name="ReportingDetail"
+            <Stack.Screen name="CustomerList"
+                component={CustomerList}
+                options={{
+                    title: 'รายชื่อผู้ใช้ Customer',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="RestList"
+                component={RestList}
+                options={{
+                    title: 'รายชื่อผู้ใช้ Restaurant',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="ReportingDetail"
                 component={ReportingDetail}
                 options={{
                     title: 'รายละเอียดคำร้องเรียน',
