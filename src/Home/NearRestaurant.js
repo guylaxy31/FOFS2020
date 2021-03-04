@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 class NearRestaurant extends Component {
+  
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image style={styles.imgBorder} source={this.props.imageUri}></Image>
+          <Image style={styles.imgBorder} source={{uri: this.props.imageUri}}></Image>
         </View>
         <View>
           <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.resName}</Text>
+      
         </View>
         <View>
           <Text style={{ fontFamily: 'pr-light', color: 'gray' }}>{this.props.distance}</Text>

@@ -10,7 +10,7 @@ const FoodMenuEdit = props => {
             <View style={styles.YellowTab}></View>
             <View style={{ flexDirection: 'row', paddingVertical: 20, alignItems: 'center' }}>
                 <Text style={styles.MenuTitleText}>{props.menuTitle}</Text>
-                <Image style={styles.ImageContainer} source={props.imageUri}></Image>
+                <Image style={styles.ImageContainer} source={{uri: props.imageUri}}></Image>
                 <Text style={styles.MenuCountText}>x 0</Text>
             </View>
         </View>

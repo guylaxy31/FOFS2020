@@ -1,56 +1,38 @@
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { AppProvider } from './src/Context/AppContext'
+// การโหลด Fonts
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
-// R E D U X
-import { createStore, combineReducers } from 'redux'
-import { loginStatus, consenseReducer, genderSelectionReducer, orderlistReducer } from './src/Reducers/Reducers'
-import { Provider } from 'react-redux';
-
-// N A V I G A T O R
+// [1]Navigation [2]Redux
 import AppNavigation from './src/screens/AppNavigation'
+import { Provider } from 'react-redux';
 import store from './store/store'
-// const store = createStore(combineReducers({ loginStatus, consense: consenseReducer, gender: genderSelectionReducer, orderlist: orderlistReducer }))
+import Toast from 'react-native-toast-message'
 
-let customFonts = {
-  'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
-  'pr-reg': require('./assets/fonts/Prompt-Regular.ttf'),
-  'pr-bold': require('./assets/fonts/Prompt-Bold.ttf'),
-};
-
-export default class App extends Component {
-  state = { fontsLoaded: false };
-
-  async _loadFontsAsync() {
-    await Font.loadAsync(customFonts);
-    this.setState({ fontsLoaded: true });
-  }
-
-  componentDidMount() { this._loadFontsAsync(); }
-
-  render() {
-
-    if (this.state.fontsLoaded) {
-      return (
-        <Provider store={store}>
-          <AppNavigation />
-        </Provider>
-      )
-    }
-    else {
-      return <AppLoading />;
-    }
-  }
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
+    'pr-reg': require('./assets/fonts/Prompt-Regular.ttf'),
+    'pr-bold': require('./assets/fonts/Prompt-Bold.ttf'),
+  })
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,                    // ให้มีพื้นที่ 1 ส่วน (Default Column)
-    alignSelf: 'stretch',       // ให้ child ใน container align ให้ match กับ height ของ container (Column direction)
-    alignItems: 'center',       // จัดให้ container มันเองอยู่ตอนกลาง ( Row direction)
-    justifyContent: 'center',   // ให้ child align ตามทิศของ container
-  },
+export default function App() {
+  const [fontLoaded, setFonLoaded] = useState(false);
 
-});
+  if (!fontLoaded) {
+    return <AppLoading startAsync={fetchFonts} onFinish={() => {
+      setFonLoaded(true)
+    }} />
+  }
+  return (
+    <Provider store={store}>
+      <AppProvider>
+        <AppNavigation />
+        <Toast ref={(ref) => Toast.setRef(ref)}></Toast>
+      </AppProvider>
+    </Provider>
+  )
+}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
@@ -17,14 +17,15 @@ const FoodMenuCustom = props => {
         { label: 'ไข่ดาว', value: 'freid' },
         { label: 'ไข่เจียว', value: 'omelet' },
     ];
-
+    //const [item, setItem] = useState(props.route.params.item);
+    //console.log(item);
     return (
 
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
                     <View><Image style={styles.imageTag} source={require('../../assets/menulist/fried-rice.jpg')}></Image></View>
-                    <View><Text style={styles.MenuTitleText}>ข้าวผัด</Text></View>
+                    <View><Text style={styles.MenuTitleText}></Text></View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 60 }}>
