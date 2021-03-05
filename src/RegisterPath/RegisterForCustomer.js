@@ -5,9 +5,12 @@ import Slider from '@react-native-community/slider';
 import HextagonIcon from '../Themes/HextagonIcon';
 import ThumbSlider from '../../assets/register/ThumbSlider.png'
 import DropDownPicker from 'react-native-dropdown-picker';
+import Toast from 'react-native-toast-message';
 import CheckBox from '@react-native-community/checkbox';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from 'axios';
+import baseURL from '../../assets/common/baseUrl';
 
 const RegisterForCustomer = props => {
 
@@ -69,7 +72,44 @@ const RegisterForCustomer = props => {
     }
 
     const checkBeforeNavigate = () => {
-        if (user.isValidUser & user.isValidPassword & user.gender != '' & user.career != '' & user.isValidPhoneNumber & user.isValidEmail && user.isValidFirstname) { props.navigation.navigate('Homescreen') } else {
+        if (user.isValidUser & user.isValidPassword & user.gender != '' & user.career != '' & user.isValidPhoneNumber & user.isValidEmail && user.isValidFirstname) {
+            let customer = {
+                cus_firstname: user.firstname,
+                cus_lastname: user.lastname,
+                cus_age: user.age,
+                cus_phone: user.phonenumber,
+                cus_email: user.email,
+                username: user.username,
+                password: user.password,
+                career: user.career,
+                careerDetail: user.careerDetail
+            }
+            axios
+                .post(`${baseURL}customer/register`, customer)
+                .then((res) => {
+                    if (res.status == 200) {
+                        Toast.show({
+                            topOffset: 60,
+                            type: "success",
+                            text1: "Registration Succeeded",
+                            text2: "Please Login into your account",
+                        });
+                        setTimeout(() => {
+                            props.navigation.navigate('LoginHome')
+                        }, 500)
+                    }
+
+                }).catch((error) => {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again",
+                    });
+                })
+
+        }
+        else {
             Alert.alert(
                 //title
                 'ไม่สามารถยืนยันได้',
@@ -182,15 +222,15 @@ const RegisterForCustomer = props => {
                     {user.isValidEmail == true ? null : <View style={{ marginBottom: 20 }}><Text style={styles.validText}>ระบุอีเมลให้ถูกต้อง</Text></View>}
                     <TouchableOpacity onPress={() => openConsense()} style={styles.TouchReadButton}><Text style={styles.readforSubmit}>อ่านข้อตกลงเพื่อยอมรับ</Text></TouchableOpacity>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
-                        <CheckBox
+                        {/* <CheckBox
                             disabled={false}
                             value={toggleCheckBox}
                             onValueChange={(newValue) => togcheckbox(newValue)}
-                        />
+                        /> */}
                         <Text style={styles.readedText}>ได้อ่านและยอมรับข้อตกลง</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 50 }}>
-                        {authSubmit == true ?
+                        {authSubmit == false ?
                             <View style={styles.SubmitContainer}><TouchableOpacity onPress={() => checkBeforeNavigate()}><Text style={styles.submitButton}>ยืนยัน</Text></TouchableOpacity></View>
                             :
                             <View style={styles.CantSubmitContainer}><Text style={styles.cantsubmitButton}>ยืนยัน</Text></View>

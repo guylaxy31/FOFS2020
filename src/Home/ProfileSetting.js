@@ -7,7 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const ProfileSetting = props => {
 
-    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
+    const { database } = useContext(AppContext);
 
     return (
 
@@ -37,39 +37,42 @@ const ProfileSetting = props => {
                             <Text style={styles.titleH1}>นามสกุล</Text>
                             <Text style={styles.titleH1}>เพศ</Text>
                             <Text style={styles.titleH1}>อายุ</Text>
-                            <Text style={styles.titleH1}>อาชีพ</Text>
-                            <Text style={styles.titleH1}>คณะ/สาขา</Text>
-                            <Text style={styles.titleH1}>สังกัด</Text>
+                            {database.role === 'customer' ? <Text style={styles.titleH1}>อาชีพ</Text> : null}
+                            {database.role === 'customer' ? <Text style={styles.titleH1}>คณะ/สาขา</Text> : null}
+                            {database.role === 'customer' ? <Text style={styles.titleH1}>สังกัด</Text> : null}
                             <Text style={styles.titleH1}>เบอร์โทร</Text>
                             <Text style={styles.titleH1}>อีเมล</Text>
+                            <Text style={styles.titleH1}>ไลน์</Text>
                         </View>
                         <View style={{ width: 150 }}>
                             <Text style={styles.valueText}>{database.firstname}</Text>
                             <Text style={styles.valueText}>{database.lastname}</Text>
                             {database.gender === 'male' ? <Text style={styles.valueText}>ชาย</Text> : <Text style={styles.valueText}>หญิง</Text>}
                             <Text style={styles.valueText}>{database.age}</Text>
-                            <Text style={styles.valueText}>{database.career}</Text>
-                            {database.careerDetail != '' && database.carrer === 'student' ? <Text style={styles.valueText}>{database.careerDetail}</Text> : <Text style={styles.valueText}>-</Text>}
-                            {database.careerDetail != '' && database.carrer === 'officer' ? <Text style={styles.valueText}>{database.careerDetail}</Text> : <Text style={styles.valueText}>-</Text>}
+                            {database.role === 'customer' ? <Text style={styles.valueText}>{database.career}</Text> : null}
+                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'student' ? <Text style={styles.valueText}>{database.careerDetail}</Text> : <Text style={styles.valueText}>-</Text> : null}
+                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'officer' ? <Text style={styles.valueText}>{database.careerDetail}</Text> : <Text style={styles.valueText}>-</Text> : null}
                             <Text style={styles.valueText}>{database.phonenumber}</Text>
                             <Text style={styles.valueText}>{database.email}</Text>
+                            {database.role === 'restaurant' ? <Text style={styles.valueText}>{database.line}</Text> : null}
                         </View>
                         <View style={{ width: 40 }}>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity>
-                            <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity>
-                            {database.careerDetail != '' && database.carrer === 'student' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity> : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 11.5 }} />}
-                            {database.careerDetail != '' && database.carrer === 'officer' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity> : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 11.5 }} />}
+                            {database.role === 'customer' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity> : null}
+                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'student' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity> : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 11.5 }} /> : null}
+                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'officer' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 11.5 }} /></TouchableOpacity> : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 11.5 }} /> : null}
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
+                            {database.role === 'restaurant' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> : null}
                         </View>
                     </View>
 
                     <View>
                         <View style={{ flexDirection: 'row', width: 180, justifyContent: 'space-between' }}>
-                            <TouchableOpacity onPress={()=>props.navigation.navigate('Homescreen')} style={{ backgroundColor: '#FFFC1B', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>บันทึก</Text></View></TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantHome')} style={{ backgroundColor: '#FFFC1B', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>บันทึก</Text></View></TouchableOpacity>
                             <TouchableOpacity style={{ backgroundColor: '#fff', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, }} onPress={() => props.navigation.goBack()}><View style={{ justifyContent: 'center' }}><Text style={{ fontFamily: 'pr-reg', fontSize: 14 }}>ยกเลิก</Text></View></TouchableOpacity>
                         </View>
                     </View>

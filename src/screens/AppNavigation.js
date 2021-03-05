@@ -6,6 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Home/Home'
 import ProfileSetting from '../Home/ProfileSetting'
+import RestaurantSetting from '../Home/RestaurantSetting'
 import Tutorial from '../Home/Tutorial'
 import CustomerReport from '../Home/CustomerReport'
 import Contact from '../Home/Contact'
@@ -28,6 +29,9 @@ import RegisterForRestaurant from '../RegisterPath/RegisterForRestaurant'
 import RestaurantHome from '../RestaurantPath/RestaurantHome'
 import AnalyticMain from '../RestaurantPath/AnalyticMain'
 import MenuList from '../RestaurantPath/MenuList'
+import VariationList from '../RestaurantPath/VariationList'
+import IngredientList from '../RestaurantPath/IngredientList'
+import OptionList from '../RestaurantPath/OptionList'
 import MenuAdd from '../RestaurantPath/MenuAdd'
 import OrderMain from '../RestaurantPath/OrderMain'
 import OrderList from '../RestaurantPath/OrderList'
@@ -39,6 +43,11 @@ import RequestMain from '../AdminPath/RequestMain'
 import RequestCheck from '../AdminPath/RequestCheck'
 import ListMain from '../AdminPath/ListMain'
 import ListCheck from '../AdminPath/ListCheck'
+import ReportManagement from '../AdminPath/ReportManagement'
+import ReportingDetail from '../AdminPath/ReportingDetail'
+import CustomerList from '../AdminPath/CustomerList'
+import RestList from '../AdminPath/RestList'
+
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,7 +55,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { DrawerContent } from './DrawerContent';
-import { header } from 'express-validator';
+
 
 
 
@@ -57,14 +66,14 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
-    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
+    const { AuthLogin, setAuthLogin, database, setDatabase, restaurant, setRestaurant } = useContext(AppContext);
 
 
     return (
 
         <Stack.Navigator initialRouteName="Homescreen">
 
-            {AuthLogin === true ?
+            {database.role === 'restaurant' && AuthLogin === true ?
                 <Stack.Screen name="RestaurantHome"
                     component={RestaurantHome}
                     options={{
@@ -124,6 +133,19 @@ const AppNavigation = props => {
                 component={ProfileSetting}
                 options={{
                     title: 'ตั้งค่าโปรไฟล์',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
+            <Stack.Screen name="RestaurantSetting"
+                component={RestaurantSetting}
+                options={{
+                    title: 'ตั้งค่าข้อมูลร้าน',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -328,6 +350,46 @@ const AppNavigation = props => {
                 }
                 }
             />
+
+            <Stack.Screen name="VariationList"
+                component={VariationList}
+                options={{
+                    title: 'รายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
+            <Stack.Screen name="IngredientList"
+                component={IngredientList}
+                options={{
+                    title: 'รายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
+
+            <Stack.Screen name="OptionList"
+                component={OptionList}
+                options={{
+                    title: 'รายการอาหาร',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
             <Stack.Screen name="MenuAdd"
                 component={MenuAdd}
                 options={{
@@ -340,6 +402,7 @@ const AppNavigation = props => {
                 }
                 }
             />
+
             <Stack.Screen name="OrderMain"
                 component={OrderMain}
                 options={{
@@ -388,6 +451,42 @@ const AppNavigation = props => {
                 }
                 }
             />
+            <Stack.Screen name="CustomerList"
+                component={CustomerList}
+                options={{
+                    title: 'รายชื่อผู้ใช้ Customer',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="RestList"
+                component={RestList}
+                options={{
+                    title: 'รายชื่อผู้ใช้ Restaurant',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+            <Stack.Screen name="ReportingDetail"
+                component={ReportingDetail}
+                options={{
+                    title: 'รายละเอียดคำร้องเรียน',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
             <Stack.Screen name="RequestMain"
                 component={RequestMain}
                 options={{
@@ -415,7 +514,7 @@ const AppNavigation = props => {
             <Stack.Screen name="ListMain"
                 component={ListMain}
                 options={{
-                    title: 'ร้านค้าในระบบ',
+                    title: 'ร้านอาหารในระบบ',
                     headerTitleStyle: {
                         fontFamily: 'pr-reg',
                         fontSize: 16,
@@ -436,6 +535,20 @@ const AppNavigation = props => {
                 }
                 }
             />
+
+            <Stack.Screen name="ReportManagement"
+                component={ReportManagement}
+                options={{
+                    title: 'ตรวจสอบคำร้องเรียง',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
+                    }
+                }
+                }
+            />
+
         </Stack.Navigator>
 
 
@@ -457,7 +570,7 @@ const userBottomTab = props => {
                 <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
                 :
                 database.role === 'customer' ?
-                    <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
+                    <Tab.Screen name="Homescreen" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
                     :
                     <Tab.Screen name="RestaurantHome" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
             }

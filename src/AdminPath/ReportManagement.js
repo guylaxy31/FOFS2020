@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const ListMain = props => {
+const ReportManagement = props => {
     const tabledataset = {
-        tableHead: ['#', 'ชื่อร้าน', 'จังหวัด', 'อนุมัติเมื่อ', 'รายการ'],
+        tableHead: ['#', 'หัวข้อ', 'จากผู้ใช้', 'บทบาท', 'รายละเอียด'],
         tableData: [
-            ['1', 'ร้านอาหาร1', 'เชียงใหม่', '15 ส.ค. 63', 'จัดการแก้ไข'],
-            ['2', 'ร้านอาหาร2', 'เชียงราย', '16 ส.ค. 63', 'จัดการแก้ไข'],
+            ['1', 'ได้อาหารไม่ตรง', 'cust01', 'Customer', 'รายละเอียด'],
+            ['2', 'ลูกค้าไม่มารับอาหาร', 'rest01', 'Restaurant', 'รายละเอียด'],
         ]
     }
 
     const element = (data, index) => (
-        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.navigation.navigate('ListCheck')}>
-            <MaterialIcons name="edit" size={24} color="black" />
+        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.navigation.navigate('ReportingDetail')}>
+            <MaterialIcons name="more-horiz" size={24} color="black" />
         </TouchableOpacity>
     );
     return (
-        <View style={styles.Tablecontainer}>
-            <ScrollView>
+
+        <View style={styles.container}>
+
+            <ScrollView style={{ width: '100%' }}>
 
                 <Table borderStyle={{ borderColor: 'transparent' }}>
                     <Row data={tabledataset.tableHead} style={styles.head} textStyle={styles.text} />
@@ -35,15 +37,18 @@ const ListMain = props => {
                         ))
                     }
                 </Table>
+
             </ScrollView>
-        </View>
+
+        </View >
+
     );
+
 }
 
-
 const styles = StyleSheet.create({
-    container: { flex: 1, height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', },
-
+    container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
+    CardContainer: { marginTop: 50, flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 20, width: 500 / Dimensions.get('window').width + 380, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 50, borderRadius: 15 },
     RestaurantCountingContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFF', paddingVertical: 5 },
     CountingTxt: { fontFamily: 'pr-reg', marginHorizontal: 5, fontSize: Dimensions.get('window').height * 0.021, color: '#909073' },
     CountingTxtNumber: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height * 0.025 },
@@ -58,4 +63,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ListMain
+export default ReportManagement

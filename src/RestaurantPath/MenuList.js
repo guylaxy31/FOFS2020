@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const MenuList = props => {
     const tabledataset = {
-        tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา(฿)', 'แก้ไข'],
+        tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
             ['1', 'ข้าวผัดหมู', 'อาหารตามสั่ง', '25', 'แก้ไข'],
             ['2', 'ข้าวไข่เจียว', 'อาหารตามสั่ง', '15', 'แก้ไข']
@@ -12,18 +13,22 @@ const MenuList = props => {
     }
 
     const element = (data, index) => (
-        <TouchableOpacity>
-            <View style={styles.btn}>
-                <Image style={styles.btnEdit} source={require('../../assets/restaurants/baseline_create_black_18.png')}></Image>
-            </View>
+        <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
+            <MaterialIcons name="edit" size={24} color="black" />
         </TouchableOpacity>
     );
     return (
         <View style={styles.Tablecontainer}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButton}>เมนู</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList')}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
+            </View>
             <ScrollView>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มอาหาร</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
                 </View>
 
                 <Table borderStyle={{ borderColor: 'transparent' }}>
@@ -57,7 +62,10 @@ const styles = StyleSheet.create({
     text: { fontFamily: 'pr-reg', marginVertical: 15, fontSize: Dimensions.get('window').height * .018, textAlign: 'center' },
     row: { flexDirection: 'row', backgroundColor: '#FFF', justifyContent: 'center', borderBottomColor: '#000', borderBottomWidth: .5, borderBottomColor: '#D3D2B3' },
     btn: { flexDirection: 'row', width: Dimensions.get('window').width * 0.18, height: Dimensions.get('window').height * 0.054, backgroundColor: '#F8F8D9', borderRadius: 15, justifyContent: 'center', padding: 5 },
-    btnEdit: { width: 20, height: 20 }
+    btnEdit: { width: 20, height: 20 },
+
+    pageButton: { fontFamily: 'pr-reg', fontSize: 16 },
+    pageButtonUnselect: { fontFamily: 'pr-reg', fontSize: 16, color: '#ccc' }
 });
 
 
