@@ -6,7 +6,7 @@ class RecommendRestaurant extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.imgContainer}>
+        <View style={styles.imageshadow}>
           <Image style={styles.imgBorder} source={{ uri: this.props.imageUri }}></Image>
         </View>
         <View>
@@ -19,30 +19,19 @@ class RecommendRestaurant extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    width: 150,
+    borderRadius: 15,
     marginLeft: 20,
-    height: null,
-    width: null,
     marginRight: 10,
-    marginVertical: 10
-  },
-  imgContainer: {
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    elevation: 3,
-    shadowOpacity: 0.26,
-    backgroundColor: '#FFF',
-    padding: 1,
-    borderRadius: 20
 
   }
   ,
   imgBorder: {
-    borderWidth: 1,
-    borderColor: '#fff',
+
+
     height: 150,
     width: 150,
-    borderRadius: 20
+    borderRadius: 15
 
   },
 });

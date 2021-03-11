@@ -82,7 +82,7 @@ const Home = props => {
         <FlatList
           // data={tempdatabase.PromotionList}
           renderItem={({ item }) =>
-            <TouchableOpacity><PromotionRestaurant imageUri={item.imageUri} /></TouchableOpacity>}
+            <TouchableOpacity ><PromotionRestaurant imageUri={item.imageUri} /></TouchableOpacity>}
           keyExtractor={(item, index) => index.toString()}
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -99,7 +99,7 @@ const Home = props => {
           data={restaurants}
           keyExtractor={item => item._id}
           renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><RecommendRestaurant imageUri={item.res_image} resName={item.restaurant_name} /></TouchableOpacity>}
+            <TouchableOpacity style={styles.imageborder} onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><RecommendRestaurant imageUri={item.res_image} resName={item.restaurant_name} /></TouchableOpacity>}
 
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -161,6 +161,19 @@ const styles = StyleSheet.create({
 
   scroll_View: { height: '100%', alignSelf: 'stretch', backgroundColor: '#fff', padding: 0, margin: 0 },
   content__container: { height: '100%', alignSelf: 'stretch' },
+
+  imageborderstyle: {
+    backgroundColor: '#FFF',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    elevation: 3,
+    shadowOpacity: 0.26,
+    backgroundColor: '#FFF',
+    padding: 1,
+    borderRadius: 20
+  },
+
 
 
   TitlePromotionAlign: { flexDirection: 'row', marginLeft: 20, marginVertical: 16, justifyContent: 'center' },

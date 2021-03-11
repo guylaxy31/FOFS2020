@@ -45,7 +45,7 @@ const FoodMenuMain = props => {
                     />
 
                     <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingHorizontal: 20, marginTop: 50, alignItems: 'center' }}>
-                        <View style={styles.nextBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm')}><Text style={styles.nextBTNText}>ดำเนินการต่อ</Text></TouchableOpacity></View>
+                        <View style={styles.nextBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm')}><Text style={styles.nextBTNText}>ดำเนินต่อ</Text></TouchableOpacity></View>
                         <View style={styles.CancelBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.cancelBTNText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 20, width: 500 / Dimensions.get('window').width + 380, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 50, borderRadius: 15 },
 
     RestNameContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginBottom: 20 },
-    RestNameText: { fontFamily: 'pr-bold', fontSize: 20 },
+    RestNameText: { fontFamily: 'pr-bold', fontSize: 18 },
     RestImageContainer: { borderRadius: 15, marginTop: 20, padding: 1, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     RestImage: { width: 200, height: 200, borderRadius: 15 },
 
