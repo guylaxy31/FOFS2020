@@ -27,16 +27,16 @@ const Home = props => {
   const { AuthLogin, setAuthLogin } = useContext(AppContext);
   const { database, setDatabase } = useContext(AppContext);
   const [searchtext, setSearchtext] = useState('');
-  const [restaurants , setRestaurants] =  useState([]);
+  const [restaurants, setRestaurants] = useState([]);
 
-  
+
   useEffect(() => {
-    
+
     axios
-    .get(`${baseUrl}home`)
-    .then((res) =>{
-      setRestaurants(res.data);
-    })
+      .get(`${baseUrl}home`)
+      .then((res) => {
+        setRestaurants(res.data);
+      })
 
     return () => {
       setSearchtext();
@@ -92,15 +92,15 @@ const Home = props => {
 
         <View style={styles.titleAlign}>
           <HextagonIcon />
-          <Text style={styles.headerText}>เมนูแนะนำ</Text>
+          <Text style={styles.headerText}>เมนูจากร้านแนะนำ</Text>
         </View>
 
         <FlatList
           data={restaurants}
           keyExtractor={item => item._id}
           renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain',{ resId: item._id })}><RecommendRestaurant imageUri={item.res_image} foodName={item.restaurant_name} resName={item.restaurant_name} /></TouchableOpacity>}
-          
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><RecommendRestaurant imageUri={item.res_image} resName={item.restaurant_name} /></TouchableOpacity>}
+
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}

@@ -7,11 +7,10 @@ class RecommendRestaurant extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image style={styles.imgBorder} source={{uri:this.props.imageUri}}></Image>
+          <Image style={styles.imgBorder} source={{ uri: this.props.imageUri }}></Image>
         </View>
         <View>
-          <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.foodName}</Text>
-          <Text style={{ fontFamily: 'pr-light' }}>{this.props.resName}</Text>
+          <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>ร้าน{this.props.resName}</Text>
         </View>
       </View>
     );
