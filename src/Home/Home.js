@@ -96,10 +96,11 @@ const Home = props => {
         </View>
 
         <FlatList
-          // data={tempdatabase.RestaurantList}
+          data={restaurants}
+          keyExtractor={item => item._id}
           renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><RecommendRestaurant imageUri={item.imageUri} foodName={item.foodName} resName={item.resName} /></TouchableOpacity>}
-          keyExtractor={(item, index) => index.toString()}
+            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain',{ resId: item._id })}><RecommendRestaurant imageUri={item.res_image} foodName={item.restaurant_name} resName={item.restaurant_name} /></TouchableOpacity>}
+          
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
