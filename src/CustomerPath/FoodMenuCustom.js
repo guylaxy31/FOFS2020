@@ -7,10 +7,7 @@ import axios from "axios";
 
 
 const FoodMenuCustom = props => {
-    var radio_qty_props = [
-        { label: 'ธรรมดา', value: 'normal' },
-        { label: 'พิเศษ', value: 'special' },
-    ];
+   
     var radio_igd_props = [
         { label: 'หมู', value: 'pork' },
         { label: 'ไก่', value: 'chick' },
@@ -26,10 +23,19 @@ const FoodMenuCustom = props => {
     const [varaition ,setVaraitions] = useState([]);
     console.log(item.item.menu_name);
     console.log(`${baseUrl}restaurant/options/${item.item._id}`);
-    // useEffect(() => {
-    //     axios.get(`${baseUrl}restaurant/options/${item.item._id}`)
-    // })
-
+    
+    useEffect(() => {
+        axios
+        .get(`${baseUrl}restaurant/options/${item.item._id}`)
+        .then((res) =>{
+            setOption(res.data)
+        })
+        return () => {
+            setOption([])
+        }
+    }, [])
+    // console.log(option);
+    
     return (
 
         <View style={styles.container}>
@@ -41,7 +47,7 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 60 }}>
                             <RadioForm
-                                radio_props={radio_qty_props}
+                                radio_props={option}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
