@@ -131,10 +131,10 @@ const RegisterForCustomer = props => {
             <ScrollView horizontal={false} showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
                 <View style={styles.FormContainerWrap}>
                     <View style={styles.RegisterTitle}><HextagonIcon /><Text style={styles.TitleText}>สร้างบัญชีใหม่</Text></View>
-                    <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -5 }} name='account' size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View></View>
+                    <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -8 }} name='account' size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View></View>
                     <View style={styles.FormContainer}><TextInput value={user.username} onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidUser == true ? null : <View><Text style={styles.validText}>ระบุ 4 - 16 ตัวอักษร</Text></View>}
-                    <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><FontAwesome name="lock" style={{ marginRight: 10 }} size={24} color="black" /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View></View>
+                    <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><FontAwesome name="lock" style={{ marginRight: 8 }} size={24} color="black" /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View></View>
                     <View style={styles.FormContainer}><TextInput value={user.password} onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>
                     {user.isValidPassword == true ? null : <View><Text style={styles.validText}>ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
@@ -151,7 +151,7 @@ const RegisterForCustomer = props => {
                     <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{user.age}</Text></View>
                     <View style={styles.FormContainer}>
                         <Slider
-                            style={{ width: 200, height: 50 }}
+                            style={{ width: 200, height: 48 }}
                             minimumValue={13}
                             maximumValue={65}
                             thumbImage={ThumbSlider}
@@ -227,7 +227,7 @@ const RegisterForCustomer = props => {
                             value={toggleCheckBox}
                             onValueChange={(newValue) => togcheckbox(newValue)}
                         /> */}
-                        <Text style={styles.readedText}>ได้อ่านและยอมรับข้อตกลง</Text>
+                        {/* <Text style={styles.readedText}>ได้อ่านและยอมรับข้อตกลง</Text> */}
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 50 }}>
                         {authSubmit == false ?
@@ -258,40 +258,40 @@ const styles = StyleSheet.create({
     FormContainerWrap: { flexDirection: 'column', alignSelf: 'center' },
 
     RegisterTitle: { flexWrap: 'wrap', justifyContent: 'center', flexDirection: 'row' },
-    TitleText: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginLeft: 5, marginVertical: 20 },
+    TitleText: { fontFamily: 'pr-bold', fontSize: 18, marginLeft: 8, marginVertical: 18 },
 
-    FormContainer: { width: '100%', marginVertical: 6 },
-    FormContainerGenderTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
-    GenderContainer: { width: '100%', marginVertical: 6, flexDirection: 'row' },
-    genderBtn: { marginHorizontal: 5 },
-    genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#6C6B2B' },
+    FormContainer: { width: '100%', marginVertical: 8 },
+    FormContainerGenderTitle: { width: '100%', marginVertical: 8, flexDirection: 'row' },
+    GenderContainer: { width: '100%', marginVertical: 8, flexDirection: 'row' },
+    genderBtn: { marginHorizontal: 8 },
+    genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: 16, color: '#6C6B2B' },
 
     FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
-    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 18, borderRadius: 15, fontSize: 16 },
     FormContainerAgeTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
-    AgeFillInput: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 100, paddingVertical: 5, paddingHorizontal: 20, borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    AgeFillInput: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 100, paddingVertical: 5, paddingHorizontal: 18, borderRadius: 15, fontSize: 16 },
     AgeText: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#6C6B2B' },
     FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 5 },
 
-    validText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14, color: 'red', marginVertical: 5, marginLeft: 10 },
+    validText: { fontFamily: 'pr-reg', fontSize: 12, color: 'red', marginVertical: 8, marginLeft: 8 },
 
-    ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 15, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
+    ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 16, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
     consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10 },
     readedText: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
 
-    SubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
-    CantSubmitContainer: { width: 90, borderRadius: 15, backgroundColor: '#ccc' },
-    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
-    cantsubmitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, color: '#FFF', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
-    CancelContainer: { width: 80, borderRadius: 15, backgroundColor: '#FFF', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
-    CancelButtonText: { textAlign: 'center', fontFamily: 'pr-reg', padding: 10, backgroundColor: '#FFF', color: '#000', alignSelf: 'center', borderRadius: 15, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
+    SubmitContainer: { width: 88, borderRadius: 16, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    CantSubmitContainer: { width: 88, borderRadius: 16, backgroundColor: '#ccc' },
+    submitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 8, color: '#000', alignSelf: 'center', borderRadius: 16, fontSize: 16 },
+    cantsubmitButton: { textAlign: 'center', fontFamily: 'pr-reg', padding: 8, color: '#FFF', alignSelf: 'center', borderRadius: 16, fontSize: 16 },
+    CancelContainer: { width: 80, borderRadius: 16, backgroundColor: '#FFF', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    CancelButtonText: { textAlign: 'center', fontFamily: 'pr-reg', padding: 8, backgroundColor: '#FFF', color: '#000', alignSelf: 'center', borderRadius: 16, fontSize: 14 },
 
 
-    TouchReadButton: { marginBottom: 10 },
-    readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginTop: 20 },
-    CloseModalContainer: { flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', borderRadius: 15, width: 100, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
-    closeButtonTxt: { textAlign: 'center', fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
+    TouchReadButton: { marginBottom: 8 },
+    readforSubmit: { fontFamily: 'pr-bold', textAlign: 'center', fontSize: 18, marginTop: 18 },
+    CloseModalContainer: { flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', borderRadius: 16, width: 96, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    closeButtonTxt: { textAlign: 'center', fontFamily: 'pr-reg', fontSize: 16, padding: 8 },
 
 });
 

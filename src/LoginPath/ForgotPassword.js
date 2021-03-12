@@ -9,7 +9,7 @@ const ForgotPassword = props => {
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
-                    <Text>ทดสอบหน้าลืมรหัสผ่านโ</Text>
+                    <Text>ทดสอบหน้าลืมรหัสผ่าน</Text>
                 </View>
 
             </ScrollView>
@@ -20,8 +20,8 @@ const ForgotPassword = props => {
 }
 
 const styles = StyleSheet.create({
-    container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 20, width: 500 / Dimensions.get('window').width + 380, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 50, borderRadius: 15 },
+    container: { flex: 1, alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
+    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 18, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 8, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
 
 });
 

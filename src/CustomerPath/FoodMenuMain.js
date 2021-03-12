@@ -40,15 +40,15 @@ const FoodMenuMain = props => {
                         renderItem={({ item }) =>
                             <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom', { item: item })} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.menu_image} />
                             </TouchableOpacity>
-                            
+
                         }
-                        
+
                         horizontal={false}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}
                     />
 
-                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingHorizontal: 20, marginTop: 50, alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingHorizontal: 16, marginTop: 48, alignItems: 'center' }}>
                         <View style={styles.nextBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm')}><Text style={styles.nextBTNText}>ดำเนินต่อ</Text></TouchableOpacity></View>
                         <View style={styles.CancelBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.cancelBTNText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
@@ -64,18 +64,18 @@ const FoodMenuMain = props => {
 }
 
 const styles = StyleSheet.create({
-    container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 20, width: 500 / Dimensions.get('window').width + 380, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 50, borderRadius: 15 },
+    container: { backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
+    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 16, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
 
-    RestNameContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginBottom: 20 },
+    RestNameContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 16, marginBottom: 16 },
     RestNameText: { fontFamily: 'pr-bold', fontSize: 18 },
-    RestImageContainer: { borderRadius: 15, marginTop: 20, padding: 1, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
-    RestImage: { width: 200, height: 200, borderRadius: 15 },
+    RestImageContainer: { borderRadius: 16, marginTop: 16, padding: 1, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+    RestImage: { width: 200, height: 200, borderRadius: 16 },
 
-    MenuTouchContainer: { borderRadius: 15, marginVertical: 10, marginHorizontal: 5, width: 300, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 1, elevation: 3, shadowOpacity: 0.26 },
+    MenuTouchContainer: { borderRadius: 16, marginVertical: 8, marginHorizontal: 8, width: 296, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 1, elevation: 3, shadowOpacity: 0.26 },
     nextBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' },
-    nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 110 },
-    CancelBTNBackground: { backgroundColor: '#FFF', padding: 10, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 80 },
+    nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 8, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 104 },
+    CancelBTNBackground: { backgroundColor: '#FFF', padding: 8, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 80 },
     cancelBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' }
 
 });

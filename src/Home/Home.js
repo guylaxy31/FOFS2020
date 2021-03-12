@@ -20,7 +20,7 @@ import axios from "axios";
 
 const Home = props => {
   console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
-  
+
   const { AuthLogin, setAuthLogin } = useContext(AppContext);
   const { database, setDatabase } = useContext(AppContext);
   const [searchtext, setSearchtext] = useState('');
@@ -51,13 +51,13 @@ const Home = props => {
       <View style={styles.nav__container}>
         {AuthLogin == true ?
           <Header
-            containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
+            containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
             leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-            rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={30} /><Text style={styles.usernameText}>{database.username}</Text></ TouchableOpacity>}
+            rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={24} /><Text style={styles.usernameText}>{database.username}</Text></ TouchableOpacity>}
           />
           : // ถ้ายังไม่ได้ Login
           <Header
-            containerStyle={{ backgroundColor: '#FFFC1B', height: 60, flexDirection: 'row', paddingTop: 0 }}
+            containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
             leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
             rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
           />}
@@ -131,9 +131,9 @@ const Home = props => {
           showsHorizontalScrollIndicator={false}
           style={styles.nearStyle}
         />
-        <View style={styles.ViewAllTxtContainer}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')}><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
-        </View>
+
+        <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
+
 
       </ScrollView>
 
@@ -149,37 +149,25 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF', alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', },
 
   nav__container: { width: '100%' },
-  HedaerTitleTxt: { fontFamily: 'pr-reg', marginRight: Dimensions.get('window').height < 1000 ? 10 : 16, fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
-  usernameText: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 12 : 14 },
+  HedaerTitleTxt: { fontFamily: 'pr-reg', fontSize: 14 },
+  usernameText: { fontFamily: 'pr-light', fontSize: 14 },
 
-  SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 10, borderRadius: 15, width: Dimensions.get('window').width < Dimensions.get('window').height ? 300 : 450, height: Dimensions.get('window').width < Dimensions.get('window').height ? 50 : 70, alignSelf: 'center', alignItems: 'center', marginVertical: 15 },
-  iconAlign: { flexDirection: 'row', marginRight: '10%', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
-  textinput_field: { flex: 1, color: '#C7B292', fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, textAlign: 'left', justifyContent: 'center' },
+  SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 8, borderRadius: 16, width: 296, height: 56, alignSelf: 'center', alignItems: 'center', marginVertical: 16 },
+  iconAlign: { flexDirection: 'row', marginLeft: 8, marginRight: 24, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
+  textinput_field: { flex: 1, color: '#C7B292', fontFamily: 'pr-light', fontSize: 14, textAlign: 'left', justifyContent: 'center' },
 
   scroll_View: { height: '100%', alignSelf: 'stretch', backgroundColor: '#fff', padding: 0, margin: 0 },
   content__container: { height: '100%', alignSelf: 'stretch' },
 
-  imageborderstyle: {
-    backgroundColor: '#FFF',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    elevation: 3,
-    shadowOpacity: 0.26,
-    backgroundColor: '#FFF',
-    padding: 1,
-    borderRadius: 20
-  },
-
-
+  imageborderstyle: { backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, backgroundColor: '#FFF', padding: 1, borderRadius: 20 },
 
   TitlePromotionAlign: { flexDirection: 'row', marginLeft: 20, marginVertical: 16, justifyContent: 'center' },
   titleAlign: { flexDirection: 'row', marginLeft: 20, marginVertical: 16 },
-  PromotionTxt: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
-  headerText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20 },
+  PromotionTxt: { fontFamily: 'pr-bold', fontSize: 18 },
+  headerText: { fontFamily: 'pr-reg', fontSize: 18 },
 
-  ViewAllTxtContainer: { marginLeft: 20, marginVertical: 30, marginBottom: 40 },
-  ViewAllTxt: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginVertical: 18, textAlign: 'center' }
+  allresttouchbtn: { marginVertical: 32, marginBottom: 40, width: '50%', alignSelf: 'center', paddingVertical: 8 },
+  ViewAllTxt: { fontFamily: 'pr-reg', fontSize: 18, textAlign: 'center' }
 });
 
 export default Home;

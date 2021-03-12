@@ -10,7 +10,7 @@ class NearRestaurant extends Component {
           <Image style={styles.imgBorder} source={{ uri: this.props.imageUri }}></Image>
         </View>
         <View>
-          <Text style={{ fontFamily: 'pr-light', marginTop: 10 }}>{this.props.resName}</Text>
+          <Text style={{ fontFamily: 'pr-light', marginTop: 8 }}>{this.props.resName}</Text>
 
         </View>
         {/* <View>
@@ -22,25 +22,9 @@ class NearRestaurant extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-    height: null,
-    width: 150,
-    marginLeft: 20,
-    marginRight: 10,
-    marginVertical: 10
-  },
-  imgContainer: {
-
-    borderRadius: 15
-  }
-  ,
-  imgBorder: {
-
-    height: 150,
-    width: 150,
-    borderRadius: 15
-  },
+  container: { height: null, width: 144, marginLeft: 16, marginRight: 8, },
+  imgContainer: { borderRadius: 16 },
+  imgBorder: { height: 144, width: 144, borderRadius: 16 },
 });
 
 export default NearRestaurant;
