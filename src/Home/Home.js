@@ -13,7 +13,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Platform } from 'react-native';
-import * as resAction from '../../store/action/resaction'
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
 

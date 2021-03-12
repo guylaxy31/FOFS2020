@@ -3,14 +3,10 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import { loginStatus, consenseReducer, genderSelectionReducer, orderlistReducer } from '../src/Reducers/Reducers'
 
-import resReducer from './reducer/resreducer' ;
+import cartItems from './reducer/cartItem' ;
 
 const rootReducer = combineReducers({
-    loginStatus,
-    restaurant: resReducer,
-    consense: consenseReducer, 
-    gender: genderSelectionReducer, 
-    orderlist: orderlistReducer
+    cartItems : cartItems
 });
 
 const middleware = composeWithDevTools(applyMiddleware(thunk));

@@ -17,7 +17,7 @@ const FoodMenuMain = props => {
     console.log(`${baseUrl}home/${resId}`);
     useEffect(() => {
         axios
-            .get(`${baseUrl}home/${resId}`)
+            .get(`${baseUrl}dhome/${resId}`)
             .then((res) => {
                 setOneres(res.data);
             })
@@ -37,7 +37,7 @@ const FoodMenuMain = props => {
                     <FlatList
                         data={oneres.menus}
                         renderItem={({ item }) =>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom'), { item: item }} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.menu_image} /></TouchableOpacity>}
+                            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom'), { item: item._id }} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.menu_image} /></TouchableOpacity>}
                         keyExtractor={item => item._id}
                         horizontal={false}
                         showsVerticalScrollIndicator={false}
