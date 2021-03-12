@@ -18,13 +18,13 @@ const FoodMenuCustom = props => {
         { label: 'ไข่เจียว', value: 'omelet' },
     ];
     const [item, setItem] = useState(props.route.params);
-    console.log(item);
+    console.log(item.item.menu_name);
     return (
 
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
-                    <View><Image style={styles.imageTag} source={{ uri: item.menu_image }}></Image></View>
+                    <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
                     <View><Text style={styles.MenuTitleText}></Text></View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
