@@ -17,7 +17,7 @@ const FoodMenuMain = props => {
     console.log(`${baseUrl}home/${resId}`);
     useEffect(() => {
         axios
-            .get(`${baseUrl}dhome/${resId}`)
+            .get(`${baseUrl}home/${resId}`)
             .then((res) => {
                 setOneres(res.data);
             })
