@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 class ModeTitle extends Component {
 
@@ -16,10 +16,10 @@ class ModeTitle extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: { width: '100%', backgroundColor: '#FFFC1B', alignItems: 'center', justifyContent: 'center', marginVertical: Dimensions.get('window').height < 800 ? 50 : 80, paddingVertical: Dimensions.get('window').height < 800 ? 28 : 34, shadowOffset: { width: 0, height: 0 }, shadowColor: '#000', shadowOpacity: 0.1, elevation: 3, },
-  header__line1: { color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 30 : 35, fontFamily: 'pr-reg' },
-  header__line2: { color: '#989762', fontSize: Dimensions.get('window').height < 1000 ? 18 : 22, fontFamily: 'pr-reg' },
-  header__line3: { color: '#D2D18F', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, fontFamily: 'pr-reg' }
+  container: { width: '100%', backgroundColor: '#FFFC1B', alignItems: 'center', justifyContent: 'center', marginVertical: 48, paddingVertical: 32, shadowOffset: { width: 0, height: 0 }, shadowColor: '#000', shadowOpacity: 0.1, elevation: 3, },
+  header__line1: { color: '#000', fontSize: 32, fontFamily: 'pr-reg' },
+  header__line2: { color: '#989762', fontSize: 18, fontFamily: 'pr-reg' },
+  header__line3: { color: '#D2D18F', fontSize: 16, fontFamily: 'pr-reg' }
 });
 
 export default ModeTitle;

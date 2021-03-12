@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     userInfoSection: { paddingLeft: 16 },
     title: { fontSize: 16, marginTop: 3, fontFamily: 'pr-bold' },
     caption: { fontSize: 14, fontFamily: 'pr-light' },
-    row: { marginTop: 20, flexDirection: 'row', alignItems: 'center', paddingLeft: 16 },
+    row: { marginTop: 24, flexDirection: 'row', alignItems: 'center', paddingLeft: 16 },
     section: { flexDirection: 'row', alignItems: 'center', marginRight: 16 },
 
     drawerSection: { marginTop: 16 },
