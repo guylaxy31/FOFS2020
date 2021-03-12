@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 
 
-let baseURL = 'https://guarded-inlet-94713.herokuapp.com/api/v1/';
+ let baseURL = 'https://guarded-inlet-94713.herokuapp.com/api/v1/';
 // let baseURL = '';
 
 // {Platform.OS == 'ios'
