@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
@@ -19,13 +19,14 @@ const FoodMenuCustom = props => {
     ];
     const [item, setItem] = useState(props.route.params);
     console.log(item);
+
     return (
 
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
-                    <View><Image style={styles.imageTag} source={{ uri: item.menu_image }}></Image></View>
-                    <View><Text style={styles.MenuTitleText}></Text></View>
+                    <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
+                    <View><Text style={styles.MenuTitleText}>{item.item.menu_name}</Text></View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 60 }}>
@@ -91,7 +92,7 @@ const FoodMenuCustom = props => {
 
                     <View style={{ width: '100%', marginVertical: 20 }}>
                         <Text style={{ fontFamily: 'pr-reg', textAlign: 'left', marginLeft: 40, marginBottom: 20 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>
-                        <TextInput style={styles.TextInputBox}></TextInput>
+                        <TextInput multiline={true} numberOfLines={3} style={styles.TextInputBox}></TextInput>
                     </View>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#F8F8F8', paddingVertical: 10 }}>
                         <Text style={styles.detailTotalTextTitle}>รวม</Text>
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, color: '#000' },
     detailTotalPrice: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, color: '#000' },
 
-    TextInputBox: { height: 60, borderColor: 'gray', borderWidth: 1, marginHorizontal: 40, padding: 10, marginBottom: 30, borderRadius: 15, fontFamily: 'pr-reg' },
+    TextInputBox: { textAlignVertical: 'top', height: 80, borderColor: 'gray', borderWidth: 1, marginHorizontal: 40, padding: 10, marginBottom: 30, borderRadius: 15, fontFamily: 'pr-reg' },
 
     btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, marginRight: 20, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     btnSubmitText: { fontFamily: 'pr-reg', paddingHorizontal: 10 },

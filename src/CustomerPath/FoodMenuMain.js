@@ -39,7 +39,6 @@ const FoodMenuMain = props => {
                         keyExtractor={item => item._id}
                         renderItem={({ item }) =>
                             <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom', { item: item })} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.menu_image} />
-                            <Text>{item._id}</Text>
                             </TouchableOpacity>
                             
                         }
