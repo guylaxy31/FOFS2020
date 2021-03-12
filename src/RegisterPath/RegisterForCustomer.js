@@ -266,19 +266,19 @@ const styles = StyleSheet.create({
     genderBtn: { marginHorizontal: 8 },
     genderTxt: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: 16, color: '#6C6B2B' },
 
-    FormFillTitle: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+    FormFillTitle: { fontFamily: 'pr-reg', fontSize: 16 },
     FillFormText: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 220, paddingVertical: 5, paddingHorizontal: 18, borderRadius: 15, fontSize: 16 },
     FormContainerAgeTitle: { width: '100%', marginVertical: 6, flexDirection: 'row' },
     AgeFillInput: { fontFamily: 'pr-reg', color: '#838383', backgroundColor: '#FFFFE3', width: 100, paddingVertical: 5, paddingHorizontal: 18, borderRadius: 15, fontSize: 16 },
-    AgeText: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#6C6B2B' },
-    FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginRight: 5 },
+    AgeText: { fontFamily: 'pr-reg', alignItems: 'center', fontSize: 16, color: '#6C6B2B' },
+    FormFillTitleGen: { fontFamily: 'pr-reg', fontSize: 16, marginRight: 5 },
 
     validText: { fontFamily: 'pr-reg', fontSize: 12, color: 'red', marginVertical: 8, marginLeft: 8 },
 
     ModalContainer: { alignSelf: 'center', width: '80%', backgroundColor: '#fff', margin: 30, padding: 40, borderRadius: 16, justifyContent: 'center', height: Dimensions.get('window').height > Dimensions.get('window').width ? '50%' : '60%', marginTop: Dimensions.get('window').height > Dimensions.get('window').width ? '40%' : '10%' },
     ModelBackground: { backgroundColor: '#000000aa', flex: 1 },
-    consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 10 },
-    readedText: { fontFamily: 'pr-light', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18 },
+    consenseText: { fontFamily: 'pr-light', color: '#000', fontSize: 16, marginVertical: 10 },
+    readedText: { fontFamily: 'pr-light', fontSize: 16 },
 
     SubmitContainer: { width: 88, borderRadius: 16, backgroundColor: '#FFFC1B', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     CantSubmitContainer: { width: 88, borderRadius: 16, backgroundColor: '#ccc' },

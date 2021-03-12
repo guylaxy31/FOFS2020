@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
@@ -22,8 +22,8 @@ const FoodMenuCustom = props => {
     ];
     const [item, setItem] = useState(props.route.params);
     const [option, setOption] = useState([]);
-    const [ingredient,setIngredients] = useState([]);
-    const [varaition ,setVaraitions] = useState([]);
+    const [ingredient, setIngredients] = useState([]);
+    const [varaition, setVaraitions] = useState([]);
     console.log(item.item.menu_name);
     console.log(`${baseUrl}restaurant/options/${item.item._id}`);
     // useEffect(() => {
@@ -38,15 +38,15 @@ const FoodMenuCustom = props => {
                     <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
                     <View><Text style={styles.MenuTitleText}>{item.item.menu_name}</Text></View>
 
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
-                        <View style={{ flexDirection: 'column', marginLeft: 60 }}>
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
+                        <View style={{ flexDirection: 'column', marginLeft: 56 }}>
                             <RadioForm
                                 radio_props={radio_qty_props}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
                                 selectedButtonColor={'#908F7D'}
-                                labelStyle={{ fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#4F4F4F', fontFamily: 'pr-reg', marginVertical: 5 }}
+                                labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginVertical: 8 }}
                                 buttonSize={10}
                             />
                         </View>
