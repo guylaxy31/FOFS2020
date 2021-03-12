@@ -4,27 +4,27 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 const FoodMenuCustom = props => {
-    // var radio_qty_props = [
-    //     { label: 'ธรรมดา', value: 'normal' },
-    //     { label: 'พิเศษ', value: 'special' },
-    // ];
-    // var radio_igd_props = [
-    //     { label: 'หมู', value: 'pork' },
-    //     { label: 'ไก่', value: 'chick' },
-    //     { label: 'กุ้ง', value: 'prawn' },
-    // ];
-    // var radio_tp_props = [
-    //     { label: 'ไข่ดาว', value: 'freid' },
-    //     { label: 'ไข่เจียว', value: 'omelet' },
-    // ];
-    const [item, setItem] = useState(props.route.params.item);
+    var radio_qty_props = [
+        { label: 'ธรรมดา', value: 'normal' },
+        { label: 'พิเศษ', value: 'special' },
+    ];
+    var radio_igd_props = [
+        { label: 'หมู', value: 'pork' },
+        { label: 'ไก่', value: 'chick' },
+        { label: 'กุ้ง', value: 'prawn' },
+    ];
+    var radio_tp_props = [
+        { label: 'ไข่ดาว', value: 'freid' },
+        { label: 'ไข่เจียว', value: 'omelet' },
+    ];
+    const [item, setItem] = useState(props.route.params);
     console.log(item);
     return (
 
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
-                    <View><Image style={styles.imageTag} source={require('../../assets/menulist/fried-rice.jpg')}></Image></View>
+                    <View><Image style={styles.imageTag} source={{ uri: item.menu_image }}></Image></View>
                     <View><Text style={styles.MenuTitleText}></Text></View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>

@@ -36,9 +36,14 @@ const FoodMenuMain = props => {
 
                     <FlatList
                         data={oneres.menus}
-                        renderItem={({ item }) =>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom'), { item: item._id }} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.menu_image} /></TouchableOpacity>}
                         keyExtractor={item => item._id}
+                        renderItem={({ item }) =>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuCustom', { item: item })} style={styles.MenuTouchContainer}><FoodMenuItem menuTitle={item.menu_name} imageUri={item.menu_image} />
+                            <Text>{item._id}</Text>
+                            </TouchableOpacity>
+                            
+                        }
+                        
                         horizontal={false}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}

@@ -20,9 +20,7 @@ import axios from "axios";
 
 const Home = props => {
   console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
-  const dispatch = useDispatch();
-
-  // const { restaurants } = useSelector(state => state.restaurant)
+  
   const { AuthLogin, setAuthLogin } = useContext(AppContext);
   const { database, setDatabase } = useContext(AppContext);
   const [searchtext, setSearchtext] = useState('');
