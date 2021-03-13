@@ -24,38 +24,46 @@ const FoodMenuCustom = props => {
         { label: 'พิเศษ', value: 'special' },
     ];
     var radio_igd_props = [
-        { label: 'หมู', value: 'pork' },
-        { label: 'ไก่', value: 'chick' },
-        { label: 'กุ้ง', value: 'prawn' },
+        { "label": 'หมู', "option_price": 'pork', "_id": "123445" },
+        { "label": 'ไก่', "value": 'chick' },
+        { "label": 'กุ้ง', "value": 'prawn' },
     ];
     var radio_tp_props = [
         { label: 'ไข่ดาว', value: 'freid' },
         { label: 'ไข่เจียว', value: 'omelet' },
     ];
     const [item, setItem] = useState(props.route.params);
-    const [options, setOption] = useState([]);
-    const [ingredient, setIngredients] = useState([]);
-    const [varaition, setVaraitions] = useState([]);
-    // console.log(item.item.menu_name);
-    // console.log(`${baseUrl}restaurant/options/${item.item._id}`);
-    console.log(options.option)
+    const [options, setOptions] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
+    const [varaitions, setVaraitions] = useState([]);
+    console.log(item.item.menu_name);
+    console.log(`${baseUrl}restaurant/options/${item.item._id}`);
 
     useEffect(() => {
         console.log('Start console log')
         axios
             .get(`${baseUrl}restaurant/options/${item.item._id}`)
             .then((res) => {
-                setOption(res.data)
+                setOptions(res.data)
+            })
+
+        axios
+            .get(`${baseUrl}restaurant/ingredients/${item.item._id}`)
+            .then((res) => {
+                setIngredients(res.data)
+            })
+        axios
+            .get(`${baseUrl}restaurant/varaitions/${item.item._id}`)
+            .then((res) => {
+                setVaraitions(res.data)
             })
         return () => {
-            setOption([])
+            setOptions([]);
+            setIngredients([]);
+            setVaraitions([])
 
-            console.dir(option)
-            console.log('end console log')
         }
     }, [])
-
-    console.log(JSON.stringify(option, null, 2))
 
     return (
 
@@ -68,7 +76,29 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 56 }}>
                             <RadioForm
-                                radio_props={radio_qty_props}
+                                radio_props={varaitions.varaition}
+                                initial={0}
+                                animationion={true}
+
+                                // onPress={(value) => { this.setState({ value: value }) }}
+                                buttonColor={'#E4E4E4'}
+                                selectedButtonColor={'#908F7D'}
+                                labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginVertical: 8 }}
+                                buttonSize={10}
+                            />
+                        </View>
+                        {/* <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginRight: 80 }}>
+                            <Text style={styles.detailTextPrice}>+ 30 ฿</Text>
+                            <Text style={styles.detailTextPrice}>+ 40 ฿</Text>
+                        </View> */}
+
+
+                    </View>
+
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
+                        <View style={{ flexDirection: 'column', marginLeft: 80 }}>
+                            <RadioForm
+                                radio_props={ingredients.ingredient}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
@@ -78,26 +108,6 @@ const FoodMenuCustom = props => {
                             />
                         </View>
                         <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginRight: 80 }}>
-                            <Text style={styles.detailTextPrice}>+ 30 ฿</Text>
-                            <Text style={styles.detailTextPrice}>+ 40 ฿</Text>
-                        </View>
-
-
-                    </View>
-
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
-                        <View style={{ flexDirection: 'column', marginLeft: 80 }}>
-                            <RadioForm
-                                radio_props={radio_igd_props}
-                                initial={0}
-                                // onPress={(value) => { this.setState({ value: value }) }}
-                                buttonColor={'#E4E4E4'}
-                                selectedButtonColor={'#908F7D'}
-                                labelStyle={{ fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#4F4F4F', fontFamily: 'pr-reg', marginVertical: 5 }}
-                                buttonSize={10}
-                            />
-                        </View>
-                        <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginRight: 80 }}>
                             <Text style={styles.detailTextPrice}>+ 0 ฿</Text>
                             <Text style={styles.detailTextPrice}>+ 0 ฿</Text>
                             <Text style={styles.detailTextPrice}>+ 0 ฿</Text>
@@ -106,37 +116,36 @@ const FoodMenuCustom = props => {
 
                     </View>
 
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 80 }}>
                             <RadioForm
-                                radio_props={radio_tp_props}
+                                radio_props={options.option}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
                                 selectedButtonColor={'#908F7D'}
-                                labelStyle={{ fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, color: '#4F4F4F', fontFamily: 'pr-reg', marginVertical: 5 }}
+                                labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginVertical: 8 }}
                                 buttonSize={10}
                             />
                         </View>
                         <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginRight: 80 }}>
                             <Text style={styles.detailTextPrice}>+ 10 ฿</Text>
                             <Text style={styles.detailTextPrice}>+ 10 ฿</Text>
-
                         </View>
 
 
                     </View>
 
                     <View style={{ width: '100%', marginVertical: 20 }}>
-                        <Text style={{ fontFamily: 'pr-reg', textAlign: 'left', marginLeft: 40, marginBottom: 20 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>
+                        <Text style={{ fontFamily: 'pr-reg', textAlign: 'left', marginLeft: 40, marginBottom: 24 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>
                         <TextInput multiline={true} numberOfLines={3} style={styles.TextInputBox}></TextInput>
                     </View>
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#F8F8F8', paddingVertical: 10 }}>
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#F8F8F8', paddingVertical: 8 }}>
                         <Text style={styles.detailTotalTextTitle}>รวม</Text>
-                        <Text style={styles.detailTotalPrice}>30 ฿</Text>
+                        <Text style={styles.detailTotalPrice}>{item.item.price}</Text>
                     </View>
 
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 30 }}>
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
                         <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity></View>
                         <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
                     </View>
@@ -152,20 +161,20 @@ const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
 
     CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 20, width: 500 / Dimensions.get('window').width + 380, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 50, borderRadius: 15 },
-    imageTag: { width: 250, height: 250, borderRadius: 15 },
+    imageTag: { width: 250, height: 250, borderRadius: 16 },
     MenuTitleText: { fontFamily: 'pr-bold', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, marginVertical: 10 },
     detailTextTitle: { fontFamily: 'pr-reg', color: '#6F6F6F' },
     detailTextPrice: { fontFamily: 'pr-reg', color: '#A7A7A7', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginVertical: 3 },
-    detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, color: '#000' },
-    detailTotalPrice: { fontFamily: 'pr-bold', fontSize: Dimensions.get('window').height < 1000 ? 18 : 20, color: '#000' },
+    detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: 24, color: '#000' },
+    detailTotalPrice: { fontFamily: 'pr-bold', fontSize: 24, color: '#000' },
 
-    TextInputBox: { textAlignVertical: 'top', height: 80, borderColor: 'gray', borderWidth: 1, marginHorizontal: 40, padding: 10, marginBottom: 30, borderRadius: 15, fontFamily: 'pr-reg' },
+    TextInputBox: { textAlignVertical: 'top', height: 80, borderColor: 'gray', borderWidth: 1, marginHorizontal: 40, padding: 8, marginBottom: 32, borderRadius: 16, fontFamily: 'pr-reg' },
 
-    btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, marginRight: 20, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
-    btnSubmitText: { fontFamily: 'pr-reg', paddingHorizontal: 10 },
+    btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 16, marginRight: 24, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+    btnSubmitText: { fontFamily: 'pr-reg', paddingHorizontal: 10, fontSize: 16 },
 
-    btnCancel: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, marginLeft: 20, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
-    btnCancelText: { fontFamily: 'pr-reg' }
+    btnCancel: { backgroundColor: '#FFF', padding: 8, borderRadius: 16, marginLeft: 24, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+    btnCancelText: { fontFamily: 'pr-reg', fontSize: 16 }
 });
 
 

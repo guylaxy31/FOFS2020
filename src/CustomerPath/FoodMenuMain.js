@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, FlatList } from 'react-native';
 
 import FoodMenuItem from './FoodMenuItem'
-import { useSelector } from "react-redux";
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
-import { log } from 'react-native-reanimated';
 const FoodMenuMain = props => {
 
     const { resId } = props.route.params;
@@ -65,18 +63,18 @@ const FoodMenuMain = props => {
 
 const styles = StyleSheet.create({
     container: { backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 16, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
+    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 16, width: 376, backgroundColor: "#FFF", shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
 
     RestNameContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 16, marginBottom: 16 },
     RestNameText: { fontFamily: 'pr-bold', fontSize: 18 },
-    RestImageContainer: { borderRadius: 16, marginTop: 16, padding: 1, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+    RestImageContainer: { borderRadius: 16, marginTop: 16, padding: 1, backgroundColor: "#FFF", shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     RestImage: { width: 200, height: 200, borderRadius: 16 },
 
-    MenuTouchContainer: { borderRadius: 16, marginVertical: 8, marginHorizontal: 8, width: 296, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 1, elevation: 3, shadowOpacity: 0.26 },
-    nextBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' },
+    MenuTouchContainer: { borderRadius: 16, marginVertical: 8, marginHorizontal: 8, width: 296, backgroundColor: '#FFF', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowRadius: 1, elevation: 3, shadowOpacity: 0.26 },
+    nextBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center', fontSize: 16 },
     nextBTNBackground: { backgroundColor: '#FFFC1B', padding: 8, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 104 },
     CancelBTNBackground: { backgroundColor: '#FFF', padding: 8, shadowColor: 'black', shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.13, borderRadius: 15, width: 80 },
-    cancelBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center' }
+    cancelBTNText: { fontFamily: 'pr-reg', color: '#000', textAlign: 'center', fontSize: 16 }
 
 });
 
