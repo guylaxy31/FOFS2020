@@ -9,18 +9,18 @@ import axios from "axios";
 const FoodMenuCustom = props => {
    
     var radio_igd_props = [
-        { label: 'หมู', value: 'pork' },
-        { label: 'ไก่', value: 'chick' },
-        { label: 'กุ้ง', value: 'prawn' },
+        { "label": 'หมู', "option_price": 'pork' , "_id" : "123445"},
+        { "label": 'ไก่', "value": 'chick' },
+        { "label": 'กุ้ง', "value": 'prawn' },
     ];
     var radio_tp_props = [
         { label: 'ไข่ดาว', value: 'freid' },
         { label: 'ไข่เจียว', value: 'omelet' },
     ];
     const [item, setItem] = useState(props.route.params);
-    const [option, setOption] = useState([]);
-    const [ingredient,setIngredients] = useState([]);
-    const [varaition ,setVaraitions] = useState([]);
+    const [options, setOptions] = useState([]);
+    const [ingredients,setIngredients] = useState([]);
+    const [varaitions ,setVaraitions] = useState([]);
     console.log(item.item.menu_name);
     console.log(`${baseUrl}restaurant/options/${item.item._id}`);
     
@@ -28,13 +28,26 @@ const FoodMenuCustom = props => {
         axios
         .get(`${baseUrl}restaurant/options/${item.item._id}`)
         .then((res) =>{
-            setOption(res.data)
+            setOptions(res.data)
+        })
+
+        axios
+        .get(`${baseUrl}restaurant/ingredients/${item.item._id}`)
+        .then((res) =>{
+            setIngredients(res.data)
+        })
+        axios
+        .get(`${baseUrl}restaurant/varaitions/${item.item._id}`)
+        .then((res) =>{
+            setVaraitions(res.data)
         })
         return () => {
-            setOption([])
+            setOptions([]);
+            setIngredients([]);
+            setVaraitions([])
+            
         }
     }, [])
-    // console.log(option);
     
     return (
 
@@ -47,7 +60,7 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 60 }}>
                             <RadioForm
-                                radio_props={option}
+                                radio_props={varaitions.varaition}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
@@ -67,7 +80,7 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 80 }}>
                             <RadioForm
-                                radio_props={radio_igd_props}
+                                radio_props={ingredients.ingredient}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
@@ -88,7 +101,7 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 80 }}>
                             <RadioForm
-                                radio_props={radio_tp_props}
+                                radio_props={options.option}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
@@ -112,7 +125,7 @@ const FoodMenuCustom = props => {
                     </View>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#F8F8F8', paddingVertical: 10 }}>
                         <Text style={styles.detailTotalTextTitle}>รวม</Text>
-                        <Text style={styles.detailTotalPrice}>30 ฿</Text>
+                        <Text style={styles.detailTotalPrice}>{item.item.price}</Text>
                     </View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 30 }}>
