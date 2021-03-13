@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
- 
+
 const Tutorial = props => {
 
     return (
@@ -9,7 +9,7 @@ const Tutorial = props => {
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
-                    <View style={{ width: '100%', alignItems: 'center', marginBottom: 8 }}>
+                    <View style={{ width: '100%', alignItems: 'center', marginBottom: 8, backgroundColor: '#FFF', borderBottomLeftRadius: 48, borderBottomRightRadius: 48, paddingBottom: 32, paddingTop: 24, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, marginTop: -24 }}>
                         <Text style={styles.howtotext}>วิธีการสั่งอาหาร</Text>
                         <View style={{ flexDirection: 'row' }}><MaterialCommunityIcons name="help-circle" color={'#000'} size={24} style={{ marginRight: 8 }} /><Text style={styles.howtosubtext}>How to</Text></View>
                     </View>
@@ -50,14 +50,14 @@ const Tutorial = props => {
 
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-    CardContainer: { flexDirection: 'column', alignItems: 'flex-start', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
+    CardContainer: { flexDirection: 'column', alignItems: 'flex-start', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingBottom: 48, borderRadius: 16 },
 
     howtotext: { fontSize: 24, fontFamily: 'pr-reg' },
     howtosubtext: { fontSize: 16, fontFamily: 'pr-reg', },
 
 
     titlecover: { marginVertical: 16, width: '100%' },
-    titlebg: { flexDirection: 'row', borderTopEndRadius: 16, borderBottomEndRadius: 16, backgroundColor: '#FFFEB8', width: 216, paddingVertical: 16, paddingHorizontal: 32, marginBottom: 16 },
+    titlebg: { flexDirection: 'row', borderTopEndRadius: 48, borderBottomEndRadius: 48, backgroundColor: '#FFFEB8', width: 216, paddingVertical: 16, paddingHorizontal: 32, marginBottom: 16 },
     titleH1Tutorial: { fontFamily: 'pr-reg', fontSize: 16, },
     detailTutorial: { fontFamily: 'pr-reg', fontSize: 16, color: '#A7A7A7', paddingHorizontal: 32 },
 });
