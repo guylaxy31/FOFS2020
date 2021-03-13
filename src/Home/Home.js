@@ -15,6 +15,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -132,7 +133,7 @@ const Home = props => {
           style={styles.nearStyle}
         />
 
-        <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><MaterialIcons name="select-all" size={24} color="black" style={{ marginRight: 8 }} /><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
 
 
       </ScrollView>
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
   PromotionTxt: { fontFamily: 'pr-bold', fontSize: 18 },
   headerText: { fontFamily: 'pr-reg', fontSize: 18 },
 
-  allresttouchbtn: { marginVertical: 32, marginBottom: 40, width: '50%', alignSelf: 'center', paddingVertical: 8 },
+  allresttouchbtn: { flexDirection: 'row', marginVertical: 32, marginBottom: 40, width: '50%', alignSelf: 'center', justifyContent: 'center', padding: 8, borderRadius: 16 },
   ViewAllTxt: { fontFamily: 'pr-reg', fontSize: 18, textAlign: 'center' }
 });
 

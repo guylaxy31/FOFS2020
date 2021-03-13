@@ -40,11 +40,11 @@ const RestaurantList = (props) => {
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
 
-    restaurantContainer: { flexDirection: 'row', backgroundColor: '#FFF', borderRadius: 15, padding: 20 },
-    containImage: { width: 100, height: 100, backgroundColor: '#ccc' },
-    touchContainer: { backgroundColor: '#FFF', marginHorizontal: 20, marginVertical: 15, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
+    restaurantContainer: { flexDirection: 'row', backgroundColor: '#FFF', borderRadius: 16, padding: 24 },
+    containImage: { width: 112, height: 112, backgroundColor: '#ccc', borderRadius: 16 },
+    touchContainer: { backgroundColor: '#FFF', marginHorizontal: 20, marginVertical: 16, borderRadius: 16, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1 },
     containText: { alignSelf: 'center', marginLeft: 20 },
-    restText: { fontFamily: 'pr-reg', fontSize: 18 }
+    restText: { fontFamily: 'pr-reg', fontSize: 16 }
 });
 
 
