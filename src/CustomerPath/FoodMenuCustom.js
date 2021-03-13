@@ -4,10 +4,25 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
+import { object } from 'yup';
 
 
 const FoodMenuCustom = props => {
-   
+
+    var radio_options = [
+        {
+            "option":
+                [
+                    { "_id": "604b8ebd8b5c35642115841c", "option_name": "ไข่ดาว", "option_price": 10, "__v": 0 },
+                    { "_id": "604b8f211b4559663867b91e", "option_name": "ไข่เจียว", "option_price": 10, "__v": 0 }
+                ]
+        }
+    ]
+
+    var radio_qty_props = [
+        { label: 'ธรรมดา', value: 'normal' },
+        { label: 'พิเศษ', value: 'special' },
+    ];
     var radio_igd_props = [
         { label: 'หมู', value: 'pork' },
         { label: 'ไก่', value: 'chick' },
@@ -18,27 +33,33 @@ const FoodMenuCustom = props => {
         { label: 'ไข่เจียว', value: 'omelet' },
     ];
     const [item, setItem] = useState(props.route.params);
-    const [option, setOption] = useState([]);
+    const [options, setOption] = useState([]);
     const [ingredient, setIngredients] = useState([]);
     const [varaition, setVaraitions] = useState([]);
-    console.log(item.item.menu_name);
-    console.log(`${baseUrl}restaurant/options/${item.item._id}`);
-    
+    // console.log(item.item.menu_name);
+    // console.log(`${baseUrl}restaurant/options/${item.item._id}`);
+    console.log(options.option)
+
     useEffect(() => {
+        console.log('Start console log')
         axios
-        .get(`${baseUrl}restaurant/options/${item.item._id}`)
-        .then((res) =>{
-            setOption(res.data)
-        })
+            .get(`${baseUrl}restaurant/options/${item.item._id}`)
+            .then((res) => {
+                setOption(res.data)
+            })
         return () => {
             setOption([])
+
+            console.dir(option)
+            console.log('end console log')
         }
     }, [])
-    // console.log(option);
-    
+
+    console.log(JSON.stringify(option, null, 2))
+
     return (
 
-        <View style={styles.container}>
+        <View style={styles.container} >
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
                     <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
@@ -47,7 +68,7 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 56 }}>
                             <RadioForm
-                                radio_props={option}
+                                radio_props={radio_qty_props}
                                 initial={0}
                                 // onPress={(value) => { this.setState({ value: value }) }}
                                 buttonColor={'#E4E4E4'}
