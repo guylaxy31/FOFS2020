@@ -12,7 +12,7 @@ const FoodStatus = props => {
 
                 <View style={styles.CardContainer}>
 
-                    <View style={{ marginBottom: 32, flexDirection: 'row', alignItems: 'center', width: '100%', justifyContent: 'center', paddingVertical: 16, backgroundColor: '#E6E5CE', borderRadius: 16 }}>
+                    <View style={{ marginBottom: 32, flexDirection: 'row', alignItems: 'center', width: '100%', justifyContent: 'center', paddingVertical: 16, backgroundColor: '#FFFEB8', borderRadius: 16 }}>
                         <MaterialCommunityIcons name="silverware" size={32} color="black" style={{ marginRight: 8 }} />
                         <Text style={styles.StatusHeaderText}>สถานะออเดอร์</Text>
                     </View>

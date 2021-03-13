@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     CommentContainer: { width: '100%', paddingHorizontal: 80 },
     CommentText: { fontFamily: 'pr-reg', fontSize: 16, color: '#636363' },
 
-    totalpricescontainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFF', borderWidth: 1, borderLeftWidth: 0, borderColor: '#7D7C60', paddingVertical: 16, marginTop: 50, borderTopRightRadius: 16, borderBottomEndRadius: 16, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16 },
+    totalpricescontainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8' , paddingVertical: 16, marginTop: 50, borderTopRightRadius: 16, borderBottomEndRadius: 16, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16 },
     detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: 24, color: '#3C3C3C', },
     detailTotalPrice: { fontFamily: 'pr-bold', fontSize: 24, color: '#3C3C3C', alignSelf: 'center' },
 

@@ -140,9 +140,9 @@ const FoodMenuCustom = props => {
                         <Text style={{ fontFamily: 'pr-reg', textAlign: 'left', marginLeft: 40, marginBottom: 24 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>
                         <TextInput multiline={true} numberOfLines={3} style={styles.TextInputBox}></TextInput>
                     </View>
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#F8F8F8', paddingVertical: 8 }}>
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8', paddingVertical: 8 }}>
                         <Text style={styles.detailTotalTextTitle}>รวม</Text>
-                        <Text style={styles.detailTotalPrice}>{item.item.price}</Text>
+                        <Text style={styles.detailTotalPrice}>{item.item.price} ฿</Text>
                     </View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
