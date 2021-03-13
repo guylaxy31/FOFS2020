@@ -150,8 +150,8 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF', alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', },
 
   nav__container: { width: '100%' },
-  HedaerTitleTxt: { fontFamily: 'pr-reg', fontSize: 14 },
-  usernameText: { fontFamily: 'pr-light', fontSize: 14 },
+  HedaerTitleTxt: { fontFamily: 'pr-reg', fontSize: 16 },
+  usernameText: { fontFamily: 'pr-light', fontSize: 16 },
 
   SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 8, borderRadius: 16, width: 296, height: 56, alignSelf: 'center', alignItems: 'center', marginVertical: 16 },
   iconAlign: { flexDirection: 'row', marginLeft: 8, marginRight: 24, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
