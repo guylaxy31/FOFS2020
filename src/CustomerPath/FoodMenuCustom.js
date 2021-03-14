@@ -5,7 +5,8 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
 import { object } from 'yup';
-
+import { connect } from "react-redux";
+import * as action from "../../store/action/cartAction";
 
 const FoodMenuCustom = props => {
 
@@ -146,7 +147,9 @@ const FoodMenuCustom = props => {
                     </View>
 
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
-                        <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity></View>
+                        <View style={styles.btnSubmit}><TouchableOpacity onPress={() => {
+                            props.addItemcart(item)
+                            props.navigation.navigate('FoodMenuMain')}}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity></View>
                         <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
                     </View>
                 </View>
@@ -155,6 +158,13 @@ const FoodMenuCustom = props => {
 
     );
 
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        addItemcart: (menu) => 
+            dispatch(action.addToCart({quantity: 1,menu}))
+    }
 }
 
 const styles = StyleSheet.create({
@@ -178,4 +188,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default FoodMenuCustom
+export default connect(null,mapDispatchToProps)(FoodMenuCustom);
