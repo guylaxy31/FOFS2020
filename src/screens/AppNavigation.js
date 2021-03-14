@@ -66,41 +66,25 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
-    const { AuthLogin, setAuthLogin, database, setDatabase, restaurant, setRestaurant } = useContext(AppContext);
-
 
     return (
 
         <Stack.Navigator initialRouteName="Homescreen">
 
-            {database.role === 'restaurant' && AuthLogin === true ?
-                <Stack.Screen name="RestaurantHome"
-                    component={RestaurantHome}
-                    options={{
-                        title: 'หน้าหลัก',
-                        headerTitleStyle: {
-                            fontFamily: 'pr-reg',
-                            fontSize: 16,
-                            textAlign: 'center',
-                        }
+            <Stack.Screen name="Homescreen"
+                component={Home}
+                options={{
+                    title: 'หน้าหลัก',
+                    headerTitleStyle: {
+                        fontFamily: 'pr-reg',
+                        fontSize: 16,
+                        textAlign: 'center',
                     }
-                    }
-                />
-                :
-                <Stack.Screen name="Homescreen"
-                    component={Home}
-                    options={{
-                        title: 'หน้าหลัก',
-                        headerTitleStyle: {
-                            fontFamily: 'pr-reg',
-                            fontSize: 16,
-                            textAlign: 'center',
-                        }
-                    }
-                    }
-                />}
+                }
+                }
+            />
 
-            {/* <Stack.Screen name="RestaurantHome"
+            <Stack.Screen name="RestaurantHome"
 
                 component={RestaurantHome}
                 options={{
@@ -110,10 +94,9 @@ const AppNavigation = props => {
                         fontSize: 16,
                         textAlign: 'center',
                     },
-
                 }
                 }
-            /> */}
+            />
 
             <Stack.Screen name="RestaurantList"
 
@@ -561,80 +544,24 @@ const AppNavigation = props => {
 
 const userBottomTab = props => {
 
-    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
-
     return (
 
         <Tab.Navigator style={{ fontFamily: 'pr-reg' }} initialRouteName="AppNavigation" activeColor="#000" inactiveColor="#797979" barStyle={{ backgroundColor: '#fff' }}>
-            {AuthLogin === false ?
-                <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
-                :
-                database.role === 'customer' ?
-                    <Tab.Screen name="Homescreen" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="RestaurantHome" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
-            }
 
-            {/* {database.role === 'restaurant' && AuthLogin === true ?
-                <Tab.Screen name="home" component={RestaurantHome} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
-                :
-                <Tab.Screen name="home" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={26} />) }} />
-            } */}
+            {/* หน้าหลัก ของลูกค้า    ----------------------------1/2 */}
+            <Tab.Screen name="Homescreen" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={24} />) }} />
+            {/* หน้าหลัก ของร้านอาหาร ----------------------------2/2 */}
+            {/* <Tab.Screen name="RestaurantHome" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={24} />) }} /> */}
 
-            { AuthLogin === false ?
+            {/* หน้าตรวจ status ของลูกค้า----------------------------1/2 */}
+            <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'ตรวจสถานะ', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={24} />) }} />
+            {/* หน้าตรวจ status ของร้านอาหาร-------------------------2/2 */}
+            {/* <Tab.Screen name="OrderMain" component={OrderMain} options={{ tabBarLabel: 'ออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={24} />) }} /> */}
 
-                <Tab.Screen name="FoodStatus" component={LoginHome} options={{ tabBarLabel: 'ตรวจสถานะ', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-                :
-                database.role === 'customer' ?
-                    <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'ตรวจสถานะ', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="OrderMain" component={OrderMain} options={{ tabBarLabel: 'ออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-
-            }
-
-
-            {/* {database.role === 'customer' || database.role === '' ?
-
-                AuthLogin === true ?
-                    <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="FoodStatus" component={LoginHome} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-
-                :
-
-                AuthLogin === true ?
-                    <Tab.Screen name="FoodOrder" component={OrderMain} options={{ tabBarLabel: 'ออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="FoodStatus" component={LoginHome} options={{ tabBarLabel: 'สถานะออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={26} />) }} />
-
-
-
-            } */}
-
-            {AuthLogin === false ?
-                <Tab.Screen name="FoodHistory" component={LoginHome} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-                :
-                database.role === 'customer' ?
-                    <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="HistoryMain" component={HistoryMain} options={{ tabBarLabel: 'ประวัติออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-            }
-
-
-            {/* {database.role === 'customer' || database.role === '' ?
-
-                AuthLogin === true ?
-                    <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="FoodHistory" component={LoginHome} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-                :
-                AuthLogin === true ?
-
-                    <Tab.Screen name="HistoryMain" component={HistoryMain} options={{ tabBarLabel: 'ประวัติออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-                    :
-                    <Tab.Screen name="FoodHistory" component={LoginHome} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={26} />) }} />
-
-            } */}
+            {/* หน้าประวัติ ของลูกค้า----------------------------1/2 */}
+            <Tab.Screen name="FoodHistory" component={FoodHistory} options={{ tabBarLabel: 'ประวัติการสั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={24} />) }} />
+            {/* หน้าประวัติ ร้านอาหาร----------------------------2/2 */}
+            {/* <Tab.Screen name="HistoryMain" component={HistoryMain} options={{ tabBarLabel: 'ประวัติออเดอร์', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="history" color={color} size={24} />) }} /> */}
 
         </Tab.Navigator>
     )
