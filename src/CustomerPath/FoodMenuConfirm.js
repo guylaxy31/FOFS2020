@@ -18,19 +18,23 @@ const FoodMenuConfirm = (props) => {
                             
                     })} */}
 
-                    <View style={styles.menunamecontainer}><Text style={styles.MenuTitleText}>ข้าวผัด</Text></View>
+                    <View style={styles.menunamecontainer}><Text style={[styles.MenuTitleText, { flex: 1 }]}>ข้าวผัด</Text></View>
                     <View style={styles.MenuListContainer}>
-                        <Text style={styles.MenuCustomText}>ธรรมดา</Text>
-                        <Text style={styles.PriceCustomText}>+ 30 ฿</Text>
+                        <Text style={[styles.MenuCustomText, { flex: 1 }]}>ธรรมดา</Text>
+                        <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 30 ฿</Text>
                     </View>
                     <View style={styles.MenuListContainer}>
-                        <Text style={styles.MenuCustomText}>หมู</Text>
-                        <Text style={styles.PriceCustomText}>+ 0 ฿</Text>
+                        <Text style={[styles.MenuCustomText, { flex: 1 }]}>หมู</Text>
+                        <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
+                    </View>
+                    <View style={styles.MenuListContainer}>
+                        <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
+                        <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
                     </View>
 
 
-                    <View style={styles.ETCContainer}><Text style={styles.ETCText}>ฝากถึงร้านเพิ่มเติม : </Text></View>
-                    <View style={styles.CommentContainer}><Text style={styles.CommentText}>ไม่ใส่ผัก เพิ่มมะนาว</Text></View>
+                    <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
+                    <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>ไม่ใส่ผัก เพิ่มมะนาว</Text></View>
 
                     <View style={styles.totalpricescontainer}>
                         <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
@@ -69,14 +73,14 @@ const styles = StyleSheet.create({
     MenuCustomText: { fontFamily: 'pr-reg', color: '#797979', marginLeft: 48, fontSize: 16 },
     PriceCustomText: { fontFamily: 'pr-reg', color: '#979797', marginRight: 80, fontSize: 16 },
 
-    ETCContainer: { width: '100%', paddingHorizontal: 50, marginBottom: 10, marginTop: 32 },
+    ETCContainer: { width: '100%', paddingHorizontal: 24, marginBottom: 10, marginTop: 32 },
     ETCText: { fontFamily: 'pr-reg', color: '#000', fontSize: 16 },
     CommentContainer: { width: '100%', paddingHorizontal: 80 },
     CommentText: { fontFamily: 'pr-reg', fontSize: 16, color: '#636363' },
 
     totalpricescontainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8', paddingVertical: 16, marginTop: 50, borderTopRightRadius: 48, borderBottomEndRadius: 48, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16 },
-    detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: 24, color: '#3C3C3C', },
-    detailTotalPrice: { fontFamily: 'pr-bold', fontSize: 24, color: '#3C3C3C', alignSelf: 'center' },
+    detailTotalTextTitle: { fontFamily: 'pr-reg', fontSize: 24, color: '#3C3C3C', },
+    detailTotalPrice: { fontFamily: 'pr-reg', fontSize: 24, color: '#3C3C3C', alignSelf: 'center' },
 
     btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 16, marginRight: 24, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 8, elevation: 3, shadowOpacity: 0.26 },
     btnSubmitText: { fontFamily: 'pr-reg', paddingHorizontal: 8, fontSize: 16 },
