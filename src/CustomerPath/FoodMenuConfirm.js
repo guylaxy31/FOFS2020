@@ -3,61 +3,89 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 const FoodMenuConfirm = (props) => {
-    console.log(props);
+    console.log(props.menu);
 
     return (
+        <>
+            <View style={styles.container}>
+                <ScrollView style={{ width: '100%' }}>
+                    <View style={styles.CardContainer}>
+                        <View style={styles.ConcluContainer}><MaterialIcons name="restaurant-menu" size={32} color="black" style={{ marginRight: 8 }} /><Text style={styles.concluText}>สรุปรายการ</Text></View>
 
-        <View style={styles.container}>
-            <ScrollView style={{ width: '100%' }}>
-                <View style={styles.CardContainer}>
-                    <View style={styles.ConcluContainer}><MaterialIcons name="restaurant-menu" size={32} color="black" style={{ marginRight: 8 }} /><Text style={styles.concluText}>สรุปรายการ</Text></View>
-                    {/* {props.cartItem.map(x => {
-                        return(
-                            <Text>{x.menu.menu_name}</Text>
-                        )
-                            
-                    })} */}
+                        {props.cartItem.map((data) => {
+                            <View>
+                                <View style={styles.menunamecontainer}><Text style={[styles.MenuTitleText, { flex: 1 }]}>{data.menu.menu_name}</Text></View>
+                        <View style={styles.MenuListContainer}>
+                            <Text style={[styles.MenuCustomText, { flex: 1 }]}>ธรรมดา</Text>
+                            <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 30 ฿</Text>
+                        </View>
+                        <View style={styles.MenuListContainer}>
+                            <Text style={[styles.MenuCustomText, { flex: 1 }]}>หมู</Text>
+                            <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
+                        </View>
+                        <View style={styles.MenuListContainer}>
+                            <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
+                            <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
+                        </View>
 
-                    <View style={styles.menunamecontainer}><Text style={[styles.MenuTitleText, { flex: 1 }]}>ข้าวผัด</Text></View>
-                    <View style={styles.MenuListContainer}>
-                        <Text style={[styles.MenuCustomText, { flex: 1 }]}>ธรรมดา</Text>
-                        <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 30 ฿</Text>
+
+                        <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
+                        <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>ไม่ใส่ผัก เพิ่มมะนาว</Text></View>
+
+                        <View style={styles.totalpricescontainer}>
+                            <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
+                            <Text style={styles.detailTotalPrice}>30 ฿</Text>
+                        </View>
+
+                        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
+                            <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity></View>
+                            <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
+                        </View>
+                            </View>
+
+                        })}  
+                        <View style={styles.menunamecontainer}><Text style={[styles.MenuTitleText, { flex: 1 }]}>ข้าวผัด</Text></View>
+                        <View style={styles.MenuListContainer}>
+                            <Text style={[styles.MenuCustomText, { flex: 1 }]}>ธรรมดา</Text>
+                            <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 30 ฿</Text>
+                        </View>
+                        <View style={styles.MenuListContainer}>
+                            <Text style={[styles.MenuCustomText, { flex: 1 }]}>หมู</Text>
+                            <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
+                        </View>
+                        <View style={styles.MenuListContainer}>
+                            <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
+                            <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
+                        </View>
+
+
+                        <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
+                        <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>ไม่ใส่ผัก เพิ่มมะนาว</Text></View>
+
+                        <View style={styles.totalpricescontainer}>
+                            <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
+                            <Text style={styles.detailTotalPrice}>30 ฿</Text>
+                        </View>
+
+                        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
+                            <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity></View>
+                            <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
+                        </View>
+
+
                     </View>
-                    <View style={styles.MenuListContainer}>
-                        <Text style={[styles.MenuCustomText, { flex: 1 }]}>หมู</Text>
-                        <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
-                    </View>
-                    <View style={styles.MenuListContainer}>
-                        <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
-                        <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 0 ฿</Text>
-                    </View>
-
-
-                    <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
-                    <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>ไม่ใส่ผัก เพิ่มมะนาว</Text></View>
-
-                    <View style={styles.totalpricescontainer}>
-                        <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
-                        <Text style={styles.detailTotalPrice}>30 ฿</Text>
-                    </View>
-
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
-                        <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity></View>
-                        <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
-                    </View>
-                </View>
-            </ScrollView>
-        </View >
-
+                </ScrollView>
+            </View >
+        </>
     );
 
 };
 const mapStatetoProps = (state) => {
-    const {cartItem} = state;
+    const { cartItem } = state;
     return {
-        cartItem : cartItem,
+        cartItem: cartItem,
     }
-    
+
 };
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
@@ -90,4 +118,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStatetoProps,null)(FoodMenuConfirm);
+export default connect(mapStatetoProps, null)(FoodMenuConfirm);
