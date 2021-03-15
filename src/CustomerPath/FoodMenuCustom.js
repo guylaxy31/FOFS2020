@@ -55,7 +55,7 @@ const FoodMenuCustom = props => {
 
     // console.log(item.item.menu_name);
     // console.log(`${baseUrl}restaurant/options/${item.item._id}`);
-    console.log(item.item);
+    // console.log(item.item);
     useEffect(() => {
 
         axios

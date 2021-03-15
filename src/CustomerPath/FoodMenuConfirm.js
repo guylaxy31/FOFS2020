@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 const FoodMenuConfirm = (props) => {
-    console.log(props);
 
     return (
 

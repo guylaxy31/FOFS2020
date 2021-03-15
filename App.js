@@ -13,8 +13,6 @@ import Toast from 'react-native-toast-message'
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 
-
-
 const fetchFonts = () => {
   return Font.loadAsync({
     'pr-light': require('./assets/fonts/Prompt-Light.ttf'),
