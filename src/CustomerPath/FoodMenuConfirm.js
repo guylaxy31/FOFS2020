@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
-const FoodMenuConfirm = props => {
-
+const FoodMenuConfirm = (props) => {
+    console.log(props);
 
     return (
 
@@ -11,12 +11,12 @@ const FoodMenuConfirm = props => {
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
                     <View style={styles.ConcluContainer}><MaterialIcons name="restaurant-menu" size={32} color="black" style={{ marginRight: 8 }} /><Text style={styles.concluText}>สรุปรายการ</Text></View>
-                    {props.cartItem.map(x => {
+                    {/* {props.cartItem.map(x => {
                         return(
                             <Text>{x.menu.menu_name}</Text>
                         )
                             
-                    })}
+                    })} */}
 
                     <View style={styles.menunamecontainer}><Text style={styles.MenuTitleText}>ข้าวผัด</Text></View>
                     <View style={styles.MenuListContainer}>
@@ -48,7 +48,7 @@ const FoodMenuConfirm = props => {
     );
 
 };
-const mapStatetoProps = state => {
+const mapStatetoProps = (state) => {
     const {cartItem} = state;
     return {
         cartItem : cartItem,
@@ -57,7 +57,7 @@ const mapStatetoProps = state => {
 };
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
+    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16, marginTop: 54 },
 
     ConcluContainer: { width: '100%', paddingHorizontal: 32, flexDirection: 'row', alignSelf: 'center', marginBottom: 24 },
     concluText: { fontFamily: 'pr-bold', fontSize: 24 },
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     CommentContainer: { width: '100%', paddingHorizontal: 80 },
     CommentText: { fontFamily: 'pr-reg', fontSize: 16, color: '#636363' },
 
-    totalpricescontainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFF', borderWidth: 1, borderLeftWidth: 0, borderColor: '#7D7C60', paddingVertical: 16, marginTop: 50, borderTopRightRadius: 16, borderBottomEndRadius: 16, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16 },
+    totalpricescontainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8', paddingVertical: 16, marginTop: 50, borderTopRightRadius: 48, borderBottomEndRadius: 48, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16 },
     detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: 24, color: '#3C3C3C', },
     detailTotalPrice: { fontFamily: 'pr-bold', fontSize: 24, color: '#3C3C3C', alignSelf: 'center' },
 

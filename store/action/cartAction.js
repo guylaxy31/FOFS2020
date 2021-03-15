@@ -1,5 +1,3 @@
-export const FETCH_RES = 'FETCH_RES';
-export const CREATE_RES = 'CRREATE_RES';
 import {
     ADD_TO_CART,
     REMOVE_FROM_CART,

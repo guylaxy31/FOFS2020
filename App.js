@@ -9,6 +9,7 @@ import AppNavigation from './src/screens/AppNavigation'
 import { Provider } from 'react-redux';
 import store from './store/store'
 import Toast from 'react-native-toast-message'
+ 
 
 const fetchFonts = () => {
   return Font.loadAsync({

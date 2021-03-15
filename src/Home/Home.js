@@ -15,6 +15,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -132,7 +133,7 @@ const Home = props => {
           style={styles.nearStyle}
         />
 
-        <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><MaterialIcons name="select-all" size={24} color="black" style={{ marginRight: 8 }} /><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
 
 
       </ScrollView>
@@ -149,8 +150,8 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF', alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', },
 
   nav__container: { width: '100%' },
-  HedaerTitleTxt: { fontFamily: 'pr-reg', fontSize: 14 },
-  usernameText: { fontFamily: 'pr-light', fontSize: 14 },
+  HedaerTitleTxt: { fontFamily: 'pr-reg', fontSize: 16 },
+  usernameText: { fontFamily: 'pr-light', fontSize: 16 },
 
   SearchBoxContainer: { flexDirection: 'row', backgroundColor: '#FFFFD9', padding: 8, borderRadius: 16, width: 296, height: 56, alignSelf: 'center', alignItems: 'center', marginVertical: 16 },
   iconAlign: { flexDirection: 'row', marginLeft: 8, marginRight: 24, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' },
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
   PromotionTxt: { fontFamily: 'pr-bold', fontSize: 18 },
   headerText: { fontFamily: 'pr-reg', fontSize: 18 },
 
-  allresttouchbtn: { marginVertical: 32, marginBottom: 40, width: '50%', alignSelf: 'center', paddingVertical: 8 },
+  allresttouchbtn: { flexDirection: 'row', marginVertical: 32, marginBottom: 40, width: '50%', alignSelf: 'center', justifyContent: 'center', padding: 8, borderRadius: 16 },
   ViewAllTxt: { fontFamily: 'pr-reg', fontSize: 18, textAlign: 'center' }
 });
 
