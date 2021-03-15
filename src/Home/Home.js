@@ -8,7 +8,7 @@ import HextagonIcon from '../Themes/HextagonIcon'
 import RecommendRestaurant from './RecommendRestaurant'
 import NearRestaurant from './NearRestaurant'
 
-import { Header } from 'react-native-elements';
+import { Header, normalize } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 

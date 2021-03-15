@@ -10,7 +10,7 @@ const FoodMenuTotal = props => {
                 <View style={styles.CardContainer}>
                     <View><Image style={styles.imageTag} source={require('../../assets/restaurantlist/rest011182.jpg')}></Image></View>
                     <View><Text style={styles.MenuTitleText}>ข้าวผัด</Text></View>
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'row', width: '100%' }}>
                         <Text style={styles.detailTextTitle}>ธรรมดา</Text>
                         <Text style={styles.detailTextPrice}>+ 30 ฿</Text>
                     </View>
@@ -35,7 +35,7 @@ const FoodMenuTotal = props => {
                         <Text style={styles.detailTextPrice}>+ 10 ฿</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.detailTextTitle}>ไข่เจีบง</Text>
+                        <Text style={styles.detailTextTitle}>ไข่เจียว</Text>
                         <Text style={styles.detailTextPrice}>+ 10 ฿</Text>
                     </View>
 

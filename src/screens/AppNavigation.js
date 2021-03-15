@@ -555,7 +555,7 @@ const userBottomTab = props => {
             {/* หน้าหลัก ของร้านอาหาร ----------------------------2/2 */}
             {/* <Tab.Screen name="RestaurantHome" component={AppNavigation} options={{ tabBarLabel: 'หน้าหลัก', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="home" color={color} size={24} />) }} /> */}
 
-            <Tab.Screen name="FoodMenuConfirm" component={FoodMenuConfirm} options={{ tabBarLabel: 'รายการที่สั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="cart-outline" size={24} color="black" />) }} />
+            <Tab.Screen name="FoodMenuConfirm" component={FoodMenuConfirm} options={{ tabBarLabel: 'รายการที่สั่ง', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="cart-outline" size={24} color={color} />) }} />
 
             {/* หน้าตรวจ status ของลูกค้า----------------------------1/2 */}
             <Tab.Screen name="FoodStatus" component={FoodStatus} options={{ tabBarLabel: 'ตรวจสถานะ', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="silverware" color={color} size={24} />) }} />

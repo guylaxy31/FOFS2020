@@ -9,8 +9,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export function DrawerContent(props) {
-
-
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const toggleTheme = () => {
