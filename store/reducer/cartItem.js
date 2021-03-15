@@ -5,6 +5,7 @@ import {
 } from "../constant";
 
 const cartItem = (state = [], action) => {
+
     switch (action.type) {
         case ADD_TO_CART:
             return [...state, action.payload];
@@ -16,4 +17,5 @@ const cartItem = (state = [], action) => {
     }
     return state
 }
+console.log('RESULT ---------------------------', JSON.stringify(cartItem))
 export default cartItem;
