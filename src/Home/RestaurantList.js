@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, FlatList } from 'react-native';
 
 
 const RestaurantList = (props) => {
@@ -9,26 +9,21 @@ const RestaurantList = (props) => {
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}>
 
-                <TouchableOpacity style={styles.touchContainer}>
-                    <View style={styles.restaurantContainer}>
-                        <View style={styles.containImage}></View>
-                        <View style={styles.containText}><Text style={styles.restText}>ร้านอาหาร 1</Text></View>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.touchContainer}>
-                    <View style={styles.restaurantContainer}>
-                        <View style={styles.containImage}></View>
-                        <View style={styles.containText}><Text style={styles.restText}>ร้านอาหาร 2</Text></View>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.touchContainer}>
-                    <View style={styles.restaurantContainer}>
-                        <View style={styles.containImage}></View>
-                        <View style={styles.containText}><Text style={styles.restText}>ร้านอาหาร 3</Text></View>
-                    </View>
-                </TouchableOpacity>
+                <FlatList
+                    data={restaurants}
+                    keyExtractor={item => item._id}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity style={styles.touchContainer}>
+                            <View style={styles.restaurantContainer}>
+                                <View style={styles.containImage}></View>
+                                <View style={styles.containText}><Text style={styles.restText}>ร้านกินชากาแฟ</Text></View>
+                            </View>
+                        </TouchableOpacity>
+                    }
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
 
             </ScrollView>
         </View >
