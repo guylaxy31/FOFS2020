@@ -1,14 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput ,FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput, FlatList } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 import * as actions from '../../store/action/cartAction';
 import CartItem from './CartItem';
 const FoodMenuConfirm = (props) => {
-<<<<<<< HEAD
-=======
     console.log(props.cartItem);
->>>>>>> 8836c7e829ceb3d1f2853b0b04653fb2aaa4edfa
 
     return (
         <>
@@ -21,10 +18,10 @@ const FoodMenuConfirm = (props) => {
                             <View>
                                 <FlatList
                                     data={props.cartItem}
-                                    renderItem={({ data }) =>
-                                            <CartItem item = {data}/>
-                                        }
-                                    keyExtractor={(data, index) => index.toString()}
+                                    renderItem={({ item }) =>
+                                        <CartItem item={item} />
+                                    }
+                                    keyExtractor={(item, index) => index.toString()}
                                     horizontal={true}
                                     showsVerticalScrollIndicator={false}
                                     showsHorizontalScrollIndicator={false}
