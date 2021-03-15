@@ -29,8 +29,11 @@
     "config": "^3.3.3",
     "dotenv": "^8.2.0",
     "expo": "^38.0.9",
+    "expo-constants": "~9.1.1",
     "expo-font": "~8.2.1",
     "expo-image-picker": "~8.3.0",
+    "expo-notifications": "~0.3.3",
+    "expo-permissions": "~9.0.1",
     "expo-status-bar": "^1.0.2",
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
@@ -71,10 +74,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "request": "^2.88.2",
-    "yup": "^0.32.8",
-    "expo-notifications": "~0.3.3",
-    "expo-permissions": "~9.0.1",
-    "expo-constants": "~9.1.1"
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
