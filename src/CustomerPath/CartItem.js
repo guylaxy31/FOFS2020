@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 
 
 const CartItem = props => {
+    console.log("-----------cartItem");
     console.log(props.item);
 
     return (
         <View>
-            <View style={styles.menunamecontainer}><Text style={[styles.MenuTitleText, { flex: 1 }]}></Text></View>
+            <View style={styles.menunamecontainer}><Text style={[styles.MenuTitleText, { flex: 1 }]}>{props.item.menu.menu_name}......... X{props.item.quantity}</Text></View>
             <View style={styles.MenuListContainer}>
                 <Text style={[styles.MenuCustomText, { flex: 1 }]}>ธรรมดา</Text>
                 <Text style={[styles.PriceCustomText, { flex: 1 }]}>+ 30 ฿</Text>
@@ -24,16 +25,6 @@ const CartItem = props => {
 
             <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
             <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>ไม่ใส่ผัก เพิ่มมะนาว</Text></View>
-
-            <View style={styles.totalpricescontainer}>
-                <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
-                <Text style={styles.detailTotalPrice}>30 ฿</Text>
-            </View>
-
-            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
-                <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity></View>
-                <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
-            </View>
         </View>
     )
 }
