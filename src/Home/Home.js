@@ -119,7 +119,7 @@ const Home = props => {
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          style={styles.nearStyle}
+
         />
 
         <FlatList
@@ -130,7 +130,7 @@ const Home = props => {
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          style={styles.nearStyle}
+
         />
 
         <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><MaterialIcons name="select-all" size={24} color="black" style={{ marginRight: 8 }} /><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
