@@ -8,7 +8,7 @@ const FoodMenuMain = props => {
 
     const { resId } = props.route.params;
     const [oneres, setOneres] = useState([]);
-    console.log(resId);
+    // console.log(resId);
     // const restaurant = useSelector(state => state.restaurant.restaurants.find(restaurant => restaurant._id  === resId));
 
     // console.log(restaurant.res_image);
@@ -23,7 +23,7 @@ const FoodMenuMain = props => {
             setOneres([]);
         }
     }, []);
-    console.log(oneres.menus);
+    // console.log(oneres.menus);
     return (
 
         <View style={styles.container}>
