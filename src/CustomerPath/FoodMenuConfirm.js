@@ -4,8 +4,13 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 import * as actions from '../../store/action/cartAction';
 import CartItem from './CartItem';
+import cartItem from '../../store/reducer/cartItem';
 const FoodMenuConfirm = (props) => {
     console.log(props.cartItem);
+    var total = 0;
+    props.cartItem.forEach(cart => {
+        return (total += cart.menu.price)
+    })
 
     return (
         <>
@@ -22,11 +27,23 @@ const FoodMenuConfirm = (props) => {
                                         <CartItem item={item} />
                                     }
                                     keyExtractor={(item, index) => index.toString()}
+<<<<<<< HEAD
                                     horizontal={true}
+=======
+                                    horizontal={false}
+>>>>>>> e76e0dc0895543c5aabcd882c6e32e060757fff8
                                     showsVerticalScrollIndicator={false}
                                     showsHorizontalScrollIndicator={false}
                                     style={styles.nearStyle}
                                 />
+                                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
+                                    <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity></View>
+                                    <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
+                                </View>
+                                <View style={styles.totalpricescontainer}>
+                                    <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
+                                    <Text style={styles.detailTotalPrice}>{total} ฿</Text>
+                                </View>
                             </View>
                         ) : (
                             <View>
