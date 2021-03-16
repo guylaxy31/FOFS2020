@@ -117,7 +117,7 @@ const Home = props => {
   return (
 
     <View style={styles.container}>
-      <Button title="Trigger notifications" onPress={triggerNotificationHandler} />
+      {/* <Button title="Trigger notifications" onPress={triggerNotificationHandler} /> */}
       <View style={styles.nav__container}>
         {AuthLogin == true ?
           <Header

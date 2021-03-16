@@ -7,6 +7,7 @@ import axios from "axios";
 import { object } from 'yup';
 import { connect } from "react-redux";
 import * as action from "../../store/action/cartAction";
+import FoodMenuConfirm from './FoodMenuConfirm';
 
 const FoodMenuCustom = props => {
 
@@ -164,11 +165,9 @@ const FoodMenuCustom = props => {
                         <Text style={styles.detailTotalPrice}>{totalprices} ฿</Text>
                     </View>
 
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
-                        <View style={styles.btnSubmit}><TouchableOpacity onPress={() => {
-                            props.addItemcart(item.item)
-                        }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity></View>
-                        <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
+                    <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, marginHorizontal: 16 }}>
+                        <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item) }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
@@ -192,16 +191,16 @@ const styles = StyleSheet.create({
     imageTag: { width: 248, height: 248, borderRadius: 16 },
     MenuTitleText: { fontFamily: 'pr-bold', color: '#000', fontSize: 18, marginVertical: 8 },
     detailTextTitle: { fontFamily: 'pr-reg', color: '#6F6F6F' },
-    detailTextPrice: { flexWrap: 'wrap', fontFamily: 'pr-reg', color: '#000', fontSize: 16, width: 160, backgroundColor: '#FFFEB8', justifyContent: 'center', alignItems: 'center', padding: 8, },
+    detailTextPrice: { flex: 1, flexWrap: 'wrap', fontFamily: 'pr-reg', color: '#000', fontSize: 16, backgroundColor: '#FFFEB8', justifyContent: 'center', alignItems: 'center', padding: 8, },
     detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: 24, color: '#000' },
     detailTotalPrice: { fontFamily: 'pr-bold', fontSize: 24, color: '#000' },
 
     TextInputBox: { textAlignVertical: 'top', height: 80, borderColor: 'gray', borderWidth: 1, marginHorizontal: 40, padding: 8, marginBottom: 32, borderRadius: 16, fontFamily: 'pr-reg' },
 
-    btnSubmit: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 16, marginRight: 24, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
-    btnSubmitText: { fontFamily: 'pr-reg', paddingHorizontal: 10, fontSize: 16 },
+    btnsubmit: { backgroundColor: '#FFFC1B', paddingVertical: 8, paddingHorizontal: 16, borderRadius: 16, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+    btnSubmitText: { fontFamily: 'pr-reg', fontSize: 16 },
 
-    btnCancel: { backgroundColor: '#FFF', padding: 8, borderRadius: 16, marginLeft: 24, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+    btnCancel: { backgroundColor: '#FFF', paddingVertical: 8, paddingHorizontal: 16, borderRadius: 16, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     btnCancelText: { fontFamily: 'pr-reg', fontSize: 16 }
 });
 
