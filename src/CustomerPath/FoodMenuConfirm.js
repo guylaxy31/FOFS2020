@@ -13,46 +13,57 @@ const FoodMenuConfirm = (props) => {
     })
 
     return (
-        <>
-            <View style={styles.container}>
-                <ScrollView style={{ width: '100%' }}>
+        <View>
+            {props.cartItem.length ? (
+
+                <ScrollView style={{ width: '100%', height: '100%', backgroundColor: '#FFF' }}>
+                    <View style={[styles.CardContainer, { flex: 1, marginTop: 64, marginBottom: 96 }]}>
+                        <View style={styles.ConcluContainer}><MaterialIcons name="restaurant-menu" size={32} color="black" style={{ marginRight: 8 }} /><Text style={styles.concluText}>สรุปรายการ</Text></View>
+
+                        <View>
+                            <FlatList
+                                data={props.cartItem}
+                                renderItem={({ item }) =>
+                                    <CartItem item={item} />
+                                }
+                                keyExtractor={(item, index) => index.toString()}
+                                horizontal={false}
+                                showsVerticalScrollIndicator={false}
+                                showsHorizontalScrollIndicator={false}
+                                style={{ backgroundColor: '#FFF', flexGrow: 0 }}
+                            />
+
+                            <View style={styles.totalpricescontainer}>
+                                <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
+                                <Text style={styles.detailTotalPrice}>{total} ฿</Text>
+                            </View>
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 8 }}>
+                                <TouchableOpacity style={styles.btnSubmit} onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>กลับไปเลือกเมนู</Text></TouchableOpacity>
+                            </View>
+
+                        </View>
+                    </View>
+                </ScrollView>
+
+            ) : (
+                <View style={styles.container}>
+
                     <View style={styles.CardContainer}>
                         <View style={styles.ConcluContainer}><MaterialIcons name="restaurant-menu" size={32} color="black" style={{ marginRight: 8 }} /><Text style={styles.concluText}>สรุปรายการ</Text></View>
 
-                        {props.cartItem.length ? (
-                            <View>
-                                <FlatList
-                                    data={props.cartItem}
-                                    renderItem={({ item }) =>
-                                        <CartItem item={item} />
-                                    }
-                                    keyExtractor={(item, index) => index.toString()}
-                                    horizontal={false}
-                                    showsVerticalScrollIndicator={false}
-                                    showsHorizontalScrollIndicator={false}
-                                    style={styles.nearStyle}
-                                />
-                                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 32 }}>
-                                    <View style={styles.btnSubmit}><TouchableOpacity onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity></View>
-                                    <View style={styles.btnCancel}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity></View>
-                                </View>
-                                <View style={styles.totalpricescontainer}>
-                                    <Text style={styles.detailTotalTextTitle}>รวมทั้งหมด</Text>
-                                    <Text style={styles.detailTotalPrice}>{total} ฿</Text>
-                                </View>
-                            </View>
-                        ) : (
-                            <View>
-                                <Text>You Don have item in cart</Text>
-                            </View>
-                        )}
-
-
+                        <View style={{ marginTop: 56, width: '100%', backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16, paddingVertical: 32, paddingHorizontal: 8, height: 168, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ fontFamily: 'pr-reg', fontSize: 16, color: 'gray', textAlign: 'center' }}>ไม่มีรายการอาหารที่สั่ง</Text>
+                            <Text style={{ fontFamily: 'pr-reg', fontSize: 16, color: 'gray', textAlign: 'center' }}>เลือกดูเมนูอาหารได้ที่หน้าหลัก</Text>
+                        </View>
 
                     </View>
-                </ScrollView>
-            </View >
-        </>
+
+                </View >
+            )
+            }
+
+        </View >
     );
 
 };
@@ -64,10 +75,10 @@ const mapStatetoProps = (state) => {
 
 };
 const styles = StyleSheet.create({
-    container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' },
-    CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16, marginTop: 54 },
+    container: { height: '100%', width: '100%', marginBottom: 16, backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', paddingTop: 64 },
+    CardContainer: { height: '100%', flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", borderRadius: 16, },
 
-    ConcluContainer: { width: '100%', paddingHorizontal: 32, flexDirection: 'row', alignSelf: 'center', marginBottom: 24 },
+    ConcluContainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8', paddingVertical: 16, borderTopRightRadius: 48, borderBottomEndRadius: 48, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16, marginLeft: -48, marginBottom: 32 },
     concluText: { fontFamily: 'pr-bold', fontSize: 24 },
 
     menunamecontainer: { width: '100%', paddingHorizontal: 32, flexDirection: 'row', alignSelf: 'center' },
@@ -82,7 +93,7 @@ const styles = StyleSheet.create({
     CommentContainer: { width: '100%', paddingHorizontal: 80 },
     CommentText: { fontFamily: 'pr-reg', fontSize: 16, color: '#636363' },
 
-    totalpricescontainer: { flexWrap: 'wrap', width: '80%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8', paddingVertical: 16, marginTop: 50, borderTopRightRadius: 48, borderBottomEndRadius: 48, marginRight: 24, alignSelf: 'flex-start', paddingHorizontal: 16 },
+    totalpricescontainer: { flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFFDD', paddingVertical: 16, marginTop: 96, borderTopRightRadius: 48, borderBottomEndRadius: 48, alignSelf: 'flex-start', paddingHorizontal: 16, marginLeft: -48, marginBottom: 32 },
     detailTotalTextTitle: { fontFamily: 'pr-reg', fontSize: 24, color: '#3C3C3C', },
     detailTotalPrice: { fontFamily: 'pr-reg', fontSize: 24, color: '#3C3C3C', alignSelf: 'center' },
 

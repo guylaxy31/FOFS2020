@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import AppContext from '../Context/AppContext'
 
@@ -17,18 +17,52 @@ import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
 import { MaterialIcons } from '@expo/vector-icons';
 
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true
+    };
+  }
+})
 
 const Home = props => {
-  console.log('--Homescreen [100%] Loaded on Device --> ', Platform.OS)
+  console.log('-- Homescreen is rendering [Device] -->', Platform.OS)
 
   const { AuthLogin, setAuthLogin } = useContext(AppContext);
   const { database, setDatabase } = useContext(AppContext);
   const [searchtext, setSearchtext] = useState('');
   const [restaurants, setRestaurants] = useState([]);
-
+  const [pushToken, setPushToken] = useState();
 
   useEffect(() => {
+
+    Permissions.getAsync(Permissions.NOTIFICATIONS)
+      .then(statusObj => {
+        if (statusObj.status === 'granted') {
+          return Permissions.askAsync(Permissions.NOTIFICATIONS);
+        }
+        return statusObj;
+      })
+      .then(statusObj => {
+        // console.log(statusObj)
+        if (statusObj.status !== 'granted') {
+          throw new Error('Permission not granted!');
+        }
+      })
+      .then(() => {
+        return Notifications.getExpoPushTokenAsync();
+      }).then(response => {
+        // console.log('Getting Token')
+        // console.log(data)
+        const token = response.data
+        setPushToken(token);
+        // fetch('https://your-own-api.com'); 
+      }).catch((err) => {
+        return null;
+      });
 
     axios
       .get(`${baseUrl}home`)
@@ -45,10 +79,45 @@ const Home = props => {
 
   }, []);
 
+  useEffect(() => {
+    // ห่ากไม่ได้เล่นแอปอยู่
+    const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('backgroundresponse ======> ', response)
+    });
+    // หากเปิดแอปเล่นอยู่
+    const foregroundSubscription = Notifications.addNotificationReceivedListener(notification => {
+      console.log('foreground response =======> ', notification);
+    });
+
+    return () => {
+      // เคลียร์เพื่อไม่ให้เกิด memory leak
+      backgroundSubscription.remove()
+      foregroundSubscription.remove()
+    };
+  }, [])
+
+  const triggerNotificationHandler = () => {
+
+    fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Accept-Encoding': 'gzip, deflate',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        to: pushToken,
+        date: { extraData: 'Some data' },
+        title: 'Send via the app',
+        body: 'This push notification was sent via the app !',
+      })
+    })
+  };
+
   return (
 
     <View style={styles.container}>
-
+      {/* <Button title="Trigger notifications" onPress={triggerNotificationHandler} /> */}
       <View style={styles.nav__container}>
         {AuthLogin == true ?
           <Header

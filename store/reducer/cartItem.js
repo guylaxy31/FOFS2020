@@ -13,7 +13,6 @@ const cartItem = (state = [], action) => {
             return state.filter(cartItem => cartItem !== action.payload);
         case CLEAR_CART:
             return state = [];
-
     }
     return state
 }
