@@ -6,7 +6,7 @@ import * as actions from '../../store/action/cartAction';
 import CartItem from './CartItem';
 import cartItem from '../../store/reducer/cartItem';
 const FoodMenuConfirm = (props) => {
-    console.log(props.cartItem);
+    console.log(props);
     var total = 0;
     props.cartItem.forEach(cart => {
         return (total += cart.menu.price)

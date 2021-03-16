@@ -39,10 +39,8 @@ const FoodMenuCustom = props => {
     const [ingredients, setIngredients] = useState([]);
     const [varaitions, setVaraitions] = useState([]);
 
-    const [selectvaraitions, setselectvaraitions] = useState({
-        index: 0,
-        value: 0
-    });
+
+    const [selectvaraitions, setselectvaraitions] = useState({ id: 0 });
     const [selectingredients, setselectingredients] = useState({
         index: 0,
         value: 0
@@ -95,10 +93,11 @@ const FoodMenuCustom = props => {
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
                             <RadioForm
+
                                 radio_props={varaitions.varaition}
                                 initial={0}
                                 animationion={true}
-                                onPress={(value, index) => { setselectvaraitions({ ...selectvaraitions, value: value, index: index, }) }}
+                                onPress={(value, index) => { setselectvaraitions({ ...selectvaraitions, id: varaitions.varaition[index]._id }), console.log(selectvaraitions.id) }}
                                 buttonColor={'#E4E4E4'}
                                 selectedButtonColor={'#908F7D'}
 
@@ -152,8 +151,6 @@ const FoodMenuCustom = props => {
                             <Text style={styles.detailTextPrice}>ราคาท็อปปิ้ง +{selectoptions.value} ฿</Text>
                         </View>
 
-
-
                     </View>
 
                     <View style={{ width: '100%', marginVertical: 20 }}>
@@ -166,7 +163,7 @@ const FoodMenuCustom = props => {
                     </View>
 
                     <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, marginHorizontal: 16 }}>
-                        <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item) }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions.id) }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -179,8 +176,7 @@ const FoodMenuCustom = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemcart: (menu) =>
-            dispatch(action.addToCart({ quantity: 1, menu }))
+        addItemcart: (menu, vaid) => { dispatch(action.addToCart({ quantity: 1, menu, varid: vaid })) }
     }
 }
 
