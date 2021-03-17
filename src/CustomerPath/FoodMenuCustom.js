@@ -11,29 +11,7 @@ import FoodMenuConfirm from './FoodMenuConfirm';
 
 const FoodMenuCustom = props => {
 
-    var radio_options = [
-        {
-            "option":
-                [
-                    { "_id": "604b8ebd8b5c35642115841c", "option_name": "ไข่ดาว", "option_price": 10, "__v": 0 },
-                    { "_id": "604b8f211b4559663867b91e", "option_name": "ไข่เจียว", "option_price": 10, "__v": 0 }
-                ]
-        }
-    ]
 
-    var radio_qty_props = [
-        { label: 'ธรรมดา', value: 'normal' },
-        { label: 'พิเศษ', value: 'special' },
-    ];
-    var radio_igd_props = [
-        { "label": 'หมู', "option_price": 'pork', "_id": "123445" },
-        { "label": 'ไก่', "value": 'chick' },
-        { "label": 'กุ้ง', "value": 'prawn' },
-    ];
-    var radio_tp_props = [
-        { label: 'ไข่ดาว', value: 'freid' },
-        { label: 'ไข่เจียว', value: 'omelet' },
-    ];
     const [item, setItem] = useState(props.route.params);
     const [options, setOptions] = useState([]);
     const [ingredients, setIngredients] = useState([]);
@@ -52,9 +30,14 @@ const FoodMenuCustom = props => {
 
     const [totalprices, settotalprices] = useState(0)
 
+    const [variationView, setvariationView] = useState(false)
+    const [ingredientsView, setingredientsView] = useState(false)
+    const [optionView, setoptionView] = useState(false)
+
     // console.log(item.item.menu_name);
     // console.log(`${baseUrl}restaurant/options/${item.item._id}`);
     // console.log(item.item);
+
     useEffect(() => {
 
         axios
@@ -62,7 +45,6 @@ const FoodMenuCustom = props => {
             .then((res) => {
                 setOptions(res.data)
             })
-
         axios
             .get(`${baseUrl}restaurant/ingredients/${item.item._id}`)
             .then((res) => {
@@ -73,85 +55,137 @@ const FoodMenuCustom = props => {
             .then((res) => {
                 setVaraitions(res.data)
             })
+
+
         return () => {
             setOptions([]);
             setIngredients([]);
             setVaraitions([])
-
         }
     }, [])
 
+    useEffect(() => {
+
+
+        if (Object.keys(varaitions)[0] == undefined) {
+        } else {
+            Object.keys(varaitions.varaition).length > 1 ?
+                setvariationView(true)
+                :
+                setvariationView(false)
+        }
+
+
+        if (Object.keys(ingredients)[0] == undefined) {
+        } else {
+            Object.keys(ingredients.ingredient).length > 1 ?
+                setingredientsView(true)
+                :
+                setingredientsView(false)
+        }
+
+        if (Object.keys(options)[0] == undefined) {
+            // console.log('Loading not finish ===== Undefined !!!')
+        } else {
+            // console.log('option is', Object.keys(options.option).length)
+            Object.keys(options.option).length > 1 ?
+                setoptionView(true)
+                :
+                setoptionView(false)
+        }
+        console.log('-------------------')
+        console.log('variation view state is ', variationView)
+        console.log('ingredient view state is ', ingredientsView)
+        console.log('option view state is ', optionView)
+
+    }, [varaitions, ingredients, options, variationView, ingredientsView, optionView])
+
+    // console.log('value -> ', Object.keys(options)[0], ' result is ', tempState)
+    // if (Object.keys(options).length != 0) { setTempState(true) }
+    // else (setTempState(true))
 
     return (
 
         <View style={styles.container} >
+
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
+
                     <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
                     <View><Text style={styles.MenuTitleText}>เมนู {item.item.menu_name}</Text></View>
 
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
-                        <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
-                            <RadioForm
+                    {variationView === true ?
+                        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
+                            <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
+                                <RadioForm
 
-                                radio_props={varaitions.varaition}
-                                initial={0}
-                                animationion={true}
-                                onPress={(value, index) => { setselectvaraitions({ ...selectvaraitions, id: varaitions.varaition[index]._id }), console.log(selectvaraitions.id) }}
-                                buttonColor={'#E4E4E4'}
-                                selectedButtonColor={'#908F7D'}
+                                    radio_props={varaitions.varaition}
+                                    initial={0}
+                                    animationion={true}
+                                    onPress={(value, index) => { setselectvaraitions({ ...selectvaraitions, id: varaitions.varaition[index]._id }) }}
+                                    buttonColor={'#E4E4E4'}
+                                    selectedButtonColor={'#908F7D'}
 
-                                labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
-                                buttonSize={10}
-                            />
-                            <Text style={styles.detailTextPrice}>ราคาปริมาณ +{selectvaraitions.value} ฿</Text>
+                                    labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
+                                    buttonSize={10}
+                                />
+                                <Text style={styles.detailTextPrice}>ราคาปริมาณ +{selectvaraitions.value} ฿</Text>
+
+                            </View>
+                            <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginRight: 80 }}>
+
+
+                            </View>
+
 
                         </View>
-                        <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginRight: 80 }}>
+                        : null
+                    }
+
+                    {ingredientsView === true ?
+                        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
+                            <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
+                                <RadioForm
+                                    radio_props={ingredients.ingredient}
+                                    initial={0}
+                                    animationion={true}
+                                    onPress={(value, index) => { setselectingredients({ ...selectingredients, value: value, index: index, }) }}
+                                    buttonColor={'#E4E4E4'}
+                                    selectedButtonColor={'#908F7D'}
+
+                                    labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
+                                    buttonSize={10}
+                                />
+                                <Text style={styles.detailTextPrice}>ราคาวัตถุดิบ +{selectingredients.value} ฿</Text>
+                            </View>
+
 
 
                         </View>
+                        :
+                        null
+                    }
 
+                    {optionView === true ?
+                        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
+                            <View style={{ flexDirection: 'column', marginLeft: 56 }}>
+                                <RadioForm
+                                    radio_props={options.option}
+                                    initial={0}
+                                    animationion={true}
+                                    onPress={(value, index) => { setselectoptions({ ...selectoptions, value: value, index: index, }) }}
+                                    buttonColor={'#E4E4E4'}
+                                    selectedButtonColor={'#908F7D'}
+                                    labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
+                                    buttonSize={10}
+                                />
+                                <Text style={styles.detailTextPrice}>ราคาท็อปปิ้ง +{selectoptions.value} ฿</Text>
+                            </View>
 
-                    </View>
-
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 }}>
-                        <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
-                            <RadioForm
-                                radio_props={ingredients.ingredient}
-                                initial={0}
-                                animationion={true}
-                                onPress={(value, index) => { setselectingredients({ ...selectingredients, value: value, index: index, }) }}
-                                buttonColor={'#E4E4E4'}
-                                selectedButtonColor={'#908F7D'}
-
-                                labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
-                                buttonSize={10}
-                            />
-                            <Text style={styles.detailTextPrice}>ราคาวัตถุดิบ +{selectingredients.value} ฿</Text>
                         </View>
-
-
-
-                    </View>
-
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
-                        <View style={{ flexDirection: 'column', marginLeft: 56 }}>
-                            <RadioForm
-                                radio_props={options.option}
-                                initial={0}
-                                animationion={true}
-                                onPress={(value, index) => { setselectoptions({ ...selectoptions, value: value, index: index, }) }}
-                                buttonColor={'#E4E4E4'}
-                                selectedButtonColor={'#908F7D'}
-
-                                labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
-                                buttonSize={10}
-                            />
-                            <Text style={styles.detailTextPrice}>ราคาท็อปปิ้ง +{selectoptions.value} ฿</Text>
-                        </View>
-
-                    </View>
+                        :
+                        null
+                    }
 
                     <View style={{ width: '100%', marginVertical: 20 }}>
                         <Text style={{ fontFamily: 'pr-reg', textAlign: 'left', marginLeft: 40, marginBottom: 24 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>

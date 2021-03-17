@@ -16,5 +16,5 @@ const cartItem = (state = [], action) => {
     }
     return state
 }
-console.log('RESULT ---------------------------', JSON.stringify(cartItem))
+// console.log('RESULT ---------------------------', JSON.stringify(cartItem))
 export default cartItem;
