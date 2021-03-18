@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import * as action from "../../store/action/cartAction";
 import FoodMenuConfirm from './FoodMenuConfirm';
 import { TouchableRipple } from 'react-native-paper';
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const FoodMenuCustom = props => {
 
@@ -33,10 +35,12 @@ const FoodMenuCustom = props => {
     const [ingredientsView, setingredientsView] = useState(false)
     const [optionView, setoptionView] = useState(false)
 
+    const [qtymenu, setqtymenu] = useState(1)
+
     // console.log(item.item.menu_name);
     // console.log(`${baseUrl}restaurant/options/${item.item._id}`);
     // console.log(item.item);
-
+    console.log(Object.values(item))
     useEffect(() => {
 
         axios
@@ -99,10 +103,10 @@ const FoodMenuCustom = props => {
                 :
                 setoptionView(false)
         }
-        console.log('-------------------')
-        console.log('variation view state is ', variationView)
-        console.log('ingredient view state is ', ingredientsView)
-        console.log('option view state is ', optionView)
+        // console.log('-------------------')
+        // console.log('variation view state is ', variationView)
+        // console.log('ingredient view state is ', ingredientsView)
+        // console.log('option view state is ', optionView)
 
     }, [varaitions, ingredients, options, variationView, ingredientsView, optionView])
 
@@ -117,9 +121,9 @@ const FoodMenuCustom = props => {
             <ScrollView style={{ width: '100%' }}>
                 <View style={styles.CardContainer}>
 
-                    <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
-                    <View><Text style={styles.MenuTitleText}>เมนู {item.item.menu_name}</Text></View>
-                    <View><Text style={styles.MenuTitleText}>ราคา {item.item.price} ฿</Text></View>
+                    <View ><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
+                    <View style={{ marginTop: 16 }}><Text style={styles.MenuTitleText}>ชื่อเมนู {item.item.menu_name}</Text></View>
+                    <View style={{ marginBottom: 8 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 16 }}>( ราคาเริ่มต้น {item.item.price} ฿ )</Text></View>
                     {/* {checkvaraitions == true ? ( */}
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
@@ -207,8 +211,14 @@ const FoodMenuCustom = props => {
                         <Text style={styles.detailTotalPrice}>{totalprices} ฿</Text>
                     </View> */}
 
+                            <View style={[styles.menunamecontainer, { paddingHorizontal: 24, marginBottom: 16, width: 248, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+                                <TouchableOpacity onPress={() => { qtymenu > 1 ? setqtymenu(qtymenu - 1) : null }} style={[styles.MenuTitleText, styles.btntool, {}]}><MaterialCommunityIcons name="minus" size={24} color="black" /></TouchableOpacity>
+                                <Text style={{ fontFamily: 'pr-reg', fontSize: 18 }}>{qtymenu}</Text>
+                                <TouchableOpacity onPress={() => { setqtymenu(qtymenu + 1) }} style={[styles.MenuTitleText, styles.btntool, {}]}><MaterialIcons name="add" size={24} color="black" /></TouchableOpacity>
+                            </View>
+
                             <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 248 }}>
-                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -224,7 +234,7 @@ const FoodMenuCustom = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemcart: (menus, vaId, ingreId, optionId, describe) => { dispatch(action.addToCart({ quantity: 1, menus, varId: vaId, ingreId: ingreId, optionId: optionId, describe })) }
+        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu) => { dispatch(action.addToCart({ quantity: qtymenu, menus, varId: vaId, ingreId: ingreId, optionId: optionId, describe })) }
     }
 }
 
@@ -233,13 +243,16 @@ const styles = StyleSheet.create({
 
     CardContainer: { flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 20, width: 376, backgroundColor: "#FFF", shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, paddingVertical: 48, borderRadius: 16 },
     imageTag: { width: 248, height: 248, borderRadius: 16 },
-    MenuTitleText: { fontFamily: 'pr-bold', color: '#000', fontSize: 18, marginVertical: 8 },
+    MenuTitleText: { fontFamily: 'pr-bold', color: '#000', fontSize: 18 },
     detailTextTitle: { fontFamily: 'pr-reg', color: '#6F6F6F' },
     detailTextPrice: { flex: 1, flexWrap: 'wrap', fontFamily: 'pr-reg', color: '#000', fontSize: 16, backgroundColor: '#FFFEB8', justifyContent: 'center', alignItems: 'center', padding: 8, },
     detailTotalTextTitle: { fontFamily: 'pr-bold', fontSize: 24, color: '#000' },
     detailTotalPrice: { fontFamily: 'pr-bold', fontSize: 24, color: '#000' },
 
+    menunamecontainer: { width: '100%', paddingHorizontal: 32, flexDirection: 'row', alignSelf: 'center' },
     TextInputBox: { width: 248, alignItems: 'center', textAlignVertical: 'top', height: 80, borderColor: 'gray', borderWidth: 1, padding: 8, marginBottom: 32, borderRadius: 16, fontFamily: 'pr-reg' },
+    btntool: { backgroundColor: '#FFF', alignItems: 'flex-start', alignSelf: 'center', padding: 8, borderRadius: 8, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
+
 
     btnsubmit: { backgroundColor: '#FFFC1B', paddingVertical: 8, paddingHorizontal: 16, borderRadius: 16, shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26 },
     btnSubmitText: { fontFamily: 'pr-reg', fontSize: 16 },

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const CartItem = props => {
@@ -11,49 +9,44 @@ const CartItem = props => {
     total += props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value;
 
     return (
-        <View style={{  paddingHorizontal: 8, paddingVertical: 32, margin: 8, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16 }}>
-            <View style={[styles.menunamecontainer, { paddingHorizontal: 24, marginBottom: 16 }]}>
-                <TouchableOpacity style={[styles.MenuTitleText, styles.btntool, { marginRight: 16 }]}><MaterialCommunityIcons name="minus" size={24} color="black" /></TouchableOpacity>
-                <TouchableOpacity style={[styles.MenuTitleText, styles.btntool, { marginRight: 184 }]}><MaterialIcons name="add" size={24} color="black" /></TouchableOpacity>
-                <TouchableOpacity style={[styles.MenuTitleText, { alignItems: 'center', alignSelf: 'center', right: 0 }]}><MaterialIcons name="close" size={24} color="gray" /></TouchableOpacity>
-            </View >
-            
+        <View style={{ paddingHorizontal: 8, paddingVertical: 32, margin: 8, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16 }}>
+
+
             <View style={styles.menunamecontainer}>
                 <Text style={[styles.MenuTitleText, { flex: 1, fontSize: 24 }]}>{props.item.menus.menu_name}</Text>
                 <Text style={[styles.MenuTitleText, { flex: .5, fontSize: 24 }]}>x {props.item.quantity}</Text>
             </View>
             {props.item.varId.id == 0 ? null : (
-            <View style={styles.MenuListContainer}>
-                <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.varId.id}</Text>
-                <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.varId.value} ฿</Text>
-            </View>)}
+                <View style={styles.MenuListContainer}>
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.varId.id}</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.varId.value} ฿</Text>
+                </View>)}
             {props.item.ingreId.id == 0 ? (
                 null
-            ):(
-                <View style={styles.MenuListContainer}>
-                <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.ingreId.id}</Text>
-                <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.ingreId.value} ฿</Text>
-            </View>
-            )}
-            
-            {props.item.optionId.id == 0 ? (
-            <View style={styles.MenuListContainer}>
-                <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
-                <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.optionId.value} ฿</Text>
-            </View>
             ) : (
                 <View style={styles.MenuListContainer}>
-                <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.optionId.id}</Text>
-                <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.optionId.value} ฿</Text>
-            </View>
-            ) 
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.ingreId.id}</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.ingreId.value} ฿</Text>
+                </View>
+            )}
+
+            {props.item.optionId.id == 0 ? (
+                <View style={styles.MenuListContainer}>
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.optionId.value} ฿</Text>
+                </View>
+            ) : (
+                <View style={styles.MenuListContainer}>
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.optionId.id}</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.optionId.value} ฿</Text>
+                </View>
+            )
             }
 
             <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
             <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>{props.item.describe}</Text></View>
-            <View style={styles.menunamecontainer}>
-                <Text style={[styles.MenuTitleText, { flex: 1, fontSize: 24 }]}>{total}</Text>
-                
+            <View style={[styles.menunamecontainer, { marginTop: 16 }]}>
+                <Text style={{ fontFamily: 'pr-reg', fontSize: 18 }}>รวมยอดเมนู {total} ฿</Text>
             </View>
         </View >
     )
