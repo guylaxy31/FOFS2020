@@ -7,6 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const CartItem = props => {
     console.log("-----------cartItem");
     console.log(props.item);
+    var total = 0;
+    total += props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value;
 
     return (
         <View style={{  paddingHorizontal: 8, paddingVertical: 32, margin: 8, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16 }}>
@@ -49,6 +51,10 @@ const CartItem = props => {
 
             <View style={styles.ETCContainer}><Text style={[styles.ETCText, { flex: 1 }]}>ฝากถึงร้านเพิ่มเติม : </Text></View>
             <View style={styles.CommentContainer}><Text style={[styles.CommentText, { flex: 1 }]}>{props.item.describe}</Text></View>
+            <View style={styles.menunamecontainer}>
+                <Text style={[styles.MenuTitleText, { flex: 1, fontSize: 24 }]}>{total}</Text>
+                
+            </View>
         </View >
     )
 }

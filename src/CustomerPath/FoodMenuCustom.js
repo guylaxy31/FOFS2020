@@ -119,6 +119,7 @@ const FoodMenuCustom = props => {
 
                     <View><Image style={styles.imageTag} source={{ uri: item.item.menu_image }}></Image></View>
                     <View><Text style={styles.MenuTitleText}>เมนู {item.item.menu_name}</Text></View>
+                    <View><Text style={styles.MenuTitleText}>ราคา {item.item.price} ฿</Text></View>
                     {/* {checkvaraitions == true ? ( */}
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                         <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
