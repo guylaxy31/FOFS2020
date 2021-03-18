@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image } from 'react-native';
-
+import { connect } from "react-redux";
+import * as action from "../../store/action/cartAction";
 const FoodMenuEdit = props => {
-
     return (
 
         <View style={styles.container}>
@@ -11,7 +11,7 @@ const FoodMenuEdit = props => {
                 <Image style={styles.ImageContainer} source={{ uri: props.imageUri }}></Image>
                 <View style={{ flexDirection: 'column', width: 140 }}>
                     <View><Text style={styles.MenuTitleText}>{props.menuTitle}</Text></View>
-                    <View><Text style={styles.MenuCountText}>x {props.cartItem}</Text></View>
+                    <View><Text style={styles.MenuCountText}>x {props.cartItem.quantity}</Text></View>
                 </View>
             </View>
         </View>
@@ -19,7 +19,13 @@ const FoodMenuEdit = props => {
     );
 
 }
+const mapStatetoProps = (state) => {
+    const { cartItem } = state;
+    return {
+        cartItem: cartItem,
+    }
 
+};
 const styles = StyleSheet.create({
     container: { backgroundColor: '#FFF', borderRadius: 15, width: '100%' },
 
@@ -32,4 +38,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default FoodMenuEdit
+export default connect(mapStatetoProps, null)(FoodMenuEdit)

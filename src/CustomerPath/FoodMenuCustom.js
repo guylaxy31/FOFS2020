@@ -22,9 +22,9 @@ const FoodMenuCustom = props => {
     const [checkvaraitions, setCheckvaraitions] = useState(false)
 
 
-    const [selectvaraitions, setselectvaraitions] = useState({ id: 0 });
-    const [selectingredients, setselectingredients] = useState({ id: 0 });
-    const [selectoptions, setselectoptions] = useState({ id: 0 });
+    const [selectvaraitions, setselectvaraitions] = useState({ id: 0 ,value: 0});
+    const [selectingredients, setselectingredients] = useState({ id: 0 ,value: 0});
+    const [selectoptions, setselectoptions] = useState({ id: 0 ,value: 0});
     const [describe, setDescribe] = useState('');
 
     const [totalprices, settotalprices] = useState(0)
@@ -43,11 +43,7 @@ const FoodMenuCustom = props => {
             .get(`${baseUrl}restaurant/options/${item.item._id}`)
             .then((res) => {
                 setOptions(res.data);
-                if (Object.keys(options.option).length !== 0) {
-                    setCheckoptions(true);
-                } else {
-                    setCheckoptions(false);
-                }
+                
             })
             .catch((error) => { console.log(error); })
 
@@ -55,12 +51,7 @@ const FoodMenuCustom = props => {
             .get(`${baseUrl}restaurant/ingredients/${item.item._id}`)
             .then((res) => {
                 setIngredients(res.data);
-                if (Object.keys(ingredients.ingredient).length !== 0) {
-                    setCheckingredients(true);
-                } else {
-                    setCheckingredients(false);
-
-                }
+                
 
             })
             .catch((error) => { console.log(error) })
@@ -68,11 +59,7 @@ const FoodMenuCustom = props => {
             .get(`${baseUrl}restaurant/varaitions/${item.item._id}`)
             .then((res) => {
                 setVaraitions(res.data);
-                if (Object.keys(varaitions.varaition).length !== 0) {
-                    setCheckvaraitions(true);
-                } else {
-                    setCheckvaraitions(false);
-                }
+                
             })
 
 
@@ -144,7 +131,7 @@ const FoodMenuCustom = props => {
                                             radio_props={varaitions.varaition}
                                             initial={0}
                                             animationion={true}
-                                            onPress={(value, index) => { setselectvaraitions({ ...selectvaraitions, id: varaitions.varaition[index]._id }) }}
+                                            onPress={(value, index) => { setselectvaraitions({ ...selectvaraitions, id: varaitions.varaition[index].label , value:value }) }}
                                             buttonColor={'#E4E4E4'}
                                             selectedButtonColor={'#908F7D'}
 
@@ -170,7 +157,7 @@ const FoodMenuCustom = props => {
                                             radio_props={ingredients.ingredient}
                                             initial={0}
                                             animationion={true}
-                                            onPress={(value, index) => { setselectingredients({ ...selectingredients, value: value, index: index, }) }}
+                                            onPress={(value, index) => { setselectingredients({ ...selectingredients, id: ingredients.ingredient[index].label , value:value }) }}
                                             buttonColor={'#E4E4E4'}
                                             selectedButtonColor={'#908F7D'}
 
@@ -194,7 +181,7 @@ const FoodMenuCustom = props => {
                                             radio_props={options.option}
                                             initial={0}
                                             animationion={true}
-                                            onPress={(value, index) => { setselectoptions({ ...selectoptions, value: value, index: index, }) }}
+                                            onPress={(value, index) => { setselectoptions({ ...selectoptions, id: options.option[index].label , value:value }) }}
                                             buttonColor={'#E4E4E4'}
                                             selectedButtonColor={'#908F7D'}
                                             labelStyle={{ fontSize: 16, color: '#4F4F4F', fontFamily: 'pr-reg', marginBottom: 8, justifyContent: 'space-between' }}
@@ -220,7 +207,7 @@ const FoodMenuCustom = props => {
                     </View> */}
 
                             <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, marginHorizontal: 16 }}>
-                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions.id, selectingredients.id, selectoptions.id, describe) }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe) }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -236,7 +223,7 @@ const FoodMenuCustom = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemcart: (menu, vaId, ingreId, optionId, describe) => { dispatch(action.addToCart({ quantity: 1, menu, varId: vaId, ingreId: ingreId, optionId: optionId, describe })) }
+        addItemcart: (menus, vaId, ingreId, optionId, describe) => { dispatch(action.addToCart({ quantity: 1, menus, varId: vaId, ingreId: ingreId, optionId: optionId, describe })) }
     }
 }
 

@@ -201,7 +201,7 @@ const RegisterForRestaurant = props => {
                 type: mime.getType(newImageUri),
                 name: newImageUri.split("/").pop()
             });
-            
+            console.log(formData);
             // const config = {
             //     headers : {"Content-Type" : "application/json"}
             // }
