@@ -38,7 +38,13 @@ const LoginHome = props => {
   }
   useEffect(() => {
     if(context.stateUser.isAuthenticated === true) {
-      props.navigation.navigate('ProfileSetting')
+      console.log("go to navigation");
+      if(context.stateUser.user.isAdmin === true){
+        props.navigation.navigate('RestaurantHome')
+      }else{
+        props.navigation.navigate('Homescreen')
+      };
+      
     }
     
   }, [context.stateUser.isAuthenticated ])

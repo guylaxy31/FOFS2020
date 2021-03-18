@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 // import AppContext from '../Context/AppContext'
-
+import AuthGlobal from "../Context/Store/AuthGlobal";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -67,7 +67,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
-
+    const context = useContext(AuthGlobal);
     return (
 
         <Stack.Navigator initialRouteName="Homescreen">
@@ -84,7 +84,7 @@ const AppNavigation = props => {
                 }
                 }
             />
-
+            {/* {context.stateUser.user.isAdmin === true } */}
             <Stack.Screen name="RestaurantHome"
 
                 component={RestaurantHome}
@@ -199,7 +199,7 @@ const AppNavigation = props => {
                 }
                 }
             />
-
+            
             <Stack.Screen name="RegisterHome"
                 component={RegisterHome}
                 options={{
