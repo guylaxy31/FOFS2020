@@ -1,14 +1,49 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState ,useCallback ,useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AppContext from '../Context/AppContext'
 import { MaterialIcons } from '@expo/vector-icons';
+import { useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
+
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
+
+import AuthGlobal from "../Context/Store/AuthGlobal"
+import { logoutUser } from "../Context/Action/Auth.action"
 
 
 const ProfileSetting = props => {
 
-    const { database } = useContext(AppContext);
+    // const { database } = useContext(AppContext);
+    const context = useContext(AuthGlobal);
+    const [userProfile, setUserProfile] = useState()
+    console.log(context.stateUser.user.userId);
+    useEffect(() => {
+        if (
+            context.stateUser.isAuthenticated === false || 
+            context.stateUser.isAuthenticated === null
+        ) {
+            props.navigation.navigate("Login")
+        }
 
+        AsyncStorage.getItem("jwt")
+            .then((res) => {
+                console.log("token",res);
+                axios
+                    .get(`${baseURL}customer/${context.stateUser.user.userId}`, {
+                        headers: { Authorization: `Bearer ${res}` },
+                    })
+                    .then((user) => setUserProfile(user.data))
+            })
+            .catch((error) => console.log(error))
+
+        return () => {
+            setUserProfile();
+        }
+    }, [context.stateUser.isAuthenticated])
+
+    console.log(userProfile);
     return (
 
         <View style={styles.container}>
@@ -23,7 +58,7 @@ const ProfileSetting = props => {
                             <Text style={styles.titleH1}>รหัสผ่าน</Text>
                         </View>
                         <View style={{ width: 144 }}>
-                            <Text style={styles.valueText}>{database.username}</Text>
+                            <Text style={styles.valueText}>petpusin</Text>
                         </View>
                         <View style={{ width: 40, marginTop: 40 }} >
 
@@ -37,36 +72,39 @@ const ProfileSetting = props => {
                             <Text style={styles.titleH1}>นามสกุล</Text>
                             <Text style={styles.titleH1}>เพศ</Text>
                             <Text style={styles.titleH1}>อายุ</Text>
-                            {database.role === 'customer' ? <Text style={styles.titleH1}>อาชีพ</Text> : null}
-                            {database.role === 'customer' ? <Text style={styles.titleH1}>คณะ/สาขา</Text> : null}
-                            {database.role === 'customer' ? <Text style={styles.titleH1}>สังกัด</Text> : null}
+                            <Text style={styles.titleH1}>อาชีพ</Text>
+                            <Text style={styles.titleH1}>คณะ/สาขา</Text> 
+                            <Text style={styles.titleH1}>สังกัด</Text>  
                             <Text style={styles.titleH1}>เบอร์โทร</Text>
                             <Text style={styles.titleH1}>อีเมล</Text>
                             <Text style={styles.titleH1}>ไลน์</Text>
                         </View>
                         <View style={{ width: 144 }}>
-                            <Text style={styles.valueText}>{database.firstname}</Text>
-                            <Text style={styles.valueText}>{database.lastname}</Text>
-                            {database.gender === 'male' ? <Text style={styles.valueText}>ชาย</Text> : <Text style={styles.valueText}>หญิง</Text>}
-                            <Text style={styles.valueText}>{database.age}</Text>
-                            {database.role === 'customer' ? <Text style={styles.valueText}>{database.career}</Text> : null}
-                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'student' ? <Text style={styles.valueText}>{database.careerDetail}</Text> : <Text style={styles.valueText}>-</Text> : null}
-                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'officer' ? <Text style={styles.valueText}>{database.careerDetail}</Text> : <Text style={styles.valueText}>-</Text> : null}
-                            <Text style={styles.valueText}>{database.phonenumber}</Text>
-                            <Text style={styles.valueText}>{database.email}</Text>
-                            {database.role === 'restaurant' ? <Text style={styles.valueText}>{database.line}</Text> : null}
+                            <Text style={styles.valueText}></Text>
+                            <Text style={styles.valueText}></Text>
+                            <Text style={styles.valueText}>ชาย</Text> 
+                            {/* : <Text style={styles.valueText}>หญิง</Text>} */}
+                            <Text style={styles.valueText}></Text>
+                            <Text style={styles.valueText}></Text> 
+                            <Text style={styles.valueText}></Text> 
+                            <Text style={styles.valueText}></Text>
+                            <Text style={styles.valueText}></Text>
+                            <Text style={styles.valueText}></Text>
+                            <Text style={styles.valueText}></Text>
                         </View>
                         <View style={{ width: 40 }}>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
-                            {database.role === 'customer' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> : null}
-                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'student' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 12 }} /> : null}
-                            {database.role === 'customer' ? database.careerDetail != '' && database.carrer === 'officer' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 12 }} /> : null}
+                            <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> 
+                            <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> 
+                            {/* : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 12 }} />  */}
+                            <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> 
+                            {/* : <MaterialIcons name="mode-edit" size={24} color="#ccc" style={{ marginBottom: 12 }} /> */}
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
                             <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity>
-                            {database.role === 'restaurant' ? <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> : null}
+                            <TouchableOpacity><MaterialIcons name="mode-edit" size={24} color="black" style={{ marginBottom: 12 }} /></TouchableOpacity> 
                         </View>
                     </View>
 

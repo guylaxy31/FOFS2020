@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList, Button } from 'react-native';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
+import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, TextInput, FlatList, Button, ActivityIndicator, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import AppContext from '../Context/AppContext'
-
+import { useFocusEffect } from '@react-navigation/native'
 import PromotionRestaurant from './PromotionRestaurant'
 import HextagonIcon from '../Themes/HextagonIcon'
 import RecommendRestaurant from './RecommendRestaurant'
@@ -19,6 +19,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
+import AuthGlobal from '../Context/Store/AuthGlobal'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -27,16 +28,21 @@ Notifications.setNotificationHandler({
     };
   }
 })
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const Home = props => {
   console.log('-- Homescreen is rendering [Device] -->', Platform.OS)
 
-  const { AuthLogin, setAuthLogin } = useContext(AppContext);
-  const { database, setDatabase } = useContext(AppContext);
+  // const { AuthLogin, setAuthLogin } = useContext(AppContext);
+  // const { database, setDatabase } = useContext(AppContext);
   const [searchtext, setSearchtext] = useState('');
   const [restaurants, setRestaurants] = useState([]);
   const [pushToken, setPushToken] = useState();
-
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const context = useContext(AuthGlobal);
   useEffect(() => {
 
     Permissions.getAsync(Permissions.NOTIFICATIONS)
@@ -64,20 +70,31 @@ const Home = props => {
         return null;
       });
 
-    axios
-      .get(`${baseUrl}home`)
-      .then((res) => {
-        setRestaurants(res.data);
-      })
+
 
     return () => {
       setSearchtext();
-      setRestaurants([]);
-      setAuthLogin();
-      setDatabase();
+      
     }
 
   }, []);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  useFocusEffect((
+    useCallback(
+      () => {
+        axios
+          .get(`${baseUrl}home`)
+          .then((res) => {
+            setRestaurants(res.data);
+            setLoading(false);
+          })
+      },
+      [],
+    )
+  ))
 
   useEffect(() => {
     // ห่ากไม่ได้เล่นแอปอยู่
@@ -115,101 +132,115 @@ const Home = props => {
   };
 
   return (
+    <>
+      {loading === false ? (
+        <View style={styles.container}>
+          {/* <Button title="Trigger notifications" onPress={triggerNotificationHandler} /> */}
+          <View style={styles.nav__container}>
+              
+              {/* <Header
+                containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
+                leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
+                rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={24} />Hello<Text style={styles.usernameText}></Text></ TouchableOpacity>}
+              /> */}
+              <Header
+                containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
+                leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
+                rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
+              />
+          </View>
 
-    <View style={styles.container}>
-      {/* <Button title="Trigger notifications" onPress={triggerNotificationHandler} /> */}
-      <View style={styles.nav__container}>
-        {AuthLogin == true ?
-          <Header
-            containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
-            leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-            rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={24} /><Text style={styles.usernameText}>{database.username}</Text></ TouchableOpacity>}
-          />
-          : // ถ้ายังไม่ได้ Login
-          <Header
-            containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
-            leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-            rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
-          />}
-      </View>
+          <ScrollView style={styles.scroll_View}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }>
 
-      <ScrollView style={styles.scroll_View} showsVerticalScrollIndicator={false}>
+            <View style={styles.SearchBoxContainer}>
+              <TouchableOpacity><FontAwesome style={styles.iconAlign} name="search" size={22} color="#C7BDAC" /></TouchableOpacity>
+              <TextInput onChangeText={(value) => setSearchtext(value)} value={searchtext} placeholder={'ค้นชื่อร้าน / ชื่อเมนู'} style={styles.textinput_field} />
+            </View>
 
-        <View style={styles.SearchBoxContainer}>
-          <TouchableOpacity><FontAwesome style={styles.iconAlign} name="search" size={22} color="#C7BDAC" /></TouchableOpacity>
-          <TextInput onChangeText={(value) => setSearchtext(value)} value={searchtext} placeholder={'ค้นชื่อร้าน / ชื่อเมนู'} style={styles.textinput_field} />
+            <View style={styles.TitlePromotionAlign}>
+              <HextagonIcon />
+              <Text style={styles.PromotionTxt}>โปรโมชั่น ส่วนลด</Text>
+              <HextagonIcon />
+            </View>
+
+            <FlatList
+              // data={tempdatabase.PromotionList}
+              renderItem={({ item }) =>
+                <TouchableOpacity ><PromotionRestaurant imageUri={item.imageUri} /></TouchableOpacity>}
+              keyExtractor={(item, index) => index.toString()}
+              horizontal={true}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+              style={styles.flatListStyle}
+            />
+
+            <View style={styles.titleAlign}>
+              <HextagonIcon />
+              <Text style={styles.headerText}>เมนูจากร้านแนะนำ</Text>
+            </View>
+
+            <FlatList
+              data={restaurants}
+              keyExtractor={item => item._id}
+              renderItem={({ item }) =>
+                <TouchableOpacity style={styles.imageborder} onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><RecommendRestaurant imageUri={item.res_image} resName={item.restaurant_name} /></TouchableOpacity>}
+
+              horizontal={true}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+              style={styles.flatListStyle}
+            />
+
+            <View style={styles.titleAlign}>
+              <HextagonIcon />
+              <Text style={styles.headerText}>จากร้านอาหารใกล้คุณ</Text>
+            </View>
+
+            <FlatList
+              data={restaurants}
+              keyExtractor={item => item._id}
+              renderItem={({ item }) =>
+                <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><NearRestaurant imageUri={item.res_image} resName={item.restaurant_name} distance={item._id} /></TouchableOpacity>}
+
+              horizontal={true}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+
+            />
+
+            <FlatList
+              // data={tempdatabase.NearList}
+              renderItem={({ item }) =>
+                <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
+              keyExtractor={(item, index) => index.toString()}
+              horizontal={true}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+
+            />
+
+            <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><MaterialIcons name="select-all" size={24} color="black" style={{ marginRight: 8 }} /><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
+
+
+
+
+          </ScrollView>
+
+
+        </View >
+      ) : (
+        <View>
+          <ActivityIndicator size="large" color="yellow" />
         </View>
-
-        <View style={styles.TitlePromotionAlign}>
-          <HextagonIcon />
-          <Text style={styles.PromotionTxt}>โปรโมชั่น ส่วนลด</Text>
-          <HextagonIcon />
-        </View>
-
-        <FlatList
-          // data={tempdatabase.PromotionList}
-          renderItem={({ item }) =>
-            <TouchableOpacity ><PromotionRestaurant imageUri={item.imageUri} /></TouchableOpacity>}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={true}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          style={styles.flatListStyle}
-        />
-
-        <View style={styles.titleAlign}>
-          <HextagonIcon />
-          <Text style={styles.headerText}>เมนูจากร้านแนะนำ</Text>
-        </View>
-
-        <FlatList
-          data={restaurants}
-          keyExtractor={item => item._id}
-          renderItem={({ item }) =>
-            <TouchableOpacity style={styles.imageborder} onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><RecommendRestaurant imageUri={item.res_image} resName={item.restaurant_name} /></TouchableOpacity>}
-
-          horizontal={true}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          style={styles.flatListStyle}
-        />
-
-        <View style={styles.titleAlign}>
-          <HextagonIcon />
-          <Text style={styles.headerText}>จากร้านอาหารใกล้คุณ</Text>
-        </View>
-
-        <FlatList
-          data={restaurants}
-          keyExtractor={item => item._id}
-          renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain', { resId: item._id })}><NearRestaurant imageUri={item.res_image} resName={item.restaurant_name} distance={item._id} /></TouchableOpacity>}
-
-          horizontal={true}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-
-        />
-
-        <FlatList
-          // data={tempdatabase.NearList}
-          renderItem={({ item }) =>
-            <TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuMain')}><NearRestaurant imageUri={item.imageUri} resName={item.resName} distance={item.distance} /></TouchableOpacity>}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={true}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-
-        />
-
-        <TouchableOpacity onPress={() => props.navigation.navigate('RestaurantList')} style={styles.allresttouchbtn}><MaterialIcons name="select-all" size={24} color="black" style={{ marginRight: 8 }} /><Text style={styles.ViewAllTxt}>ดูร้านอาหารทั้งหมด</Text></TouchableOpacity>
-
-
-      </ScrollView>
-
-
-    </View >
-
+      )}
+    </>
   );
 
 }

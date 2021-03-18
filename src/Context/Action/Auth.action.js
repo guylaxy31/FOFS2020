@@ -1,13 +1,13 @@
 import jwt_decode from 'jwt-decode';
 import Toast from 'react-native-toast-message';
-import baseURL from '../../assets/common/baseUrl';
-import Toast from 'react-native-toast-message';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import baseURL from '../../../assets/common/baseUrl';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 
-export const SET_CURRENT_USER;
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
-export const loginUser = (user, disparch) => {
+export const loginUser = (user, dispatch) => {
     fetch(`${baseURL}user/login`, {
         method: "POST",
         body: JSON.stringify(user),
@@ -22,20 +22,22 @@ export const loginUser = (user, disparch) => {
                 const token = data.token;
                 AsyncStorage.setItem("jwt",token);
                 const decoded = jwt_decode(token);
-                disparch(setCurrentUser(decoded,user));
+                dispatch(setCurrentUser(decoded,user));
+                console.log("complete");
             }else{
-                logoutUser(disparch)
+                logoutUser(dispatch)
+                console.log("faill");
             }
 
         })
         .catch((error) => {
             Toast.show({
                 topOffset: 60,
-                type: "erro",
+                type: "error",
                 text1:"Please  provide conrrect credentials",
                 text2:""
             })
-            logoutUser(disparch)
+            logoutUser(dispatch)
         })
 };
 

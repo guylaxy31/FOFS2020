@@ -132,7 +132,7 @@ const RegisterForCustomer = props => {
                 <View style={styles.FormContainerWrap}>
                     <View style={styles.RegisterTitle}><HextagonIcon /><Text style={styles.TitleText}>สร้างบัญชีใหม่</Text></View>
                     <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -8 }} name='account' size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View></View>
-                    <View style={styles.FormContainer}><TextInput value={user.username} onChangeText={(value) => { usernameRecord(value) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
+                    <View style={styles.FormContainer}><TextInput value={user.username} onChangeText={(value) => { usernameRecord(value.toLowerCase()) }} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput></View>
                     {user.isValidUser == true ? null : <View><Text style={styles.validText}>ระบุ 4 - 16 ตัวอักษร</Text></View>}
                     <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><FontAwesome name="lock" style={{ marginRight: 8 }} size={24} color="black" /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View></View>
                     <View style={styles.FormContainer}><TextInput value={user.password} onChangeText={(value) => passRecord(value)} onEndEditing={() => checkPassword()} secureTextEntry={true} style={styles.FillFormText}></TextInput></View>

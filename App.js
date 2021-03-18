@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { AppProvider } from './src/Context/AppContext'
+//Context API
+
+import Auth from './src/Context/Store/Auth'
 // การโหลด Fonts
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -96,12 +98,16 @@ export default function App() {
   }
 
   return (
+    <Auth>
+
+    
     <Provider store={store}>
-      <AppProvider>
+      
         <AppNavigation />
         <Toast ref={(ref) => Toast.setRef(ref)}></Toast>
-      </AppProvider>
+      
     </Provider>
+    </Auth>
   )
 }
 

@@ -10,9 +10,7 @@ export default function (state,action) {
                 isAuthenticated: !isEmpty(action.payload),
                 user: action.payload,
                 userProfile: action.userProfile 
-            }
-            
-    
+            };
         default:
             return state;
     }

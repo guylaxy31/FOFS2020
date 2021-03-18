@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 import baseURL from '../../assets/common/baseUrl';
+import mime from "mime";
 
 const RegisterForRestaurant = props => {
 
@@ -49,6 +50,7 @@ const RegisterForRestaurant = props => {
         isValidProvince: false,
         isValidPostalcode: false
     })
+    console.log(restaurant);
 
 
     const checkUsername = () => { if (user.username.trim().length >= 4 & user.username.trim().length <= 16) { setUser({ ...user, isValidUsername: true }) } else { setUser({ ...user, isValidUsername: false }) } }
@@ -202,11 +204,14 @@ const RegisterForRestaurant = props => {
                 name: newImageUri.split("/").pop()
             });
             console.log(formData);
-            // const config = {
-            //     headers : {"Content-Type" : "application/json"}
-            // }
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+    
             axios
-                .post(`${baseURL}sales/register`, formData)
+                .post(`${baseURL}sales/register`, formData , config)
                 .then((res) => {
                     if (res.status == 200) {
                         Toast.show({

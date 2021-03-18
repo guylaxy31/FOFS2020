@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import AppContext from '../Context/AppContext'
+// import AppContext from '../Context/AppContext'
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -572,7 +572,6 @@ const userBottomTab = props => {
 };
 
 const DrawerTab = props => {
-    const { AuthLogin, setAuthLogin, database, setDatabase } = useContext(AppContext);
     return (
         <NavigationContainer>
             <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>

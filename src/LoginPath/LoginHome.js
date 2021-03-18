@@ -1,15 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext ,useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView, Alert } from 'react-native';
 import HextagonIcon from '../Themes/HextagonIcon';
-import AppContext from '../Context/AppContext'
+//Context
+// import AppContext from "../Context/AppContext";
+import AuthGlobal from '../Context/Store/AuthGlobal'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { getActiveChildNavigationOptions } from 'react-navigation';
 import Error from './Error';
+import { loginUser } from "../Context/Action/Auth.action";
 
 const LoginHome = props => {
 
-  const { AuthLogin, setAuthLogin, database, setDatabase, user, setUser } = useContext(AppContext);
+  const context = useContext(AuthGlobal);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,14 +36,34 @@ const LoginHome = props => {
       else if (database.role === 'restaurant') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
     }
   }
+  useEffect(() => {
+    if(context.stateUser.isAuthenticated === true) {
+      props.navigation.navigate('ProfileSetting')
+    }
+    
+  }, [context.stateUser.isAuthenticated ])
 
   const handleSubmit = () => {
     const user = { username, password };
 
     if (username === "" || password === "") {
       setError("Please fill in your credentials");
+      Alert.alert(
+        //title
+        'ไม่สามารถเข้าสู่ระบบได้',
+        //body
+        'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+        [
+          { text: 'ปิด' },
+        ],
+        { cancelable: false },
+        //clicking out side of alert will not cancel
+
+      );
     } else {
+      console.log(user);
       console.log("success");
+      loginUser(user,context.dispatch)
     }
 
   };
@@ -58,17 +81,17 @@ const LoginHome = props => {
         <View style={styles.FormContainer}>
           <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -8 }} name='account' size={24} /><Text style={styles.LoginForm}>ชื่อผู้ใช้</Text></View></View>
 
-          <View style={styles.TextInputContainer}><TextInput value={user.username} onChangeText={(val) => setUser({ ...user, username: val })} style={styles.id_field} /></View>
+          <View style={styles.TextInputContainer}><TextInput value={username} onChangeText={(val) => setUsername(val.toLowerCase())} style={styles.id_field} /></View>
 
           <View style={styles.FormContainer}><View style={{ flexDirection: 'row', alignItems: 'center' }}><FontAwesome name="lock" style={{ marginRight: 8 }} size={24} color="black" /><Text style={styles.LoginForm}>รหัสผ่าน</Text></View></View>
 
-          <View style={styles.TextInputContainer}><TextInput value={user.password} onChangeText={(val) => setUser({ ...user, password: val })} secureTextEntry={true} style={styles.pass_field} /></View>
+          <View style={styles.TextInputContainer}><TextInput value={password} onChangeText={(val) => setPassword(val)} secureTextEntry={true} style={styles.pass_field} /></View>
         </View>
       </KeyboardAvoidingView>
 
       <View style={styles.TouchLoginContainer}>
 
-        <TouchableOpacity style={styles.LoginButton} onPress={() => checkBeforeLogin()}>
+        <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
           <Text style={styles.LoginButtonText}>เข้าสู่ระบบ</Text>
         </TouchableOpacity>
       </View>
