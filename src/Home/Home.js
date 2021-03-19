@@ -90,8 +90,6 @@ const Home = props => {
   ))
 
   useEffect(() => {
-
-
     // ห่ากไม่ได้เล่นแอปอยู่
     const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
       console.log('backgroundresponse ======> ', response)
