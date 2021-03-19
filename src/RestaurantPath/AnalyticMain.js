@@ -49,7 +49,7 @@ const DayRoute = (props) => {
     const labellist = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
     const datalist = [0, 0, 0, 0, 0, 0, 0, 0, 90, 535, 225, 635, 1130, 295, 195, 165, 125, 0, 0, 0, 0, 0, 0, 0,]
     const dayofweeklist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-    const todayindex = 1
+    const todayindex = 4
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
@@ -77,7 +77,8 @@ const DayRoute = (props) => {
             <View style={styles.container}>
                 <View style={styles.CardContainer}>
                     <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
-                    <View><Text style={styles.TextTitleHeader}>ภาพรวมวัน{dayofweeklist[todayindex]} (24 ชม.)</Text></View>
+                    <View><Text style={styles.TextTitleHeader}>ภาพรวม (24 ชม.)</Text></View>
+                    <View><Text style={[styles.TextTitleHeader, { fontSize: 16, fontFamily: 'pr-light', marginTop: 16 }]}>วัน{dayofweeklist[todayindex]} 19-03-64</Text></View>
                     <View style={styles.LineChartContainer}>
                         <LineChart
                             data={{
@@ -204,7 +205,7 @@ const DayRoute = (props) => {
 const WeekRoute = (props) => {
 
     const labellist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-    const datalist = [2814, 3395, 2240, 3132, 3518, 0, 0]
+    const datalist = [3625, 3420, 2184, 3158, 3395, 0, 0]
 
 
     const [maxtotal, setmaxtotal] = useState()
@@ -234,6 +235,8 @@ const WeekRoute = (props) => {
                 <View style={styles.CardContainer}>
                     <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
                     <View><Text style={styles.TextTitleHeader}>ในสัปดาห์นี้ (7วัน)</Text></View>
+                    <View><Text style={[styles.TextTitleHeader, { fontSize: 16, fontFamily: 'pr-light', marginTop: 16 }]}>สัปดาห์ที่ 3 </Text></View>
+
                     <View style={styles.LineChartContainer}>
                         <LineChart
                             data={{
@@ -262,7 +265,7 @@ const WeekRoute = (props) => {
 
                                 },
                                 propsForDots: {
-                                    r: "2",
+                                    r: "6",
                                     strokeWidth: "2",
                                     stroke: "#378885"
                                 }
@@ -322,21 +325,16 @@ const WeekRoute = (props) => {
 
 const MonthRoute = (props) => {
 
-    const labellist = ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
-    const datalist = [0, 0, 0, 0, 50, 120, 750, 955, 815, 620, 375, 350, 250, 120, 80, 40, 0, 0, 0, 0, 0, 0, 0, 0,]
+    const labellist = ["สัปดาห์ที่ 1", "สัปดาห์ที่ 2", "สัปดาห์ที่ 3", "สัปดาห์ที่ 4", "สัปดาที่เหลือ"]
+    const datalist = [14735, 16230, 15782, 0, 0]
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
-    const [prevmaxtotal, setprevmaxtotal] = useState(485)
 
 
     function findMaxTotal(arrlist) {
         setmaxtotal(Math.max.apply(null, arrlist))
     }
-
-    // function findMaxIndex(maxval) {
-    //     setmaxattime(datalist.findIndex(maxval))
-    // }
 
     useEffect(() => {
         findMaxTotal(datalist)
@@ -346,14 +344,16 @@ const MonthRoute = (props) => {
 
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ backgroundColor: '#FFF' }}>
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ backgroundColor: '#FFF', margin: 0 }}>
             <View style={styles.container}>
                 <View style={styles.CardContainer}>
                     <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
-                    <View><Text style={styles.TextTitleHeader}>ภาพรวม (24 ชม.)</Text></View>
+                    <View><Text style={styles.TextTitleHeader}>ในเดือนนี้ (4 สัปดาห์ 3 วัน)</Text></View>
+                    <View><Text style={[styles.TextTitleHeader, { fontSize: 16, fontFamily: 'pr-light', marginTop: 16 }]}>สัปดาห์ที่ 3 </Text></View>
                     <View style={styles.LineChartContainer}>
                         <LineChart
                             data={{
+                                labels: labellist,
                                 datasets: [
                                     {
                                         data: datalist
@@ -362,7 +362,6 @@ const MonthRoute = (props) => {
                             }}
                             width={windowWidth}// from react-native
                             height={280}
-
                             yAxisSuffix=" ฿"
                             yAxisInterval={1} // optional, defaults to 1
                             chartConfig={{
@@ -378,7 +377,7 @@ const MonthRoute = (props) => {
 
                                 },
                                 propsForDots: {
-                                    r: "2",
+                                    r: "6",
                                     strokeWidth: "2",
                                     stroke: "#378885"
                                 }
@@ -386,7 +385,8 @@ const MonthRoute = (props) => {
                             bezier
                             style={{
                                 marginVertical: 8,
-                                borderRadius: 16
+                                borderRadius: 16,
+
                             }}
 
                         />
@@ -395,75 +395,29 @@ const MonthRoute = (props) => {
                     <View style={styles.dataContainer}>
 
                         <View style={styles.column1}>
-                            <Text style={styles.changeFont}>ยอดสูงสุดที่ช่วง</Text>
-                            <Text style={styles.changeFont}>ยอดทั้งหมด</Text>
-                            <Text style={styles.changeFont}>เทียบกับวันก่อนหน้า</Text>
+                            <Text style={styles.changeFont}>ยอดสูงสุดอยู่ใน</Text>
+                            <Text style={styles.changeFont}>เป็นจำนวน</Text>
+
+
                         </View>
                         <View style={styles.column2}>
                             <Text style={styles.changeFont}>{maxtimeindex == undefined ? <Text>กำลังโหลด...</Text> : labellist[maxtimeindex]}</Text>
                             <Text style={styles.changeFont}>{maxtotal == undefined ? <Text>กำลังโหลด...</Text> : maxtotal}</Text>
-                            <Text style={styles.changeFont}>{maxtotal == undefined || maxtimeindex == undefined ? <Text>กำลังคำนวณ...</Text> : (prevmaxtotal > maxtotal ? <Text style={{ color: 'red' }}>{maxtotal - prevmaxtotal}</Text> : <Text style={{ color: 'green' }}>+{maxtotal - prevmaxtotal}</Text>)}</Text>
+
                         </View>
                         <View>
-                            <Text style={styles.changeFont}>น.</Text>
+                            <Text style={styles.changeFont}></Text>
                             <Text style={styles.changeFont}>บาท</Text>
-                            <Text style={styles.changeFont}>บาท</Text>
+
+
                         </View>
                     </View>
 
                 </View>
             </View>
 
-            <View style={{ marginBottom: 24 }}><Text style={[styles.TextTitleHeader, { textAlign: 'center' }]}>กราฟละเอียด</Text></View >
-            <View style={{ marginLeft: 20 }}><Text style={styles.TextSubTitleHeader}>Tip : กราฟสามารถเลื่อนซ้ายขวา</Text></View>
 
 
-            <ScrollView style={{ backgroundColor: '#FFF' }} horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={styles.LineChartContainer2}>
-
-                    <LineChart
-                        data={{
-                            labels: labellist,
-                            datasets: [
-                                {
-                                    data: datalist
-                                }
-                            ]
-                        }}
-                        width={1000}// from react-native
-                        height={280}
-
-                        yAxisSuffix=" ฿"
-                        yAxisInterval={1} // optional, defaults to 1
-                        chartConfig={{
-                            backgroundColor: "#e26a00",
-                            backgroundGradientFrom: "#FFFFEF",
-                            backgroundGradientTo: "#F1F1E7",
-                            decimalPlaces: 2, // optional, defaults to 2dp
-                            color: (opacity = 1) => `rgba(87, 195, 192, ${opacity})`,
-                            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                            style: {
-
-                                borderRadius: 16,
-
-                            },
-                            propsForDots: {
-                                r: "6",
-                                strokeWidth: "2",
-                                stroke: "#378885"
-                            }
-                        }}
-                        bezier
-                        style={{
-                            marginVertical: 8,
-                            borderRadius: 16
-                        }}
-
-                    />
-
-                </View>
-
-            </ScrollView>
         </ScrollView >
     );
 
