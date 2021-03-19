@@ -9,6 +9,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import AuthGlobal from "../Context/Store/AuthGlobal";
+import AsyncStorage from '@react-native-community/async-storage';
+import { logoutUser } from "../Context/Action/Auth.action";
 
 export function DrawerContent(props) {
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
@@ -104,7 +106,7 @@ export function DrawerContent(props) {
                 {context.stateUser.user.role == undefined ?
                     <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="login" color={color} size={size} />)} label="เข้าสู่ระบบ" labelStyle={styles.draweritemtext} onPress={() => props.navigation.navigate('LoginHome')} labelStyle={{ fontFamily: 'pr-reg' }} />
                     :
-                    <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="exit-to-app" color={color} size={size} />)} label="ออกจากระบบ" labelStyle={styles.draweritemtext} onPress={() => { setAuthLogin(false), setUser({ ...user, username: '', password: '' }) }} labelStyle={{ fontFamily: 'pr-reg' }} />
+                    <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="exit-to-app" color={color} size={size} />)} label="ออกจากระบบ" labelStyle={styles.draweritemtext} onPress={() => [AsyncStorage.removeItem("jwt"), logoutUser(context.dispatch)]} labelStyle={{ fontFamily: 'pr-reg' }} />
                 }
 
             </Drawer.Section >
