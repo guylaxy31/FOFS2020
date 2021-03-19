@@ -39,6 +39,7 @@ const LoginHome = props => {
   useEffect(() => {
     if(context.stateUser.isAuthenticated === true) {
       console.log("go to navigation");
+      
       if(context.stateUser.user.isAdmin === true){
         props.navigation.navigate('RestaurantHome')
       }else{

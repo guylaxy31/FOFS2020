@@ -6,7 +6,7 @@ const CartItem = props => {
     console.log("-----------cartItem");
     console.log(props.item);
     var total = 0;
-    total += props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value;
+    total += (props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value) * props.item.quantity;
 
     return (
         <View style={{ paddingHorizontal: 8, paddingVertical: 32, margin: 8, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16 }}>
