@@ -21,7 +21,7 @@ const LoginHome = props => {
     if (context.stateUser.isAuthenticated === true) {
       console.log("go to navigation");
 
-      if (context.stateUser.user.isAdmin === true) {
+      if (context.stateUser.user.role === "restaurant") {
         props.navigation.navigate('RestaurantHome')
       } else {
         props.navigation.navigate('Homescreen')
