@@ -10,6 +10,7 @@ import {
     ContributionGraph,
     StackedBarChart
 } from "react-native-chart-kit";
+import { FlatList } from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -48,7 +49,7 @@ const DayRoute = (props) => {
     const labellist = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
     const datalist = [0, 0, 0, 0, 0, 0, 0, 0, 90, 535, 225, 635, 1130, 295, 195, 165, 125, 0, 0, 0, 0, 0, 0, 0,]
     const dayofweeklist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-    const todayindex = 2
+    const todayindex = 1
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
@@ -203,15 +204,17 @@ const DayRoute = (props) => {
 const WeekRoute = (props) => {
 
     const labellist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-    const datalist = [1300, 1225, 1000, 1750, 1650, 3845, 4525]
+    const datalist = [2814, 3395, 2240, 3132, 3518, 0, 0]
+
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
-    const [prevmaxtotal, setprevmaxtotal] = useState(485)
+    const [weektotal, setweektotal] = useState()
 
 
     function findMaxTotal(arrlist) {
         setmaxtotal(Math.max.apply(null, arrlist))
+        setweektotal(datalist.reduce(function (acc, val) { return acc + val; }, 0))
     }
 
     // function findMaxIndex(maxval) {
@@ -230,7 +233,7 @@ const WeekRoute = (props) => {
             <View style={styles.container}>
                 <View style={styles.CardContainer}>
                     <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
-                    <View><Text style={styles.TextTitleHeader}>(ในสัปดาห์นี้)</Text></View>
+                    <View><Text style={styles.TextTitleHeader}>ในสัปดาห์นี้ (7วัน)</Text></View>
                     <View style={styles.LineChartContainer}>
                         <LineChart
                             data={{
@@ -278,18 +281,34 @@ const WeekRoute = (props) => {
                         <View style={styles.column1}>
                             <Text style={styles.changeFont}>ยอดสูงสุดคือวัน</Text>
                             <Text style={styles.changeFont}>เป็นจำนวน</Text>
-                            <Text style={styles.changeFont}>เทียบกับวันก่อนหน้า</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>ยอดรวมสัปดาห์นี้</Text>
+
+
                         </View>
                         <View style={styles.column2}>
                             <Text style={styles.changeFont}>{maxtimeindex == undefined ? <Text>กำลังโหลด...</Text> : labellist[maxtimeindex]}</Text>
                             <Text style={styles.changeFont}>{maxtotal == undefined ? <Text>กำลังโหลด...</Text> : maxtotal}</Text>
-                            <Text style={styles.changeFont}>{maxtotal == undefined || maxtimeindex == undefined ? <Text>กำลังคำนวณ...</Text> : (datalist[maxtimeindex - 1] > maxtotal ? <Text style={{ color: 'red' }}>{maxtotal - (datalist[maxtimeindex - 1])}</Text> : <Text style={{ color: 'green' }}>+{maxtotal - (datalist[maxtimeindex - 1])}</Text>)}</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>{weektotal}</Text>
                         </View>
                         <View>
                             <Text style={styles.changeFont}></Text>
                             <Text style={styles.changeFont}>บาท</Text>
-                            <Text style={styles.changeFont}>บาท</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>บาท</Text>
                         </View>
+
+
+                    </View>
+
+                    <View style={{ width: '100%', backgroundColor: '#FFF', padding: 16, borderRadius: 16, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, }}>
+                        <View style={{ marginBottom: 16 }}><Text style={[styles.TextTitleHeader, { textAlign: 'center' }]}>(แสดงยอดรายวัน)</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>จันทร์</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[0]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>อังคาร</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[1]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>พุธ</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[2]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>พฤหัสบดี</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[3]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>ศุกร์</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[4]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>เสาร์</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[5]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>อาทิตย์</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[6]} ฿</Text></View>
+
                     </View>
 
                 </View>
@@ -463,7 +482,10 @@ const styles = StyleSheet.create({
     column2: { marginRight: 10 },
     changeFont: { fontFamily: 'pr-reg', fontSize: 16 },
     LineChartContainer: { marginBottom: '5%' },
-    LineChartContainer2: { backgroundColor: '#FFF', flexDirection: 'row', marginBottom: '5%', marginLeft: 20, marginRight: 20 }
+    LineChartContainer2: { backgroundColor: '#FFF', flexDirection: 'row', marginBottom: '5%', marginLeft: 20, marginRight: 20 },
+
+    dayverticallist: { width: '100%', flex: 1, flexWrap: 'wrap', flexDirection: 'row', marginBottom: 8 },
+    generalfont: { fontFamily: 'pr-reg', fontSize: 16 }
 });
 
 
