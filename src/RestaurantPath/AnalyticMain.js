@@ -45,12 +45,14 @@ export default function AnalyticMain() {
 
 const DayRoute = (props) => {
 
-    const labellist = ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
-    const datalist = [0, 0, 0, 0, 50, 120, 750, 955, 815, 620, 375, 350, 250, 120, 80, 40, 0, 0, 0, 0, 0, 0, 0, 0,]
+    const labellist = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
+    const datalist = [0, 0, 0, 0, 0, 0, 0, 0, 90, 535, 225, 635, 1130, 295, 195, 165, 125, 0, 0, 0, 0, 0, 0, 0,]
+    const dayofweeklist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
+    const todayindex = 6
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
-    const [prevmaxtotal, setprevmaxtotal] = useState(485)
+    const [yesterdaytotal, setyesterdaytotal] = useState(2965)
     const [daytotal, setdaytotal] = useState()
 
     function findMaxTotal(arrlist) {
@@ -74,7 +76,7 @@ const DayRoute = (props) => {
             <View style={styles.container}>
                 <View style={styles.CardContainer}>
                     <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
-                    <View><Text style={styles.TextTitleHeader}>ภาพรวม (24 ชม.)</Text></View>
+                    <View><Text style={styles.TextTitleHeader}>ภาพรวมวัน{dayofweeklist[todayindex]} (24 ชม.)</Text></View>
                     <View style={styles.LineChartContainer}>
                         <LineChart
                             data={{
@@ -121,17 +123,22 @@ const DayRoute = (props) => {
                         <View style={styles.column1}>
                             <Text style={styles.changeFont}>ยอดสูงสุดที่ช่วง</Text>
                             <Text style={styles.changeFont}>เป็นจำนวน</Text>
-                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginTop: 8 }]}>ยอดรวมตอนนี้</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>ยอดรวมตอนนี้</Text>
+                            <Text style={styles.changeFont}>เทียบกับเมื่อวาน</Text>
                         </View>
                         <View style={styles.column2}>
                             <Text style={styles.changeFont}>{maxtimeindex == undefined ? <Text>กำลังโหลด...</Text> : labellist[maxtimeindex]}</Text>
                             <Text style={styles.changeFont}>{maxtotal == undefined ? <Text>กำลังโหลด...</Text> : maxtotal}</Text>
-                            <Text style={[styles.changeFont, { marginTop: 8, fontFamily: 'pr-bold' }]}>{daytotal == undefined ? <Text>กำลังคำนวณ...</Text> : daytotal} </Text>
+                            <Text style={[styles.changeFont, { marginVertical: 8, fontFamily: 'pr-bold' }]}>{daytotal == undefined ? <Text>กำลังคำนวณ...</Text> : daytotal} </Text>
+                            <Text style={styles.changeFont}>{yesterdaytotal == undefined ? <Text>กำลังโหลด...</Text> : (daytotal > yesterdaytotal ? <Text style={{ color: 'green' }}>+{daytotal - yesterdaytotal}</Text> : <Text style={{ color: 'red' }}>{daytotal - yesterdaytotal}</Text>)}</Text>
+
                         </View>
                         <View>
                             <Text style={styles.changeFont}>น.</Text>
                             <Text style={styles.changeFont}>บาท</Text>
-                            <Text style={[styles.changeFont, { marginTop: 8, fontFamily: 'pr-bold' }]}>บาท</Text>
+                            <Text style={[styles.changeFont, { marginVertical: 8, fontFamily: 'pr-bold' }]}>บาท</Text>
+                            <Text style={styles.changeFont}>บาท</Text>
+
                         </View>
                     </View>
 
@@ -196,7 +203,7 @@ const DayRoute = (props) => {
 const WeekRoute = (props) => {
 
     const labellist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-    const datalist = [1300, 1225, 11000, 1750, 1650, 860, 750]
+    const datalist = [1300, 1225, 1000, 1750, 1650, 3845, 4525]
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
@@ -270,7 +277,7 @@ const WeekRoute = (props) => {
 
                         <View style={styles.column1}>
                             <Text style={styles.changeFont}>ยอดสูงสุดคือวัน</Text>
-                            <Text style={styles.changeFont}>ยอดทั้งหมด</Text>
+                            <Text style={styles.changeFont}>เป็นจำนวน</Text>
                             <Text style={styles.changeFont}>เทียบกับวันก่อนหน้า</Text>
                         </View>
                         <View style={styles.column2}>
