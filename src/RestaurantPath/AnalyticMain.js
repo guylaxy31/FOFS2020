@@ -48,16 +48,16 @@ const DayRoute = (props) => {
     const labellist = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
     const datalist = [0, 0, 0, 0, 0, 0, 0, 0, 90, 535, 225, 635, 1130, 295, 195, 165, 125, 0, 0, 0, 0, 0, 0, 0,]
     const dayofweeklist = ["จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิตย์"]
-    const todayindex = 6
+    const todayindex = 2
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
     const [yesterdaytotal, setyesterdaytotal] = useState(2965)
-    const [daytotal, setdaytotal] = useState()
+    const [todaytotal, settodaytotal] = useState()
 
     function findMaxTotal(arrlist) {
         setmaxtotal(Math.max.apply(null, arrlist))
-        setdaytotal(datalist.reduce(function (acc, val) { return acc + val; }, 0))
+        settodaytotal(datalist.reduce(function (acc, val) { return acc + val; }, 0))
     }
 
     // function findMaxIndex(maxval) {
@@ -129,8 +129,8 @@ const DayRoute = (props) => {
                         <View style={styles.column2}>
                             <Text style={styles.changeFont}>{maxtimeindex == undefined ? <Text>กำลังโหลด...</Text> : labellist[maxtimeindex]}</Text>
                             <Text style={styles.changeFont}>{maxtotal == undefined ? <Text>กำลังโหลด...</Text> : maxtotal}</Text>
-                            <Text style={[styles.changeFont, { marginVertical: 8, fontFamily: 'pr-bold' }]}>{daytotal == undefined ? <Text>กำลังคำนวณ...</Text> : daytotal} </Text>
-                            <Text style={styles.changeFont}>{yesterdaytotal == undefined ? <Text>กำลังโหลด...</Text> : (daytotal > yesterdaytotal ? <Text style={{ color: 'green' }}>+{daytotal - yesterdaytotal}</Text> : <Text style={{ color: 'red' }}>{daytotal - yesterdaytotal}</Text>)}</Text>
+                            <Text style={[styles.changeFont, { marginVertical: 8, fontFamily: 'pr-bold' }]}>{todaytotal == undefined ? <Text>กำลังคำนวณ...</Text> : todaytotal} </Text>
+                            <Text style={styles.changeFont}>{yesterdaytotal == undefined ? <Text>กำลังโหลด...</Text> : (todaytotal > yesterdaytotal ? <Text style={{ color: 'green' }}>+{todaytotal - yesterdaytotal}</Text> : <Text style={{ color: 'red' }}>{todaytotal - yesterdaytotal}</Text>)}</Text>
 
                         </View>
                         <View>
