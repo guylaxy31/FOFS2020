@@ -49,14 +49,14 @@ const LoginHome = props => {
 
       );
     } else {
-      console.log(user);
+      // console.log(user);
 
       loginUser(user, context.dispatch)
     }
 
   };
 
-  console.log(context.stateUser)
+  // console.log(context.stateUser)
   return (
     <View style={styles.container}>
 

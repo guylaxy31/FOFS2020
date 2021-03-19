@@ -24,7 +24,7 @@ const ProfileSetting = props => {
             context.stateUser.isAuthenticated === false || 
             context.stateUser.isAuthenticated === null
         ) {
-            props.navigation.navigate("Login")
+            props.navigation.navigate("LoginHome")
         }
 
         AsyncStorage.getItem("jwt")

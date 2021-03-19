@@ -9,7 +9,7 @@ const FoodMenuConfirm = (props) => {
     // console.log(props);
     var total = 0;
     props.cartItem.forEach(cart => {
-        return (total += cart.menus.price + cart.varId.value + cart.ingreId.value + cart.ingreId.value)
+        return (total += (cart.menus.price + cart.varId.value + cart.ingreId.value + cart.ingreId.value)*cart.quantity)
     })
 
     return (

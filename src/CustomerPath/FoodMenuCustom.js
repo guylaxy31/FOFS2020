@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
@@ -11,14 +11,16 @@ import FoodMenuConfirm from './FoodMenuConfirm';
 import { TouchableRipple } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import AuthGlobal from "../Context/Store/AuthGlobal"
+import AsyncStorage from "@react-native-community/async-storage";
 const FoodMenuCustom = props => {
 
-
+    const context = useContext(AuthGlobal);
     const [item, setItem] = useState(props.route.params);
     const [options, setOptions] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [varaitions, setVaraitions] = useState([]);
+    const [op , setOp] = useState([]);
     const [checkoptions, setCheckoptions] = useState(false);
     const [checkingredients, setCheckingredients] = useState(false)
     const [checkvaraitions, setCheckvaraitions] = useState(false)
@@ -42,35 +44,62 @@ const FoodMenuCustom = props => {
     // console.log(item.item);
     console.log(Object.values(item))
     useEffect(() => {
+        if (
+            context.stateUser.isAuthenticated === false ||
+            context.stateUser.isAuthenticated === null
+        ) {
+            props.navigation.navigate("LoginHome")
+        }
 
-        axios
-            .get(`${baseUrl}restaurant/options/${item.item._id}`)
-            .then((res) => {
-                setOptions(res.data);
+        AsyncStorage.getItem("jwt").then((res) => {
 
-            })
-            .catch((error) => { console.log(error); })
+            axios
+                .get(`${baseUrl}restaurant/options/${item.item._id}`, {
+                    headers: { Authorization: `Bearer ${res}` },
+                })
+                .then((op) => {
+                    setOptions(op.data);
 
-        axios
-            .get(`${baseUrl}restaurant/ingredients/${item.item._id}`)
-            .then((res) => {
-                setIngredients(res.data);
+                })
+                .catch((error) => { console.log(error); })
+
+            axios
+                .get(`${baseUrl}restaurant/ingredients/${item.item._id}`, {
+                    headers: { Authorization: `Bearer ${res}` },
+                })
+                .then((ing) => {
+                    setIngredients(ing.data);
 
 
-            })
-            .catch((error) => { console.log(error) })
-        axios
-            .get(`${baseUrl}restaurant/varaitions/${item.item._id}`)
-            .then((res) => {
-                setVaraitions(res.data);
+                })
+                .catch((error) => { console.log(error) })
+            axios
+                .get(`${baseUrl}restaurant/varaitions/${item.item._id}`, {
+                    headers: { Authorization: `Bearer ${res}` },
+                })
+                .then((vara) => {
+                    setVaraitions(vara.data);
 
-            })
+                })
+            axios
+                .get(`${baseUrl}restaurant/op/${item.item._id}`, {
+                    headers: { Authorization: `Bearer ${res}` },
+                })
+                .then((ops) => {
+                    setOp(ops.data);
+
+
+                })
+                .catch((error) => { console.log(error) })
+        })
+
 
 
         return () => {
             setOptions([]);
             setIngredients([]);
-            setVaraitions([])
+            setVaraitions([]);
+            setOp([]);
         }
     }, [])
 
@@ -113,7 +142,7 @@ const FoodMenuCustom = props => {
     // console.log('value -> ', Object.keys(options)[0], ' result is ', tempState)
     // if (Object.keys(options).length != 0) { setTempState(true) }
     // else (setTempState(true))
-
+    console.log(op);
     return (
 
         <View style={styles.container} >
