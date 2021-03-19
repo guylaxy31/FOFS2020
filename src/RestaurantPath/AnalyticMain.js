@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import {
     LineChart,
@@ -9,133 +9,50 @@ import {
     StackedBarChart
 } from "react-native-chart-kit";
 
+const windowWidth = Dimensions.get('window').width;
+
+const AnalyticMain = (props) => {
+    const labellist = ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
+    const datalist = [0, 0, 0, 0, 50, 120, 750, 955, 815, 620, 375, 350, 250, 120, 80, 40, 0, 0, 0, 0, 0, 0, 0, 0,]
+
+    const [maxtotal, setmaxtotal] = useState()
+    const [maxtimeindex, setmaxtimeindex] = useState()
+    const [prevmaxtotal, setprevmaxtotal] = useState(485)
 
 
-export default class AnalyticMain extends Component {
+    function findMaxTotal(arrlist) {
+        setmaxtotal(Math.max.apply(null, arrlist))
+    }
 
-    render() {
+    // function findMaxIndex(maxval) {
+    //     setmaxattime(datalist.findIndex(maxval))
+    // }
 
-        return (
-            <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: '#FFF' }}>
-                <View style={styles.container}>
-                    <View style={styles.CardContainer}>
-                        <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
-                        <View><Text style={styles.TextTitleHeader}>ภาพรวม</Text></View>
-                        <View style={styles.LineChartContainer}>
-
-                            <LineChart
-                                data={{
-
-                                    datasets: [
-                                        {
-                                            data: [
-                                                Math.random() * 100,
-                                                Math.random() * 100,
-                                                Math.random() * 100,
-                                                Math.random() * 100,
-                                                Math.random() * 100,
-                                                Math.random() * 100,
-                                                Math.random() * 100
-                                            ]
-                                        }
-                                    ]
-                                }}
-                                width={Dimensions.get("window").width * 0.9} // from react-native
-                                height={220}
-
-                                yAxisSuffix=" ฿"
-                                yAxisInterval={1} // optional, defaults to 1
-                                chartConfig={{
-                                    backgroundColor: "#e26a00",
-                                    backgroundGradientFrom: "#FFFFEF",
-                                    backgroundGradientTo: "#F1F1E7",
-                                    decimalPlaces: 2, // optional, defaults to 2dp
-                                    color: (opacity = 1) => `rgba(87, 195, 192, ${opacity})`,
-                                    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                                    style: {
-                                        borderRadius: 16
-                                    },
-                                    propsForDots: {
-                                        r: "6",
-                                        strokeWidth: "2",
-                                        stroke: "#378885"
-                                    }
-                                }}
-                                bezier
-                                style={{
-                                    marginVertical: 8,
-                                    borderRadius: 16
-                                }}
-                            />
-
-                        </View>
+    useEffect(() => {
+        findMaxTotal(datalist)
+        let tempindex = datalist.indexOf(maxtotal)
+        setmaxtimeindex(tempindex)
+    }, [maxtotal])
 
 
-                        <View style={styles.dataContainer}>
 
-                            <View style={styles.column1}>
-                                <Text style={styles.changeFont}>ยอดสูงสุดที่ช่วง</Text>
-                                <Text style={styles.changeFont}>ยอดทั้งหมด</Text>
-                                <Text style={styles.changeFont}>เทียบกับก่อนหน้า</Text>
-                            </View>
-                            <View style={styles.column2}>
-                                <Text style={styles.changeFont}>13:00</Text>
-                                <Text style={styles.changeFont}>2,320</Text>
-                                <Text style={styles.changeFont}>200</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.changeFont}>น.</Text>
-                                <Text style={styles.changeFont}>บาท</Text>
-                                <Text style={styles.changeFont}>บาท</Text>
-                            </View>
-                        </View>
-
-                    </View>
-                </View>
-
-                <View style={{ marginLeft: 20 }}><Text style={styles.TextSubTitleHeader}>Tip : กราฟสามารถเลื่อนซ้ายขวา</Text></View>
-
-                <ScrollView style={{ backgroundColor: '#FFF' }} horizontal={true}>
-                    <View style={styles.LineChartContainer2}>
-
+    return (
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ backgroundColor: '#FFF' }}>
+            <View style={styles.container}>
+                <View style={styles.CardContainer}>
+                    <View><Text style={styles.TotalText}>ยอดรวมของร้านอาหาร</Text></View>
+                    <View><Text style={styles.TextTitleHeader}>ภาพรวม (24 ชม.)</Text></View>
+                    <View style={styles.LineChartContainer}>
                         <LineChart
                             data={{
-                                labels: ["05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00",],
                                 datasets: [
                                     {
-                                        data: [
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-
-
-                                        ]
+                                        data: datalist
                                     }
                                 ]
                             }}
-                            width={1000}// from react-native
-                            height={220}
+                            width={windowWidth}// from react-native
+                            height={280}
 
                             yAxisSuffix=" ฿"
                             yAxisInterval={1} // optional, defaults to 1
@@ -147,10 +64,12 @@ export default class AnalyticMain extends Component {
                                 color: (opacity = 1) => `rgba(87, 195, 192, ${opacity})`,
                                 labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                                 style: {
-                                    borderRadius: 16
+
+                                    borderRadius: 16,
+
                                 },
                                 propsForDots: {
-                                    r: "6",
+                                    r: "2",
                                     strokeWidth: "2",
                                     stroke: "#378885"
                                 }
@@ -160,14 +79,85 @@ export default class AnalyticMain extends Component {
                                 marginVertical: 8,
                                 borderRadius: 16
                             }}
-                        />
 
+                        />
                     </View>
 
-                </ScrollView>
+                    <View style={styles.dataContainer}>
+
+                        <View style={styles.column1}>
+                            <Text style={styles.changeFont}>ยอดสูงสุดที่ช่วง</Text>
+                            <Text style={styles.changeFont}>ยอดทั้งหมด</Text>
+                            <Text style={styles.changeFont}>เทียบกับก่อนหน้า</Text>
+                        </View>
+                        <View style={styles.column2}>
+                            <Text style={styles.changeFont}>{maxtimeindex == undefined ? <Text>กำลังโหลด...</Text> : labellist[maxtimeindex]}</Text>
+                            <Text style={styles.changeFont}>{maxtotal == undefined ? <Text>กำลังโหลด...</Text> : maxtotal}</Text>
+                            <Text style={styles.changeFont}>{maxtotal == undefined || maxtimeindex == undefined ? <Text>กำลังคำนวณ...</Text> : (prevmaxtotal > maxtotal ? <Text style={{ color: 'red' }}>{maxtotal - prevmaxtotal}</Text> : <Text style={{ color: 'green' }}>+{maxtotal - prevmaxtotal}</Text>)}</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.changeFont}>น.</Text>
+                            <Text style={styles.changeFont}>บาท</Text>
+                            <Text style={styles.changeFont}>บาท</Text>
+                        </View>
+                    </View>
+
+                </View>
+            </View>
+
+            <View style={{ marginBottom: 24 }}><Text style={[styles.TextTitleHeader, { textAlign: 'center' }]}>กราฟละเอียด</Text></View >
+            <View style={{ marginLeft: 20 }}><Text style={styles.TextSubTitleHeader}>Tip : กราฟสามารถเลื่อนซ้ายขวา</Text></View>
+
+
+            <ScrollView style={{ backgroundColor: '#FFF' }} horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={styles.LineChartContainer2}>
+
+                    <LineChart
+                        data={{
+                            labels: labellist,
+                            datasets: [
+                                {
+                                    data: datalist
+                                }
+                            ]
+                        }}
+                        width={1000}// from react-native
+                        height={280}
+
+                        yAxisSuffix=" ฿"
+                        yAxisInterval={1} // optional, defaults to 1
+                        chartConfig={{
+                            backgroundColor: "#e26a00",
+                            backgroundGradientFrom: "#FFFFEF",
+                            backgroundGradientTo: "#F1F1E7",
+                            decimalPlaces: 2, // optional, defaults to 2dp
+                            color: (opacity = 1) => `rgba(87, 195, 192, ${opacity})`,
+                            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                            style: {
+
+                                borderRadius: 16,
+
+                            },
+                            propsForDots: {
+                                r: "6",
+                                strokeWidth: "2",
+                                stroke: "#378885"
+                            }
+                        }}
+                        bezier
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16
+                        }}
+
+                    />
+
+                </View>
+
             </ScrollView>
-        );
-    }
+        </ScrollView >
+    );
+
 }
 
 const styles = StyleSheet.create({
@@ -184,4 +174,5 @@ const styles = StyleSheet.create({
     LineChartContainer2: { backgroundColor: '#FFF', flexDirection: 'row', marginBottom: '5%', marginLeft: 20, marginRight: 20 }
 });
 
+export default AnalyticMain
 

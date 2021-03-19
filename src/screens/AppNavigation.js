@@ -70,7 +70,7 @@ const AppNavigation = props => {
     const context = useContext(AuthGlobal);
     return (
 
-        <Stack.Navigator initialRouteName="Homescreen">
+        <Stack.Navigator initialRouteName="RestaurantHome">
 
             <Stack.Screen name="Homescreen"
                 component={Home}
@@ -199,7 +199,7 @@ const AppNavigation = props => {
                 }
                 }
             />
-            
+
             <Stack.Screen name="RegisterHome"
                 component={RegisterHome}
                 options={{
