@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import AppContext from '../Context/AppContext'
 import AuthGlobal from "../Context/Store/AuthGlobal";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -67,10 +67,12 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AppNavigation = props => {
-    const context = useContext(AuthGlobal);
+    const context = useContext(AuthGlobal)
+    console.log('context Login State is ---------------------> ', context.stateUser.isAuthenticated)
+
     return (
 
-        <Stack.Navigator initialRouteName="RestaurantHome">
+        <Stack.Navigator initialRouteName="Homescreen">
 
             <Stack.Screen name="Homescreen"
                 component={Home}

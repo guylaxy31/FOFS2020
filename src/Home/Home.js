@@ -35,8 +35,6 @@ const wait = (timeout) => {
 const Home = props => {
   console.log('-- Homescreen is rendering [Device] -->', Platform.OS)
 
-  // const { AuthLogin, setAuthLogin } = useContext(AppContext);
-  // const { database, setDatabase } = useContext(AppContext);
   const [searchtext, setSearchtext] = useState('');
   const [restaurants, setRestaurants] = useState([]);
   const [pushToken, setPushToken] = useState();
@@ -70,12 +68,7 @@ const Home = props => {
         return null;
       });
 
-
-
-    return () => {
-      setSearchtext();
-      
-    }
+    return () => { setSearchtext(); }
 
   }, []);
   const onRefresh = useCallback(() => {
@@ -97,6 +90,8 @@ const Home = props => {
   ))
 
   useEffect(() => {
+
+
     // ห่ากไม่ได้เล่นแอปอยู่
     const backgroundSubscription = Notifications.addNotificationResponseReceivedListener(response => {
       console.log('backgroundresponse ======> ', response)
@@ -130,6 +125,7 @@ const Home = props => {
       })
     })
   };
+  // console.log('context state user is ---------------------> ', context.stateUser.isAuthenticated)
 
   return (
     <>
@@ -137,17 +133,17 @@ const Home = props => {
         <View style={styles.container}>
           {/* <Button title="Trigger notifications" onPress={triggerNotificationHandler} /> */}
           <View style={styles.nav__container}>
-              
-              {/* <Header
+
+            {/* <Header
                 containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
                 leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
                 rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={24} />Hello<Text style={styles.usernameText}></Text></ TouchableOpacity>}
               /> */}
-              <Header
-                containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
-                leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-                rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
-              />
+            <Header
+              containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
+              leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
+              rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
+            />
           </View>
 
           <ScrollView style={styles.scroll_View}

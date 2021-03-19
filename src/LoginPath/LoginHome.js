@@ -1,4 +1,4 @@
-import React, { useState, useContext ,useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, KeyboardAvoidingView, Alert } from 'react-native';
 import HextagonIcon from '../Themes/HextagonIcon';
 //Context
@@ -17,38 +17,19 @@ const LoginHome = props => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const checkBeforeLogin = () => {
-    if (user.username != database.username || user.password != database.password) {
-      Alert.alert(
-        //title
-        'ไม่สามารถเข้าสู่ระบบได้',
-        //body
-        'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
-        [
-          { text: 'ปิด' },
-        ],
-        { cancelable: false },
-        //clicking out side of alert will not cancel
-
-      );
-    } else {
-      if (database.role === 'customer') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
-      else if (database.role === 'restaurant') { setAuthLogin(true); props.navigation.navigate('Homescreen') }
-    }
-  }
   useEffect(() => {
-    if(context.stateUser.isAuthenticated === true) {
+    if (context.stateUser.isAuthenticated === true) {
       console.log("go to navigation");
-      
-      if(context.stateUser.user.isAdmin === true){
+
+      if (context.stateUser.user.isAdmin === true) {
         props.navigation.navigate('RestaurantHome')
-      }else{
+      } else {
         props.navigation.navigate('Homescreen')
       };
-      
+
     }
-    
-  }, [context.stateUser.isAuthenticated ])
+
+  }, [context.stateUser.isAuthenticated])
 
   const handleSubmit = () => {
     const user = { username, password };
@@ -69,14 +50,13 @@ const LoginHome = props => {
       );
     } else {
       console.log(user);
-      console.log("success");
-      loginUser(user,context.dispatch)
+
+      loginUser(user, context.dispatch)
     }
 
   };
 
-
-
+  console.log(context.stateUser)
   return (
     <View style={styles.container}>
 
