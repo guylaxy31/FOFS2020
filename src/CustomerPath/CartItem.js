@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-
+import { MaterialIcons } from '@expo/vector-icons';
 const CartItem = props => {
     // console.log("-----------cartItem");
     // console.log(props.item);
@@ -11,13 +11,15 @@ const CartItem = props => {
     return (
         <View style={{ paddingHorizontal: 8, paddingVertical: 32, margin: 8, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16 }}>
 
+            <View style={[styles.menunamecontainer.alignSelf, { alignItems: 'flex-end' }]}>
+                <TouchableOpacity style={[styles.btntool, { alignSelf: 'flex-end', marginRight: 16 }]} onPress={props.onRemove}>
+                    <MaterialIcons name="close" size={24} color="#000" />
+                </TouchableOpacity>
+            </View>
 
             <View style={styles.menunamecontainer}>
                 <Text style={[styles.MenuTitleText, { flex: 1, fontSize: 24 }]}>{props.item.menus.menu_name}</Text>
                 <Text style={[styles.MenuTitleText, { flex: .5, fontSize: 24 }]}>x {props.item.quantity}</Text>
-                <TouchableOpacity style={styles.btnSubmit} onPress={props.onRemove}>
-                    <AntDesign name="minuscircleo" size={24} color="black" />
-                </TouchableOpacity>
             </View>
             {props.item.varId.id == 0 ? null : (
                 <View style={styles.MenuListContainer}>

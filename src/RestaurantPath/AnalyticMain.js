@@ -409,8 +409,17 @@ const MonthRoute = (props) => {
                             <Text style={styles.changeFont}></Text>
                             <Text style={styles.changeFont}>บาท</Text>
 
-
                         </View>
+
+                    </View>
+                    <View style={{ width: '100%', backgroundColor: '#FFF', padding: 16, borderRadius: 16, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, }}>
+                        <View style={{ marginBottom: 16 }}><Text style={[styles.TextTitleHeader, { textAlign: 'center' }]}>(ยอดรายสัปดาห์)</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>สัปดาห์ที่ 1</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[0]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>สัปดาห์ที่ 2</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[1]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>สัปดาห์ที่ 3</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[2]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>สัปดาห์ที่ 4</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[3]} ฿</Text></View>
+                        <View style={styles.dayverticallist}><Text style={[styles.generalfont, { flex: .4 }]}>ที่เหลือ</Text><Text style={[styles.generalfont, { flex: .6, color: 'grey' }]}>{datalist[4]} ฿</Text></View>
+
                     </View>
 
                 </View>
