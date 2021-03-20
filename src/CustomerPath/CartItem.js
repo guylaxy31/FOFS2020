@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
-
+import { AntDesign } from '@expo/vector-icons';
 
 const CartItem = props => {
     console.log("-----------cartItem");
     console.log(props.item);
+    console.log("props in this page" , props);
     var total = 0;
     total += (props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value) * props.item.quantity;
 
@@ -15,6 +16,9 @@ const CartItem = props => {
             <View style={styles.menunamecontainer}>
                 <Text style={[styles.MenuTitleText, { flex: 1, fontSize: 24 }]}>{props.item.menus.menu_name}</Text>
                 <Text style={[styles.MenuTitleText, { flex: .5, fontSize: 24 }]}>x {props.item.quantity}</Text>
+                <TouchableOpacity style={styles.btnSubmit} onPress={props.onRemove}>
+                    <AntDesign name="minuscircleo" size={24} color="black" />
+                </TouchableOpacity>
             </View>
             {props.item.varId.id == 0 ? null : (
                 <View style={styles.MenuListContainer}>

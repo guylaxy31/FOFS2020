@@ -11,10 +11,10 @@ export const addToCart = (payload) => {
         payload
     }
 }
-export const removeFromCart = (paylaod) => {
+export const removeFromCart = (payload) => {
     return {
         type: 'REMOVE_FROM_CART',
-        paylaod
+        payload
     }
 }
 export const clearCart = () => {
