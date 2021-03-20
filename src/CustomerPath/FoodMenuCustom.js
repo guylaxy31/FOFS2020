@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
-import { object } from 'yup';
+
 import { connect } from "react-redux";
 import * as action from "../../store/action/cartAction";
 import FoodMenuConfirm from './FoodMenuConfirm';
@@ -250,8 +250,8 @@ const FoodMenuCustom = props => {
                                 <TouchableOpacity onPress={() => { setqtymenu(qtymenu + 1) }} style={[styles.MenuTitleText, styles.btntool, {}]}><MaterialIcons name="add" size={24} color="black" /></TouchableOpacity>
                             </View>
 
-                            <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 248 }}>
-                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu , restaurantid), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
+                            <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, paddingHorizontal: 24, }}>
+                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu ), props.navigation.navigate('FoodMenuConfirm', {resId : restaurantid }) }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -267,7 +267,7 @@ const FoodMenuCustom = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu ,resId) => { dispatch(action.addToCart({ quantity: qtymenu, menus, varId: vaId, ingreId: ingreId, optionId: optionId, describe:describe , resId:resId})) }
+        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu ,resId) => { dispatch(action.addToCart({ quantity: qtymenu, menus, varaition: vaId, ingredient: ingreId, option: optionId, describe:describe})) }
     }
 }
 

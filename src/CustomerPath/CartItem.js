@@ -6,7 +6,7 @@ const CartItem = props => {
     // console.log("-----------cartItem");
     // console.log(props.item);
     var total = 0;
-    total += (props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value) * props.item.quantity;
+    total += (props.item.menus.price + props.item.varaition.value + props.item.option.value + props.item.ingredient.value) * props.item.quantity;
 
     return (
         <View style={{ paddingHorizontal: 8, paddingVertical: 32, margin: 8, backgroundColor: '#FFF', shadowColor: 'black', shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 3, shadowOpacity: 0.26, borderRadius: 16 }}>
@@ -21,29 +21,29 @@ const CartItem = props => {
                 <Text style={[styles.MenuTitleText, { flex: 1, fontSize: 24 }]}>{props.item.menus.menu_name}</Text>
                 <Text style={[styles.MenuTitleText, { flex: .5, fontSize: 24 }]}>x {props.item.quantity}</Text>
             </View>
-            {props.item.varId.id == 0 ? null : (
+            {props.item.varaition.id == 0 ? null : (
                 <View style={styles.MenuListContainer}>
-                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.varId.id}</Text>
-                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.varId.value} ฿</Text>
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.varaition.id}</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.varaition.value} ฿</Text>
                 </View>)}
-            {props.item.ingreId.id == 0 ? (
+            {props.item.ingredient.id == 0 ? (
                 null
             ) : (
                 <View style={styles.MenuListContainer}>
-                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.ingreId.id}</Text>
-                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.ingreId.value} ฿</Text>
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.ingredient.id}</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.ingredient.value} ฿</Text>
                 </View>
             )}
 
-            {props.item.optionId.id == 0 ? (
+            {props.item.option.id == 0 ? (
                 <View style={styles.MenuListContainer}>
                     <Text style={[styles.MenuCustomText, { flex: 1 }]}>ไม่เพิ่มท็อปปิ้ง</Text>
-                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.optionId.value} ฿</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.option.value} ฿</Text>
                 </View>
             ) : (
                 <View style={styles.MenuListContainer}>
-                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.optionId.id}</Text>
-                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.optionId.value} ฿</Text>
+                    <Text style={[styles.MenuCustomText, { flex: 1 }]}>{props.item.option.id}</Text>
+                    <Text style={[styles.PriceCustomText, { flex: .55 }]}>+ {props.item.option.value} ฿</Text>
                 </View>
             )
             }

@@ -1,36 +1,43 @@
-import React , {useState,useContext,useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput, FlatList } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 import * as actions from '../../store/action/cartAction';
 import CartItem from './CartItem';
 import AuthGlobal from "../Context/Store/AuthGlobal";
+import Toast from "react-native-toast-message";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
 // import cartItem from '../../store/reducer/cartItem';
 import { SwipeListView } from 'react-native-swipe-list-view'
 const FoodMenuConfirm = (props) => {
     // console.log(props);
     const context = useContext(AuthGlobal);
 
-    const [orderDetail,setOrderDetail] = useState([]);
-    const [customer , setCustomer] = useState();
-    const [restaurant ,setRestaurant] = useState();
-    console.log("context is " ,context);
-    console.log("props of cart",Object.keys(props.cartItem));
+    const [orderDetail, setOrderDetail] = useState([]);
+    const [customer, setCustomer] = useState();
+    const [restaurant, setRestaurant] = useState();
+    // console.log("context is " ,context);
+    // console.log("props of cart",props);
     var total = 0;
-    var restaid = "";
+    var resId = {};
+
+
     props.cartItem.forEach(cart => {
-        return (total += (cart.menus.price + cart.varId.value + cart.ingreId.value + cart.ingreId.value)*cart.quantity)
+        return (total += (cart.menus.price + cart.varaition.value + cart.ingredient.value + cart.option.value) * cart.quantity)
     })
-    props.cartItem.forEach(resid =>{
-        return restaid = `${resid.resId}`
-    })
+    console.log("param of res", props);
 
     useEffect(() => {
         setOrderDetail(props.cartItem);
+        if (props.route.params) {
+            resId = props.route.params.resId;
+            setRestaurant(resId);
+        }
         if (context.stateUser.isAuthenticated) {
             setCustomer(context.stateUser.user.userId)
-            setRestaurant(restaid)
-        }else{
+            // setRestaurant()
+        } else {
             props.navigation.navigate("LoginHome");
             Toast.show({
                 topOffset: 60,
@@ -43,8 +50,41 @@ const FoodMenuConfirm = (props) => {
             setOrderDetail([]);
         }
     }, [])
-    console.log("customerId is a  ",customer);
-    console.log("restaurantId is a  ",restaurant);
+    console.log("customerId is a  ", customer);
+    console.log("restaurantId is a  ", restaurant);
+
+    const checkOut = () => {
+        let order = {
+            orderDetail,
+            cus_id: customer,
+            res_id: restaurant,
+            dateOrderStart: Date.now(),
+            totalPrice: total,
+            status: "Waiting",
+        }
+        console.log(order);
+        axios.post(`${baseURL}orders`, order).then((res) => {
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "Order Completed",
+                    text2: "",
+                })
+                setTimeout(() => {
+                    props.clearCart();
+                    
+                }, 500)
+            }
+        }).catch((error) => {
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+            })
+        })
+    }
     return (
         <View>
             {props.cartItem.length ? (
@@ -57,7 +97,7 @@ const FoodMenuConfirm = (props) => {
                             <FlatList
                                 data={props.cartItem}
                                 renderItem={({ item }) =>
-                                    <CartItem item={item} onRemove={()=>props.removeFromCart(item)}/>
+                                    <CartItem item={item} onRemove={() => props.removeFromCart(item)} />
                                 }
                                 keyExtractor={item => item.menus._id}
                                 horizontal={false}
@@ -71,7 +111,7 @@ const FoodMenuConfirm = (props) => {
                                 <Text style={styles.detailTotalPrice}>{total} ฿</Text>
                             </View>
                             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 8 }}>
-                                <TouchableOpacity style={styles.btnSubmit} onPress={() => props.navigation.navigate('FoodStatus')}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnSubmit} onPress={() => {checkOut(),props.navigation.navigate("FoodStatus")}}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>กลับไปเลือกเมนู</Text></TouchableOpacity>
                             </View>
 
@@ -106,13 +146,14 @@ const mapStatetoProps = (state) => {
         cartItem: cartItem,
     }
 
+
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-      clearCart: () => dispatch(actions.clearCart()),
-      removeFromCart: (item) => dispatch(actions.removeFromCart(item))
-      }
-  }
+        clearCart: () => dispatch(actions.clearCart()),
+        removeFromCart: (item) => dispatch(actions.removeFromCart(item))
+    }
+}
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', marginBottom: 16, backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', paddingTop: 64 },
     CardContainer: { height: '100%', flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", borderRadius: 16, },

@@ -1,23 +1,23 @@
-// import {
-//     ADD_TO_CART,
-//     REMOVE_FROM_CART,
-//     CLEAR_CART
-// } from "../constant";
+import {
+    ADD_TO_CART,
+    REMOVE_FROM_CART,
+    CLEAR_CART
+} from "../constant";
 
 
 export const addToCart = (payload) => {
     return {
-        type: 'ADD_TO_CART',
+        type: ADD_TO_CART,
         payload
     }
 }
 export const removeFromCart = (payload) => {
     return {
-        type: 'REMOVE_FROM_CART',
+        type: REMOVE_FROM_CART,
         payload
     }
 }
 export const clearCart = () => {
-    return 'CLEAR_CART'
+    return CLEAR_CART
 
 }

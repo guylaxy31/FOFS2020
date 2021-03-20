@@ -47,7 +47,7 @@ const FoodMenuMain = props => {
                     />
 
                     <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingHorizontal: 16, marginTop: 48, alignItems: 'center' }}>
-                        <View style={styles.nextBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm')}><Text style={styles.nextBTNText}>ดำเนินต่อ</Text></TouchableOpacity></View>
+                        <View style={styles.nextBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('FoodMenuConfirm', {resId:resId})}><Text style={styles.nextBTNText}>ดำเนินต่อ</Text></TouchableOpacity></View>
                         <View style={styles.CancelBTNBackground}><TouchableOpacity onPress={() => props.navigation.navigate('Homescreen')}><Text style={styles.cancelBTNText}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
 
