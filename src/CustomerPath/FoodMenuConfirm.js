@@ -64,6 +64,7 @@ const FoodMenuConfirm = (props) => {
             status: "Waiting",
         }
         console.log(order);
+        
         axios.post(`${baseURL}orders`, order).then((res) => {
             if (res.status == 200 || res.status == 201) {
                 Toast.show({

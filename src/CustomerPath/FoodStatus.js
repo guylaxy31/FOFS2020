@@ -1,4 +1,4 @@
-import React , {useState , useCallback  , useContext}from 'react';
+import React , {useState , useCallback  , useContext ,useEffect}from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { normalize } from 'react-native-elements';
@@ -10,19 +10,25 @@ import { useFocusEffect } from "@react-navigation/native";
 const FoodStatus = props => {
     const context = useContext(AuthGlobal);
     const [order , setOrder] = useState([]);
-
+    const [cusId , setCusId] = useState();
     useEffect(() => {
         if (
             context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("LoginHome")
         } else{
-            // AsyncStorage.getItem("")
+            setCusId(context.stateUser.user.userId)
+            axios.get(`${baseUrl}orders/${cusId}`).then((op) =>{
+                setOrder(op.data)
+            }).catch((error) => { console.log(error); })
         }
         return () => {
-            
+            setOrder([]);
         }
     }, [])
+
+    console.log("order" , order);
+    console.log("customer", cusId);
     return (
 
         <View style={styles.container}>
