@@ -25,13 +25,14 @@ const FoodStatus = props => {
         ) {
             props.navigation.navigate("LoginHome")
         } else{
-            
+            setCusId(context.stateUser.user.userId)
             axios.get(`${baseUrl}orders/${cusId}`).then((op) =>{
                 setOrder(op.data)
             }).catch((error) => { console.log(error); })
         }
         return () => {
             setOrder([]);
+            setCusId('');
         }
     }, [])
     const onRefresh = useCallback(() => {
@@ -39,7 +40,7 @@ const FoodStatus = props => {
         wait(2000).then(() => setRefreshing(false));
       }, []);
 
-    console.log("order" , Object.values(order[0]));
+    console.log("order" , order);
     console.log("customer", cusId);
     return (
 
@@ -68,17 +69,18 @@ const FoodStatus = props => {
 
                     <FlatList
                         data={order}
-                        keyExtractor={item => item._id}
+                        
                         renderItem={({ item }) =>
                             <>
                                 <View style={[styles.StatusValueContainer, { width: 376 }]}>
-                                    <Text style={[styles.HeaderText, { flex: .4 }]}>lsssfs</Text>
-                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{order._id}</Text>
-                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{order._id}</Text>
-                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{order._id}</Text>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{item._id.substring(21,24)}</Text>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{item.dateOrderStart.substring(11,16)}</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{item.res_id.restaurant_name}</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{item.status}</Text>
                                 </View>
                             </>
                         }
+                        keyExtractor={item => item._id}
 
                         horizontal={false}
                         showsVerticalScrollIndicator={false}
