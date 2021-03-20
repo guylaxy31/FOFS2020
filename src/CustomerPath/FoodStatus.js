@@ -1,5 +1,5 @@
-import React , {useState , useCallback  , useContext ,useEffect}from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList , RefreshControl } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { normalize } from 'react-native-elements';
 import AuthGlobal from '../Context/Store/AuthGlobal'
@@ -7,17 +7,25 @@ import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 const FoodStatus = props => {
     const context = useContext(AuthGlobal);
-    const [order , setOrder] = useState([]);
     const [cusId , setCusId] = useState();
+    const [order, setOrder] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
+    const [customerstatus, setcustomerstatus] = useState(["รอรับออเดอร์", "กำลังปรุงอาหาร", "วัตถุดิบไม่พอ", "ออเดอร์ถูกปฏิเสธ", "อาหารเสร็จแล้ว"])
+
+    
     useEffect(() => {
+        setCusId(context.stateUser.user.userId)
         if (
             context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("LoginHome")
         } else{
-            setCusId(context.stateUser.user.userId)
+            
             axios.get(`${baseUrl}orders/${cusId}`).then((op) =>{
                 setOrder(op.data)
             }).catch((error) => { console.log(error); })
@@ -26,14 +34,24 @@ const FoodStatus = props => {
             setOrder([]);
         }
     }, [])
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+      }, []);
 
-    console.log("order" , order);
+    console.log("order" , Object.values(order[0]));
     console.log("customer", cusId);
     return (
 
         <View style={styles.container}>
 
-            <ScrollView style={{ width: '100%' }}>
+            <ScrollView style={{ width: '100%' }}
+            refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                />
+              }>
 
                 <View style={styles.CardContainer}>
 
@@ -42,18 +60,32 @@ const FoodStatus = props => {
                         <Text style={styles.StatusHeaderText}>สถานะออเดอร์</Text>
                     </View>
                     <View style={styles.StatusHeaderContainer}>
-                        <Text style={[styles.HeaderText, { flex: .7 }]}>#</Text>
-                        <Text style={[styles.HeaderText, { flex: 1 }]}>เวลา(น.)</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>ร้านอาหาร</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>สถานะ</Text>
+                        <Text style={[styles.HeaderText, { flex: .4 }]}>#</Text>
+                        <Text style={[styles.HeaderText, { flex: .4 }]}>เวลา(น.)</Text>
+                        <Text style={[styles.HeaderText, { flex: 1 }]}>ร้านอาหาร</Text>
+                        <Text style={[styles.HeaderText, { flex: 1 }]}>สถานะ</Text>
                     </View>
-                    <View style={styles.StatusValueContainer}>
-                        <Text style={[styles.HeaderText, { flex: .7 }]}>152</Text>
-                        <Text style={[styles.HeaderText, { flex: 1 }]}>11:58</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>ตามสั่งนายวรัญ</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>อาหารเสร็จแล้ว</Text>
-                    </View>
-                    <View style={styles.StatusValueContainer}>
+
+                    <FlatList
+                        data={order}
+                        keyExtractor={item => item._id}
+                        renderItem={({ item }) =>
+                            <>
+                                <View style={[styles.StatusValueContainer, { width: 376 }]}>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>lsssfs</Text>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{order._id}</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{order._id}</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{order._id}</Text>
+                                </View>
+                            </>
+                        }
+
+                        horizontal={false}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                    />
+
+                    {/* <View style={styles.StatusValueContainer}>
                         <Text style={[styles.HeaderText, { flex: .7 }]}>152</Text>
                         <Text style={[styles.HeaderText, { flex: 1 }]}>12:10</Text>
                         <Text style={[styles.HeaderText, { flex: 2 }]}>ตำยำแหลก</Text>
@@ -64,7 +96,7 @@ const FoodStatus = props => {
                         <Text style={[styles.HeaderText, { flex: 1 }]}>12:34</Text>
                         <Text style={[styles.HeaderText, { flex: 2 }]}>ข้าวมันไก่หลังมอ</Text>
                         <Text style={[styles.HeaderText, { flex: 2 }]}>รอรับออเดอร์</Text>
-                    </View>
+                    </View> */}
                 </View>
 
             </ScrollView>

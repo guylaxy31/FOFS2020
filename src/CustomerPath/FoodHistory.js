@@ -1,10 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 
 const FoodHistory = props => {
+    const datatemp =
+        [
+            {
+                "_id": 1,
+                "date": "19-03-54",
+                "resname": "ตามสั่งนายวรัญ",
+            },
+        ]
+
 
     return (
 
@@ -18,19 +27,37 @@ const FoodHistory = props => {
                         <MaterialCommunityIcons name="history" color={'#000'} size={32} style={{ marginRight: 8 }} />
                         <Text style={styles.StatusHeaderText}>ประวัติสั่งออเดอร์</Text>
                     </View>
+
+
+
                     <View style={styles.StatusHeaderContainer}>
                         <Text style={[styles.celltext, { flex: .7 }]}>#</Text>
                         <Text style={[styles.celltext, { flex: 1 }]}>วันที่</Text>
                         <Text style={[styles.celltext, { flex: 2 }]}>ร้านอาหาร</Text>
                         <Text style={[styles.celltext, { flex: 1 }]}>รายการ</Text>
                     </View>
-                    <View style={[styles.StatusValueContainer, { marginBottom: 8 }]}>
-                        <View style={[styles.celltext, { flex: .7 }]}><Text style={styles.celltext}>152</Text></View>
-                        <Text style={[styles.celltext, { flex: 1 }]}>23-01-64</Text>
-                        <Text style={[styles.celltext, { flex: 2 }]}>ตามสั่งนายวรัญ</Text>
-                        <View style={{ flex: 1 }}><TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><MaterialIcons name="more-vert" size={24} color="black" /></TouchableOpacity>
-                        </View>
-                    </View>
+
+                    <FlatList
+                        data={datatemp}
+                        keyExtractor={item => item._id}
+                        renderItem={({ item }) =>
+                            <>
+                                <View style={[styles.StatusValueContainer, { marginBottom: 8, width: 376 }]}>
+                                    <View style={[styles.celltext, { flex: .7 }]}><Text style={styles.celltext}>{item._id}</Text></View>
+                                    <Text style={[styles.celltext, { flex: 1 }]}>{item.date}</Text>
+                                    <Text style={[styles.celltext, { flex: 2 }]}>{item.resname}</Text>
+                                    <View style={{ flex: 1 }}><TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><MaterialIcons name="more-vert" size={24} color="black" /></TouchableOpacity>
+                                    </View>
+                                </View>
+                            </>
+                        }
+
+                        horizontal={false}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                    />
+
+
 
 
 
