@@ -4,7 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 import * as actions from '../../store/action/cartAction';
 import CartItem from './CartItem';
-import cartItem from '../../store/reducer/cartItem';
+// import cartItem from '../../store/reducer/cartItem';
+import { SwipeListView } from 'react-native-swipe-list-view'
 const FoodMenuConfirm = (props) => {
     // console.log(props);
     var total = 0;
@@ -24,9 +25,9 @@ const FoodMenuConfirm = (props) => {
                             <FlatList
                                 data={props.cartItem}
                                 renderItem={({ item }) =>
-                                    <CartItem item={item} />
+                                    <CartItem item={item} onRemove={()=>props.removeFromCart(item)}/>
                                 }
-                                keyExtractor={(item, index) => index.toString()}
+                                keyExtractor={item => item.menus._id}
                                 horizontal={false}
                                 showsVerticalScrollIndicator={false}
                                 showsHorizontalScrollIndicator={false}
@@ -74,6 +75,12 @@ const mapStatetoProps = (state) => {
     }
 
 };
+const mapDispatchToProps = (dispatch) => {
+    return {
+      clearCart: () => dispatch(actions.clearCart()),
+      removeFromCart: (item) => dispatch(actions.removeFromCart(item))
+      }
+  }
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', marginBottom: 16, backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center', paddingTop: 64 },
     CardContainer: { height: '100%', flexDirection: 'column', alignItems: 'center', alignSelf: 'center', margin: 24, width: 376, backgroundColor: "#FFF", borderRadius: 16, },
@@ -105,4 +112,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStatetoProps, null)(FoodMenuConfirm);
+export default connect(mapStatetoProps, mapDispatchToProps)(FoodMenuConfirm);

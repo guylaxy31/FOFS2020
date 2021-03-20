@@ -61,6 +61,7 @@
     "react-native-screens": "~2.9.0",
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-svg": "^12.1.0",
+    "react-native-swipe-list-view": "^3.2.6",
     "react-native-table-component": "^1.2.1",
     "react-native-toast": "^1.0.1",
     "react-native-toast-message": "^1.4.9",
