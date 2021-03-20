@@ -17,24 +17,26 @@ const FoodStatus = props => {
     const [refreshing, setRefreshing] = useState(false);
     const [customerstatus, setcustomerstatus] = useState(["รอรับออเดอร์", "กำลังปรุงอาหาร", "วัตถุดิบไม่พอ", "ออเดอร์ถูกปฏิเสธ", "อาหารเสร็จแล้ว"])
 
+    useFocusEffect((useCallback(
+        () => {
+            if (
+                context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+            ) {
+                props.navigation.navigate("LoginHome")
+            } else{
+                setCusId(context.stateUser.user.userId)
+                axios.get(`${baseUrl}orders/${cusId}`).then((op) =>{
+                    setOrder(op.data)
+                }).catch((error) => { console.log(error); })
+            }
+            return () => {
+                setOrder([]);
+                setCusId('');
+            }
+        },
+        [cusId],
+    )))
     
-    useEffect(() => {
-        setCusId(context.stateUser.user.userId)
-        if (
-            context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
-        ) {
-            props.navigation.navigate("LoginHome")
-        } else{
-            setCusId(context.stateUser.user.userId)
-            axios.get(`${baseUrl}orders/${cusId}`).then((op) =>{
-                setOrder(op.data)
-            }).catch((error) => { console.log(error); })
-        }
-        return () => {
-            setOrder([]);
-            setCusId('');
-        }
-    }, [])
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));

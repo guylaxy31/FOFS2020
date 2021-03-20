@@ -1,20 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AuthGlobal from '../Context/Store/AuthGlobal'
+import baseUrl from '../../assets/common/baseUrl';
+import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 const RestaurantHome = props => {
+  const context = useContext(AuthGlobal);
+  const [restaurantId , setRestaurantId] = useState(context.stateUser.user.userId);
+  const [rest , setRest] = useState([]);
+  
+  
+    useEffect(() => {
+      if (
+        context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+    ) {
+        props.navigation.navigate("LoginHome")
+    } else{
+      
+      AsyncStorage.getItem("jwt").then((res) => {
+        
+        axios.get(`${baseUrl}restaurant/${restaurantId}`, {
+          headers: { Authorization: `Bearer ${res}` },
+      }).then((op) =>{
+            setRest(op.data)
+        }).catch((error) => { console.log(error); })
+      })
+        
+    }
+      return () => {
+        setRest([])
+        setRestaurantId('');
+      }
+    }, [restaurantId])
 
+  
+    console.log(restaurantId);
+    console.log(rest.restaurants);
   return (
     <View style={styles.container}>
       <View style={{ marginTop: '5%' }}>
         <View style={styles.textInline}>
           <Text style={styles.restNameTitle}>ร้าน</Text>
-          <Text style={styles.restNameValue}>อาหาร 1</Text>
+          <Text style={styles.restNameValue}></Text>
         </View>
         <View style={styles.textInline}>
           <Text style={styles.statusTitle}>สถานะ</Text>
-          <Text style={styles.statusValue}>ผ่านการอนุมัติแล้ว</Text>
+          <Text style={styles.statusValue}></Text>
         </View>
       </View>
       <View style={styles.toolsFlex}>
