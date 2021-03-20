@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput, FlatList ,Button} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 import * as actions from '../../store/action/cartAction';
@@ -9,7 +9,8 @@ import Toast from "react-native-toast-message";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 // import cartItem from '../../store/reducer/cartItem';
-import { SwipeListView } from 'react-native-swipe-list-view'
+
+
 const FoodMenuConfirm = (props) => {
     // console.log(props);
     const context = useContext(AuthGlobal);
@@ -73,7 +74,7 @@ const FoodMenuConfirm = (props) => {
                 })
                 setTimeout(() => {
                     props.clearCart();
-                    
+                    props.navigation.navigate("FoodStatus")
                 }, 500)
             }
         }).catch((error) => {
@@ -111,7 +112,7 @@ const FoodMenuConfirm = (props) => {
                                 <Text style={styles.detailTotalPrice}>{total} ฿</Text>
                             </View>
                             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 8 }}>
-                                <TouchableOpacity style={styles.btnSubmit} onPress={() => {checkOut(),props.navigation.navigate("FoodStatus")}}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnSubmit} onPress={() => checkOut()}><Text style={styles.btnSubmitText}>สั่งอาหาร</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>กลับไปเลือกเมนู</Text></TouchableOpacity>
                             </View>
 
@@ -150,8 +151,9 @@ const mapStatetoProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        clearCart: () => dispatch(actions.clearCart()),
-        removeFromCart: (item) => dispatch(actions.removeFromCart(item))
+        
+        removeFromCart: (item) => dispatch(actions.removeFromCart(item)),
+        clearCart: () => dispatch(actions.clearCart())
     }
 }
 const styles = StyleSheet.create({

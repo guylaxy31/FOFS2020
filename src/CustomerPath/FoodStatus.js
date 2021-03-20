@@ -1,10 +1,28 @@
-import React from 'react';
+import React , {useState , useCallback  , useContext}from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { normalize } from 'react-native-elements';
-
+import AuthGlobal from '../Context/Store/AuthGlobal'
+import baseUrl from '../../assets/common/baseUrl';
+import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 const FoodStatus = props => {
+    const context = useContext(AuthGlobal);
+    const [order , setOrder] = useState([]);
 
+    useEffect(() => {
+        if (
+            context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+        ) {
+            props.navigation.navigate("LoginHome")
+        } else{
+            // AsyncStorage.getItem("")
+        }
+        return () => {
+            
+        }
+    }, [])
     return (
 
         <View style={styles.container}>

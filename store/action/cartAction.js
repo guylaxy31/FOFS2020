@@ -18,6 +18,6 @@ export const removeFromCart = (payload) => {
     }
 }
 export const clearCart = () => {
-    return CLEAR_CART
+    return {type : CLEAR_CART}
 
 }
