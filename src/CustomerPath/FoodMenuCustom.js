@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput } from 'react-native';
 
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
@@ -20,7 +20,7 @@ const FoodMenuCustom = props => {
     const [options, setOptions] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [varaitions, setVaraitions] = useState([]);
-    const [op , setOp] = useState([]);
+    const [op, setOp] = useState([]);
     const [checkoptions, setCheckoptions] = useState(false);
     const [checkingredients, setCheckingredients] = useState(false)
     const [checkvaraitions, setCheckvaraitions] = useState(false)
@@ -45,8 +45,7 @@ const FoodMenuCustom = props => {
     console.log(Object.values(item))
     useEffect(() => {
         if (
-            context.stateUser.isAuthenticated === false ||
-            context.stateUser.isAuthenticated === null
+            context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("LoginHome")
         }
@@ -154,8 +153,8 @@ const FoodMenuCustom = props => {
                     <View style={{ marginTop: 16 }}><Text style={styles.MenuTitleText}>ชื่อเมนู {item.item.menu_name}</Text></View>
                     <View style={{ marginBottom: 8 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 16 }}>( ราคาเริ่มต้น {item.item.price} ฿ )</Text></View>
                     {/* {checkvaraitions == true ? ( */}
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
-                        <View style={{ flexDirection: 'column', marginLeft: 56, marginBottom: 16 }}>
+                    <View style={{ width: 376, flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
+                        <View style={{ flexDirection: 'column', marginBottom: 16, width: 376 }}>
 
                             {variationView === true ?
                                 <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
@@ -209,7 +208,7 @@ const FoodMenuCustom = props => {
                             }
 
                             {optionView === true ?
-                                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
+                                <View style={{ width: 376, flexDirection: 'row', justifyContent: 'space-between', marginVertical: 8 }}>
                                     <View style={{ flexDirection: 'column', marginLeft: 56 }}>
                                         <RadioForm
                                             radio_props={options.option}
@@ -228,17 +227,14 @@ const FoodMenuCustom = props => {
                                 :
                                 null
                             }
-
-                            <View style={{ width: '100%', marginVertical: 20, flexDirection: 'column' }}>
-                                <Text style={{ fontFamily: 'pr-reg', textAlign: 'left', marginBottom: 24 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>
-                                <TextInput multiline={true} numberOfLines={3} style={styles.TextInputBox} onChangeText={(value) => {
+                            <></>
+                            <View style={{ width: 376, marginVertical: 20, flexDirection: 'column', alignItems: 'center' }}>
+                                <Text style={{ fontFamily: 'pr-reg', alignSelf: 'flex-start', marginBottom: 24, marginLeft: 54 }}>ฝากถึงร้านเพิ่มเติม (ถ้ามี)</Text>
+                                <TextInput style={{ justifyContent: 'center' }} multiline={true} numberOfLines={3} style={styles.TextInputBox} onChangeText={(value) => {
                                     setDescribe(value)
                                 }}></TextInput>
                             </View>
-                            {/* <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#FFFEB8', paddingVertical: 8 }}>
-                        <Text style={styles.detailTotalTextTitle}>รวม</Text>
-                        <Text style={styles.detailTotalPrice}>{totalprices} ฿</Text>
-                    </View> */}
+
 
                             <View style={[styles.menunamecontainer, { paddingHorizontal: 24, marginBottom: 16, width: 248, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
                                 <TouchableOpacity onPress={() => { qtymenu > 1 ? setqtymenu(qtymenu - 1) : null }} style={[styles.MenuTitleText, styles.btntool, {}]}><MaterialCommunityIcons name="minus" size={24} color="black" /></TouchableOpacity>
@@ -246,7 +242,7 @@ const FoodMenuCustom = props => {
                                 <TouchableOpacity onPress={() => { setqtymenu(qtymenu + 1) }} style={[styles.MenuTitleText, styles.btntool, {}]}><MaterialIcons name="add" size={24} color="black" /></TouchableOpacity>
                             </View>
 
-                            <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 248 }}>
+                            <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 376 }}>
                                 <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>

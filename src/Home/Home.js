@@ -124,7 +124,7 @@ const Home = props => {
     })
   };
   // console.log('context state user is ---------------------> ', context.stateUser.isAuthenticated)
-
+  console.log(context.stateUser)
   return (
     <>
       {loading === false ? (
@@ -132,16 +132,21 @@ const Home = props => {
           {/* <Button title="Trigger notifications" onPress={triggerNotificationHandler} /> */}
           <View style={styles.nav__container}>
 
-            {/* <Header
-                containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
-                leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
-                rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={24} />Hello<Text style={styles.usernameText}></Text></ TouchableOpacity>}
-              /> */}
-            <Header
+            {context.stateUser.isAuthenticated == undefined || context.stateUser.isAuthenticated == false ? <Header
               containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
               leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
               rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('LoginHome')}><Text style={styles.HedaerTitleTxt}>เข้าสู่ระบบ</Text></ TouchableOpacity>}
             />
+              :
+              <Header
+                containerStyle={{ backgroundColor: '#FFFC1B', height: 56, flexDirection: 'row', paddingTop: 0, paddingHorizontal: 16 }}
+                leftComponent={<TouchableOpacity onPress={() => props.navigation.openDrawer()}><FontAwesome style={styles.iconAlign} name="bars" size={24} color="#000" /></TouchableOpacity>}
+                rightComponent={<TouchableOpacity onPress={() => props.navigation.navigate('ProfileSetting')} style={{ alignItems: 'center' }}><MaterialCommunityIcons name="account" size={24} /><Text style={[styles.usernameText, { fontSize: 14 }]}>{context.stateUser.user.username}</Text></ TouchableOpacity>}
+              />
+            }
+
+
+
           </View>
 
           <ScrollView style={styles.scroll_View}
