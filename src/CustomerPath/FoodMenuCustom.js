@@ -242,7 +242,7 @@ const FoodMenuCustom = props => {
                                 <TouchableOpacity onPress={() => { setqtymenu(qtymenu + 1) }} style={[styles.MenuTitleText, styles.btntool, {}]}><MaterialIcons name="add" size={24} color="black" /></TouchableOpacity>
                             </View>
 
-                            <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 376 }}>
+                            <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 376, paddingHorizontal: 24 }}>
                                 <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
