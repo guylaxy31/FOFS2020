@@ -1,5 +1,5 @@
-import React , {useState , useCallback  , useContext}from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { normalize } from 'react-native-elements';
 import AuthGlobal from '../Context/Store/AuthGlobal'
@@ -9,18 +9,19 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 const FoodStatus = props => {
     const context = useContext(AuthGlobal);
-    const [order , setOrder] = useState([]);
+    const [order, setOrder] = useState([]);
+    const [customerstatus, setcustomerstatus] = useState(["รอรับออเดอร์", "กำลังปรุงอาหาร", "วัตถุดิบไม่พอ", "ออเดอร์ถูกปฏิเสธ", "อาหารเสร็จแล้ว"])
 
     useEffect(() => {
         if (
             context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("LoginHome")
-        } else{
+        } else {
             // AsyncStorage.getItem("")
         }
         return () => {
-            
+
         }
     }, [])
     return (
@@ -36,18 +37,32 @@ const FoodStatus = props => {
                         <Text style={styles.StatusHeaderText}>สถานะออเดอร์</Text>
                     </View>
                     <View style={styles.StatusHeaderContainer}>
-                        <Text style={[styles.HeaderText, { flex: .7 }]}>#</Text>
-                        <Text style={[styles.HeaderText, { flex: 1 }]}>เวลา(น.)</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>ร้านอาหาร</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>สถานะ</Text>
+                        <Text style={[styles.HeaderText, { flex: .4 }]}>#</Text>
+                        <Text style={[styles.HeaderText, { flex: .4 }]}>เวลา(น.)</Text>
+                        <Text style={[styles.HeaderText, { flex: 1 }]}>ร้านอาหาร</Text>
+                        <Text style={[styles.HeaderText, { flex: 1 }]}>สถานะ</Text>
                     </View>
-                    <View style={styles.StatusValueContainer}>
-                        <Text style={[styles.HeaderText, { flex: .7 }]}>152</Text>
-                        <Text style={[styles.HeaderText, { flex: 1 }]}>11:58</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>ตามสั่งนายวรัญ</Text>
-                        <Text style={[styles.HeaderText, { flex: 2 }]}>อาหารเสร็จแล้ว</Text>
-                    </View>
-                    <View style={styles.StatusValueContainer}>
+
+                    <FlatList
+                        data={null}
+                        keyExtractor={null}
+                        renderItem={({ item }) =>
+                            <>
+                                <View style={[styles.StatusValueContainer, { width: 376 }]}>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>101</Text>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>11:58</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}>ตามสั่งนายวรัญ</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}></Text>
+                                </View>
+                            </>
+                        }
+
+                        horizontal={false}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                    />
+
+                    {/* <View style={styles.StatusValueContainer}>
                         <Text style={[styles.HeaderText, { flex: .7 }]}>152</Text>
                         <Text style={[styles.HeaderText, { flex: 1 }]}>12:10</Text>
                         <Text style={[styles.HeaderText, { flex: 2 }]}>ตำยำแหลก</Text>
@@ -58,7 +73,7 @@ const FoodStatus = props => {
                         <Text style={[styles.HeaderText, { flex: 1 }]}>12:34</Text>
                         <Text style={[styles.HeaderText, { flex: 2 }]}>ข้าวมันไก่หลังมอ</Text>
                         <Text style={[styles.HeaderText, { flex: 2 }]}>รอรับออเดอร์</Text>
-                    </View>
+                    </View> */}
                 </View>
 
             </ScrollView>
