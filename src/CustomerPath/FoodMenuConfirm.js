@@ -1,18 +1,50 @@
-import React from 'react';
+import React , {useState,useContext,useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, TextInput, FlatList } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from "react-redux";
 import * as actions from '../../store/action/cartAction';
 import CartItem from './CartItem';
+import AuthGlobal from "../Context/Store/AuthGlobal";
 // import cartItem from '../../store/reducer/cartItem';
 import { SwipeListView } from 'react-native-swipe-list-view'
 const FoodMenuConfirm = (props) => {
     // console.log(props);
+    const context = useContext(AuthGlobal);
+
+    const [orderDetail,setOrderDetail] = useState([]);
+    const [customer , setCustomer] = useState();
+    const [restaurant ,setRestaurant] = useState();
+    console.log("context is " ,context);
+    console.log("props of cart",Object.keys(props.cartItem));
     var total = 0;
+    var restaid = "";
     props.cartItem.forEach(cart => {
         return (total += (cart.menus.price + cart.varId.value + cart.ingreId.value + cart.ingreId.value)*cart.quantity)
     })
+    props.cartItem.forEach(resid =>{
+        return restaid = `${resid.resId}`
+    })
 
+    useEffect(() => {
+        setOrderDetail(props.cartItem);
+        if (context.stateUser.isAuthenticated) {
+            setCustomer(context.stateUser.user.userId)
+            setRestaurant(restaid)
+        }else{
+            props.navigation.navigate("LoginHome");
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Please Login to Checkout",
+                text2: ""
+            });
+        }
+        return () => {
+            setOrderDetail([]);
+        }
+    }, [])
+    console.log("customerId is a  ",customer);
+    console.log("restaurantId is a  ",restaurant);
     return (
         <View>
             {props.cartItem.length ? (

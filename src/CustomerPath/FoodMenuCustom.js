@@ -20,6 +20,7 @@ const FoodMenuCustom = props => {
     const [options, setOptions] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [varaitions, setVaraitions] = useState([]);
+    const [restaurantid ,setRestaurantId] = useState();
     const [op , setOp] = useState([]);
     const [checkoptions, setCheckoptions] = useState(false);
     const [checkingredients, setCheckingredients] = useState(false)
@@ -38,60 +39,64 @@ const FoodMenuCustom = props => {
     const [optionView, setoptionView] = useState(false)
 
     const [qtymenu, setqtymenu] = useState(1)
-
+    const restaurantId = props.route.params.resId;
+    
+    console.log(restaurantid);
     // console.log(item.item.menu_name);
     // console.log(`${baseUrl}restaurant/options/${item.item._id}`);
     // console.log(item.item);
-    console.log(Object.values(item))
+    // console.log(Object.values(item))
     useEffect(() => {
         if (
             context.stateUser.isAuthenticated === false ||
             context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("LoginHome")
+        } else{
+            AsyncStorage.getItem("jwt").then((res) => {
+                setRestaurantId(restaurantId);
+                axios
+                    .get(`${baseUrl}restaurant/options/${item.item._id}`, {
+                        headers: { Authorization: `Bearer ${res}` },
+                    })
+                    .then((op) => {
+                        setOptions(op.data);
+    
+                    })
+                    .catch((error) => { console.log(error); })
+    
+                axios
+                    .get(`${baseUrl}restaurant/ingredients/${item.item._id}`, {
+                        headers: { Authorization: `Bearer ${res}` },
+                    })
+                    .then((ing) => {
+                        setIngredients(ing.data);
+    
+    
+                    })
+                    .catch((error) => { console.log(error) })
+                axios
+                    .get(`${baseUrl}restaurant/varaitions/${item.item._id}`, {
+                        headers: { Authorization: `Bearer ${res}` },
+                    })
+                    .then((vara) => {
+                        setVaraitions(vara.data);
+    
+                    })
+                // axios
+                //     .get(`${baseUrl}restaurant/op/${item.item._id}`, {
+                //         headers: { Authorization: `Bearer ${res}` },
+                //     })
+                //     .then((ops) => {
+                //         setOp(ops.data);
+    
+    
+                //     })
+                //     .catch((error) => { console.log(error) })
+            }) 
         }
 
-        AsyncStorage.getItem("jwt").then((res) => {
-
-            axios
-                .get(`${baseUrl}restaurant/options/${item.item._id}`, {
-                    headers: { Authorization: `Bearer ${res}` },
-                })
-                .then((op) => {
-                    setOptions(op.data);
-
-                })
-                .catch((error) => { console.log(error); })
-
-            axios
-                .get(`${baseUrl}restaurant/ingredients/${item.item._id}`, {
-                    headers: { Authorization: `Bearer ${res}` },
-                })
-                .then((ing) => {
-                    setIngredients(ing.data);
-
-
-                })
-                .catch((error) => { console.log(error) })
-            axios
-                .get(`${baseUrl}restaurant/varaitions/${item.item._id}`, {
-                    headers: { Authorization: `Bearer ${res}` },
-                })
-                .then((vara) => {
-                    setVaraitions(vara.data);
-
-                })
-            axios
-                .get(`${baseUrl}restaurant/op/${item.item._id}`, {
-                    headers: { Authorization: `Bearer ${res}` },
-                })
-                .then((ops) => {
-                    setOp(ops.data);
-
-
-                })
-                .catch((error) => { console.log(error) })
-        })
+        
 
 
 
@@ -100,6 +105,7 @@ const FoodMenuCustom = props => {
             setIngredients([]);
             setVaraitions([]);
             setOp([]);
+            setRestaurantId();
         }
     }, [])
 
@@ -142,7 +148,9 @@ const FoodMenuCustom = props => {
     // console.log('value -> ', Object.keys(options)[0], ' result is ', tempState)
     // if (Object.keys(options).length != 0) { setTempState(true) }
     // else (setTempState(true))
-    console.log(op);
+    // console.log(op);
+    
+    
     return (
 
         <View style={styles.container} >
@@ -247,7 +255,7 @@ const FoodMenuCustom = props => {
                             </View>
 
                             <View style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'space-around', marginTop: 32, width: 248 }}>
-                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
+                                <TouchableOpacity style={styles.btnsubmit} onPress={() => { props.addItemcart(item.item, selectvaraitions, selectingredients, selectoptions, describe, qtymenu , restaurantid), props.navigation.navigate('FoodMenuMain') }}><Text style={styles.btnSubmitText}>ยืนยัน</Text></TouchableOpacity>
                                 <TouchableOpacity style={styles.btnCancel} onPress={() => props.navigation.navigate('FoodMenuMain')} ><Text style={styles.btnCancelText}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -263,7 +271,7 @@ const FoodMenuCustom = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu) => { dispatch(action.addToCart({ quantity: qtymenu, menus, varId: vaId, ingreId: ingreId, optionId: optionId, describe })) }
+        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu ,resId) => { dispatch(action.addToCart({ quantity: qtymenu, menus, varId: vaId, ingreId: ingreId, optionId: optionId, describe:describe , resId:resId})) }
     }
 }
 

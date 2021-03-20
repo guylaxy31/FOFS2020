@@ -3,9 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image
 import { AntDesign } from '@expo/vector-icons';
 
 const CartItem = props => {
-    console.log("-----------cartItem");
-    console.log(props.item);
-    console.log("props in this page" , props);
+    // console.log("-----------cartItem");
+    // console.log(props.item);
     var total = 0;
     total += (props.item.menus.price + props.item.varId.value + props.item.ingreId.value + props.item.ingreId.value) * props.item.quantity;
 
