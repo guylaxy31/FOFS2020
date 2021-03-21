@@ -4,18 +4,12 @@ import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const MenuList = props => {
-    const tabledataset = {
-        tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา (฿)', 'แก้ไข'],
-        tableData: [
-            ['1', 'ข้าวผัดหมู', 'อาหารตามสั่ง', '25', 'แก้ไข'],
-            ['2', 'ข้าวไข่เจียว', 'อาหารตามสั่ง', '15', 'แก้ไข']
-        ]
-    }
+
 
     // const element = (data, index) => (
-    //     <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
-    //         <MaterialIcons name="edit" size={24} color="black" />
-    //     </TouchableOpacity>
+    // <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
+    //     <MaterialIcons name="edit" size={24} color="black" />
+    // </TouchableOpacity>
     // );
     return (
         <View style={styles.Tablecontainer}>
@@ -28,6 +22,7 @@ const MenuList = props => {
             <View>
                 <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
             </View>
+
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                 <Text>#</Text>
                 <Text>เมนู</Text>
@@ -50,6 +45,9 @@ const MenuList = props => {
                                 <Text style={[{ flex: .4 }]}>กะเพรา</Text>
                                 <Text style={[{ flex: .4 }]}>อาหารตามสั่ง</Text>
                                 <Text style={[{ flex: .3 }]}>30 ฿</Text>
+                                <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
+                                    <MaterialIcons name="edit" size={24} color="black" />
+                                </TouchableOpacity>
                             </View>
                         </>
                     }
