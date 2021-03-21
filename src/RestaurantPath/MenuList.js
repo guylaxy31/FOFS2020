@@ -1,16 +1,47 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, FlatList } from 'react-native';
+import React , { useState, useCallback, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image ,FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
+import Toast from "react-native-toast-message";
+import { useFocusEffect } from "@react-navigation/native";
 const MenuList = props => {
+    const tabledataset = {
+        tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา (฿)', 'แก้ไข'],
+        tableData: [
+            ['1', 'ข้าวผัดหมู', 'อาหารตามสั่ง', '25', 'แก้ไข'],
+            ['2', 'ข้าวไข่เจียว', 'อาหารตามสั่ง', '15', 'แก้ไข']
+        ]
+    }
+    console.log(props);
+    const restId = props.route.params.resId;
+    const [menuRest , setMenuRest]= useState([])
+    const [token,setToken] = useState();
+    useFocusEffect((useCallback(
+        () => {
+            AsyncStorage.getItem("jwt")
+                    .then((res) => {
+                        setToken(res)
+                        axios.get(`${baseURL}restaurant/menus/${restId}`, {
+                            headers: { Authorization: `Bearer ${res}` }
+                          }).then((menuRes) => {
+                              setMenuRest(menuRes.data)
 
+                          })
+                    })
+                    .catch((error) => console.log(error))
 
-    // const element = (data, index) => (
-    // <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
-    //     <MaterialIcons name="edit" size={24} color="black" />
-    // </TouchableOpacity>
-    // );
+                    return () => {
+                        setMenuRest([]);
+                    }
+            
+        },
+        [],
+    )))
+
+    console.log("menu restaurant" , menuRest);
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
@@ -36,18 +67,15 @@ const MenuList = props => {
 
 
                 <FlatList
-                    data={null}
+                    data={menuRest.menus}
 
                     renderItem={({ item }) =>
                         <>
                             <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>#</Text>
-                                <Text style={[{ flex: .4 }]}>กะเพรา</Text>
-                                <Text style={[{ flex: .4 }]}>อาหารตามสั่ง</Text>
-                                <Text style={[{ flex: .3 }]}>30 ฿</Text>
-                                <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
-                                    <MaterialIcons name="edit" size={24} color="black" />
-                                </TouchableOpacity>
+                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.menu_name}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.type_menu}</Text>
+                                <Text style={[{ flex: .3 }]}>{item.price} ฿</Text>
                             </View>
                         </>
                     }

@@ -4,30 +4,24 @@ import { Icon } from 'react-native-elements'
 
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from "@react-native-community/async-storage"
+import baseURL from "../../assets/common/baseUrl"
+import axios from "axios"
+import mime from "mime";
 
 
 const MenuAdd = props => {
     const [image, setImage] = useState(null);
+    const [token, setToken] = useState();
+    const [typemenu, setTypemenu] = useState([]);
     const [menu, setMenu] = useState({
         name: '',
-        category: 'default',
+        type_menu: 'default',
         price: '',
         description: '',
         status: true
     });
-    const [variation, setVariation] = useState({
-        key1: { name: 'ธรรมดา', price: 30 },
-        key2: { name: 'พิเศษ', price: 35 },
-    });
-    const [ingredient, setIngredient] = useState({
-        key1: { name: 'หมู', price: 0 },
-        key2: { name: 'ไก่', price: 0 },
-        key3: { name: 'ปลา', price: 5 },
-    });
-    const [option, setOption] = useState({
-        key1: { name: 'ไข่ดาว', price: 5 },
-        key2: { name: 'ไข่เจียว', price: 5 }
-    });
+
     const [state, setState] = useState({
         edit: false,
         delete: false,
@@ -37,6 +31,18 @@ const MenuAdd = props => {
     })
 
     useEffect(() => {
+        AsyncStorage.getItem("jwt")
+            .then((res) => {
+                setToken(res)
+            })
+            .catch((error) => console.log(error))
+
+        axios
+            .get(`${baseURL}typemenu`)
+            .then((res) => setTypemenu(res.data))
+            .catch((error) => alert("Error to load categories"));
+
+
         (async () => {
             if (Platform.OS !== 'web') {
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -45,6 +51,9 @@ const MenuAdd = props => {
                 }
             }
         });
+        return () => {
+            setTypemenu([]);
+        }
     }, []);
 
     const pickImage = async () => {
@@ -63,105 +72,132 @@ const MenuAdd = props => {
     };
 
     const checkBeforeNavigate = () => {
-        {
-            image != null && menu.name != '' && menu.category != '' && menu.price != '' ? props.navigation.navigate('MenuList')
-                :
-                Alert.alert(
-                    //title
-                    'ไม่สามารถเพิ่มเมนูได้',
-                    //body
-                    'โปรดระบุข้อมูลให้ครบถ้วน',
-                    [
-                        { text: 'ปิด' },
-                    ],
-                    { cancelable: false },
-                    //clicking out side of alert will not cancel
 
-                );
+        if (image != null && menu.name != '' && menu.category != '' && menu.price != '' ) {
+            let formData = new FormData();
+
+            const newImageUri = "file:///" + image.split("file:/").join("");
+
+            formData.append("image", {
+                uri: newImageUri,
+                type: mime.getType(newImageUri),
+                name: newImageUri.split("/").pop()
+            });
+            formData.append("menu_name", name);
+            
+            formData.append("price", price);
+            formData.append("description", description);
+            formData.append("category", category);
+            formData.append("countInStock", countInStock);
+            formData.append("richDescription", richDescription);
+            formData.append("rating", rating);
+            formData.append("numReviews", numReviews);
+            formData.append("isFeatured", isFeatured);
+
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        }else{
+            Alert.alert(
+                //title
+                'ไม่สามารถเพิ่มเมนูได้',
+                //body
+                'โปรดระบุข้อมูลให้ครบถ้วน',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+            
+            )
         }
+        
     }
 
-    return (
-        <View style={styles.container}>
-            <ScrollView style={{ width: '100%', paddingHorizontal: 50 }} showsVerticalScrollIndicator={false}>
-                {/* [1] โค้ดปุ่มเพิ่มรูป เมืออัพโหลดรูปรูปจะแสดงด้านใต้ของป่ม */}
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={styles.AddImageContainer}><TouchableOpacity style={styles.TouchImageContainer} onPress={pickImage}><Text style={styles.addImageText}>+ เพิ่มรูปเมนู</Text><Icon name="image"></Icon></TouchableOpacity></View>
-                    {image && <Image source={{ uri: image }} style={{ width: 150, height: 150, marginTop: 20, borderRadius: 15 }} />}
-                </View>
-                {image === null ? <View style={{ width: '100%', alignItems: 'center', marginTop: 20 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*ต้องการรูปเมนู</Text></View> : null}
+return (
+    <View style={styles.container}>
+        <ScrollView style={{ width: '100%', paddingHorizontal: 50 }} showsVerticalScrollIndicator={false}>
+            {/* [1] โค้ดปุ่มเพิ่มรูป เมืออัพโหลดรูปรูปจะแสดงด้านใต้ของป่ม */}
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={styles.AddImageContainer}><TouchableOpacity style={styles.TouchImageContainer} onPress={pickImage}><Text style={styles.addImageText}>+ เพิ่มรูปเมนู</Text><Icon name="image"></Icon></TouchableOpacity></View>
+                {image && <Image source={{ uri: image }} style={{ width: 150, height: 150, marginTop: 20, borderRadius: 15 }} />}
+            </View>
+            {image === null ? <View style={{ width: '100%', alignItems: 'center', marginTop: 20 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*ต้องการรูปเมนู</Text></View> : null}
 
-                {/* [2] ชื่อเมนู */}
-                <View><Text style={styles.MenuTitleText}>ชื่อเมนู</Text></View>
-                <View><TextInput style={styles.TextInputVal} onChangeText={(val) => setMenu({ ...menu, name: val })}></TextInput></View>
-                {menu.name === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
+            {/* [2] ชื่อเมนู */}
+            <View><Text style={styles.MenuTitleText}>ชื่อเมนู</Text></View>
+            <View><TextInput style={styles.TextInputVal} onChangeText={(val) => setMenu({ ...menu, name: val })}></TextInput></View>
+            {menu.name === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
-                {/* [3] ประเภทอาหาร เลือกเป็น dropdown */}
-                <View><Text style={styles.MenuTitleText}>ประเภทอาหาร</Text></View>
-                <DropDownPicker
-                    items={[
-                        { label: 'โปรดระบุ', value: 'default', hidden: true, disabled: true },
-                        { label: 'อาหาตามสั่ง', value: 'madeinorder' },
-                        { label: 'เมนูเส้น', value: 'noodle' },
-                        { label: 'เครื่องดื่ม', value: 'drinks' },
-                        { label: 'ขนม', value: 'sweets' }
-                    ]}
-                    defaultValue={menu.category}
-                    dropDownMaxHeight={300}
-                    placeholder="โปรดระบุ"
-                    containerStyle={{ height: 40, marginBottom: 16 }}
-                    style={{
-                        backgroundColor: '#fafafa',
-                    }}
-                    itemStyle={{
-                        justifyContent: 'flex-start'
-                    }}
-                    dropDownStyle={{ backgroundColor: '#fafafa' }}
-                    onChangeItem={(item) => setMenu({ ...menu, category: item.value })}
-                    labelStyle={{
-                        fontFamily: 'pr-reg',
-                        color: '#000'
-                    }}
-                    selectedLabelStyle={{
-                        color: '#000'
-                    }}
-                />
-                {menu.category === 'default' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดเลือก</Text></View> : null}
+            {/* [3] ประเภทอาหาร เลือกเป็น dropdown */}
+            <View><Text style={styles.MenuTitleText}>ประเภทอาหาร</Text></View>
+            <DropDownPicker
+                items={[
+                    { label: 'โปรดระบุ', value: 'default', hidden: true, disabled: true },
+                    { label: 'อาหาตามสั่ง', value: 'madeinorder' },
+                    { label: 'เมนูเส้น', value: 'noodle' },
+                    { label: 'เครื่องดื่ม', value: 'drinks' },
+                    { label: 'ขนม', value: 'sweets' }
+                ]}
+                defaultValue={menu.category}
+                dropDownMaxHeight={300}
+                placeholder="โปรดระบุ"
+                containerStyle={{ height: 40, marginBottom: 16 }}
+                style={{
+                    backgroundColor: '#fafafa',
+                }}
+                itemStyle={{
+                    justifyContent: 'flex-start'
+                }}
+                dropDownStyle={{ backgroundColor: '#fafafa' }}
+                onChangeItem={(item) => setMenu({ ...menu, category: item.value })}
+                labelStyle={{
+                    fontFamily: 'pr-reg',
+                    color: '#000'
+                }}
+                selectedLabelStyle={{
+                    color: '#000'
+                }}
+            />
+            {menu.category === 'default' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดเลือก</Text></View> : null}
 
-                {/* [4] ช่องกรอกราคา */}
-                <View><Text style={styles.MenuTitleText}>ราคา (บาท)</Text></View>
-                <View><TextInput keyboardType='numeric' onChangeText={(val) => setMenu({ ...menu, price: val })} style={styles.TextInputValPrices}></TextInput></View>
-                {menu.price === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
+            {/* [4] ช่องกรอกราคา */}
+            <View><Text style={styles.MenuTitleText}>ราคา (บาท)</Text></View>
+            <View><TextInput keyboardType='numeric' onChangeText={(val) => setMenu({ ...menu, price: val })} style={styles.TextInputValPrices}></TextInput></View>
+            {menu.price === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
 
-                {/* เขียนเกี่ยวกับอาหารเพิ่มเติม หรืออาจจะเป็นข้อความแนะนำอาหาร ความพิเศษของเมนูนี้ */}
-                <View><Text style={styles.MenuTitleText}>รายละเอียดเพิ่มเติม (อาหาร)</Text></View>
-                <View><TextInput onChangeText={(val) => setMenu({ ...menu, description: val })} style={{ textAlignVertical: 'top' }} numberOfLines={3} multiline={true} style={styles.TextInputValDesc}></TextInput></View>
+            {/* เขียนเกี่ยวกับอาหารเพิ่มเติม หรืออาจจะเป็นข้อความแนะนำอาหาร ความพิเศษของเมนูนี้ */}
+            <View><Text style={styles.MenuTitleText}>รายละเอียดเพิ่มเติม (อาหาร)</Text></View>
+            <View><TextInput onChangeText={(val) => setMenu({ ...menu, description: val })} style={{ textAlignVertical: 'top' }} numberOfLines={3} multiline={true} style={styles.TextInputValDesc}></TextInput></View>
 
-                {/* สิ้นสุดการกรอกข้อมูล 1)ยืนยันข้อมูลทั้งหมดจะถูกเก็บเมื่อผ่านเงื่อนไข 2)ยกเลิก จะกลับไปหน้าเดิม */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 50 }}>
-                    <View style={styles.submitBtn}><TouchableOpacity onPress={() => checkBeforeNavigate()}><Text style={styles.submitBtnText}>ยืนยัน</Text></TouchableOpacity></View>
-                    <View style={styles.cancelBtn}><TouchableOpacity onPress={() => props.navigation.goBack()}><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
-                </View>
+            {/* สิ้นสุดการกรอกข้อมูล 1)ยืนยันข้อมูลทั้งหมดจะถูกเก็บเมื่อผ่านเงื่อนไข 2)ยกเลิก จะกลับไปหน้าเดิม */}
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 50 }}>
+                <View style={styles.submitBtn}><TouchableOpacity onPress={() => checkBeforeNavigate()}><Text style={styles.submitBtnText}>ยืนยัน</Text></TouchableOpacity></View>
+                <View style={styles.cancelBtn}><TouchableOpacity onPress={() => props.navigation.goBack()}><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
+            </View>
 
-                {/* แสดงเมื่อกดปุ่มลบ ถังขยะ */}
-                <Modal transparent={true} visible={state.delete}>
-                    <View style={styles.ModelBackground}>
-                        <View style={styles.ModalContainer}>
+            {/* แสดงเมื่อกดปุ่มลบ ถังขยะ */}
+            <Modal transparent={true} visible={state.delete}>
+                <View style={styles.ModelBackground}>
+                    <View style={styles.ModalContainer}>
 
-                            <View style={{ flexDirection: 'row', marginBottom: 30, justifyContent: 'center' }}><Text style={styles.CancelText}>คุณแน่ใจว่าต้องการลบวัตถุดิบนี้</Text></View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                                <View style={styles.TouchSubmitButton}><TouchableOpacity><Text style={styles.SubmitButtonTxt}>ยืนยัน</Text></TouchableOpacity></View>
-                                <View style={styles.TouchCloseButton}><TouchableOpacity><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity></View>
-                            </View>
+                        <View style={{ flexDirection: 'row', marginBottom: 30, justifyContent: 'center' }}><Text style={styles.CancelText}>คุณแน่ใจว่าต้องการลบวัตถุดิบนี้</Text></View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <View style={styles.TouchSubmitButton}><TouchableOpacity><Text style={styles.SubmitButtonTxt}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchCloseButton}><TouchableOpacity><Text style={styles.closeButtonTxt}>ปิด</Text></TouchableOpacity></View>
                         </View>
                     </View>
-                </Modal>
+                </View>
+            </Modal>
 
-            </ScrollView>
+        </ScrollView>
 
-        </View >
-    );
+    </View >
+);
 }
 
 

@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, Modal, TextInput, FlatList } from 'react-native';
+import React, { useState ,useEffect } from 'react';
+import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, Modal, TextInput ,FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
@@ -7,7 +7,7 @@ import baseURL from "../../assets/common/baseUrl";
 import Toast from "react-native-toast-message";
 const OrderList = props => {
     var total = 0;
-    const [token, setToken] = useState();
+    const [token ,setToken] = useState();
     const [orderstatus, setorderstatus] = useState(props.status)
     const [orderstate, setOrderstate] = useState({
         submit: false,
@@ -21,67 +21,227 @@ const OrderList = props => {
     });
     useEffect(() => {
         AsyncStorage.getItem("jwt")
-            .then((res) => {
-                setToken(res);
-            })
-            .catch((error) => console.log(error));
+        .then((res) => {
+          setToken(res);
+        })
+        .catch((error) => console.log(error));
 
         setorderstatus(props.status)
         return () => {
-
+            
         }
     }, [])
-    const updataOrder = () => {
+    
+    const updataOrderCooking = () => {
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
-        };
-        var order = {};
-        console.log('_______________________________________')
-        console.log('state when onpress --> ', orderstatus);
-
-        if (orderstatus == "Waiting" || orderstatus == "Cooking" || orderstatus == "Finish") {
+          };
+          var order = {};
+          
+          const stat ="Cooking";
+        if (stat == "Waiting" || stat == "Cooking" || stat == "Finish") {
             order = {
-                status: orderstatus
+                status : stat
             };
-        } else {
+        }else{
             order = {
-                status: orderstatus,
+                status : stat,
                 dateOrderFinish: Date.now()
             }
         }
 
-        axios.put(`${baseURL}restaurant/orders/${props.idx}`, order, config).then((res) => {
+        axios.put(`${baseURL}restaurant/orders/${props.idx}`,order ,config).then((res) =>{
             if (res.status == 200 || res.status == 201) {
-
                 Toast.show({
-                    topOffset: 60,
-                    type: "success",
-                    text1: "Order Edited",
-                    text2: "",
+                  topOffset: 60,
+                  type: "success",
+                  text1: "Order Edited",
+                  text2: "",
                 });
-
                 setTimeout(() => {
-
-                    console.log("state after onpress --> ", orderstatus);
-
+                    
                 }, 500);
-            }
-        })
-            .catch((error) => {
-                Toast.show({
-                    topOffset: 60,
-                    type: "error",
-                    text1: "Something went wrong",
-                    text2: "Please try again",
-                });
+              }
             })
+            .catch((error) => {
+              Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+              });
+        })
     }
-    // const orderword = ["Waiting", "Cooking", "Lack", "Cancel", "Finish", "Lack", "Cancel", "Endtransac"]
+    const updataOrderFinish = () => {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          var order = {};
+          
+          const stat = "Finish";
+        if (stat == "Waiting" || stat == "Cooking" || stat == "Finish") {
+            order = {
+                status : stat
+            };
+        
+        }
 
+        axios.put(`${baseURL}restaurant/orders/${props.idx}`,order ,config).then((res) =>{
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                  topOffset: 60,
+                  type: "success",
+                  text1: "Order Edited",
+                  text2: "",
+                });
+                setTimeout(() => {
+                    
+                }, 500);
+              }
+            })
+            .catch((error) => {
+              Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+              });
+        })
+    }
+    const updataOrderEntran = () => {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          
+          
+          const stat = "Endtransac";
+        
+            var order = {
+                status : stat,
+                dateOrderFinish: Date.now()
+            }
+        
+
+        axios.put(`${baseURL}restaurant/orders/${props.idx}`,order ,config).then((res) =>{
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                  topOffset: 60,
+                  type: "success",
+                  text1: "Order Edited",
+                  text2: "",
+                });
+                setTimeout(() => {
+                    
+                }, 500);
+              }
+            })
+            .catch((error) => {
+              Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+              });
+        })
+    }
+    const updataOrderCancel = () => {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          var order = {};
+          
+          const stat = "Cancel";
+        if (stat == "Waiting" || stat == "Cooking" || stat == "Finish") {
+            order = {
+                status : stat
+            };
+        }else{
+            order = {
+                status : stat,
+                dateOrderFinish: Date.now()
+            }
+        }
+
+        axios.put(`${baseURL}restaurant/orders/${props.idx}`,order ,config).then((res) =>{
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                  topOffset: 60,
+                  type: "success",
+                  text1: "Order Edited",
+                  text2: "",
+                });
+                setTimeout(() => {
+                    
+                }, 500);
+              }
+            })
+            .catch((error) => {
+              Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+              });
+        })
+    }
+    const updataOrderLack = () => {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          var order = {};
+          
+          const stat = "Lack";
+        if (stat == "Waiting" || stat == "Cooking" || stat == "Finish") {
+            order = {
+                status : stat
+            };
+        }else{
+            order = {
+                status : stat,
+                dateOrderFinish: Date.now()
+            }
+        }
+
+        axios.put(`${baseURL}restaurant/orders/${props.idx}`,order ,config).then((res) =>{
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                  topOffset: 60,
+                  type: "success",
+                  text1: "Order Edited",
+                  text2: "",
+                });
+                setTimeout(() => {
+                    
+                }, 500);
+              }
+            })
+            .catch((error) => {
+              Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+              });
+        })
+    }
+    
+
+
+    // const orderword = ["Waiting", "Cooking", "Lack", "Cancel", "Finish", "Lack", "Cancel", "Endtransac"]
+    
     //console.log("props menu ---->" , props.menu)
 
+    
 
     return (
         <View style={styles.container}>
@@ -143,16 +303,16 @@ const OrderList = props => {
 
                 <View style={styles.BtnContainer}>
                     {/* <View style={{ backgroundColor: '#DDDDDD', padding: 8, borderRadius: 15 }}><Text style={styles.GetOrderText}>รับออเดอร์แล้ว</Text></View> */}
-                    {orderstatus === "Waiting" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => { setorderstatus("Cooking"); updataOrder(); }}><AntDesign name="check" size={26} color="#000" /></TouchableOpacity></View>
+                    {orderstatus === "Waiting" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => {setOrderstate({ ...orderstate, submitBox: true })}}><AntDesign name="check" size={26} color="#000" /></TouchableOpacity></View>
                         : null}
-                    {orderstatus === "Cooking" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => setOrderstate({ ...orderstate, cookedBox: true })}><Text style={{ fontFamily: 'pr-reg', fontSize: 16 }}>เตรียมอาหารเสร็จแล้ว</Text></TouchableOpacity></View>
+                    {orderstatus === "Cooking" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => {setOrderstate({ ...orderstate, cookedBox: true })} }><Text style={{ fontFamily: 'pr-reg', fontSize: 16 }}>เตรียมอาหารเสร็จแล้ว</Text></TouchableOpacity></View>
                         : null}
-                    {orderstatus === "Waiting" ? <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, fooddemandBox: true })}><Text style={styles.SubmitButtonText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
+                    {orderstatus === "Waiting" ? <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => {setOrderstate({ ...orderstate, fooddemandBox: true }) }}><Text style={styles.SubmitButtonText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
                         : null}
-                    {orderstatus === "Finish" ? <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, receivedBox: true })}><Text style={styles.NotEnBtnText}>ลูกค้าได้รับอาหารแล้ว</Text></TouchableOpacity></View>
+                    {orderstatus === "Finish" ? <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => {setOrderstate({ ...orderstate, receivedBox: true })}}><Text style={styles.NotEnBtnText}>ลูกค้าได้รับอาหารแล้ว</Text></TouchableOpacity></View>
                         : null}
                     {orderstatus === "Endtransac" || orderstatus === "Lack" || orderstatus === "Cancel" ? null
-                        : <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: true })} ><AntDesign name="close" size={24} color="#FF0A0A" /></TouchableOpacity></View>}
+                        : <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => {setOrderstate({ ...orderstate, cancelBox: true }) }} ><AntDesign name="close" size={24} color="#FF0A0A" /></TouchableOpacity></View>}
 
 
                 </View>
@@ -164,7 +324,7 @@ const OrderList = props => {
                     <View style={styles.ModalContainer}>
                         <View ><Text style={styles.SubmitOrderText}>รับออเดอร์นี้ ทำการยืนยัน</Text></View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setorderstatus("Cooking"); updataOrder(); setOrderstate({ ...orderstate, submitBox: false }) }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setorderstatus("Cooking") , setOrderstate({ ...orderstate, submitBox: false }), updataOrderCooking() }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, submitBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -177,7 +337,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>ปฏิเสธออเดอร์ เนื่องด้วยวัตถุดิบไม่เพียงพอ</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, fooddemandBox: false }), setorderstatus("Lack"), updataOrder() }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setorderstatus("Lack")  , setOrderstate({ ...orderstate, fooddemandBox: false }), updataOrderLack() }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, fooddemandBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -191,7 +351,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>ปฏิเสธออเดอร์นี้ ทำการยืนยัน</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, cancelBox: false }), setorderstatus("Cancel"), updataOrder() }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setorderstatus("Cancel") ,setOrderstate({ ...orderstate, cancelBox: false }),  updataOrderCancel() }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -204,7 +364,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.SubmitOrderText}>เตรียมอาหารเสร็จแล้ว ทำการยืนยัน</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, cookedBox: false }), setorderstatus("Finish"), updataOrder() }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => {setorderstatus("Finish")  , setOrderstate({ ...orderstate, cookedBox: false }),  updataOrderFinish() }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cookedBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -217,7 +377,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.SubmitOrderText}>ลูกค้าได้รับอาหารแล้ว ทำการยืนยัน</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, receivedBox: false }), setorderstatus("Endtransac"), updataOrder() }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setorderstatus("Endtransac")  ,setOrderstate({ ...orderstate, receivedBox: false }),  updataOrderEntran()}}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, receivedBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
