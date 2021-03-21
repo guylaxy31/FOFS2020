@@ -97,7 +97,18 @@ const VariationList = props => {
                 })
             
         } else{
-            console.log("cant not add");
+            Alert.alert(
+                //title
+                'ไม่สามารถเพิ่มเมนูได้',
+                //body
+                'โปรดระบุข้อมูลให้ครบถ้วน',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+
+            )
         }
     }
     return (

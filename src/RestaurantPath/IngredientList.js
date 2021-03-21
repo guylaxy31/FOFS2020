@@ -1,5 +1,5 @@
 import React, { useState,useCallback } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList ,Alert} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 import axios from "axios";
@@ -46,6 +46,66 @@ const IngredientList = props => {
         },
         [],
     )))
+    const addItem = () => {
+        console.log(value);
+        if(label != "" && value != ""){
+            // let formData = new FormData;
+            // formData.append("id",resId)
+            // formData.append("label",label)
+            // formData.append("value",value)
+            // console.log("formdata", formData);
+            const vara = {
+                id:resId,
+                label:label,
+                value:value
+
+            }
+            console.log(vara);
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            axios
+                .post(`${baseURL}restaurant/ingredients`, vara, config)
+                .then((res) => {
+                    if (res.status == 200 || res.status == 201) {
+                        Toast.show({
+                            topOffset: 60,
+                            type: "success",
+                            text1: "New Menu added",
+                            text2: ""
+                        });
+                        setTimeout(() => {
+                            props.navigation.navigate("IngredientList");
+                        }, 500)
+                    }
+                })
+                .catch((error) => {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again"
+                    })
+                })
+            
+        } else{
+            Alert.alert(
+                //title
+                'ไม่สามารถเพิ่มเมนูได้',
+                //body
+                'โปรดระบุข้อมูลให้ครบถ้วน',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+
+            )
+        }
+    }
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
@@ -54,15 +114,15 @@ const IngredientList = props => {
                 <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList',{restId:restId})}><Text style={styles.pageButton}>วัตถุดิบ</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('OptionList',{restId:restId})}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 8 }}>
                 <TouchableOpacity onPress={() => { setState({ ...state, ingredientViewState: true }) }} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มวัตถุดิบ</Text></TouchableOpacity>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Text>#</Text>
-                <Text>รายการวัตถุดิบ</Text>
-                <Text>ราคา(฿)</Text>
-                <Text>แก้ไข</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>รายการวัตถุดิบ</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>ราคา(฿)</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>แก้ไข</Text>
             </View>
             <ScrollView>
 
@@ -71,10 +131,10 @@ const IngredientList = props => {
 
                     renderItem={({ item }) =>
                         <>
-                            <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
-                                <Text style={[{ flex: .4 }]}>{item.label}</Text>
-                                <Text style={[{ flex: .4 }]}>{item.value}</Text>
+                            <View style={[{ flexDirection: 'row' }]}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{(item._id.substring(21, 24))}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.label}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.value}</Text>
                                 <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
                                     <MaterialIcons name="edit" size={24} color="black" />
                                 </TouchableOpacity>
@@ -94,14 +154,14 @@ const IngredientList = props => {
                     <View style={styles.ModalContainer}>
                         <View>
                             <Text style={styles.titleText}>ชื่อวัตถุดิบ</Text>
-                            <TextInput style={styles.TextInputVal}></TextInput>
+                            <TextInput style={styles.TextInputVal} onChangeText={(val) => setLabel(val)}></TextInput>
                         </View>
                         <View style={{ marginBottom: 40 }}>
                             <Text style={styles.titleText}>ราคา</Text>
-                            <TextInput keyboardType='numeric' style={styles.TextInputValPrices}></TextInput>
+                            <TextInput keyboardType='numeric' style={styles.TextInputValPrices} onChangeText={(val) => setValue(val)}></TextInput>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20 }}>
-                            <TouchableOpacity style={styles.touchContainer} onPress={() => { setState({ ...state, ingredientViewState: false }) }}><Text style={styles.submitModalBtn}>เพิ่ม</Text></TouchableOpacity>
+                            <TouchableOpacity style={styles.touchContainer} onPress={() => { addItem(),setState({ ...state, ingredientViewState: false }) }}><Text style={styles.submitModalBtn}>เพิ่ม</Text></TouchableOpacity>
                             <TouchableOpacity style={styles.touchBackContainer} onPress={() => { setState({ ...state, ingredientViewState: false }) }}><Text style={styles.cancelModalBtn}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
                 </View>
