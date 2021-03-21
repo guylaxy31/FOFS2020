@@ -8,14 +8,7 @@ import baseURL from "../../assets/common/baseUrl";
 import Toast from "react-native-toast-message";
 import { useFocusEffect } from "@react-navigation/native";
 const MenuList = props => {
-    const tabledataset = {
-        tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา (฿)', 'แก้ไข'],
-        tableData: [
-            ['1', 'ข้าวผัดหมู', 'อาหารตามสั่ง', '25', 'แก้ไข'],
-            ['2', 'ข้าวไข่เจียว', 'อาหารตามสั่ง', '15', 'แก้ไข']
-        ]
-    }
-    console.log(props);
+    
     const restId = props.route.params.resId;
     const [menuRest, setMenuRest] = useState([])
     const [token, setToken] = useState();
@@ -46,9 +39,9 @@ const MenuList = props => {
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
                 <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButton}>เมนู</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList')}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList',{restId:restId})}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList',{restId:restId})}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList',{restId:restId})}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <View>
                 <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd',{resId : restId})} style={[styles.AddFoodContainerTouch, { alignSelf: 'center', marginVertical: 8 }]}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>

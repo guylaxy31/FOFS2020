@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useContext, useEffect }from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
+import Toast from "react-native-toast-message";
+import { useFocusEffect } from "@react-navigation/native"
 const VariationList = props => {
+    const [variation , setVariation] = useState([]);
+    const [token, setToken] = useState();
     const [state, setState] = useState({
         variationViewState: false,
     })
+    const restId = props.route.params.restId;
+    const [resId ,setResId] = useState(props.route.params.restId);
+    
     const tabledataset = {
         tableHead: ['#', 'รายการปริมาณ', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
@@ -14,11 +23,33 @@ const VariationList = props => {
             ['2', 'พิเศษ', '5', 'แก้ไข']
         ]
     }
-    const element = (data, index) => (
-        <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
-            <MaterialIcons name="edit" size={24} color="black" />
-        </TouchableOpacity>
-    );
+    // const element = (data, index) => (
+    //     <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
+    //         <MaterialIcons name="edit" size={24} color="black" />
+    //     </TouchableOpacity>
+    // );
+    useFocusEffect((useCallback(
+        () => {
+            AsyncStorage.getItem("jwt")
+                .then((res) => {
+                    setToken(res)
+                    axios.get(`${baseURL}restaurant/menus/${restId}`, {
+                        headers: { Authorization: `Bearer ${res}` }
+                    }).then((menuRes) => {
+                        setVariation(menuRes.data)
+
+                    })
+                })
+                .catch((error) => console.log(error))
+
+            return () => {
+                setVariation([]);
+            }
+
+        },
+        [],
+    )))
+    
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
@@ -39,14 +70,14 @@ const VariationList = props => {
                 </View>
 
                 <FlatList
-                    data={null}
+                    data={variation.varaition}
 
                     renderItem={({ item }) =>
                         <>
                             <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>#</Text>
-                                <Text style={[{ flex: .4 }]}>ธรรมดา</Text>
-                                <Text style={[{ flex: .4 }]}>0</Text>
+                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.label}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.value}</Text>
                                 <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
                                     <MaterialIcons name="edit" size={24} color="black" />
                                 </TouchableOpacity>
