@@ -86,6 +86,7 @@ const FoodMenuConfirm = (props) => {
             })
         })
     }
+    console.log("menu details" , orderDetail);
     return (
         <View>
             {props.cartItem.length ? (
