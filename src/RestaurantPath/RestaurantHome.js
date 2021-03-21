@@ -13,7 +13,7 @@ const RestaurantHome = props => {
   const context = useContext(AuthGlobal);
   const [restaurantId, setRestaurantId] = useState(context.stateUser.user.userId);
   const [rest, setRest] = useState([]);
-
+  const [resId, setResId] = useState('')
 
   useEffect(() => {
     if (
@@ -38,7 +38,16 @@ const RestaurantHome = props => {
       setRestaurantId('');
     }
   }, [restaurantId])
+  
+  useEffect(() => {
+    if (rest.restaurants !== undefined)
+      setResId(rest.restaurants._id)
+    return () => {
+      setResId('')
+    }
+  }, [rest.restaurants])
 
+  console.log(resId);
 
   return (
     <View style={styles.container}>
@@ -52,9 +61,10 @@ const RestaurantHome = props => {
           <Text style={styles.statusValue}> {rest.restaurants == undefined ? <Text style={{ color: '#000' }}>โหลดข้อมูล</Text> : (rest.restaurants.approve_status == "Approve" ? <Text style={{ color: 'green' }}>ผ่านการอนุมัติ</Text> : <Text style={{ color: 'red' }}>ยังไม่ได้รับการอนุมัติ</Text>)}</Text>
         </View>
       </View>
+
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('MenuList',{resId,resId})}>
             <View style={styles.touchAlign}>
               <MaterialIcons name="restaurant" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>รายการอาหาร</Text></View>
@@ -62,7 +72,7 @@ const RestaurantHome = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('OrderMain')}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('OrderMain',{resId,resId})}>
             <View style={styles.touchAlign}>
               <MaterialCommunityIcons name="room-service" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ออเดอร์ลูกค้า</Text></View>
@@ -74,7 +84,7 @@ const RestaurantHome = props => {
 
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('AnalyticMain')}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('AnalyticMain',{resId,resId})}>
             <View style={styles.touchAlignSpecial}>
               <MaterialIcons name="assessment" size={80} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ดูสถิติของร้าน</Text></View>
@@ -82,7 +92,7 @@ const RestaurantHome = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain')}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain',{resId,resId})}>
             <View style={styles.touchAlign}>
               <MaterialIcons name="history" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ประวัติออเดอร์</Text></View>

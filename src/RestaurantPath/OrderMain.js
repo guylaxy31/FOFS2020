@@ -5,15 +5,17 @@ import OrderList from './OrderList'
 import AuthGlobal from '../Context/Store/AuthGlobal'
 import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 const OrderMain = props => {
     const context = useContext(AuthGlobal);
-    const [resId, setResId] = useState();
+    const [resId, setResId] = useState(props.route.params.resId);
     const [order, setOrder] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
+    
     const tempdatabase = {
         menulists: [
             {
@@ -35,28 +37,27 @@ const OrderMain = props => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
-    useFocusEffect((useCallback(
-        () => {
-            if (
-                context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
-            ) {
-                props.navigation.navigate("LoginHome")
-            } else {
-                setResId(context.stateUser.user.userId)
-                axios.get(`${baseUrl}orders/restaurant/${resId}`).then((op) => {
+    useEffect(() => {
+        if (
+            context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+        ) {
+            props.navigation.navigate("LoginHome")
+        } else {
+            AsyncStorage.getItem("jwt").then((res) =>{
+                axios.get(`${baseUrl}restaurant/orders/${resId}`, {
+                    headers: { Authorization: `Bearer ${res}` }
+                  }).then((op) => {
                     setOrder(op.data)
                 }).catch((error) => { console.log(error); })
-            }
-            return () => {
-                setOrder([]);
-                setResId('');
-            }
-        },
-        [resId],
-    )))
-    console.log(order);
-    console.log(context);
-    console.log(`${baseUrl}restaurant/${resId}`);
+            })
+            
+        }
+        return () => {
+            setOrder([])
+        }
+    }, [resId])
+    // console.log(resId);
+    //console.log(order);
     return (
         <View style={styles.container}>
 
@@ -67,8 +68,8 @@ const OrderMain = props => {
                 />
             }>
                 <FlatList
-                    data={tempdatabase.menulists}
-                    renderItem={({ item }) => <OrderList idx={item.idx} ordernumber={item.ordernumber} timeclock={item.timeclock} menu={item.menu} />}
+                    data={order}
+                    renderItem={({ item }) => <OrderList idx={item._id} ordernumber={item._id} timeclock={item.dateOrderStart} menu={item.orderDetail} totalPrice={item.totalPrice} />}
                     keyExtractor={(item, index) => index.toString()}
                     horizontal={false}
                     showsVerticalScrollIndicator={false}

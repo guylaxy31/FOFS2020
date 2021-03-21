@@ -267,7 +267,7 @@ const FoodMenuCustom = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu ,resId) => { dispatch(action.addToCart({ quantity: qtymenu, menus, varaition: vaId, ingredient: ingreId, option: optionId, describe:describe})) }
+        addItemcart: (menus, vaId, ingreId, optionId, describe, qtymenu ,resId) => { dispatch(action.addToCart({ quantity: qtymenu, menus:menus, varaition: vaId, ingredient: ingreId, option: optionId, describe:describe})) }
     }
 }
 

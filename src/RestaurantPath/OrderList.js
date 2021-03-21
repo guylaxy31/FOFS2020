@@ -1,5 +1,5 @@
 import React, { Component, useState, useContext } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, Modal, TextInput } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, Modal, TextInput ,FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 
@@ -14,7 +14,7 @@ const OrderList = props => {
         cancelBox: false,
 
     });
-
+    console.log("menu ",props);
 
     return (
         <View style={styles.container}>
@@ -22,27 +22,42 @@ const OrderList = props => {
                 <View style={styles.YellowBar}></View>
 
                 <View style={styles.FirstRow}>
-                    <View><Text style={styles.IndexText}>{props.idx}</Text></View>
+                    <View><Text style={styles.IndexText}>{props.idx.substring(21, 24)}</Text></View>
                     <View><Text style={styles.OrderNumberTextTitle}>ออเดอร์</Text></View>
-                    <View><Text style={styles.OrderNumberTextValue}>#{props.ordernumber}</Text></View>
+                    <View><Text style={styles.OrderNumberTextValue}>#{props.ordernumber.substring(21, 24)}</Text></View>
 
-                    <View style={{ marginLeft: 'auto' }}><Text style={styles.TimeValueText}>{props.timeclock}</Text></View>
+                    <View style={{ marginLeft: 'auto' }}><Text style={styles.TimeValueText}>{props.timeclock.substring(11, 16)}</Text></View>
                     <View style={{ marginLeft: 5 }}><Text style={styles.TimeUnitText}>น.</Text></View>
                 </View>
 
 
-                <View style={styles.MenuRow}>
-                    <View><Text style={styles.MenuText}>{props.menu[0][0]}</Text></View>
-                    <View style={{ marginLeft: 'auto', marginRight: 50 }}><Text style={styles.CountingText}>{props.menu[0][1]}</Text></View>
-                    <View><Text style={styles.PricesText}>{props.menu[0][2]} ฿</Text></View>
-                </View>
+
+
+                <FlatList
+                    data={props.menu}
+
+                    renderItem={({ item }) =>
+                        <>
+                            <View style={styles.MenuRow}>
+                                <View><Text style={styles.MenuText}>{props.menu[0][1]}</Text></View>
+                                <View style={{ marginLeft: 'auto', marginRight: 50 }}><Text style={styles.CountingText}>{props.menu[0][1]}</Text></View>
+                                <View><Text style={styles.PricesText}>{props.menu[0][2]} ฿</Text></View>
+                            </View>
+                        </>
+                    }
+                    keyExtractor={item => item._id}
+
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
 
                 <View style={styles.TotalCountsRow}>
                     <Text style={styles.TotalCountsText}>ยอดรวม</Text>
                 </View>
 
                 <View style={styles.TotalPricesRow}>
-                    <Text style={styles.TotalPricesText}>25 ฿</Text>
+                    <Text style={styles.TotalPricesText}>{props.totalPrice} ฿</Text>
                 </View>
 
                 <View style={styles.BtnContainer}>
@@ -132,7 +147,7 @@ const styles = StyleSheet.create({
     BtnContainer: { flexDirection: 'row', justifyContent: 'space-between', margin: 20, alignItems: 'center' },
     SubmitContainer: { backgroundColor: '#FFFC1B', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },
     SubmitBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 },
-    SubmitForCCButtonText: { fontFamily: 'pr-reg', color: '#FF0A0A', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16 ,textAlign:'center'},
+    SubmitForCCButtonText: { fontFamily: 'pr-reg', color: '#FF0A0A', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, textAlign: 'center' },
     NotEnContainer: { backgroundColor: '#FFF', padding: 10, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, paddingHorizontal: 10 },
     NotEnBtnText: { fontFamily: 'pr-reg', color: '#000', fontSize: 16 },
     CancelContainer: { backgroundColor: '#FFF', padding: 8, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, },

@@ -27,8 +27,7 @@ const FoodMenuConfirm = (props) => {
     props.cartItem.forEach(cart => {
         return (total += (cart.menus.price + cart.varaition.value + cart.ingredient.value + cart.option.value) * cart.quantity)
     })
-    console.log("param of res", props);
-
+    
     useEffect(() => {
         setOrderDetail(props.cartItem);
         if (props.route.params) {
