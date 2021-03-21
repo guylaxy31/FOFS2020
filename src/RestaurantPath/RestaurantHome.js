@@ -8,48 +8,48 @@ import baseUrl from '../../assets/common/baseUrl';
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
+import { colors } from 'react-native-elements';
 const RestaurantHome = props => {
   const context = useContext(AuthGlobal);
-  const [restaurantId , setRestaurantId] = useState(context.stateUser.user.userId);
-  const [rest , setRest] = useState([]);
-  
-  
-    useEffect(() => {
-      if (
-        context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+  const [restaurantId, setRestaurantId] = useState(context.stateUser.user.userId);
+  const [rest, setRest] = useState([]);
+
+
+  useEffect(() => {
+    if (
+      context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
     ) {
-        props.navigation.navigate("LoginHome")
-    } else{
-      
+      props.navigation.navigate("LoginHome")
+    } else {
+
       AsyncStorage.getItem("jwt").then((res) => {
-        
+
         axios.get(`${baseUrl}restaurant/${restaurantId}`, {
           headers: { Authorization: `Bearer ${res}` },
-      }).then((op) =>{
-            setRest(op.data)
+        }).then((op) => {
+          setRest(op.data)
         }).catch((error) => { console.log(error); })
       })
-        
-    }
-      return () => {
-        setRest([])
-        setRestaurantId('');
-      }
-    }, [restaurantId])
 
-  
-    console.log(restaurantId);
-    console.log(rest.restaurants);
+    }
+
+    return () => {
+      setRest([])
+      setRestaurantId('');
+    }
+  }, [restaurantId])
+
+
   return (
     <View style={styles.container}>
       <View style={{ marginTop: '5%' }}>
         <View style={styles.textInline}>
           <Text style={styles.restNameTitle}>ร้าน</Text>
-          <Text style={styles.restNameValue}></Text>
+          <Text style={styles.restNameValue}> {rest.restaurants == undefined ? "โหลดข้อมูล" : Object.values(rest.restaurants.restaurant_name)}</Text>
         </View>
         <View style={styles.textInline}>
           <Text style={styles.statusTitle}>สถานะ</Text>
-          <Text style={styles.statusValue}></Text>
+          <Text style={styles.statusValue}> {rest.restaurants == undefined ? <Text style={{ color: '#000' }}>โหลดข้อมูล</Text> : (rest.restaurants.approve_status == "Approve" ? <Text style={{ color: 'green' }}>ผ่านการอนุมัติ</Text> : <Text style={{ color: 'red' }}>ยังไม่ได้รับการอนุมัติ</Text>)}</Text>
         </View>
       </View>
       <View style={styles.toolsFlex}>
