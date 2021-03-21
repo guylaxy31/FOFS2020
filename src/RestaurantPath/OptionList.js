@@ -27,7 +27,7 @@ const OptionList = props => {
                 <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButton}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 8 }}>
                 <TouchableOpacity onPress={() => { setState({ ...state, optionViewState: true }) }} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
