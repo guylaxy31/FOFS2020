@@ -27,15 +27,15 @@ const IngredientList = props => {
                 <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButton}>วัตถุดิบ</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 8 }}>
                 <TouchableOpacity onPress={() => { setState({ ...state, ingredientViewState: true }) }} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มวัตถุดิบ</Text></TouchableOpacity>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Text>#</Text>
-                <Text>รายการวัตถุดิบ</Text>
-                <Text>ราคา(฿)</Text>
-                <Text>แก้ไข</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>รายการวัตถุดิบ</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>ราคา(฿)</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>แก้ไข</Text>
             </View>
             <ScrollView>
 
@@ -44,10 +44,10 @@ const IngredientList = props => {
 
                     renderItem={({ item }) =>
                         <>
-                            <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>#</Text>
-                                <Text style={[{ flex: .4 }]}>หมู</Text>
-                                <Text style={[{ flex: .4 }]}>0</Text>
+                            <View style={[{ flexDirection: 'row' }]}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>หมู</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>0</Text>
                                 <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
                                     <MaterialIcons name="edit" size={24} color="black" />
                                 </TouchableOpacity>
