@@ -1,5 +1,5 @@
-import React , { useState, useCallback, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image ,FlatList } from 'react-native';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-community/async-storage";
@@ -17,31 +17,31 @@ const MenuList = props => {
     }
     console.log(props);
     const restId = props.route.params.resId;
-    const [menuRest , setMenuRest]= useState([])
-    const [token,setToken] = useState();
+    const [menuRest, setMenuRest] = useState([])
+    const [token, setToken] = useState();
     useFocusEffect((useCallback(
         () => {
             AsyncStorage.getItem("jwt")
-                    .then((res) => {
-                        setToken(res)
-                        axios.get(`${baseURL}restaurant/menus/${restId}`, {
-                            headers: { Authorization: `Bearer ${res}` }
-                          }).then((menuRes) => {
-                              setMenuRest(menuRes.data)
+                .then((res) => {
+                    setToken(res)
+                    axios.get(`${baseURL}restaurant/menus/${restId}`, {
+                        headers: { Authorization: `Bearer ${res}` }
+                    }).then((menuRes) => {
+                        setMenuRest(menuRes.data)
 
-                          })
                     })
-                    .catch((error) => console.log(error))
+                })
+                .catch((error) => console.log(error))
 
-                    return () => {
-                        setMenuRest([]);
-                    }
-            
+            return () => {
+                setMenuRest([]);
+            }
+
         },
         [],
     )))
 
-    console.log("menu restaurant" , menuRest);
+    console.log("menu restaurant", menuRest);
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
@@ -51,19 +51,20 @@ const MenuList = props => {
                 <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={[styles.AddFoodContainerTouch, { alignSelf: 'center', marginVertical: 8 }]}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
             </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Text>#</Text>
-                <Text>เมนู</Text>
-                <Text>ประเภท</Text>
-                <Text>ราคา(฿)</Text>
-                <Text>แก้ไข</Text>
+            <View style={{ flexDirection: 'row' }}>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>เมนู</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>ประเภท</Text>
+                <Text style={[{ flex: .3, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>ราคา(฿)</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>แก้ไข</Text>
+
             </View>
 
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
 
                 <FlatList
@@ -71,11 +72,14 @@ const MenuList = props => {
 
                     renderItem={({ item }) =>
                         <>
-                            <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
-                                <Text style={[{ flex: .4 }]}>{item.menu_name}</Text>
-                                <Text style={[{ flex: .4 }]}>{item.type_menu}</Text>
-                                <Text style={[{ flex: .3 }]}>{item.price} ฿</Text>
+                            <View style={[{ width: '100%', flexDirection: 'row', flexWrap: 'wrap' }]}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{(item._id).substring(21, 24)}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.menu_name}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.type_menu}</Text>
+                                <Text style={[{ flex: .3, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.price} ฿</Text>
+                                <TouchableOpacity style={{ alignItems: 'center', padding: 8, borderRadius: 16, flex: .2 }}>
+                                    <MaterialIcons name="edit" size={24} color="black" />
+                                </TouchableOpacity>
                             </View>
                         </>
                     }

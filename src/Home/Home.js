@@ -20,7 +20,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
 import AuthGlobal from '../Context/Store/AuthGlobal'
-
+ 
 Notifications.setNotificationHandler({
   handleNotification: async () => {
     return {
