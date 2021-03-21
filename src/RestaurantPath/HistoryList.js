@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 
     FirstRow: { flexDirection: 'row', padding: 20, alignItems: 'center' },
     IndexText: { fontFamily: 'pr-reg', marginRight: 15 },
-    OrderNumberTextTitle: { fontFamily: 'pr-reg', marginRight: 10 },
+    OrderNumberTextTitle: { fontFamily: 'pr-reg', marginRight: 8 },
     OrderNumberTextValue: { fontFamily: 'pr-reg', color: '#8B8B8B' },
 
     TimeValueText: { fontFamily: 'pr-reg', color: '#8B8B8B' },
