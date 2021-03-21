@@ -51,7 +51,7 @@ const MenuList = props => {
                 <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd',{resId : restId})} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
