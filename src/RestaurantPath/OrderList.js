@@ -4,10 +4,11 @@ import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
-
+import Toast from "react-native-toast-message";
 const OrderList = props => {
     var total = 0;
     const [token ,setToken] = useState();
+    const [orderstatus, setorderstatus] = useState(props.status)
     const [orderstate, setOrderstate] = useState({
         submit: false,
         fooddemand: false,
@@ -18,17 +19,39 @@ const OrderList = props => {
         cooked: false,
         receivedBox: false,
     });
+    useEffect(() => {
+        AsyncStorage.getItem("jwt")
+        .then((res) => {
+          setToken(res);
+        })
+        .catch((error) => console.log(error));
+
+        setorderstatus(props.status)
+        return () => {
+            
+        }
+    }, [orderstatus])
     const updataOrder = () => {
         const config = {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           };
-        const order = {
-            status : orderstatus
-        };
+          var order = {};
+          console.log(orderstatus);
+        
+        if (orderstatus == "Waiting" || orderstatus == "Cooking" || orderstatus == "Finish") {
+            order = {
+                status : orderstatus
+            };
+        }else{
+            order = {
+                status : orderstatus,
+                dateOrderFinish: Date.now()
+            }
+        }
 
-        axios.put(`${baseURL}restaurant/orders${prop.idx}`,order ,config).then((res) =>{
+        axios.put(`${baseURL}restaurant/orders/${props.idx}`,order ,config).then((res) =>{
             if (res.status == 200 || res.status == 201) {
                 Toast.show({
                   topOffset: 60,
@@ -37,7 +60,7 @@ const OrderList = props => {
                   text2: "",
                 });
                 setTimeout(() => {
-                  props.navigation.navigate("Products");
+                    console.log("after",orderstatus);
                 }, 500);
               }
             })
@@ -51,19 +74,10 @@ const OrderList = props => {
         })
     }
     // const orderword = ["Waiting", "Cooking", "Lack", "Cancel", "Finish", "Lack", "Cancel", "Endtransac"]
-    const [orderstatus, setorderstatus] = useState("Waiting")
-    console.log("props menu ---->" , props.menu)
+    
+    //console.log("props menu ---->" , props.menu)
 
-    useEffect(() => {
-        AsyncStorage.getItem("jwt")
-        .then((res) => {
-          setToken(res);
-        })
-        .catch((error) => console.log(error));
-        return () => {
-            
-        }
-    }, [])
+    
 
     return (
         <View style={styles.container}>
@@ -71,15 +85,13 @@ const OrderList = props => {
                 <View style={styles.YellowBar}></View>
 
                 <View style={styles.FirstRow}>
-                    <View><Text style={styles.IndexText}>{props.idx.substring(21, 24)}</Text></View>
-                    <View><Text style={styles.OrderNumberTextTitle}>ออเดอร์</Text></View>
-                    <View><Text style={styles.OrderNumberTextValue}>#{props.ordernumber.substring(21, 24)}</Text></View>
+
+                    <View><Text style={[styles.OrderNumberTextTitle, { backgroundColor: '#ECE6DA', padding: 8 }]}>ออเดอร์</Text></View>
+                    <View><Text style={styles.OrderNumberTextValue}>{props.ordernumber.substring(21, 24)}</Text></View>
 
                     <View style={{ marginLeft: 'auto' }}><Text style={styles.TimeValueText}>{props.timeclock.substring(11, 16)}</Text></View>
                     <View style={{ marginLeft: 5 }}><Text style={styles.TimeUnitText}>น.</Text></View>
                 </View>
-
-
 
 
                 <FlatList
@@ -87,32 +99,30 @@ const OrderList = props => {
                     keyExtractor={item => item._id}
                     renderItem={({ item }) =>
                         <>
-                            
-                            <View style={styles.MenuRow}>
-                                <View><Text style={styles.MenuText}>{item.menus.menu_name}</Text></View>
-                                <View style={{ marginLeft: 'auto', marginRight: 50 }}><Text style={styles.CountingText}>{item.quantity}</Text></View>
-                                <View><Text style={styles.PricesText}>{total = (item.menus.price + item.varaition.value + item.option.value + item.ingredient.value) * item.quantity } ฿</Text></View>
+
+                            <View style={[styles.MenuRow, { width: '100%' }]}>
+                                <View style={{ flex: .5, alignItems: 'flex-start' }}><Text style={styles.MenuText, { fontFamily: 'pr-bold', fontSize: 18 }}>{item.menus.menu_name}</Text></View>
+                                <View style={{ flex: .2, alignItems: 'center' }}><Text style={styles.CountingText}>x{item.quantity}</Text></View>
+                                <View style={{ flex: .3, alignItems: 'center' }}><Text style={styles.PricesText}>{total = (item.menus.price + item.varaition.value + item.option.value + item.ingredient.value) * item.quantity} ฿</Text></View>
                             </View>
-                            <View>
-                                {item.varaition.id == 0 ?  null :(
-                                    <View><Text style={styles.PricesText}>varaition :{item.varaition.id} </Text></View>
+                            <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
+                                {item.varaition.id == 0 ? null : (
+                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>varaition :{item.varaition.id} </Text></View>
                                 )}
-                                {item.ingredient.id == 0 ?  null :(
-                                    <View><Text style={styles.PricesText}>ingredient :{item.ingredient.id} </Text></View>
+                                {item.ingredient.id == 0 ? null : (
+                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>ingredient :{item.ingredient.id} </Text></View>
                                 )}
-                                {item.option.id == 0 ?  null :(
-                                    <View><Text style={styles.PricesText}>option :{item.option.id} </Text></View>
+                                {item.option.id == 0 ? null : (
+                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>{item.option.id}</Text></View>
                                 )}
-                                {item.describe == null ?  null :(
-                                    <View><Text style={styles.PricesText}>describe :{item.describe} </Text></View>
+                                {item.describe == null ? null : (
+                                    <View style={{ backgroundColor: '#F3F3E3', marginTop: 16, paddingVertical: 8, borderRadius: 16 }}><Text style={{ fontFamily: 'pr-reg', marginLeft: 16 }}>ข้อความจากผู้สั่ง :</Text><Text style={[styles.PricesText, { marginTop: 8, marginLeft: 40 }]}>{item.describe} </Text></View>
                                 )}
-                            
-                            
-                            
+
                             </View>
                         </>
                     }
-                   
+
 
                     horizontal={false}
                     showsVerticalScrollIndicator={false}
@@ -129,9 +139,9 @@ const OrderList = props => {
 
                 <View style={styles.BtnContainer}>
                     {/* <View style={{ backgroundColor: '#DDDDDD', padding: 8, borderRadius: 15 }}><Text style={styles.GetOrderText}>รับออเดอร์แล้ว</Text></View> */}
-                    {orderstatus === "Waiting" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => setOrderstate({ ...orderstate, submitBox: true })}><AntDesign name="check" size={26} color="#000" /></TouchableOpacity></View>
+                    {orderstatus === "Waiting" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => {setorderstatus("Cooking") ,updataOrder()  ,setOrderstate({ ...orderstate, submitBox: true })}}><AntDesign name="check" size={26} color="#000" /></TouchableOpacity></View>
                         : null}
-                    {orderstatus === "Cooking" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => setOrderstate({ ...orderstate, cookedBox: true })}><Text style={{ fontFamily: 'pr-reg', fontSize: 16 }}>ปรุงอาหารเสร็จแล้ว</Text></TouchableOpacity></View>
+                    {orderstatus === "Cooking" ? <View><TouchableOpacity style={styles.NotEnContainer} onPress={() => setOrderstate({ ...orderstate, cookedBox: true })}><Text style={{ fontFamily: 'pr-reg', fontSize: 16 }}>เตรียมอาหารเสร็จแล้ว</Text></TouchableOpacity></View>
                         : null}
                     {orderstatus === "Waiting" ? <View style={styles.NotEnContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, fooddemandBox: true })}><Text style={styles.SubmitButtonText}>วัตถุดิบไม่เพียงพอ</Text></TouchableOpacity></View>
                         : null}
@@ -150,7 +160,7 @@ const OrderList = props => {
                     <View style={styles.ModalContainer}>
                         <View ><Text style={styles.SubmitOrderText}>รับออเดอร์นี้ ทำการยืนยัน</Text></View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, submitBox: false }), setorderstatus("Cooking") }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setorderstatus("Cooking") , updataOrder() , setOrderstate({ ...orderstate, submitBox: false })}}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, submitBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -163,7 +173,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>ปฏิเสธออเดอร์ เนื่องด้วยวัตถุดิบไม่เพียงพอ</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, fooddemandBox: false }), setorderstatus("Lack") }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, fooddemandBox: false }), setorderstatus("Lack")  , updataOrder() }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, fooddemandBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -177,7 +187,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.NotEnText}>ปฏิเสธออเดอร์นี้ ทำการยืนยัน</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, cancelBox: false }), setorderstatus("Cancel") }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainerRed}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, cancelBox: false }), setorderstatus("Cancel") , updataOrder() }}><Text style={styles.SubmitForCCButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cancelBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -187,10 +197,10 @@ const OrderList = props => {
             <Modal transparent={true} visible={orderstate.cookedBox === undefined ? false : orderstate.cookedBox}>
                 <View style={styles.ModelBackground}>
                     <View style={styles.ModalContainer}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.SubmitOrderText}>ปรุงอาหารเสร็จแล้ว ทำการยืนยัน</Text></View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.SubmitOrderText}>เตรียมอาหารเสร็จแล้ว ทำการยืนยัน</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, cookedBox: false }), setorderstatus("Finish") }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, cookedBox: false }), setorderstatus("Finish")  , updataOrder() }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, cookedBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -203,7 +213,7 @@ const OrderList = props => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.SubmitOrderText}>ลูกค้าได้รับอาหารแล้ว ทำการยืนยัน</Text></View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, marginBottom: 20, paddingHorizontal: 40 }}>
-                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, receivedBox: false }), setorderstatus("Endtransac") }}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
+                            <View style={styles.TouchContainer}><TouchableOpacity onPress={() => { setOrderstate({ ...orderstate, receivedBox: false }), setorderstatus("Endtransac")  , updataOrder()}}><Text style={styles.SubmitButtonText}>ยืนยัน</Text></TouchableOpacity></View>
                             <View style={styles.TouchBackContainer}><TouchableOpacity onPress={() => setOrderstate({ ...orderstate, receivedBox: false })}><Text style={styles.closeButtonTxt}>ย้อนกลับ</Text></TouchableOpacity></View>
                         </View>
                     </View>
@@ -235,10 +245,10 @@ const styles = StyleSheet.create({
     SecondRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 20, alignItems: 'center' },
     CustomerNameText: { fontFamily: 'pr-light', color: '#8B8B8B', marginTop: -10, fontSize: 16 },
 
-    MenuRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 20, alignItems: 'center', backgroundColor: '#FCFCFC', paddingVertical: 5 },
-    MenuText: { fontFamily: 'pr-bold', fontSize: 16 },
-    CountingText: { fontFamily: 'pr-bold', fontSize: 16 },
-    PricesText: { fontFamily: 'pr-reg', color: '#8B8B8B', fontSize: 14 },
+    MenuRow: { flexDirection: 'row', paddingHorizontal: 20, alignItems: 'center', backgroundColor: '#FCFCFC' },
+    MenuText: { fontFamily: 'pr-reg', fontSize: 16 },
+    CountingText: { fontFamily: 'pr-reg', fontSize: 16 },
+    PricesText: { fontFamily: 'pr-reg', color: '#8B8B8B', fontSize: 16 },
 
     TotalCountsRow: { flexDirection: 'row', paddingHorizontal: 20, marginBottom: 5 },
     TotalCountsText: { fontFamily: 'pr-reg', marginLeft: 'auto', fontSize: 20 },

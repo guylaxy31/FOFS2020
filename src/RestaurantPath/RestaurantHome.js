@@ -38,7 +38,7 @@ const RestaurantHome = props => {
       setRestaurantId('');
     }
   }, [restaurantId])
-  
+
   useEffect(() => {
     if (rest.restaurants !== undefined)
       setResId(rest.restaurants._id)
@@ -48,6 +48,8 @@ const RestaurantHome = props => {
   }, [rest.restaurants])
 
   console.log(resId);
+
+  console.log('Test log', resId)
 
   return (
     <View style={styles.container}>
@@ -64,7 +66,7 @@ const RestaurantHome = props => {
 
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('MenuList',{resId,resId})}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('MenuList', { resId, resId })}>
             <View style={styles.touchAlign}>
               <MaterialIcons name="restaurant" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>รายการอาหาร</Text></View>
@@ -72,7 +74,7 @@ const RestaurantHome = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('OrderMain',{resId,resId})}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('OrderMain', { resId, resId })}>
             <View style={styles.touchAlign}>
               <MaterialCommunityIcons name="room-service" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ออเดอร์ลูกค้า</Text></View>
@@ -84,7 +86,7 @@ const RestaurantHome = props => {
 
       <View style={styles.toolsFlex}>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('AnalyticMain',{resId,resId})}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('AnalyticMain', { resId, resId })}>
             <View style={styles.touchAlignSpecial}>
               <MaterialIcons name="assessment" size={80} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ดูสถิติของร้าน</Text></View>
@@ -92,7 +94,7 @@ const RestaurantHome = props => {
           </TouchableOpacity>
         </View>
         <View style={styles.toolCard}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain',{resId,resId})}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('HistoryMain', { resId, resId })}>
             <View style={styles.touchAlign}>
               <MaterialIcons name="history" size={60} color="black" />
               <View style={styles.textContainer}><Text style={styles.toolText}>ประวัติออเดอร์</Text></View>

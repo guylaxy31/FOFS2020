@@ -69,7 +69,7 @@ const OrderMain = props => {
             }>
                 <FlatList
                     data={order}
-                    renderItem={({ item }) => <OrderList idx={item._id} ordernumber={item._id} timeclock={item.dateOrderStart} menu={item.orderDetail} totalPrice={item.totalPrice} />}
+                    renderItem={({ item }) => <OrderList idx={item._id} ordernumber={item._id} timeclock={item.dateOrderStart} menu={item.orderDetail} totalPrice={item.totalPrice} status={item.status}/>}
                     keyExtractor={(item, index) => index.toString()}
                     horizontal={false}
                     showsVerticalScrollIndicator={false}
