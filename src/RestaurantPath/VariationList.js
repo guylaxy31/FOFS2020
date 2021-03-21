@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext, useEffect }from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList ,Alert } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-community/async-storage";
@@ -9,13 +9,15 @@ import Toast from "react-native-toast-message";
 import { useFocusEffect } from "@react-navigation/native"
 const VariationList = props => {
     const [variation , setVariation] = useState([]);
+    const [label, setLabel] = useState('');
+    const [value,setValue] = useState('');
     const [token, setToken] = useState();
     const [state, setState] = useState({
         variationViewState: false,
     })
     const restId = props.route.params.restId;
     const [resId ,setResId] = useState(props.route.params.restId);
-    
+    console.log("prop.param" , props.route.params.restId);
     const tabledataset = {
         tableHead: ['#', 'รายการปริมาณ', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
@@ -49,18 +51,66 @@ const VariationList = props => {
         },
         [],
     )))
-    
+    const addItem = () => {
+        console.log(value);
+        if(label != "" && value != ""){
+            // let formData = new FormData;
+            // formData.append("id",resId)
+            // formData.append("label",label)
+            // formData.append("value",value)
+            // console.log("formdata", formData);
+            const vara = {
+                id:resId,
+                label:label,
+                value:value
+
+            }
+            console.log(vara);
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            axios
+                .post(`${baseURL}restaurant/varaitions`, vara, config)
+                .then((res) => {
+                    if (res.status == 200 || res.status == 201) {
+                        Toast.show({
+                            topOffset: 60,
+                            type: "success",
+                            text1: "New Menu added",
+                            text2: ""
+                        });
+                        setTimeout(() => {
+                            props.navigation.navigate("VariationList");
+                        }, 500)
+                    }
+                })
+                .catch((error) => {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again"
+                    })
+                })
+            
+        } else{
+            console.log("cant not add");
+        }
+    }
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
-                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButtonUnselect}>เมนู</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList')}><Text style={styles.pageButton}>ปริมาณ</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList',{restId:restId})}><Text style={styles.pageButtonUnselect}>เมนู</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList',{restId:restId})}><Text style={styles.pageButton}>ปริมาณ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList',{restId:restId})}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList',{restId:restId})}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <ScrollView>
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => setState({ ...state, variationViewState: true })} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่ม</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => {setState({ ...state, variationViewState: true })}} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่ม</Text></TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Text>#</Text>
@@ -99,14 +149,14 @@ const VariationList = props => {
                     <View style={styles.ModalContainer}>
                         <View>
                             <Text style={styles.titleText}>ปริมาณ</Text>
-                            <TextInput style={styles.TextInputVal}></TextInput>
+                            <TextInput style={styles.TextInputVal} onChangeText={(val) => setLabel(val)}></TextInput>
                         </View>
                         <View style={{ marginBottom: 40 }}>
                             <Text style={styles.titleText}>ราคา</Text>
-                            <TextInput keyboardType='numeric' style={styles.TextInputValPrices}></TextInput>
+                            <TextInput keyboardType='numeric' style={styles.TextInputValPrices} onChangeText={(val) => setValue(val)}></TextInput>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20 }}>
-                            <TouchableOpacity style={styles.touchContainer} onPress={() => { setState({ ...state, variationViewState: false }) }}><Text style={styles.submitModalBtn}>เพิ่ม</Text></TouchableOpacity>
+                            <TouchableOpacity style={styles.touchContainer} onPress={() => { setState({ ...state, variationViewState: false }) ,addItem()}}><Text style={styles.submitModalBtn}>เพิ่ม</Text></TouchableOpacity>
                             <TouchableOpacity style={styles.touchBackContainer} onPress={() => { setState({ ...state, variationViewState: false }) }}><Text style={styles.cancelModalBtn}>ยกเลิก</Text></TouchableOpacity></View>
                     </View>
                 </View>

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
+import AsyncStorage from "@react-native-community/async-storage";
+import Toast from "react-native-toast-message";
+import { useFocusEffect } from "@react-navigation/native"
 const IngredientList = props => {
+    const [ingredients , setIngredients] = useState([]);
+    const [label, setLabel] = useState('');
+    const [value,setValue] = useState('');
+    const [token, setToken] = useState();
     const [state, setState] = useState({
         ingredientViewState: false,
     })
+    const restId = props.route.params.restId;
+    const [resId ,setResId] = useState(props.route.params.restId);
+    console.log("prop.param" , props.route.params.restId);
     const tabledataset = {
         tableHead: ['#', 'รายการวัตถุดิบ', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
@@ -14,18 +25,34 @@ const IngredientList = props => {
             ['2', 'ปลา', '5', 'แก้ไข']
         ]
     }
-    const element = (data, index) => (
-        <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
-            <MaterialIcons name="edit" size={24} color="black" />
-        </TouchableOpacity>
-    );
+    useFocusEffect((useCallback(
+        () => {
+            AsyncStorage.getItem("jwt")
+                .then((res) => {
+                    setToken(res)
+                    axios.get(`${baseURL}restaurant/menus/${restId}`, {
+                        headers: { Authorization: `Bearer ${res}` }
+                    }).then((menuRes) => {
+                        setIngredients(menuRes.data)
+
+                    })
+                })
+                .catch((error) => console.log(error))
+
+            return () => {
+                setIngredients([]);
+            }
+
+        },
+        [],
+    )))
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
-                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.pageButtonUnselect}>เมนู</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList')}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButton}>วัตถุดิบ</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuList',{restId:restId})}><Text style={styles.pageButtonUnselect}>เมนู</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('VariationList',{restId:restId})}><Text style={styles.pageButtonUnselect}>ปริมาณ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList',{restId:restId})}><Text style={styles.pageButton}>วัตถุดิบ</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('OptionList',{restId:restId})}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={() => { setState({ ...state, ingredientViewState: true }) }} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มวัตถุดิบ</Text></TouchableOpacity>
@@ -40,14 +67,14 @@ const IngredientList = props => {
             <ScrollView>
 
                 <FlatList
-                    data={null}
+                    data={ingredients.ingredient}
 
                     renderItem={({ item }) =>
                         <>
                             <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>#</Text>
-                                <Text style={[{ flex: .4 }]}>หมู</Text>
-                                <Text style={[{ flex: .4 }]}>0</Text>
+                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.label}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.value}</Text>
                                 <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
                                     <MaterialIcons name="edit" size={24} color="black" />
                                 </TouchableOpacity>
