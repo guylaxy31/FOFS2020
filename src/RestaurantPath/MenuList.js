@@ -1,8 +1,12 @@
-import React from 'react';
+import React , { useState, useCallback, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
+import Toast from "react-native-toast-message";
+import { useFocusEffect } from "@react-navigation/native";
 const MenuList = props => {
     const tabledataset = {
         tableHead: ['#', 'เมนู', 'ประเภท', 'ราคา (฿)', 'แก้ไข'],
@@ -11,7 +15,8 @@ const MenuList = props => {
             ['2', 'ข้าวไข่เจียว', 'อาหารตามสั่ง', '15', 'แก้ไข']
         ]
     }
-
+    console.log(props);
+    const restId = props.route.params.resId;
     const element = (data, index) => (
         <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
             <MaterialIcons name="edit" size={24} color="black" />
