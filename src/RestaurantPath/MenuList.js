@@ -53,6 +53,7 @@ const MenuList = props => {
             <View>
                 <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
             </View>
+
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                 <Text>#</Text>
                 <Text>เมนู</Text>
