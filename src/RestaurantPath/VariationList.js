@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect }from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Modal, TextInput, FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -8,14 +8,14 @@ import baseURL from "../../assets/common/baseUrl";
 import Toast from "react-native-toast-message";
 import { useFocusEffect } from "@react-navigation/native"
 const VariationList = props => {
-    const [variation , setVariation] = useState([]);
+    const [variation, setVariation] = useState([]);
     const [token, setToken] = useState();
     const [state, setState] = useState({
         variationViewState: false,
     })
     const restId = props.route.params.restId;
-    const [resId ,setResId] = useState(props.route.params.restId);
-    
+    const [resId, setResId] = useState(props.route.params.restId);
+
     const tabledataset = {
         tableHead: ['#', 'รายการปริมาณ', 'ราคา (฿)', 'แก้ไข'],
         tableData: [
@@ -49,7 +49,7 @@ const VariationList = props => {
         },
         [],
     )))
-    
+
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
@@ -60,13 +60,13 @@ const VariationList = props => {
             </View>
             <ScrollView>
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => setState({ ...state, variationViewState: true })} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่ม</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => setState({ ...state, variationViewState: true })} style={[styles.AddFoodContainerTouch, { alignSelf: 'center', marginVertical: 8 }]}><Text style={[styles.AddFoodText, { fontSize: 16 }]}>+ เพิ่ม</Text></TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                    <Text>#</Text>
-                    <Text>รายการปริมาณ</Text>
-                    <Text>ราคา(฿)</Text>
-                    <Text>แก้ไข</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                    <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>รายการปริมาณ</Text>
+                    <Text style={[{ flex: .3, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>ราคา(฿)</Text>
+                    <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>แก้ไข</Text>
                 </View>
 
                 <FlatList
@@ -74,11 +74,11 @@ const VariationList = props => {
 
                     renderItem={({ item }) =>
                         <>
-                            <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
-                                <Text style={[{ flex: .4 }]}>{item.label}</Text>
-                                <Text style={[{ flex: .4 }]}>{item.value}</Text>
-                                <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
+                            <View style={[{ width: '100%', flexDirection: 'row' }]}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{(item._id).substring(21, 24)}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.label}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.value}</Text>
+                                <TouchableOpacity style={{ alignItems: 'center', padding: 8, borderRadius: 16, flex: .2 }}>
                                     <MaterialIcons name="edit" size={24} color="black" />
                                 </TouchableOpacity>
                             </View>

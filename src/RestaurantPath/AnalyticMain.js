@@ -330,10 +330,13 @@ const MonthRoute = (props) => {
 
     const [maxtotal, setmaxtotal] = useState()
     const [maxtimeindex, setmaxtimeindex] = useState()
+    const [monthtotal, setmonthtotal] = useState()
 
 
     function findMaxTotal(arrlist) {
         setmaxtotal(Math.max.apply(null, arrlist))
+        setmonthtotal(datalist.reduce(function (acc, val) { return acc + val; }, 0))
+
     }
 
     useEffect(() => {
@@ -397,17 +400,20 @@ const MonthRoute = (props) => {
                         <View style={styles.column1}>
                             <Text style={styles.changeFont}>ยอดสูงสุดอยู่ใน</Text>
                             <Text style={styles.changeFont}>เป็นจำนวน</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>ยอดรวมเดือนนี้</Text>
 
 
                         </View>
                         <View style={styles.column2}>
                             <Text style={styles.changeFont}>{maxtimeindex == undefined ? <Text>กำลังโหลด...</Text> : labellist[maxtimeindex]}</Text>
                             <Text style={styles.changeFont}>{maxtotal == undefined ? <Text>กำลังโหลด...</Text> : maxtotal}</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>{monthtotal == undefined ? <Text>กำลังโหลด...</Text> : monthtotal}</Text>
 
                         </View>
                         <View>
                             <Text style={styles.changeFont}></Text>
                             <Text style={styles.changeFont}>บาท</Text>
+                            <Text style={[styles.changeFont, { fontFamily: 'pr-bold', marginVertical: 8 }]}>บาท</Text>
 
                         </View>
 
