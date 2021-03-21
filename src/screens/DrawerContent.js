@@ -51,13 +51,16 @@ export function DrawerContent(props) {
 
 
                         {/* =========================== 2 หน้าตั้งค่า ===========================*/}
-                        {context.stateUser.user.role == undefined || context.stateUser.user.role == 'customer' ?
+                        {context.stateUser.user.role == 'customer' ?
                             <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={styles.draweritemtext} label="ตั้งค่าข้อมูลผู้ใช้" onPress={() => props.navigation.navigate('ProfileSetting')} />
                             :
-                            <>
-                                <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={styles.draweritemtext} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} />
-                                <DrawerItem icon={({ color, size }) => (<MaterialIcons name="store" size={size} color={color} />)} labelStyle={styles.draweritemtext} label="ตั้งค่าข้อมูลร้าน" onPress={() => props.navigation.navigate('RestaurantSetting')} />
-                            </>
+                            context.stateUser.user.role == 'restaurant' ?
+                                <>
+                                    <DrawerItem icon={({ color, size }) => (<MaterialCommunityIcons name="account-circle" color={color} size={size} />)} labelStyle={styles.draweritemtext} label="ตั้งค่าโปรไฟล์" onPress={() => props.navigation.navigate('ProfileSetting')} />
+                                    <DrawerItem icon={({ color, size }) => (<MaterialIcons name="store" size={size} color={color} />)} labelStyle={styles.draweritemtext} label="ตั้งค่าข้อมูลร้าน" onPress={() => props.navigation.navigate('RestaurantSetting')} />
+                                </>
+                                :
+                                null
                         }
 
                         {/* =========================== 3 หน้าสอนใช้แอป ===========================*/}
