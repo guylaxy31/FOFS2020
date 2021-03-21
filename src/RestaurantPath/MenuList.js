@@ -1,5 +1,5 @@
 import React , { useState, useCallback, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image ,FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-community/async-storage";
@@ -17,11 +17,31 @@ const MenuList = props => {
     }
     console.log(props);
     const restId = props.route.params.resId;
-    const element = (data, index) => (
-        <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15 }}>
-            <MaterialIcons name="edit" size={24} color="black" />
-        </TouchableOpacity>
-    );
+    const [menuRest , setMenuRest]= useState([])
+    const [token,setToken] = useState();
+    useFocusEffect((useCallback(
+        () => {
+            AsyncStorage.getItem("jwt")
+                    .then((res) => {
+                        setToken(res)
+                        axios.get(`${baseURL}restaurant/menus/${restId}`, {
+                            headers: { Authorization: `Bearer ${res}` }
+                          }).then((menuRes) => {
+                              setMenuRest(menuRes.data)
+
+                          })
+                    })
+                    .catch((error) => console.log(error))
+
+                    return () => {
+                        setMenuRest([]);
+                    }
+            
+        },
+        [],
+    )))
+
+    console.log("menu restaurant" , menuRest);
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
@@ -30,26 +50,41 @@ const MenuList = props => {
                 <TouchableOpacity onPress={() => props.navigation.navigate('IngredientList')}><Text style={styles.pageButtonUnselect}>วัตถุดิบ</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('OptionList')}><Text style={styles.pageButtonUnselect}>ท็อปปิ้ง</Text></TouchableOpacity>
             </View>
+            <View>
+                <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Text>#</Text>
+                <Text>เมนู</Text>
+                <Text>ประเภท</Text>
+                <Text>ราคา(฿)</Text>
+                <Text>แก้ไข</Text>
+            </View>
+
+
             <ScrollView>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('MenuAdd')} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มเมนู</Text></TouchableOpacity>
-                </View>
 
-                <Table borderStyle={{ borderColor: 'transparent' }}>
-                    <Row data={tabledataset.tableHead} style={styles.head} textStyle={styles.text} />
-                    {
-                        tabledataset.tableData.map((rowData, index) => (
-                            <TableWrapper key={index} style={styles.row}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 4 ? element(cellData, index) : cellData} textStyle={styles.text} />
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
+                <FlatList
+                    data={menuRest.menus}
+
+                    renderItem={({ item }) =>
+                        <>
+                            <View style={[{ width: '100%', backgroundColor: 'red' }]}>
+                                <Text style={[{ flex: .1 }]}>{item._id}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.menu_name}</Text>
+                                <Text style={[{ flex: .4 }]}>{item.type_menu}</Text>
+                                <Text style={[{ flex: .3 }]}>{item.price} ฿</Text>
+                            </View>
+                        </>
                     }
-                </Table>
+                    keyExtractor={item => item._id}
+
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
+
             </ScrollView>
         </View>
     );
