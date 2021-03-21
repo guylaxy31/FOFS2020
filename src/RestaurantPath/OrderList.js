@@ -1,11 +1,13 @@
-import React, { Component, useState, useContext } from 'react';
+import React, { Component, useState ,useEffect } from 'react';
 import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text, Modal, TextInput ,FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
 
 const OrderList = props => {
     var total = 0;
-    
+    const [token ,setToken] = useState();
     const [orderstate, setOrderstate] = useState({
         submit: false,
         fooddemand: false,
@@ -16,10 +18,53 @@ const OrderList = props => {
         cooked: false,
         receivedBox: false,
     });
+    const updataOrder = () => {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+        const order = {
+            status : orderstatus
+        };
 
+        axios.put(`${baseURL}restaurant/orders${prop.idx}`,order ,config).then((res) =>{
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                  topOffset: 60,
+                  type: "success",
+                  text1: "Order Edited",
+                  text2: "",
+                });
+                setTimeout(() => {
+                  props.navigation.navigate("Products");
+                }, 500);
+              }
+            })
+            .catch((error) => {
+              Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+              });
+        })
+    }
     // const orderword = ["Waiting", "Cooking", "Lack", "Cancel", "Finish", "Lack", "Cancel", "Endtransac"]
     const [orderstatus, setorderstatus] = useState("Waiting")
     console.log("props menu ---->" , props.menu)
+
+    useEffect(() => {
+        AsyncStorage.getItem("jwt")
+        .then((res) => {
+          setToken(res);
+        })
+        .catch((error) => console.log(error));
+        return () => {
+            
+        }
+    }, [])
+
     return (
         <View style={styles.container}>
             <View style={styles.cardcontainer}>
