@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 //Context API
 
+
 import Auth from './src/Context/Store/Auth'
 // การโหลด Fonts
 import * as Font from 'expo-font';
@@ -65,6 +66,7 @@ async function registerForPushNotificationsAsync() {
 
 export default function App() {
 
+
   const [fontLoaded, setFonLoaded] = useState(false);
   // const [expoPushToken, setExpoPushToken] = useState('');
   // const [notification, setNotification] = useState(false);
@@ -98,15 +100,16 @@ export default function App() {
   }
 
   return (
+
     <Auth>
 
-    
-    <Provider store={store}>
-      
+
+      <Provider store={store}>
+
         <AppNavigation />
         <Toast ref={(ref) => Toast.setRef(ref)}></Toast>
-      
-    </Provider>
+
+      </Provider>
     </Auth>
   )
 }

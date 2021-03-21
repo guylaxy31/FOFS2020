@@ -11,7 +11,7 @@ const FoodMenuEdit = props => {
                 <Image style={styles.ImageContainer} source={{ uri: props.imageUri }}></Image>
                 <View style={{ flexDirection: 'column', width: 140 }}>
                     <View><Text style={styles.MenuTitleText}>{props.menuTitle}</Text></View>
-                    <View><Text style={styles.MenuCountText}>x {props.cartItem.quantity}</Text></View>
+                    <View><Text style={styles.MenuCountText}>{props.cartItem.quantity}</Text></View>
                 </View>
             </View>
         </View>
