@@ -31,10 +31,10 @@ const OptionList = props => {
                 <TouchableOpacity onPress={() => { setState({ ...state, optionViewState: true }) }} style={styles.AddFoodContainerTouch}><Text style={styles.AddFoodText}>+ เพิ่มท็อปปิ้ง</Text></TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Text>#</Text>
-                <Text>รายการท็อปปิ้ง</Text>
-                <Text>ราคา(฿)</Text>
-                <Text>แก้ไข</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>รายการท็อปปิ้ง</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>ราคา(฿)</Text>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>แก้ไข</Text>
             </View>
             <ScrollView>
 
@@ -43,10 +43,10 @@ const OptionList = props => {
 
                     renderItem={({ item }) =>
                         <>
-                            <View style={[{ width: '100%', backgroundColor: 'red' }]}>
-                                <Text style={[{ flex: .1 }]}>#</Text>
-                                <Text style={[{ flex: .4 }]}>หมู</Text>
-                                <Text style={[{ flex: .4 }]}>0</Text>
+                            <View style={[{ width: '100%' }]}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>หมู</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>0</Text>
                                 <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 10, borderRadius: 15, flex: .2 }}>
                                     <MaterialIcons name="edit" size={24} color="black" />
                                 </TouchableOpacity>
