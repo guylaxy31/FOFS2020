@@ -101,9 +101,6 @@ const AppNavigation = props => {
             />
 
 
-
-
-
             <Stack.Screen name="RestaurantList"
 
                 component={RestaurantList}
