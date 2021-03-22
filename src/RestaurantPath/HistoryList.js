@@ -17,10 +17,6 @@ class HistoryList extends Component {
                         <View style={{ marginLeft: 5 }}><Text style={styles.TimeUnitText}>น.</Text></View>
                     </View>
 
-                    <View style={styles.SecondRow}>
-                        <Text style={styles.CustomerNameText}>คุณประเสริฐ อร่อยดี</Text>
-                    </View>
-
                     <View style={styles.MenuRow}>
                         <View><Text style={styles.MenuText}>ข้าวผัดหมู</Text></View>
                         <View style={{ marginLeft: 'auto', marginRight: 50 }}><Text style={styles.CountingText}>1</Text></View>

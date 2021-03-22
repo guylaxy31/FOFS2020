@@ -1,5 +1,5 @@
-import React ,{ useState, useCallback, useContext, useEffect }from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, RefreshControl, FlatList } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
 import AuthGlobal from '../Context/Store/AuthGlobal'
@@ -23,11 +23,6 @@ const HistoryMain = props => {
         ]
     }
 
-    const element = (data, index) => (
-        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.navigation.navigate('HistoryList')}>
-            <MaterialIcons name="more-horiz" size={24} color="black" />
-        </TouchableOpacity>
-    );
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
@@ -38,14 +33,14 @@ const HistoryMain = props => {
         ) {
             props.navigation.navigate("LoginHome")
         } else {
-            AsyncStorage.getItem("jwt").then((res) =>{
+            AsyncStorage.getItem("jwt").then((res) => {
                 axios.get(`${baseUrl}restaurant/orders/${resId}`, {
                     headers: { Authorization: `Bearer ${res}` }
-                  }).then((op) => {
+                }).then((op) => {
                     setOrder(op.data)
                 }).catch((error) => { console.log(error); })
             })
-            
+
         }
         return () => {
             setOrder([])
@@ -53,6 +48,13 @@ const HistoryMain = props => {
     }, [resId])
     return (
         <View style={styles.Tablecontainer}>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>#</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>วันที่</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>เวลา</Text>
+                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>รายละเอียด</Text>
+            </View>
             <ScrollView showsVerticalScrollIndicator={false} refreshControl={
                 <RefreshControl
                     refreshing={refreshing}
@@ -60,22 +62,27 @@ const HistoryMain = props => {
                 />
             }>
 
+                <FlatList
+                    data={null}
 
-
-                <Table borderStyle={{ borderColor: 'transparent' }}>
-                    <Row data={tabledataset.tableHead} style={styles.head} textStyle={styles.text} />
-                    {
-                        tabledataset.tableData.map((rowData, index) => (
-                            <TableWrapper key={index} style={styles.row}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} textStyle={styles.text} />
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
+                    renderItem={({ item }) =>
+                        <>
+                            <View style={[{ width: '100%', flexDirection: 'row', flexWrap: 'wrap' }]}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>1</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>190964</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>11:04น.</Text>
+                                <TouchableOpacity style={{ alignItems: 'center', padding: 8, borderRadius: 16, flex: .4 }} onPress={() => props.navigation.navigate('HistoryList')}>
+                                    <MaterialIcons name="more-horiz" size={24} color="black" />
+                                </TouchableOpacity>
+                            </View>
+                        </>
                     }
-                </Table>
+                    keyExtractor={item => item._id}
+
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
             </ScrollView>
         </View>
     );
