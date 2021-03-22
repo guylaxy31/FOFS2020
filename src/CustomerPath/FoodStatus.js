@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList , RefreshControl } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList, RefreshControl } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { normalize } from 'react-native-elements';
 import AuthGlobal from '../Context/Store/AuthGlobal'
@@ -9,10 +9,10 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
-  }
+}
 const FoodStatus = props => {
     const context = useContext(AuthGlobal);
-    const [cusId , setCusId] = useState();
+    const [cusId, setCusId] = useState();
     const [order, setOrder] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
     const [customerstatus, setcustomerstatus] = useState(["รอรับออเดอร์", "กำลังปรุงอาหาร", "วัตถุดิบไม่พอ", "ออเดอร์ถูกปฏิเสธ", "อาหารเสร็จแล้ว"])
@@ -23,9 +23,9 @@ const FoodStatus = props => {
                 context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
             ) {
                 props.navigation.navigate("LoginHome")
-            } else{
+            } else {
                 setCusId(context.stateUser.user.userId)
-                axios.get(`${baseUrl}orders/${cusId}`).then((op) =>{
+                axios.get(`${baseUrl}orders/${cusId}`).then((op) => {
                     setOrder(op.data)
                 }).catch((error) => { console.log(error); })
             }
@@ -36,25 +36,25 @@ const FoodStatus = props => {
         },
         [cusId],
     )))
-    
+
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
-      }, []);
+    }, []);
 
-    console.log("order" , order);
+    console.log("order", order);
     console.log("customer", cusId);
     return (
 
         <View style={styles.container}>
 
             <ScrollView style={{ width: '100%' }}
-            refreshControl={
-                <RefreshControl
-                  refreshing={refreshing}
-                  onRefresh={onRefresh}
-                />
-              }>
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }>
 
                 <View style={styles.CardContainer}>
 
@@ -71,14 +71,21 @@ const FoodStatus = props => {
 
                     <FlatList
                         data={order}
-                        
+
                         renderItem={({ item }) =>
                             <>
                                 <View style={[styles.StatusValueContainer, { width: 376 }]}>
-                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{item._id.substring(21,24)}</Text>
-                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{item.dateOrderStart.substring(11,16)}</Text>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{item._id.substring(21, 24)}</Text>
+                                    <Text style={[styles.HeaderText, { flex: .4 }]}>{item.dateOrderStart.substring(11, 16)}</Text>
                                     <Text style={[styles.HeaderText, { flex: 1 }]}>{item.res_id.restaurant_name}</Text>
-                                    <Text style={[styles.HeaderText, { flex: 1 }]}>{item.status}</Text>
+                                    <Text style={[styles.HeaderText, { flex: 1 }]}>
+                                        {item.status === "Waiting" ? <Text>รอรับออเดอร์</Text> : null}
+                                        {item.status === "Cooking" ? <Text>กำลังเตรียมอาหาร</Text> : null}
+                                        {item.status === "Finish" ? <Text>อาหารเสร็จแล้ว</Text> : null}
+                                        {item.status === "Endtransac" ? <Text>ได้รับอาหารแล้ว</Text> : null}
+                                        {item.status === "Lack" ? <Text>วัตถุดิบไม่เพียงพอ</Text> : null}
+                                        {item.status === "Cancel" ? <Text>ออเดอร์ถูกปฏิเสธ</Text> : null}
+                                    </Text>
                                 </View>
                             </>
                         }
