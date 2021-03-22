@@ -1,10 +1,20 @@
-import React from 'react';
+import React ,{ useState, useCallback, useContext, useEffect }from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { MaterialIcons } from '@expo/vector-icons';
-
-
+import AuthGlobal from '../Context/Store/AuthGlobal'
+import baseUrl from '../../assets/common/baseUrl';
+import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 const HistoryMain = props => {
+    const context = useContext(AuthGlobal);
+    const [resId, setResId] = useState(props.route.params.resId);
+    const [order, setOrder] = useState([]);
+    const [refreshing, setRefreshing] = useState(false);
     const tabledataset = {
         tableHead: ['#ออเดอร์', 'วันที่', 'เวลา(น.)', 'รายละเอียด'],
         tableData: [
@@ -18,9 +28,37 @@ const HistoryMain = props => {
             <MaterialIcons name="more-horiz" size={24} color="black" />
         </TouchableOpacity>
     );
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+    useEffect(() => {
+        if (
+            context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+        ) {
+            props.navigation.navigate("LoginHome")
+        } else {
+            AsyncStorage.getItem("jwt").then((res) =>{
+                axios.get(`${baseUrl}restaurant/orders/${resId}`, {
+                    headers: { Authorization: `Bearer ${res}` }
+                  }).then((op) => {
+                    setOrder(op.data)
+                }).catch((error) => { console.log(error); })
+            })
+            
+        }
+        return () => {
+            setOrder([])
+        }
+    }, [resId])
     return (
         <View style={styles.Tablecontainer}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
 
 
 

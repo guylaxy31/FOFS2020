@@ -16,7 +16,24 @@ import mime from "mime";
 
 const RegisterForRestaurant = props => {
 
-
+    const [firstname, setFirstname] = useState();
+    const [lastname, setLastname] = useState();
+    const [gender, setGender] = useState();
+    const [age, setAge] = useState();
+    const [phonenumber, setPhonenumber] = useState();
+    const [username, setusername] = useState();
+    const [password, setPassword] = useState();
+    const [line, setLine] = useState();
+    const [email, setEmail] = useState();
+    const [restname, setRestname] = useState();
+    const [addr_line1, setAddr_line1] = useState();
+    const [road, setRoad] = useState();
+    const [subdistrict, setSubdistrict] = useState();
+    const [district, setDistrict] = useState();
+    const [province, setProvince] = useState();
+    const [postalcode, setPostalcode] = useState();
+    const [website, setWebsite] = useState();
+    
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -50,25 +67,25 @@ const RegisterForRestaurant = props => {
         isValidProvince: false,
         isValidPostalcode: false
     })
-    console.log(restaurant);
+    
 
 
-    const checkUsername = () => { if (user.username.trim().length >= 4 & user.username.trim().length <= 16) { setUser({ ...user, isValidUsername: true }) } else { setUser({ ...user, isValidUsername: false }) } }
-    const checkPassword = () => { if (user.password.trim().length >= 6 & user.password.trim().length <= 16) { setUser({ ...user, isValidPassword: true }) } else { setUser({ ...user, isValidPassword: false }) } }
-    const checkFirstname = () => { if (user.firstname.trim().length >= 1 & user.firstname.trim().length <= 16) { setUser({ ...user, isValidFirstname: true }) } else { setUser({ ...user, isValidFirstname: false }) } }
-    const checkPhonenumber = () => { if (user.phonenumber.trim().length === 9 || user.phonenumber.trim().length === 10) { setUser({ ...user, isValidPhoneNumber: true }) } else { setUser({ ...user, isValidPhoneNumber: false }) } }
+    const checkUsername = () => { if (username.trim().length >= 4 & username.trim().length <= 16) { setUser({ ...user, isValidUsername: true }) } else { setUser({ ...user, isValidUsername: false }) } }
+    const checkPassword = () => { if (password.trim().length >= 6 & password.trim().length <= 16) { setUser({ ...user, isValidPassword: true }) } else { setUser({ ...user, isValidPassword: false }) } }
+    const checkFirstname = () => { if (firstname.trim().length >= 1 & firstname.trim().length <= 16) { setUser({ ...user, isValidFirstname: true }) } else { setUser({ ...user, isValidFirstname: false }) } }
+    const checkPhonenumber = () => { if (phonenumber.trim().length === 9 || phonenumber.trim().length === 10) { setUser({ ...user, isValidPhoneNumber: true }) } else { setUser({ ...user, isValidPhoneNumber: false }) } }
     const checkEmail = () => {
         const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
-        if (expression.test(String(user.email).toLowerCase())) {
+        if (expression.test(String(email).toLowerCase())) {
             setUser({ ...user, isValidEmail: true })
         } else { setUser({ ...user, isValidEmail: false }) }
     }
-    const checkRestaurantname = () => { if (restaurant.restaurantName.trim().length >= 1 & restaurant.restaurantName.trim().length <= 16) { setRestaurant({ ...restaurant, isValidRestaurantname: true }) } else { setRestaurant({ ...restaurant, isValidRestaurantname: false }) } }
-    const checkAddress = () => { if (restaurant.address.trim().length >= 1 & restaurant.address.trim().length <= 50) { setRestaurant({ ...restaurant, isValidAddress: true }) } else { setRestaurant({ ...restaurant, isValidAddress: false }) } }
-    const checkAmphoe = () => { if (restaurant.amphoe.trim().length >= 1 & restaurant.amphoe.trim().length <= 16) { setRestaurant({ ...restaurant, isValidAmphoe: true }) } else { setRestaurant({ ...restaurant, isValidAmphoe: false }) } }
-    const checkProvince = () => { if (restaurant.province.trim().length >= 1 & restaurant.province.trim().length <= 16) { setRestaurant({ ...restaurant, isValidProvince: true }) } else { setRestaurant({ ...restaurant, isValidProvince: false }) } }
-    const checkPostalcode = () => { if (restaurant.postalcode.trim().length === 5) { setRestaurant({ ...restaurant, isValidPostalcode: true }) } else { setRestaurant({ ...restaurant, isValidPostalcode: false }) } }
+    const checkRestaurantname = () => { if (restname.trim().length >= 1 & restname.trim().length <= 16) { setRestaurant({ ...restaurant, isValidRestaurantname: true }) } else { setRestaurant({ ...restaurant, isValidRestaurantname: false }) } }
+    const checkAddress = () => { if (addr_line1.trim().length >= 1 & addr_line1.trim().length <= 50) { setRestaurant({ ...restaurant, isValidAddress: true }) } else { setRestaurant({ ...restaurant, isValidAddress: false }) } }
+    const checkAmphoe = () => { if (district.trim().length >= 1 & district.trim().length <= 16) { setRestaurant({ ...restaurant, isValidAmphoe: true }) } else { setRestaurant({ ...restaurant, isValidAmphoe: false }) } }
+    const checkProvince = () => { if (province.trim().length >= 1 & province.trim().length <= 16) { setRestaurant({ ...restaurant, isValidProvince: true }) } else { setRestaurant({ ...restaurant, isValidProvince: false }) } }
+    const checkPostalcode = () => { if (postalcode.trim().length === 5) { setRestaurant({ ...restaurant, isValidPostalcode: true }) } else { setRestaurant({ ...restaurant, isValidPostalcode: false }) } }
 
 
     const [conSenseState, setConsenseState] = useState(false);
@@ -139,7 +156,7 @@ const RegisterForRestaurant = props => {
 
     const onNextStep2 = () => {
 
-        if (user.isValidFirstname == true & user.gender != '' & user.isValidPhoneNumber == true & user.isValidEmail == true) {
+        if (user.isValidFirstname == true & gender != '' & user.isValidPhoneNumber == true & user.isValidEmail == true) {
             setPageValid({ ...pageValid, error2: false });
         } else {
             Alert.alert(
@@ -161,43 +178,44 @@ const RegisterForRestaurant = props => {
 
         if (restaurant.isValidRestaurantname === true & restaurant.isValidAddress === true & restaurant.isValidAmphoe === true & restaurant.isValidProvince === true & restaurant.isValidPostalcode === true  & image != null) {
             const newImageUri = "file:///" + image.split("file:/").join("");
-            let sales = {
-                sale_firstname: user.firstname,
-                sale_lastname: user.lastname,
-                sale_age: user.age,
-                sale_phone: user.phonenumber,
-                sale_email: user.email,
-                username: user.username,
-                password: user.password,
-                restaurant_name: restaurant.restaurantName,
-                addr_line1: restaurant.address,
-                road: restaurant.road,
-                subdistrict: restaurant.subdistrict,
-                district: restaurant.amphoe,
-                province: restaurant.province,
-                postalcode: restaurant.postalcode,
-                line: user.line,
-                website: restaurant.website,
+            // let sales = {
+            //     sale_firstname: user.firstname,
+            //     sale_lastname: user.lastname,
+            //     sale_age: user.age,
+            //     sale_phone: user.phonenumber,
+            //     sale_email: user.email,
+            //     username: user.username,
+            //     password: user.password,
+            //     restaurant_name: restaurant.restaurantName,
+            //     addr_line1: restaurant.address,
+            //     road: restaurant.road,
+            //     subdistrict: restaurant.subdistrict,
+            //     district: restaurant.amphoe,
+            //     province: restaurant.province,
+            //     postalcode: restaurant.postalcode,
+            //     line: user.line,
+            //     website: restaurant.website,
 
-            }
+            // }
             // console.log(sales);
             let formData = new FormData;
-            formData.append("sale_firstname",user.firstname);
-            formData.append("sale_lastname",user.lastname);
-            formData.append("sale_age",user.age);
-            formData.append("sale_phone",user.phonenumber);
-            formData.append("sale_email",user.email);
-            formData.append("username",user.username);
-            formData.append("password",user.password);
-            formData.append("restaurant_name",restaurant.restaurantName);
-            formData.append("addr_line1",restaurant.address);
-            formData.append("road",restaurant.road);
-            formData.append("subdistrict",restaurant.subdistrict);
-            formData.append("district",restaurant.amphoe);
-            formData.append("province",restaurant.province);
-            formData.append("postalcode",restaurant.postalcode);
-            formData.append("line",user.line);
-            formData.append("website",restaurant.website);
+            formData.append("sale_firstname",firstname);
+            formData.append("sale_lastname",lastname);
+            formData.append("sale_age",age);
+            formData.append("sale_gender",gender);
+            formData.append("sale_phone",phonenumber);
+            formData.append("sale_email",email);
+            formData.append("username",username);
+            formData.append("password",password);
+            formData.append("restaurant_name",restname);
+            formData.append("addr_line1",addr_line1);
+            formData.append("road",road);
+            formData.append("subdistrict",subdistrict);
+            formData.append("district",district);
+            formData.append("province",province);
+            formData.append("postalcode",postalcode);
+            formData.append("line",line);
+            formData.append("website",website);
             formData.append("res_image", {
                 uri: newImageUri,
                 type: mime.getType(newImageUri),
@@ -261,11 +279,11 @@ const RegisterForRestaurant = props => {
                 <ProgressStep label="บัญชี" nextBtnText='ถัดไป' nextBtnTextStyle={{ fontFamily: 'pr-reg', color: '#000' }} onNext={onNextStep1} errors={pageValid.error1}>
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><MaterialCommunityIcons style={{ marginRight: 8, marginLeft: -5 }} name='account' size={24} /><Text style={styles.FormFillTitle}>กำหนดชื่อผู้ใช้</Text></View>
-                        <TextInput value={user.username} onChangeText={(val) => setUser({ ...user, username: val })} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput>
+                        <TextInput value={username} onChangeText={(val) => setusername(val.toLowerCase())} onEndEditing={() => checkUsername()} style={styles.FillFormText}></TextInput>
                         {user.isValidUsername == true ? null : <View><Text style={styles.validText}>*ระบุ 4 - 16 ตัวอักษร</Text></View>}
 
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><FontAwesome name="lock" style={{ marginRight: 10 }} size={24} color="black" /><Text style={styles.FormFillTitle}>กำหนดรหัสผ่าน</Text></View>
-                        <TextInput value={user.password} onChangeText={(val) => setUser({ ...user, password: val })} onEndEditing={() => checkPassword()} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
+                        <TextInput value={password} onChangeText={(val) => setPassword( val)} onEndEditing={() => checkPassword()} style={styles.FillFormText} secureTextEntry={true} style={styles.FillFormText}></TextInput>
                         {user.isValidPassword == true ? null : <View><Text style={styles.validText}>*ระบุ 6 - 16 ตัวอักษร</Text></View>}
                     </View>
 
@@ -276,17 +294,17 @@ const RegisterForRestaurant = props => {
 
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ชื่อจริง</Text></View>
-                        <TextInput value={user.firstname} onChangeText={(val) => setUser({ ...user, firstname: val })} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput>
+                        <TextInput value={firstname} onChangeText={(val) => setFirstname(val)} onEndEditing={() => checkFirstname()} style={styles.FillFormText}></TextInput>
                         {user.isValidFirstname ? null : <View><Text style={styles.validText}>*ระบุไม่เกิน 16 ตัวอักษร</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>นามสกุล</Text></View>
-                        <TextInput value={user.lastname} onChangeText={(val) => setUser({ ...user, lastname: val })} style={styles.FillFormText} secureTextEntry={false}></TextInput>
+                        <TextInput value={lastname} onChangeText={(val) => setLastname(val)} style={styles.FillFormText} secureTextEntry={false}></TextInput>
 
-                        <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{user.gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (user.gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
+                        <View style={styles.FormContainerGenderTitle}><Text style={styles.FormFillTitleGen}>เพศ : </Text>{gender === '' ? <Text style={styles.genderTxt}>โปรดเลือก</Text> : (gender === 'male' ? <Text style={styles.genderTxt}>ชาย</Text> : <Text style={styles.genderTxt}>หญิง</Text>)}</View>
                         <View style={styles.GenderContainer}>
-                            <TouchableOpacity onPress={() => setUser({ ...user, gender: 'male' })}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
-                            <TouchableOpacity onPress={() => setUser({ ...user, gender: 'female' })}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
+                            <TouchableOpacity onPress={() => setGender('male')}><Image style={styles.genderBtn} source={require('../../assets/register/MaleBtn.png')}></Image></TouchableOpacity>
+                            <TouchableOpacity onPress={() => setGender('female')}><Image style={styles.genderBtn} source={require('../../assets/register/FemaleBtn.png')}></Image></TouchableOpacity>
                         </View>
-                        <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{user.age}</Text></View>
+                        <View style={styles.FormContainerAgeTitle}><Text style={styles.FormFillTitle}>อายุ : </Text><Text style={styles.AgeText}>{age}</Text></View>
                         <Slider
                             style={{ width: 200, height: 50 }}
                             minimumValue={20}
@@ -294,7 +312,7 @@ const RegisterForRestaurant = props => {
                             thumbImage={ThumbSlider}
                             minimumTrackTintColor="#000"
                             maximumTrackTintColor="#616000"
-                            onValueChange={(val) => setUser({ ...user, age: val })}
+                            onValueChange={(val) => setAge(val)}
                             step={1}
                             thumbTintColor="#FFFC1B"
 
@@ -304,13 +322,13 @@ const RegisterForRestaurant = props => {
 
                     <View style={styles.FormContainer}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>เบอร์ติดต่อ</Text></View>
-                        <TextInput value={user.phonenumber} keyboardType='numeric' onChangeText={(val) => setUser({ ...user, phonenumber: val })} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        <TextInput value={phonenumber} keyboardType='numeric' onChangeText={(val) => setPhonenumber(val)} onEndEditing={() => checkPhonenumber()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
                         {user.isValidPhoneNumber == true ? null : <View><Text style={styles.validText}>*ระบุเบอร์ให้ถูกต้อง</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>อีเมล</Text></View>
-                        <TextInput value={user.email} onChangeText={(val) => setUser({ ...user, email: val })} onEndEditing={() => checkEmail()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        <TextInput value={email} onChangeText={(val) => setEmail(val)} onEndEditing={() => checkEmail()} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
                         {user.isValidEmail == true ? null : <View><Text style={styles.validText}>*ระบุอีเมลให้ถูกต้อง</Text></View>}
                         <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ไลน์</Text></View>
-                        <TextInput value={user.line} onChangeText={(val) => setUser({ ...user, line: val })} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
+                        <TextInput value={line} onChangeText={(val) => setLine(val)} style={styles.FillFormText} style={styles.FillFormText}></TextInput>
                     </View>
 
                 </ProgressStep>
@@ -335,30 +353,30 @@ const RegisterForRestaurant = props => {
 
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row' }}><Text style={styles.FormFillTitle}>ชื่อร้านอาหาร</Text></View>
-                            <TextInput value={restaurant.restaurantName} onChangeText={(val) => setRestaurant({ ...restaurant, restaurantName: val })} onEndEditing={() => checkRestaurantname()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={restname} onChangeText={(val) => setRestname(val)} onEndEditing={() => checkRestaurantname()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidRestaurantname == true ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                         </View>
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Ionicons name='location-outline' size={24} style={{ marginRight: 5 }}></Ionicons><Text style={styles.FormFillTitle}>ที่อยู่ร้านอาหาร</Text></View>
-                            <TextInput value={restaurant.address} onChangeText={(val) => setRestaurant({ ...restaurant, address: val })} onEndEditing={() => checkAddress()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={addr_line1} onChangeText={(val) => setAddr_line1(val)} onEndEditing={() => checkAddress()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidAddress ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ถนน</Text></View>
-                            <TextInput value={restaurant.road} onChangeText={(val) => setRestaurant({ ...restaurant, road: val })} style={styles.FillFormText}></TextInput>
+                            <TextInput value={road} onChangeText={(val) => setRoad(val)} style={styles.FillFormText}></TextInput>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>ตำบล</Text></View>
-                            <TextInput value={restaurant.subdistrict} onChangeText={(val) => setRestaurant({ ...restaurant, subdistrict: val })} style={styles.FillFormText}></TextInput>
+                            <TextInput value={subdistrict} onChangeText={(val) => setSubdistrict(val)} style={styles.FillFormText}></TextInput>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>อำเภอ</Text></View>
-                            <TextInput value={restaurant.amphoe} onChangeText={(val) => setRestaurant({ ...restaurant, amphoe: val })} onEndEditing={() => checkAmphoe()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={district} onChangeText={(val) => setDistrict(val)} onEndEditing={() => checkAmphoe()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidAmphoe ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>จังหวัด</Text></View>
-                            <TextInput value={restaurant.province} onChangeText={(val) => setRestaurant({ ...restaurant, province: val })} onEndEditing={() => checkProvince()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={province} onChangeText={(val) => setProvince(val)} onEndEditing={() => checkProvince()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidProvince ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>รหัสไปรษณีย์</Text></View>
-                            <TextInput value={restaurant.postalcode} keyboardType='numeric' onChangeText={(val) => setRestaurant({ ...restaurant, postalcode: val })} onEndEditing={() => checkPostalcode()} style={styles.FillFormText}></TextInput>
+                            <TextInput value={postalcode} keyboardType='numeric' onChangeText={(val) => setPostalcode(val)} onEndEditing={() => checkPostalcode()} style={styles.FillFormText}></TextInput>
                             {restaurant.isValidPostalcode ? null : <View><Text style={styles.validText}>*ระบุ</Text></View>}
                         </View>
                         <View style={styles.FormContainer}>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}><Text style={styles.FormFillTitle}>เว็บไซต์ของร้าน</Text></View>
-                            <TextInput value={restaurant.website} onChangeText={(val) => setRestaurant({ ...restaurant, website: val })} style={styles.FillFormText}></TextInput>
+                            <TextInput value={website} onChangeText={(val) => setWebsite(val)} style={styles.FillFormText}></TextInput>
 
                         </View>
 

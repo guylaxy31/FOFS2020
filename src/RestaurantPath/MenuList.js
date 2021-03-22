@@ -34,7 +34,7 @@ const MenuList = props => {
         [],
     )))
 
-    console.log("menu restaurant", menuRest);
+    ;
     return (
         <View style={styles.Tablecontainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginBottom: 30 }}>
