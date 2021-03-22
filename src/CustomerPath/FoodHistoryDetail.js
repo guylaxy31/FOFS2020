@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView ,FlatList} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList } from 'react-native';
 
 
 const FoodHistoryDetail = props => {
     var total = 0;
     var qty = 0;
     props.route.params.item.orderDetail.forEach(qt => {
-        return (qty +=  qt.quantity)
+        return (qty += qt.quantity)
     })
     console.log(props.route.params.item);
     const orders = props.route.params.item;
@@ -19,8 +19,8 @@ const FoodHistoryDetail = props => {
                 <View style={styles.CardContainer}>
 
                     <View style={styles.rowcontent}>
-                        <Text style={[styles.TitleDetailText, { flex: 1 }]}>หมายเลขออเดอร์</Text>
-                        <Text style={[styles.AValueDetailText, { flex: 1.5 }]}>{orders._id.substring(21,24)}</Text>
+                        <Text style={[styles.TitleDetailText, { flex: 1, fontFamily: 16 }]}>หมายเลขออเดอร์</Text>
+                        <Text style={[styles.AValueDetailText, { flex: 1.5, fontFamily: 16  }]}>{orders._id.substring(21, 24)}</Text>
                     </View>
                     <View style={styles.rowcontent}>
                         <Text style={[styles.TitleDetailText, { flex: 1 }]}>วันที่</Text>
@@ -31,39 +31,39 @@ const FoodHistoryDetail = props => {
                         <Text style={[styles.AValueDetailText, { flex: 1.5 }]}>{orders.res_id.restaurant_name}</Text>
                     </View>
                     <FlatList
-                    data={orders.orderDetail}
-                    keyExtractor={item => item._id}
-                    renderItem={({ item }) =>
-                        <>
+                        data={orders.orderDetail}
+                        keyExtractor={item => item._id}
+                        renderItem={({ item }) =>
+                            <>
 
-                            <View style={[styles.MenuRow, { width: '100%' }]}>
-                                <View style={{ flex: .5, alignItems: 'flex-start' }}><Text style={styles.MenuText, { fontFamily: 'pr-bold', fontSize: 18 }}>{item.menus.menu_name}</Text></View>
-                                <View style={{ flex: .2, alignItems: 'center' }}><Text style={styles.CountingText}>x{item.quantity}</Text></View>
-                                <View style={{ flex: .3, alignItems: 'center' }}><Text style={styles.PricesText}>{total = (item.menus.price + item.varaition.value + item.option.value + item.ingredient.value) * item.quantity} ฿</Text></View>
-                            </View>
-                            <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
-                                {item.varaition.id == 0 ? null : (
-                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>varaition :{item.varaition.id} </Text></View>
-                                )}
-                                {item.ingredient.id == 0 ? null : (
-                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>ingredient :{item.ingredient.id} </Text></View>
-                                )}
-                                {item.option.id == 0 ? null : (
-                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>{item.option.id}</Text></View>
-                                )}
-                                {item.describe == null ? null : (
-                                    <View style={{ backgroundColor: '#F3F3E3', marginTop: 16, paddingVertical: 8, borderRadius: 16 }}><Text style={{ fontFamily: 'pr-reg', marginLeft: 16 }}>ข้อความจากผู้สั่ง :</Text><Text style={[styles.PricesText, { marginTop: 8, marginLeft: 40 }]}>{item.describe} </Text></View>
-                                )}
+                                <View style={[styles.MenuRow, { width: '100%' }]}>
+                                    <View style={{ flex: .5, alignItems: 'flex-start' }}><Text style={styles.MenuText, { fontFamily: 'pr-bold', fontSize: 18 }}>{item.menus.menu_name}</Text></View>
+                                    <View style={{ flex: .2, alignItems: 'center' }}><Text style={styles.CountingText}>x{item.quantity}</Text></View>
+                                    <View style={{ flex: .3, alignItems: 'center' }}><Text style={styles.PricesText}>{total = (item.menus.price + item.varaition.value + item.option.value + item.ingredient.value) * item.quantity} ฿</Text></View>
+                                </View>
+                                <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
+                                    {item.varaition.id == 0 ? null : (
+                                        <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>varaition :{item.varaition.id} </Text></View>
+                                    )}
+                                    {item.ingredient.id == 0 ? null : (
+                                        <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>ingredient :{item.ingredient.id} </Text></View>
+                                    )}
+                                    {item.option.id == 0 ? null : (
+                                        <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>{item.option.id}</Text></View>
+                                    )}
+                                    {item.describe == null ? null : (
+                                        <View style={{ backgroundColor: '#F3F3E3', marginTop: 16, paddingVertical: 8, borderRadius: 16 }}><Text style={{ fontFamily: 'pr-reg', marginLeft: 16 }}>ข้อความจากผู้สั่ง :</Text><Text style={[styles.PricesText, { marginTop: 8, marginLeft: 40 }]}>{item.describe} </Text></View>
+                                    )}
 
-                            </View>
-                        </>
-                    }
+                                </View>
+                            </>
+                        }
 
 
-                    horizontal={false}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
-                />
+                        horizontal={false}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                    />
 
 
 
