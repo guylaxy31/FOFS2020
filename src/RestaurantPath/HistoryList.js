@@ -1,43 +1,81 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions, TouchableOpacity, Text ,FlatList} from 'react-native';
+
+const HistoryList = props => {
+    var total = 0;
+    var qty = 0;
+    props.route.params.item.orderDetail.forEach(qt => {
+        return (qty +=  qt.quantity)
+    })
+    console.log(props.route.params.item);
+    const orders = props.route.params.item;
+    return (
+        <View style={styles.container}>
+            <View style={styles.cardcontainer}>
+                <View style={styles.YellowBar}></View>
+
+                <View style={styles.FirstRow}>
+                    <View><Text style={styles.OrderNumberTextTitle}>หมายเลขออเดอร์</Text></View>
+                    <View><Text style={styles.OrderNumberTextValue}>{orders._id.substring(21,24)}</Text></View>
+
+                    <View style={{ marginLeft: 'auto' }}><Text style={styles.TimeValueText}>{orders.dateOrderStart.substring(11,16)}</Text></View>
+                    <View style={{ marginLeft: 5 }}><Text style={styles.TimeUnitText}>น.</Text></View>
+                </View>
+
+                
+                <FlatList
+                    data={orders.orderDetail}
+                    keyExtractor={item => item._id}
+                    renderItem={({ item }) =>
+                        <>
+
+                            <View style={[styles.MenuRow, { width: '100%' }]}>
+                                <View style={{ flex: .5, alignItems: 'flex-start' }}><Text style={styles.MenuText, { fontFamily: 'pr-bold', fontSize: 18 }}>{item.menus.menu_name}</Text></View>
+                                <View style={{ flex: .2, alignItems: 'center' }}><Text style={styles.CountingText}>x{item.quantity}</Text></View>
+                                <View style={{ flex: .3, alignItems: 'center' }}><Text style={styles.PricesText}>{total = (item.menus.price + item.varaition.value + item.option.value + item.ingredient.value) * item.quantity} ฿</Text></View>
+                            </View>
+                            <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
+                                {item.varaition.id == 0 ? null : (
+                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>varaition :{item.varaition.id} </Text></View>
+                                )}
+                                {item.ingredient.id == 0 ? null : (
+                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>ingredient :{item.ingredient.id} </Text></View>
+                                )}
+                                {item.option.id == 0 ? null : (
+                                    <View style={{ marginLeft: 16 }}><Text style={styles.PricesText}>{item.option.id}</Text></View>
+                                )}
+                                {item.describe == null ? null : (
+                                    <View style={{ backgroundColor: '#F3F3E3', marginTop: 16, paddingVertical: 8, borderRadius: 16 }}><Text style={{ fontFamily: 'pr-reg', marginLeft: 16 }}>ข้อความจากผู้สั่ง :</Text><Text style={[styles.PricesText, { marginTop: 8, marginLeft: 40 }]}>{item.describe} </Text></View>
+                                )}
+
+                            </View>
+                        </>
+                    }
 
 
-class HistoryList extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.cardcontainer}>
-                    <View style={styles.YellowBar}></View>
-
-                    <View style={styles.FirstRow}>
-                        <View><Text style={styles.OrderNumberTextTitle}>หมายเลขออเดอร์</Text></View>
-                        <View><Text style={styles.OrderNumberTextValue}>152</Text></View>
-
-                        <View style={{ marginLeft: 'auto' }}><Text style={styles.TimeValueText}>11:15</Text></View>
-                        <View style={{ marginLeft: 5 }}><Text style={styles.TimeUnitText}>น.</Text></View>
-                    </View>
-
-                    <View style={styles.MenuRow}>
-                        <View><Text style={styles.MenuText}>ข้าวผัดหมู</Text></View>
-                        <View style={{ marginLeft: 'auto', marginRight: 50 }}><Text style={styles.CountingText}>1</Text></View>
-                        <View><Text style={styles.PricesText}>25 ฿</Text></View>
-                    </View>
-
-                    <View style={styles.TotalCountsRow}>
-                        <Text style={styles.TotalCountsText}>รวม 1 รายการ</Text>
-                    </View>
-
-                    <View style={styles.TotalPricesRow}>
-                        <Text style={styles.TotalPricesText}>25 ฿</Text>
-                    </View>
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
 
 
-                </View >
-            </View>
-        )
-    }
+
+                <View style={styles.TotalCountsRow}>
+                    <Text style={styles.TotalCountsText}>รวม {qty} รายการ</Text>
+                </View>
+
+                <View style={styles.TotalPricesRow}>
+                    <Text style={styles.TotalPricesText}>{orders.totalPrice} ฿</Text>
+                </View>
+
+
+            </View >
+        </View>
+    )
 
 }
+
+
 
 const styles = StyleSheet.create({
     container: { height: '100%', width: '100%', alignSelf: 'stretch', backgroundColor: '#fff', alignItems: 'center', backgroundColor: '#FFF' },

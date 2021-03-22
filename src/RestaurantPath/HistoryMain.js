@@ -63,15 +63,15 @@ const HistoryMain = props => {
             }>
 
                 <FlatList
-                    data={null}
+                    data={order}
 
                     renderItem={({ item }) =>
                         <>
                             <View style={[{ width: '100%', flexDirection: 'row', flexWrap: 'wrap' }]}>
-                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>1</Text>
-                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>190964</Text>
-                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>11:04น.</Text>
-                                <TouchableOpacity style={{ alignItems: 'center', padding: 8, borderRadius: 16, flex: .4 }} onPress={() => props.navigation.navigate('HistoryList')}>
+                                <Text style={[{ flex: .2, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item._id.substring(21,24)}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.dateOrderStart.split("T")[0]}</Text>
+                                <Text style={[{ flex: .4, padding: 8, fontFamily: 'pr-light', fontSize: 16, textAlign: 'center' }]}>{item.dateOrderStart.substring(11,16)}น.</Text>
+                                <TouchableOpacity style={{ alignItems: 'center', padding: 8, borderRadius: 16, flex: .4 }} onPress={() => props.navigation.navigate('HistoryList', {item:item})}>
                                     <MaterialIcons name="more-horiz" size={24} color="black" />
                                 </TouchableOpacity>
                             </View>

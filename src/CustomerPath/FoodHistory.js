@@ -1,8 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, FlatList } from 'react-native';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, RefreshControl, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import AuthGlobal from '../Context/Store/AuthGlobal'
+import baseUrl from '../../assets/common/baseUrl';
+import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const FoodHistory = props => {
     const datatemp =
@@ -14,12 +21,47 @@ const FoodHistory = props => {
             },
         ]
 
+        const context = useContext(AuthGlobal);
+        const [cusId, setCusId] = useState();
+        const [order, setOrder] = useState([]);
+        const [refreshing, setRefreshing] = useState(false);
 
+        useFocusEffect((useCallback(
+            () => {
+                if (
+                    context.stateUser.isAuthenticated === false || context.stateUser.isAuthenticated === undefined || context.stateUser.isAuthenticated === null
+                ) {
+                    props.navigation.navigate("LoginHome")
+                } else {
+                    setCusId(context.stateUser.user.userId)
+                    axios.get(`${baseUrl}orders/${cusId}`).then((op) => {
+                        setOrder(op.data)
+                    }).catch((error) => { console.log(error); })
+                }
+                return () => {
+                    setOrder([]);
+                    setCusId('');
+                }
+            },
+            [cusId],
+        )))
+    
+        const onRefresh = useCallback(() => {
+            setRefreshing(true);
+            wait(2000).then(() => setRefreshing(false));
+        }, []);
+    
     return (
 
         <View style={styles.container}>
 
-            <ScrollView style={{ width: '100%' }}>
+            <ScrollView style={{ width: '100%' }}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
 
                 <View style={styles.CardContainer}>
 
@@ -38,15 +80,15 @@ const FoodHistory = props => {
                     </View>
 
                     <FlatList
-                        data={datatemp}
+                        data={order}
                         keyExtractor={item => item._id}
                         renderItem={({ item }) =>
                             <>
                                 <View style={[styles.StatusValueContainer, { marginBottom: 8, width: 376 }]}>
-                                    <View style={[styles.celltext, { flex: .7 }]}><Text style={styles.celltext}>{item._id}</Text></View>
-                                    <Text style={[styles.celltext, { flex: 1 }]}>{item.date}</Text>
-                                    <Text style={[styles.celltext, { flex: 2 }]}>{item.resname}</Text>
-                                    <View style={{ flex: 1 }}><TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail')} style={styles.TouchDetailBtn}><MaterialIcons name="more-vert" size={24} color="black" /></TouchableOpacity>
+                                    <View style={[styles.celltext, { flex: .7 }]}><Text style={styles.celltext}>{item._id.substring(21, 24)}</Text></View>
+                                    <Text style={[styles.celltext, { flex: 1 }]}>{item.dateOrderStart.substring(11, 16)}</Text>
+                                    <Text style={[styles.celltext, { flex: 2 }]}>{item.res_id.restaurant_name}</Text>
+                                    <View style={{ flex: 1 }}><TouchableOpacity onPress={() => props.navigation.navigate('FoodHistoryDetail',{item:item})} style={styles.TouchDetailBtn}><MaterialIcons name="more-vert" size={24} color="black" /></TouchableOpacity>
                                     </View>
                                 </View>
                             </>

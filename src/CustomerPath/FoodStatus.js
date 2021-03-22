@@ -42,8 +42,7 @@ const FoodStatus = props => {
         wait(2000).then(() => setRefreshing(false));
     }, []);
 
-    console.log("order", order);
-    console.log("customer", cusId);
+    
     return (
 
         <View style={styles.container}>
