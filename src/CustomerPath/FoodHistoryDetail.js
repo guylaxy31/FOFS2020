@@ -19,8 +19,8 @@ const FoodHistoryDetail = props => {
                 <View style={styles.CardContainer}>
 
                     <View style={styles.rowcontent}>
-                        <Text style={[styles.TitleDetailText, { flex: 1, fontFamily: 16 }]}>หมายเลขออเดอร์</Text>
-                        <Text style={[styles.AValueDetailText, { flex: 1.5, fontFamily: 16  }]}>{orders._id.substring(21, 24)}</Text>
+                        <Text style={[styles.TitleDetailText, { flex: 1 }]}>หมายเลขออเดอร์</Text>
+                        <Text style={[styles.AValueDetailText, { flex: 1.5 }]}>{orders._id.substring(21, 24)}</Text>
                     </View>
                     <View style={styles.rowcontent}>
                         <Text style={[styles.TitleDetailText, { flex: 1 }]}>วันที่</Text>

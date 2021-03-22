@@ -32,7 +32,7 @@ export function DrawerContent(props) {
                             <View style={{ flexDirection: 'row', marginTop: 16, paddingLeft: 16 }}>
                                 <MaterialCommunityIcons name="account" size={48} />
                                 <View style={{ marginLeft: 16, flexDirection: 'column' }}>
-                                    <Title style={{ fontFamily: 'pr-light' }}><Text style={{ fontFamily: 'pr-light' }}>คุณ</Text>ชื่อจริง.. นามสกุล..</Title>
+                                    <Title style={{ fontFamily: 'pr-light' }}><Text style={{ fontFamily: 'pr-light' }}>ยินดีต้อนรับ</Text></Title>
                                     <Caption style={{ fontFamily: 'pr-light' }}>@{context.stateUser.user.username}</Caption>
                                 </View>
                             </View>

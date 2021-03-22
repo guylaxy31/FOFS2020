@@ -30,17 +30,17 @@ const RestaurantList = (props) => {
             [],
         )
     ))
-    console.log(restaurants);
+
     return (
 
         <View style={styles.container}>
             <ScrollView style={{ width: '100%' }}
-            refreshControl={
-                <RefreshControl
-                  refreshing={refreshing}
-                  onRefresh={onRefresh}
-                />
-              }>
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }>
 
                 <FlatList
                     data={restaurants}
@@ -49,7 +49,7 @@ const RestaurantList = (props) => {
                         <TouchableOpacity style={styles.touchContainer}>
                             <View style={styles.restaurantContainer}>
                                 <View style={styles.containImage}>
-                                <Image style={styles.imgBorder} source={{ uri: item.res_image }}></Image>
+                                    {item.res_image ? <Image style={styles.imgBorder} source={{ uri: item.res_image }}></Image> : null}
                                 </View>
                                 <View style={styles.containText}><Text style={styles.restText}>{item.restaurant_name}</Text></View>
                             </View>
