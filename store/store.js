@@ -1,12 +1,12 @@
-import {createStore , applyMiddleware , combineReducers, compose} from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { loginStatus, consenseReducer, genderSelectionReducer, orderlistReducer } from '../src/Reducers/Reducers'
 
-
-import resReducer from './reducer/resreducer' ;
+import cartItem from './reducer/cartItem';
 
 const rootReducer = combineReducers({
-    restaurant: resReducer
+    cartItem: cartItem
 });
 
 const middleware = composeWithDevTools(applyMiddleware(thunk));

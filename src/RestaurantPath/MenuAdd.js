@@ -1,14 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, TextInput, Modal, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, TextInput, Modal, Button, Alert } from 'react-native';
 import { Icon } from 'react-native-elements'
 
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from "@react-native-community/async-storage"
+import baseURL from "../../assets/common/baseUrl"
+import axios from "axios"
+import mime from "mime";
+import Toast from "react-native-toast-message";
 
 
 const MenuAdd = props => {
+    
     const [image, setImage] = useState(null);
+    const [token, setToken] = useState();
+    const [typemenu, setTypemenu] = useState([]);
+    const [name, setName] = useState();
+    const [price, setPrice] = useState();
+    const [describe, setDescribe] = useState();
+    const [category, setCategory] = useState();
+    const [restId, setResId] = useState(props.route.params.resId)
+    const [menu, setMenu] = useState({
+        name: '',
+        type_menu: 'default',
+        price: '',
+        description: '',
+        status: true
+    });
+
+    const [state, setState] = useState({
+        edit: false,
+        delete: false,
+        variationAdd: false,
+        ingredientAdd: false,
+        optionAdd: false,
+    })
+
     useEffect(() => {
+        AsyncStorage.getItem("jwt")
+            .then((res) => {
+                setToken(res)
+            })
+            .catch((error) => console.log(error))
+
+        axios
+            .get(`${baseURL}typemenu`)
+            .then((res) => setTypemenu(res.data))
+            .catch((error) => alert("Error to load categories"));
+
+
         (async () => {
             if (Platform.OS !== 'web') {
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -16,9 +57,12 @@ const MenuAdd = props => {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
             }
-        })();
+        });
+        return () => {
+            setTypemenu([]);
+        }
     }, []);
-
+    console.log("typemenu" , typemenu);
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -34,95 +78,131 @@ const MenuAdd = props => {
         }
     };
 
+    const checkBeforeNavigate = () => {
+
+        if (image != null && name != '' && category != '' && price != '') {
+            let formData = new FormData();
+
+            const newImageUri = "file:///" + image.split("file:/").join("");
+            formData.append("_id_res", restId)
+            formData.append("menu_image", {
+                uri: newImageUri,
+                type: mime.getType(newImageUri),
+                name: newImageUri.split("/").pop()
+            });
+            formData.append("menu_name", name);
+            formData.append("type_menu",category)
+            formData.append("price", price);
+            formData.append("describe", describe);
+            console.log(formData);
+
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            axios
+                .post(`${baseURL}menu`, formData, config)
+                .then((res) => {
+                    if (res.status == 200 || res.status == 201) {
+                        Toast.show({
+                            topOffset: 60,
+                            type: "success",
+                            text1: "New Menu added",
+                            text2: ""
+                        });
+                        setTimeout(() => {
+                            props.navigation.navigate("MenuList");
+                        }, 500)
+                    }
+                })
+                .catch((error) => {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again"
+                    })
+                })
+
+
+        } else {
+            Alert.alert(
+                //title
+                'ไม่สามารถเพิ่มเมนูได้',
+                //body
+                'โปรดระบุข้อมูลให้ครบถ้วน',
+                [
+                    { text: 'ปิด' },
+                ],
+                { cancelable: false },
+                //clicking out side of alert will not cancel
+
+            )
+        }
+
+    }
+
     return (
         <View style={styles.container}>
             <ScrollView style={{ width: '100%', paddingHorizontal: 50 }} showsVerticalScrollIndicator={false}>
-
+                {/* [1] โค้ดปุ่มเพิ่มรูป เมืออัพโหลดรูปรูปจะแสดงด้านใต้ของป่ม */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={styles.AddImageContainer}><TouchableOpacity style={styles.TouchImageContainer} onPress={pickImage}><Text style={styles.addImageText}>+ เพิ่มรูปเมนู</Text><Icon name="image"></Icon></TouchableOpacity></View>
-                    {image && <Image source={{ uri: image }} style={{ width: 150, height: 150 }} />}
+                    {image && <Image source={{ uri: image }} style={{ width: 150, height: 150, marginTop: 20, borderRadius: 15 }} />}
                 </View>
+                {image === null ? <View style={{ width: '100%', alignItems: 'center', marginTop: 20 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*ต้องการรูปเมนู</Text></View> : null}
 
+                {/* [2] ชื่อเมนู */}
                 <View><Text style={styles.MenuTitleText}>ชื่อเมนู</Text></View>
-                <View><TextInput style={styles.TextInputVal}></TextInput></View>
+                <View><TextInput style={styles.TextInputVal} onChangeText={(val) => setName(val)}></TextInput></View>
+                {name === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
+                {/* [3] ประเภทอาหาร เลือกเป็น dropdown */}
                 <View><Text style={styles.MenuTitleText}>ประเภทอาหาร</Text></View>
-                <View style={styles.DropDownContainer}>
-                    <DropDownPicker
-                        items={[
-                            { label: 'อาหาตามสั่ง', value: 'madeinorder' },
-                            { label: 'เมนูเส้น', value: 'noodle' },
-                            { label: 'เครื่องดื่ม', value: 'drinks' },
-                            { label: 'ขนม', value: 'sweets' }
-                        ]}
-                        defaultIndex={0}
-                        containerStyle={{ height: 40 }}
-                        onChangeItem={item => console.log(item.label, item.value)}
-                        labelStyle={{ fontSize: 14, fontFamily: 'pr-reg', color: '#000', backgroundColor: '#FFF', textAlign: 'center' }}
-                        placeholder="เลือกประเภทอาหาร"
-                        placeholderStyle={{ fontFamily: 'pr-reg', color: '#A09E8C', textAlign: 'center', fontSize: 14 }}
-                        dropDownStyle={{ backgroundColor: '#FFF', textAlign: 'center' }}
-                        activeLabelStyle={{ backgroundColor: '#DDDDD6', width: '100%', textAlign: 'center', borderRadius: 15 }}
+                <DropDownPicker
+                    items={typemenu}
+                    defaultValue={menu.category}
+                    dropDownMaxHeight={300}
+                    placeholder="โปรดระบุ"
+                    containerStyle={{ height: 40, marginBottom: 16 }}
+                    style={{
+                        backgroundColor: '#fafafa',
+                    }}
+                    itemStyle={{
+                        justifyContent: 'flex-start'
+                    }}
+                    dropDownStyle={{ backgroundColor: '#fafafa' }}
+                    onChangeItem={(item) => setCategory(item.value)}
+                    labelStyle={{
+                        fontFamily: 'pr-reg',
+                        color: '#000'
+                    }}
+                    selectedLabelStyle={{
+                        color: '#000'
+                    }}
+                />
+                {category === 'default' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดเลือก</Text></View> : null}
 
-                    />
-                </View>
-
+                {/* [4] ช่องกรอกราคา */}
                 <View><Text style={styles.MenuTitleText}>ราคา (บาท)</Text></View>
-                <View><TextInput style={styles.TextInputValPrices}></TextInput></View>
-
-                <View><Text style={styles.MenuTitleText}>กรณีมีปริมาณพิเศษ</Text></View>
-                <View style={styles.ValueTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
-
-                <View><Text style={styles.MenuTitleText}>วัตถุดิบที่ลูกค้าสามารถเลือก</Text></View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>หมู</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+0 ฿</Text></View>
-
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>ไก่</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+0 ฿</Text></View>
-
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>กุ้ง</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+5 ฿</Text></View>
-
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
+                <View><TextInput keyboardType='numeric' onChangeText={(val) => setPrice(val)} style={styles.TextInputValPrices}></TextInput></View>
+                {price === '' ? <View style={{ width: '100%', marginTop: 10 }}><Text style={{ fontFamily: 'pr-reg', fontSize: 12, color: 'red' }}>*โปรดระบุ</Text></View> : null}
 
 
-                <View style={styles.AddTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
-
-
-                <View><Text style={styles.MenuTitleText}>ท็อปปิ้ง</Text></View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <View><Text style={styles.ingreTitleText}>ไข่เขียว</Text></View>
-                    <View><Text style={styles.ingrePricesText}>+10 ฿</Text></View>
-
-                    <View style={styles.EditTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='edit' /></View></TouchableOpacity></View>
-                    <View style={styles.DeleteTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='delete' /></View></TouchableOpacity></View>
-                </View>
-                <View style={styles.AddTouchContainer}><TouchableOpacity style={styles.ValueTouchBox}><View><Icon name='add' color='#7A7A7A' /></View></TouchableOpacity></View>
-
-
+                {/* เขียนเกี่ยวกับอาหารเพิ่มเติม หรืออาจจะเป็นข้อความแนะนำอาหาร ความพิเศษของเมนูนี้ */}
                 <View><Text style={styles.MenuTitleText}>รายละเอียดเพิ่มเติม (อาหาร)</Text></View>
-                <View><TextInput style={styles.TextInputValDesc}></TextInput></View>
+                <View><TextInput onChangeText={(val) => setDescribe(val)} style={{ textAlignVertical: 'top' }} numberOfLines={3} multiline={true} style={styles.TextInputValDesc}></TextInput></View>
 
+                {/* สิ้นสุดการกรอกข้อมูล 1)ยืนยันข้อมูลทั้งหมดจะถูกเก็บเมื่อผ่านเงื่อนไข 2)ยกเลิก จะกลับไปหน้าเดิม */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 50 }}>
-                    <View style={styles.submitBtn}><TouchableOpacity onPress={() => props.navigation.navigate('MenuList')}><Text style={styles.submitBtnText}>ยืนยัน</Text></TouchableOpacity></View>
-                    <View style={styles.cancelBtn}><TouchableOpacity><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
+                    <View style={styles.submitBtn}><TouchableOpacity onPress={() => checkBeforeNavigate()}><Text style={styles.submitBtnText}>ยืนยัน</Text></TouchableOpacity></View>
+                    <View style={styles.cancelBtn}><TouchableOpacity onPress={() => props.navigation.goBack()}><Text style={styles.CancelBtnText}>ยกเลิก</Text></TouchableOpacity></View>
                 </View>
-
-                {/* แสดงเมื่อกดปุ่มลบ แก้ไข */}
 
                 {/* แสดงเมื่อกดปุ่มลบ ถังขยะ */}
-                <Modal transparent={true} visible={false}>
+                <Modal transparent={true} visible={state.delete}>
                     <View style={styles.ModelBackground}>
                         <View style={styles.ModalContainer}>
 
@@ -134,8 +214,6 @@ const MenuAdd = props => {
                         </View>
                     </View>
                 </Modal>
-
-                {/* แสดงเมื่อกดปุ่มลบ เพิ่ม */}
 
             </ScrollView>
 
@@ -152,11 +230,11 @@ const styles = StyleSheet.create({
     TouchImageContainer: { width: 150, height: 150, justifyContent: 'center', borderRadius: 15 },
 
     MenuTitleText: { fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 16 : 18, marginBottom: 10, marginTop: 20 },
-    TextInputVal: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 250, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
+    TextInputVal: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 250, fontFamily: 'pr-reg', fontSize: 14, paddingHorizontal: 20, paddingVertical: 10 },
     TextInputValPrices: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 100, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
-    TextInputValDesc: { color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 300, height: 100, fontFamily: 'pr-reg', fontSize: Dimensions.get('window').height < 1000 ? 14 : 16, padding: 10 },
+    TextInputValDesc: { textAlignVertical: 'top', color: '#767676', backgroundColor: '#FFFFE3', borderRadius: 15, width: 300, height: 100, fontFamily: 'pr-reg', fontSize: 14, padding: 10 },
 
-    DropDownContainer: { zIndex: 1, width: Dimensions.get('window').width * .5, height: Dimensions.get('window').height * .08, marginVertical: 5, backgroundColor: '#FFF' },
+    DropDownContainer: { zIndex: 1, width: Dimensions.get('window').width * .5, marginVertical: 5, backgroundColor: '#FFF' },
 
     ValueTouchContainer: { width: 40, backgroundColor: '#EBEBEB', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 2, elevation: 2, shadowOpacity: 0.1, marginHorizontal: 5, borderRadius: 15 },
     ValueTouchBox: { padding: 5, },
