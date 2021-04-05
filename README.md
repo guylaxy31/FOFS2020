@@ -3,6 +3,7 @@ Food Ordering Facilitate System [FOFS]
 
 resources
 - Visual Studio Code (Optional)
+- Expo (Framework)
 - Android Emulator (Android Virtual Device) or Expo Application (on Smartphone)
 - Mongo DB
 
